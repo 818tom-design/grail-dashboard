@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="format-detection" content="telephone=no">
+<title>Grail Onboarding</title>
+<link rel="icon" type="image/png" sizes="64x64" href="data:image/png;base64,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">
+<script>
+// Put a look chosen on an earlier visit in place before the first paint.
+try { var grailLook = localStorage.getItem('grail-onboarding-look'); if (grailLook === 'black' || grailLook === 'mono') document.documentElement.setAttribute('data-look', grailLook); } catch (err) { /* no stored look: the default stands */ }
+</script>
+<style>
+:root { padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+img { max-width: 100%; }
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/inter-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/inter-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(../fonts/inter-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(../fonts/inter-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/inter-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/inter-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/inter-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/inter-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/inter-tight-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/inter-tight-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Layout: one step per screen. On the left one task in big type, on the right a lit stage of graded cards that reacts to what you do.
+   Dark on purpose in every viewer theme: the cards are the only strong colour, the page around them is ivory type on near-black with one quiet metal accent. */
+:root {
+  --ink: #070B15;                      /* the dashboard navy taken almost to black */
+  --ink-2: #0C111E;                    /* raised surface */
+  --ink-3: #131929;                    /* fields and tiles */
+  --ink-4: #182034;                    /* field in focus */
+  --bone: #F1EDE4;                     /* ivory: main type, slab labels and the main button */
+  --mist: #AEB3BF;                     /* second line */
+  --haze: #858B99;                     /* captions */
+  --line: rgba(241,237,228,0.11);
+  --line-2: rgba(241,237,228,0.22);
+  --glass-a: rgba(241,237,228,0.14); --glass-b: rgba(241,237,228,0.035);
+  --accent: #C7AB6E;                   /* brass, the one accent: what is on, added, signed or yours */
+  --accent-hi: #DCC38C; --accent-ink: #171204; --accent-soft: rgba(199,171,110,0.10); --accent-line: rgba(199,171,110,0.46);
+  --go: #F1EDE4; --go-hi: #FFFFFF; --go-ink: #0A0F1D;   /* the main button is ivory, not coloured */
+  --warn: #DB6049;                     /* exclusivity and "still missing" only */
+  --warn-soft: rgba(219,96,73,0.07);
+  --light: rgba(120,138,190,0.11);     /* the stage light */
+  --glow: 0.26;                        /* how much of a card's own colour spills around its case */
+  --done-o: 1;                         /* strength of a finished progress segment */
+  --pass-a: rgba(34,43,70,0.74); --pass-b: rgba(13,18,33,0.84);
+  --tip-bg: #F1EDE4; --tip-ink: #0F1A2E;
+  --shadow: 0 34px 60px -26px rgba(0,0,0,0.85);
+  --display: 'Inter Tight', 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --dw: 600;                           /* headline weight: firm, not loud */
+  --track: -0.03em;                    /* headline and big-number tracking */
+  --text: 'Inter', 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+  --r1: 0.375rem; --r2: 0.625rem; --r3: 0.875rem;   /* corners: tags, controls, panels */
+  --ease: cubic-bezier(.2,.7,.2,1);
+  color-scheme: dark;
+}
+/* two more looks to choose between, switched from the foot of the page: black with brass, and black with ivory only */
+:root[data-look="black"], :root[data-look="mono"] {
+  --ink: #09090A; --ink-2: #101011; --ink-3: #18181A; --ink-4: #1F1F22;
+  --bone: #F2EFE9; --mist: #B4B2AD; --haze: #86847F;
+  --line: rgba(242,239,233,0.11); --line-2: rgba(242,239,233,0.22);
+  --glass-a: rgba(242,239,233,0.13); --glass-b: rgba(242,239,233,0.03);
+  --go: #F2EFE9; --go-hi: #FFFFFF; --go-ink: #09090A;
+  --warn: #E0644D; --warn-soft: rgba(224,100,77,0.07);
+  --light: rgba(255,255,255,0.05); --glow: 0.24;
+  --pass-a: rgba(38,38,42,0.78); --pass-b: rgba(16,16,18,0.86);
+  --tip-bg: #F2EFE9; --tip-ink: #111113;
+}
+:root[data-look="black"] { --accent: #C9AC6F; --accent-hi: #DEC58E; --accent-ink: #151104; --accent-soft: rgba(201,172,111,0.10); --accent-line: rgba(201,172,111,0.46); }
+:root[data-look="mono"] { --accent: #F2EFE9; --accent-hi: #FFFFFF; --accent-ink: #09090A; --accent-soft: rgba(242,239,233,0.06); --accent-line: rgba(242,239,233,0.5); --done-o: 0.45; }
+
+html, body { height: 100%; }
+body { background: var(--ink); color: var(--bone); font-family: var(--text); font-size: 16px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; }
+h1, h2, p, ol, ul { margin: 0; padding: 0; }
+ol, ul { list-style: none; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--accent-hi); outline-offset: 3px; }
+svg.ic { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.num { font-variant-numeric: tabular-nums; }
+
+.app { min-height: 100%; display: flex; flex-direction: column; overflow-x: clip;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 14px;
+  background: radial-gradient(54rem 36rem at 76% 38%, var(--light) 0%, transparent 68%); }
+.app:has(.step.solo:not([hidden])) { background: radial-gradient(52rem 32rem at 50% 50%, var(--light) 0%, transparent 68%); }
+.in { width: 100%; max-width: 75rem; margin-inline: auto; }
+
+/* top bar */
+.top { display: grid; grid-template-columns: minmax(max-content, 1fr) minmax(0, 19rem) minmax(0, 1fr); align-items: center; gap: 12px 20px; min-height: 4.25rem; }
+.top .brand { justify-self: start; }
+.brand { display: inline-flex; align-items: center; gap: 0.625rem; min-height: 2.75rem; min-width: 2.75rem; color: var(--bone); text-decoration: none; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; }
+.logo { width: 2rem; height: 2rem; border-radius: var(--r1); background: var(--ink-3); border: 1px solid var(--line-2); display: grid; place-items: center; }
+.prog { display: flex; gap: 6px; min-width: 0; }
+.prog li { flex: 1; }
+.prog button { width: 100%; height: 2.75rem; padding: 0; border: 0; background: none; display: flex; align-items: center; }
+.prog button::before { content: ""; width: 100%; height: 4px; border-radius: 99px; background: var(--line); transition: background .3s; }
+.prog li.done button::before { background: var(--accent); opacity: var(--done-o); }
+.prog li.later button::before { background: repeating-linear-gradient(90deg, var(--accent) 0 5px, transparent 5px 9px); opacity: var(--done-o); }   /* passed, but left for later */
+.prog li.now button::before { background: var(--bone); }
+.prog button:disabled { cursor: default; }
+.ghost { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 2.75rem; padding: 0 1rem; border-radius: var(--r2); border: 1px solid var(--line-2); background: transparent; color: var(--bone); font-size: 0.9375rem; font-weight: 500; text-decoration: none; white-space: nowrap; }
+.ghost:hover { border-color: var(--bone); }
+.ghost:disabled { color: var(--haze); border-color: var(--line); cursor: not-allowed; }
+
+/* a step */
+main { flex: 1; display: flex; }
+.step { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(1.75rem, 5vw, 5rem); align-items: center; padding-block: clamp(1rem, 4vh, 3rem); min-width: 0; }
+.step.solo { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+.step.solo .task { align-items: center; text-align: center; }
+.step.go { animation: stepin .5s var(--ease); }
+@keyframes stepin { from { opacity: 0; transform: translateY(14px); } }
+.task { display: flex; flex-direction: column; align-items: flex-start; gap: 2.25rem; min-width: 0; }
+.task form { display: contents; }
+.kick { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; margin-bottom: -1.75rem; padding: 0; border: 0; background: none; font-size: 0.875rem; font-weight: 500; color: var(--haze); }
+button.kick:hover { color: var(--bone); }
+h1 { font-family: var(--display); font-weight: var(--dw); font-size: clamp(2.5rem, 5.2vw, 4.25rem); line-height: 1.02; letter-spacing: var(--track); text-wrap: balance; }
+h1:focus { outline: none; }
+.sub { font-size: 1.125rem; color: var(--mist); max-width: 29rem; text-wrap: pretty; }
+.sub.strong { color: var(--bone); max-width: 32rem; }
+.sub .tipw { vertical-align: middle; }
+.cta { display: inline-flex; align-items: center; justify-content: center; gap: 0.625rem; min-height: 3.5rem; padding: 0 1.75rem; border-radius: var(--r2); border: 0; background: var(--go); color: var(--go-ink); font-size: 1.0625rem; font-weight: 600; text-decoration: none; transition: background .15s, transform .15s; }
+.cta:hover { background: var(--go-hi); }
+.cta:active { transform: scale(0.98); }
+.cta:disabled { background: var(--ink-3); color: var(--haze); cursor: not-allowed; transform: none; }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; }
+.scene { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0; min-height: 26rem; container-type: inline-size; }
+
+/* chips, pills */
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip { display: inline-flex; align-items: center; gap: 0.25rem; min-height: 2.5rem; padding: 0 0.875rem; border-radius: var(--r2); border: 1px solid var(--line-2); background: var(--glass-b); font-size: 0.9375rem; font-weight: 500; white-space: nowrap; }
+.chip.hot { border-color: var(--accent-line); background: var(--accent-soft); padding-right: 0.5rem; }
+.pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.pill { min-height: 2.75rem; padding: 0 1rem; border-radius: var(--r2); border: 1px solid var(--line-2); background: transparent; font-size: 0.9375rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem; transition: background .15s, border-color .15s; }
+.pill:hover { border-color: var(--bone); }
+.pill[aria-pressed="true"] { background: var(--bone); border-color: var(--bone); color: var(--tip-ink); }
+
+/* tooltips: the long text lives here */
+.tipw { position: relative; display: inline-flex; align-items: center; }
+.info { position: relative; width: 1.75rem; height: 1.75rem; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--haze); display: inline-grid; place-items: center; cursor: help; }
+.info::after { content: ""; position: absolute; inset: -8px; }
+.info svg.ic { width: 1rem; height: 1rem; }
+.info:hover, .info:focus-visible { color: var(--bone); }
+.tip { position: absolute; z-index: 60; bottom: calc(100% + 10px); left: 50%; width: max-content; max-width: min(21rem, 80vw); padding: 0.75rem 0.875rem; border-radius: var(--r2); background: var(--tip-bg); color: var(--tip-ink);
+  font-family: var(--text); font-size: 0.875rem; font-weight: 500; line-height: 1.45; letter-spacing: 0; text-align: left; white-space: normal; box-shadow: 0 18px 40px -12px rgba(0,0,0,0.75);
+  transform: translate(calc(-50% + var(--dx, 0px)), 6px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .15s, transform .15s, visibility .15s; }
+.tipw.down .tip { bottom: auto; top: calc(100% + 10px); }
+/* .calm is on from a step change until the pointer really moves, so a tooltip never opens just because the next step slid in under a resting pointer */
+.app:not(.calm) .tipw:hover .tip, .tipw:focus-within .tip, .tipw.open .tip { opacity: 1; visibility: visible; transform: translate(calc(-50% + var(--dx, 0px)), 0); }
+
+/* fields */
+.fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1rem; width: 100%; max-width: 33rem; }
+.f { display: flex; flex-direction: column; gap: 0.375rem; min-width: 0; }
+.f.wide { grid-column: 1 / -1; }
+.f label, .lab { display: flex; align-items: center; gap: 0.25rem; min-height: 1.75rem; font-size: 0.8125rem; font-weight: 500; color: var(--haze); }
+.f input, .f select { width: 100%; min-height: 3.375rem; padding: 0 1rem; border-radius: var(--r2); border: 1px solid var(--line); background: var(--ink-3); color: var(--bone); font-size: 1.0625rem; transition: border-color .15s, background .15s; }
+.f input::placeholder { color: var(--haze); }
+.f input:focus-visible, .f select:focus-visible { outline: none; border-color: var(--accent); background: var(--ink-4); }
+.f input[aria-invalid="true"] { border-color: var(--warn); }
+.f .err { font-size: 0.8125rem; font-weight: 600; color: var(--warn); }
+
+/* a graded card in its case */
+.slab { --w: 9.5rem; position: relative; isolation: isolate; width: var(--w); flex: none; padding: calc(var(--w) * 0.045); border-radius: calc(var(--w) * 0.085); display: flex; flex-direction: column; gap: calc(var(--w) * 0.04);
+  background: linear-gradient(160deg, var(--glass-a), var(--glass-b)); border: 1px solid var(--line-2); box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.22); }
+.slab::before { content: ""; position: absolute; z-index: -1; inset: 6%; background: var(--img) center / cover; filter: blur(36px) saturate(1.1); opacity: var(--glow); }
+.slab-lab { height: calc(var(--w) * 0.17); border-radius: calc(var(--w) * 0.035); background: var(--bone); color: var(--tip-ink); display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--w) * 0.065); font-size: max(0.53125rem, calc(var(--w) * 0.082)); font-weight: 700; line-height: 1; white-space: nowrap; gap: 0.3em; overflow: hidden; }
+.slab-win { position: relative; overflow: hidden; border-radius: calc(var(--w) * 0.035); aspect-ratio: 360 / 500; background: var(--ink-2); }
+.slab-win img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.slab-win::after { content: ""; position: absolute; inset: 0; background: linear-gradient(112deg, transparent 36%, rgba(255,255,255,0.30) 49%, transparent 62%); transform: translateX(-130%); animation: sheen 7s ease-in-out infinite; animation-delay: var(--d, 0s); }
+@keyframes sheen { 0%, 62% { transform: translateX(-130%); } 100% { transform: translateX(130%); } }
+
+/* hello: the fan */
+.fan { --u: min(1cqw, 0.37rem); position: relative; width: 100%; height: calc(72 * var(--u)); }
+.fan .slab.mid { --w: min(12.25rem, 32.5cqw); }
+.fan .slab { --w: min(10.25rem, 27.5cqw); position: absolute; left: 50%; top: 50%; z-index: var(--z, 1); transform: translate(-50%, -50%) translate(calc(var(--x) * var(--u)), calc(var(--y) * var(--u))) rotate(var(--r)); animation: fanout 1s var(--ease) backwards, bob 7s ease-in-out infinite; animation-delay: var(--d, 0s), var(--d, 0s); }
+@keyframes fanout { from { transform: translate(-50%, -50%) translate(0, 1.5rem) rotate(0deg); } }
+@keyframes bob { 50% { translate: 0 -9px; } }
+
+/* you and company: the pass */
+.stack { position: relative; width: 100%; max-width: 27rem; display: grid; place-items: center; padding-block: 3.5rem; }
+.stack > .slab { position: absolute; z-index: 1; }
+.stack > .slab:nth-of-type(1) { left: 2%; top: 0; transform: rotate(-11deg); }
+.stack > .slab:nth-of-type(2) { right: 0; bottom: 0; transform: rotate(9deg); }
+.pass { position: relative; z-index: 2; width: 100%; aspect-ratio: 1.62; border-radius: 1rem; padding: 1.375rem 1.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.75rem;
+  background: linear-gradient(150deg, var(--pass-a), var(--pass-b)); border: 1px solid var(--accent-line); box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.14); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+.pass-top, .pass-foot { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.pass-top .brand { min-height: 0; font-size: 0.9375rem; }
+.tag { display: inline-flex; align-items: center; gap: 0.375rem; height: 1.75rem; padding: 0 0.625rem; border-radius: var(--r1); border: 1px solid var(--line-2); font-size: 0.8125rem; font-weight: 500; white-space: nowrap; }
+.tag.live { border-color: var(--accent-line); background: var(--accent-soft); color: var(--accent-hi); }
+.tag.wait::before, .tag.live::before { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: currentColor; }
+.tag.wait::before { animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.25; } }
+.pass-shop { font-family: var(--display); font-weight: var(--dw); font-size: clamp(1.75rem, 3.4vw, 2.5rem); line-height: 1.04; letter-spacing: var(--track); overflow-wrap: anywhere; }
+.pass-shop.empty, .pass-who b.empty { color: var(--haze); }
+.pass-who { display: flex; flex-direction: column; gap: 0.125rem; min-width: 0; font-size: 0.8125rem; color: var(--haze); }
+.pass-who b { font-size: 1rem; font-weight: 600; color: var(--bone); overflow-wrap: anywhere; }
+
+/* documents */
+.docs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; width: 100%; max-width: 58rem; }
+.doc-w { position: relative; display: flex; }
+.doc-w .tipw { position: absolute; top: 0.5rem; right: 0.5rem; }
+.doc { flex: 1; min-width: 0; min-height: 10.5rem; padding: 1.75rem 0.75rem 1rem; border-radius: var(--r3); border: 1px dashed var(--line-2); background: var(--glass-b); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.875rem; text-align: center; transition: border-color .2s, background .2s, transform .2s; }
+.doc:hover { border-color: var(--bone); transform: translateY(-3px); }
+.doc-ic { width: 3.5rem; height: 3.5rem; border-radius: 50%; background: var(--ink-3); display: grid; place-items: center; color: var(--mist); transition: background .2s, color .2s; }
+.doc-ic svg.ic { width: 1.5rem; height: 1.5rem; }
+.doc-ic .ok { display: none; stroke-width: 2.6; }
+.doc b { font-size: 0.9375rem; font-weight: 600; line-height: 1.25; min-height: 2.5em; display: flex; align-items: center; }
+.doc.on { border-style: solid; border-color: var(--accent-line); background: var(--accent-soft); }
+.doc.on .doc-ic { background: var(--accent); color: var(--accent-ink); animation: pop .45s var(--ease); }
+.doc.on .doc-ic .ok { display: block; }
+.doc.on .doc-ic .add { display: none; }
+@keyframes pop { 0% { transform: scale(0.7); } 60% { transform: scale(1.12); } }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* fees, then the one-supplier confirmation */
+.confirm { display: flex; align-items: center; gap: 0.75rem; min-height: 2.75rem; font-size: 1.0625rem; font-weight: 500; text-align: left; cursor: pointer; }
+.confirm input { width: 1.375rem; height: 1.375rem; margin: 0; accent-color: var(--accent); flex: none; }
+.excl { padding: 0.5rem 1.25rem; border-radius: var(--r2); border: 1px solid var(--warn); background: var(--warn-soft); transition: border-color .3s, background .3s; }
+.excl.signed { border-color: var(--accent-line); background: var(--accent-soft); }
+.spin { width: 1.125rem; height: 1.125rem; border-radius: 50%; border: 2.5px solid currentColor; border-right-color: transparent; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.ladder { width: 100%; max-width: 31rem; display: flex; flex-direction: column; gap: 2.75rem; }
+/* fee by level: thin columns on one baseline, the value on each cap, how to reach the level on hover */
+.bars { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: end; }
+.bars::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2rem; height: 1px; background: var(--line-2); }
+.bar { min-width: 0; }
+.bar .tipw { display: flex; }
+.col { flex: 1; min-width: 0; padding: 0; border: 0; background: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: help; }
+.col .me { height: 1.5rem; padding: 0 0.5rem; border-radius: var(--r1); background: var(--accent-soft); border: 1px solid var(--accent-line); font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; }
+.col .v { font-size: 0.9375rem; font-weight: 700; }
+.col i { display: block; width: 1.5rem; height: calc(var(--r, 1) * 12rem); border-radius: 4px 4px 0 0; background: rgba(241,237,228,0.26); transition: height .6s var(--ease), background .15s; }
+.bar.you .col i { background: var(--accent); }
+.col:hover i, .col:focus-visible i { background: var(--bone); }
+.col .n { height: 1.5rem; line-height: 1.5rem; font-size: 0.8125rem; font-weight: 500; color: var(--mist); white-space: nowrap; }
+.bar.you .col .n { color: var(--bone); font-weight: 600; }
+
+/* top-up */
+.amount { font-family: var(--display); font-weight: var(--dw); font-size: clamp(3.25rem, 7vw, 5.25rem); line-height: 1; letter-spacing: var(--track); }
+.range-w { position: relative; width: 100%; max-width: 31rem; padding-bottom: 0.5rem; }
+.range { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 2.75rem; margin: 0; background: transparent; cursor: pointer; }
+.range::-webkit-slider-runnable-track { height: 0.5rem; border-radius: 99px; background: linear-gradient(90deg, var(--accent) var(--p, 0%), var(--line-2) var(--p, 0%)); }
+.range::-moz-range-track { height: 0.5rem; border-radius: 99px; background: var(--line-2); }
+.range::-moz-range-progress { height: 0.5rem; border-radius: 99px; background: var(--accent); }
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 1.875rem; height: 1.875rem; margin-top: -0.6875rem; border-radius: 50%; border: 0; background: var(--bone); box-shadow: 0 6px 16px rgba(0,0,0,0.6); }
+.range::-moz-range-thumb { width: 1.875rem; height: 1.875rem; border-radius: 50%; border: 0; background: var(--bone); box-shadow: 0 6px 16px rgba(0,0,0,0.6); }
+.range:focus-visible { outline: none; }
+.range:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--accent-hi); outline-offset: 3px; }
+.range:focus-visible::-moz-range-thumb { outline: 2px solid var(--accent-hi); outline-offset: 3px; }
+.ticks { position: absolute; left: 0.9375rem; right: 0.9375rem; bottom: 0; height: 0.5rem; pointer-events: none; }
+.ticks i { position: absolute; top: 0; width: 2px; height: 0.5rem; margin-left: -1px; border-radius: 2px; background: var(--line-2); transition: background .2s; }
+.ticks i.hit { background: var(--accent); }
+.mcv { width: 100%; max-width: 33rem; display: flex; align-items: center; gap: 0.375rem; padding-bottom: 1.25rem; font-size: 0.9375rem; color: var(--mist); }
+.mcv b { margin-left: 0.25rem; font-size: 1.0625rem; font-weight: 600; color: var(--bone); }
+.packs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; width: 100%; max-width: 33rem; }
+.pack { position: relative; min-width: 0; padding: 1.125rem 1rem 0.875rem; border-radius: var(--r3); border: 1px solid var(--line); background: var(--glass-b); display: flex; flex-direction: column; gap: 0.875rem; transition: border-color .35s, background .35s; }
+.pack .cards { position: relative; height: 8.5rem; }
+.pack .cards img { position: absolute; bottom: 0; left: 50%; width: 5.5rem; aspect-ratio: 360 / 500; object-fit: cover; border-radius: 0.375rem; box-shadow: 0 14px 22px -10px rgba(0,0,0,0.85); transform-origin: 50% 100%; filter: grayscale(1) brightness(0.42); transition: filter .45s, transform .55s var(--ease); }
+.pack .cards img:nth-child(1) { transform: translateX(-50%) translateX(-2.9rem) rotate(-9deg); }
+.pack .cards img:nth-child(2) { transform: translateX(-50%) translateX(2.9rem) rotate(9deg); }
+.pack .cards img:nth-child(3) { z-index: 2; width: 6rem; transform: translateX(-50%); }
+.pack.on { border-color: var(--accent-line); background: var(--accent-soft); }
+.pack.on .cards img { filter: none; }
+.pack.on .cards img:nth-child(1) { transform: translateX(-50%) translateX(-3.9rem) rotate(-13deg); }
+.pack.on .cards img:nth-child(2) { transform: translateX(-50%) translateX(3.9rem) rotate(13deg); }
+.pack.on .cards img:nth-child(3) { transform: translateX(-50%) translateY(-0.375rem); }
+.pack-row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.pack-row b { font-size: 0.9375rem; font-weight: 600; min-width: 0; }
+.pack-st { display: inline-flex; align-items: center; gap: 0.375rem; min-height: 1.5rem; font-size: 0.8125rem; font-weight: 500; color: var(--haze); white-space: nowrap; }
+.pack-st svg.ic { width: 0.9375rem; height: 0.9375rem; }
+.pack.on .pack-st { color: var(--accent-hi); }
+
+/* in line, live */
+.status { width: 100%; max-width: 30rem; border-top: 1px solid var(--line); }
+.status li { display: flex; align-items: center; gap: 0.875rem; min-height: 3.75rem; border-bottom: 1px solid var(--line); }
+.status b { flex: 1; min-width: 0; font-size: 1.0625rem; font-weight: 600; }
+.status span.s { font-size: 0.9375rem; color: var(--mist); text-align: right; }
+.dot { width: 1.75rem; height: 1.75rem; border-radius: 50%; display: grid; place-items: center; flex: none; border: 1.5px solid var(--line-2); color: transparent; }
+.dot svg.ic { width: 0.9375rem; height: 0.9375rem; stroke-width: 2.8; }
+li.ok .dot { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+li.wait .dot { border-color: var(--bone); animation: pulse 1.6s ease-in-out infinite; }
+li.todo .dot { border-color: var(--warn); }
+li.todo span.s { color: var(--warn); }
+.demo { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.875rem; padding: 0.75rem 1rem; border-radius: var(--r2); border: 1px dashed var(--line-2); font-size: 0.875rem; color: var(--haze); }
+.linkbtn { min-height: 2.75rem; padding: 0 0.25rem; border: 0; background: none; color: var(--mist); font-size: 0.9375rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.linkbtn:hover { color: var(--bone); }
+.wall { display: flex; align-items: flex-end; justify-content: center; gap: clamp(0.5rem, 1.6vw, 1.125rem); width: 100%; }
+.wall .slab { --w: clamp(6.5rem, min(11.5vw, 19vh), 11rem); transition: filter .5s, opacity .5s, transform .6s var(--ease); }
+.wall .slab.off { filter: grayscale(1) brightness(0.5); opacity: 0.55; }
+.wall .slab.off::before { opacity: 0; }
+.wall .slab:not(.off) { transform: translateY(-0.75rem); }
+
+/* foot, toast */
+.foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 1rem; min-height: 2.75rem; font-size: 0.875rem; color: var(--haze); }
+.foot > span { display: inline-flex; align-items: center; gap: 0.25rem; }
+.looks .linkbtn { padding: 0 0.5rem; font-weight: 500; text-decoration: none; color: var(--haze); }
+.looks .linkbtn[aria-pressed="true"] { color: var(--bone); text-decoration: underline; text-underline-offset: 6px; }
+.toast { position: fixed; z-index: 80; left: 1rem; right: 1rem; bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)); width: fit-content; max-width: min(30rem, calc(100% - 2rem)); margin-inline: auto; padding: 0.75rem 1.125rem; border-radius: var(--r2); background: var(--tip-bg); color: var(--tip-ink); font-size: 0.9375rem; font-weight: 600; box-shadow: 0 18px 40px -12px rgba(0,0,0,0.75); }
+
+/* narrow: the stage goes on top, smaller */
+@media (max-width: 60rem) {
+  .app, .app:has(.step.solo:not([hidden])) { background: radial-gradient(34rem 24rem at 50% 15rem, var(--light) 0%, transparent 70%); }
+  .step { grid-template-columns: minmax(0, 1fr); align-items: start; align-content: start; gap: 1.5rem; padding-block: 0.5rem 1.5rem; }
+  .scene { order: -1; min-height: 0; }
+  .stack { max-width: 22rem; padding-block: 1.75rem; }
+  .stack > .slab { --w: 6rem; }
+  .docs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .doc { min-height: 9.5rem; padding-top: 1.25rem; }
+  .col i { height: calc(var(--r, 1) * 7.5rem); }
+  /* fees: the headline first, then the chart, then the rest */
+  #s-deal .task { display: contents; }
+  #s-deal .task > * { order: 4; }
+  #s-deal .task > .kick, #s-topup .task > .kick { margin-bottom: -1rem; }
+  #s-deal .task > .kick { order: 1; }
+  #s-deal .task > h1 { order: 2; }
+  #s-deal .scene { order: 3; }
+  /* top-up: the packs sit right under the slider, so they light up in view while you drag */
+  #s-topup .task { display: contents; }
+  #s-topup .task > * { order: 6; }
+  #s-topup .task > .kick { order: 1; }
+  #s-topup .task > h1 { order: 2; }
+  #s-topup .task > .amt { order: 3; }
+  #s-topup .task > .range-w { order: 4; }
+  #s-topup .scene { order: 5; }
+  .mcv { padding-bottom: 0.25rem; }
+  .packs { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; }
+  .pack { padding: 0.375rem 0.375rem 0.5rem; border-radius: var(--r2); gap: 0.375rem; }
+  .pack .cards { height: auto; }
+  .pack .cards img, .pack .cards img:nth-child(3), .pack.on .cards img:nth-child(3) { position: static; display: block; width: 100%; transform: none; box-shadow: none; }
+  .pack .cards img:nth-child(1), .pack .cards img:nth-child(2) { display: none; }
+  .pack-row { flex-direction: column; align-items: flex-start; gap: 0.125rem; }
+  .pack-row b { font-size: 0.8125rem; line-height: 1.2; min-height: 2.4em; }
+  .pack-st .from { display: none; }
+  .pack-st { font-size: 0.75rem; gap: 0.25rem; min-height: 1.25rem; }
+  .pack-st svg.ic { width: 0.8125rem; height: 0.8125rem; }
+}
+@media (max-width: 34rem) {
+  .brand span.bn { display: none; }
+  .fields { grid-template-columns: minmax(0, 1fr); }
+  .docs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cta { width: 100%; }
+  .row { width: 100%; }
+  .row > .cta, .row > .ghost { flex: 1 1 100%; width: auto; }
+  .row > .cta:has(+ .tipw), .row > .ghost:has(+ .tipw) { flex: 1 1 0; }
+  .row > .linkbtn:last-child { flex: 1 1 100%; }
+  .docs .doc-w:last-child { grid-column: 1 / -1; }
+  .docs .doc-w:last-child .doc { min-height: 7.5rem; }
+  .fan { --u: 0.9cqw; }
+  .stack { padding-block: 0.25rem; }
+  .stack > .slab { display: none; }
+  .pass { aspect-ratio: 2.05; padding: 1rem 1.125rem; border-radius: var(--r3); }
+  .wall { display: grid; grid-template-columns: repeat(2, auto); justify-content: center; gap: 0.75rem; }
+  .wall .slab { --w: min(7.25rem, 32vw); }
+  .wall .slab:not(.off) { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-gem" viewBox="0 0 24 24"><path d="M6 3h12l3 6-9 12L3 9z"></path><path d="M3 9h18"></path></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5.5"></path><path d="M12 7.5v.01"></path></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2.5"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"></path></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 16V5"></path><path d="M7 10l5-5 5 5"></path><path d="M5 19h14"></path></symbol>
+  </defs>
+</svg>
+
+<div class="app">
+  <header class="top in">
+    <a class="brand" href="#hello"><span class="logo" aria-hidden="true"><svg class="ic"><use href="#i-gem"></use></svg></span><span class="bn">Grail Collective</span></a>
+    <ol class="prog" id="prog" aria-label="Setup progress" hidden></ol>
+  </header>
+
+  <main class="in">
+
+    <!-- hello -->
+    <section class="step" id="s-hello" aria-labelledby="h-hello">
+      <div class="task">
+        <span class="kick">You are invited</span>
+        <h1 id="h-hello" tabindex="-1">Your shop.<br>Our grails.</h1>
+        <span class="chip hot">Purchase fee from 0.30%
+          <span class="tipw"><button class="info" type="button" aria-label="About the purchase fee" aria-describedby="t-fee"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-fee">Of the card value. A new shop starts at 0.80% on Chase cards and 1.10% on Basic cards, and the fee drops as your volume grows. No setup fee, no monthly minimum, no storage fees.</span></span>
+        </span>
+        <button class="cta" type="button" data-go="you">Start setup</button>
+      </div>
+      <div class="scene" aria-hidden="true">
+        <div class="fan">
+          <div class="slab" style="--x: -41.5; --y: 5.5; --r: -15deg; --z: 1; --d: .12s; --img: url(../cards/GR-0163-4.jpg)"><div class="slab-lab"><span>BGS 8</span><span>$4,500</span></div><div class="slab-win"><img src="../cards/GR-0163-4.jpg" alt="" width="360" height="493"></div></div>
+          <div class="slab" style="--x: -21.5; --y: 1; --r: -7.5deg; --z: 2; --d: .06s; --img: url(../cards/GR-0117-1.jpg)"><div class="slab-lab"><span>PSA 9</span><span>$1,900</span></div><div class="slab-win"><img src="../cards/GR-0117-1.jpg" alt="" width="360" height="502"></div></div>
+          <div class="slab mid" style="--x: 0; --y: -2; --r: 0deg; --z: 3; --d: 0s; --img: url(../cards/GR-0163-1.jpg)"><div class="slab-lab"><span>PSA 7</span><span>$13,500</span></div><div class="slab-win"><img src="../cards/GR-0163-1.jpg" alt="" width="360" height="509"></div></div>
+          <div class="slab" style="--x: 21.5; --y: 1; --r: 7.5deg; --z: 2; --d: .06s; --img: url(../cards/GR-0142-1.jpg)"><div class="slab-lab"><span>PSA 9</span><span>$6,300</span></div><div class="slab-win"><img src="../cards/GR-0142-1.jpg" alt="" width="360" height="495"></div></div>
+          <div class="slab" style="--x: 41.5; --y: 5.5; --r: 15deg; --z: 1; --d: .12s; --img: url(../cards/GR-0158-3.jpg)"><div class="slab-lab"><span>PSA 9</span><span>$3,800</span></div><div class="slab-win"><img src="../cards/GR-0158-3.jpg" alt="" width="360" height="502"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- you -->
+    <section class="step" id="s-you" aria-labelledby="h-you" hidden>
+      <div class="task">
+        <button class="kick" type="button" data-go="hello"><svg class="ic" aria-hidden="true"><use href="#i-back"></use></svg>Back</button>
+        <h1 id="h-you" tabindex="-1">First, you.</h1>
+        <form id="f-you" novalidate>
+          <div class="fields">
+            <div class="f wide"><label for="in-name">Your name</label><input id="in-name" type="text" autocomplete="off" placeholder="Full name" aria-describedby="e-name"><span class="err" id="e-name" role="alert" hidden>Add your name to continue.</span></div>
+            <div class="f wide"><div class="lab"><label for="in-pass">Password</label>
+              <span class="tipw"><button class="info" type="button" aria-label="About the password" aria-describedby="t-pass"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-pass">12 characters or more. You sign in to your dashboard with this password and the email your invite was sent to. This demo keeps nothing you type.</span></span>
+            </div><input id="in-pass" type="password" autocomplete="new-password" placeholder="12 characters or more"></div>
+          </div>
+          <button class="cta" type="submit">Continue</button>
+        </form>
+      </div>
+      <div class="scene" aria-hidden="true">
+        <div class="stack">
+          <div class="slab" style="--w: 8.25rem; --d: 1s; --img: url(../cards/GR-0117-1.jpg)"><div class="slab-lab"><span>PSA 9</span><span>$1,900</span></div><div class="slab-win"><img src="../cards/GR-0117-1.jpg" alt="" width="360" height="502"></div></div>
+          <div class="slab" style="--w: 8.25rem; --d: 3s; --img: url(../cards/GR-0142-1.jpg)"><div class="slab-lab"><span>PSA 9</span><span>$6,300</span></div><div class="slab-win"><img src="../cards/GR-0142-1.jpg" alt="" width="360" height="495"></div></div>
+          <div class="pass">
+            <div class="pass-top"><span class="brand"><span class="logo"><svg class="ic"><use href="#i-gem"></use></svg></span>Grail Collective</span><span class="tag">Starter</span></div>
+            <div class="pass-shop empty" data-bind="shop">Your shop</div>
+            <div class="pass-foot"><span class="pass-who">Admin<b class="empty" data-bind="name">Your name</b></span><span class="tag wait" data-bind="state">Setting up</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- company -->
+    <section class="step" id="s-company" aria-labelledby="h-company" hidden>
+      <div class="task">
+        <button class="kick" type="button" data-go="you"><svg class="ic" aria-hidden="true"><use href="#i-back"></use></svg>Back</button>
+        <h1 id="h-company" tabindex="-1">Your company.</h1>
+        <form id="f-company" novalidate>
+          <div class="fields">
+            <div class="f"><label for="in-shop">Shop name</label><input id="in-shop" type="text" autocomplete="off" maxlength="28" aria-describedby="e-shop"><span class="err" id="e-shop" role="alert" hidden>Add your shop name to continue.</span></div>
+            <div class="f"><label for="in-url">Shop website</label><input id="in-url" type="url" autocomplete="off" placeholder="https://"></div>
+            <div class="f"><div class="lab"><label for="in-legal">Legal company name</label>
+              <span class="tipw"><button class="info" type="button" aria-label="About the legal name" aria-describedby="t-legal"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-legal">As on the certificate of incorporation. It is used for the company check, and your customers never see it.</span></span>
+            </div><input id="in-legal" type="text" autocomplete="off"></div>
+            <div class="f"><label for="in-country">Country</label><input id="in-country" type="text" autocomplete="off"></div>
+          </div>
+          <button class="cta" type="submit">Continue</button>
+        </form>
+      </div>
+      <div class="scene" aria-hidden="true">
+        <div class="stack">
+          <div class="slab" style="--w: 8.25rem; --d: 2s; --img: url(../cards/GR-0163-1.jpg)"><div class="slab-lab"><span>PSA 7</span><span>$13,500</span></div><div class="slab-win"><img src="../cards/GR-0163-1.jpg" alt="" width="360" height="509" loading="lazy"></div></div>
+          <div class="slab" style="--w: 8.25rem; --d: 4s; --img: url(../cards/GR-0158-3.jpg)"><div class="slab-lab"><span>PSA 9</span><span>$3,800</span></div><div class="slab-win"><img src="../cards/GR-0158-3.jpg" alt="" width="360" height="502" loading="lazy"></div></div>
+          <div class="pass">
+            <div class="pass-top"><span class="brand"><span class="logo"><svg class="ic"><use href="#i-gem"></use></svg></span>Grail Collective</span><span class="tag">Starter</span></div>
+            <div class="pass-shop empty" data-bind="shop">Your shop</div>
+            <div class="pass-foot"><span class="pass-who">Admin<b class="empty" data-bind="name">Your name</b></span><span class="tag wait" data-bind="state">Setting up</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- documents -->
+    <section class="step solo" id="s-documents" aria-labelledby="h-documents" hidden>
+      <div class="task">
+        <button class="kick" type="button" data-go="company"><svg class="ic" aria-hidden="true"><use href="#i-back"></use></svg>Back</button>
+        <h1 id="h-documents" tabindex="-1">Five documents.</h1>
+        <div class="docs" id="docs"></div>
+        <div class="row" style="justify-content: center">
+          <button class="cta" type="button" id="docs-next" disabled>Continue</button>
+          <button class="linkbtn" type="button" id="docs-later">Do this later</button>
+          <span class="tipw"><button class="info" type="button" aria-label="About adding documents" aria-describedby="t-docs"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-docs">Tap a tile to add a file. You can carry on without them and add them later. Your shop goes live once the company check has passed.</span></span>
+          <span class="sr" id="doc-count" role="status">0 of 5 added</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- the deal -->
+    <section class="step" id="s-deal" aria-labelledby="h-deal" hidden>
+      <div class="task">
+        <button class="kick" type="button" data-go="documents"><svg class="ic" aria-hidden="true"><use href="#i-back"></use></svg>Back</button>
+        <h1 id="h-deal" tabindex="-1">Purchase fee<br>from 0.30%.</h1>
+        <div class="chips">
+          <span class="chip">One fee per card
+            <span class="tipw"><button class="info" type="button" aria-label="About the fee" aria-describedby="t-p3"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-p3">A percentage of the card value. You pay the purchase fee, or the fulfilment fee if the card ships, never both. No setup fee, no monthly minimum, no storage fees.</span></span>
+          </span>
+          <span class="chip">How it works
+            <span class="tipw"><button class="info" type="button" aria-label="How Grail works with your shop" aria-describedby="t-p1"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-p1">Grail supplies the cards, keeps them in custody and ships them to your customers. Every sale starts as a Temporary Purchase. If your customer does not ask for shipping within 48 hours, the card is released automatically.</span></span>
+          </span>
+        </div>
+        <button class="cta" type="button" data-go="sign">Continue</button>
+      </div>
+      <div class="scene">
+        <div class="ladder">
+          <div class="pills" role="group" aria-label="Fee shown">
+            <button class="pill" type="button" data-fee="chase" aria-pressed="true">Chase</button>
+            <button class="pill" type="button" data-fee="basic" aria-pressed="false">Basic</button>
+            <button class="pill" type="button" data-fee="ship" aria-pressed="false">Fulfilment</button>
+          </div>
+          <ol class="bars" id="bars" aria-label="Fee by level"></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- one supplier -->
+    <section class="step solo" id="s-sign" aria-labelledby="h-sign" hidden>
+      <div class="task">
+        <button class="kick" type="button" data-go="deal"><svg class="ic" aria-hidden="true"><use href="#i-back"></use></svg>Back</button>
+        <h1 id="h-sign" tabindex="-1">Grail is your<br>only supplier.</h1>
+        <p class="sub strong">Use another supplier and your balance is not refunded, and Grail may take legal action.
+          <span class="tipw"><button class="info" type="button" aria-label="The full exclusivity term" aria-describedby="t-excl"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-excl">While these terms are in force, your shop may not use another supplier for packs or for a service similar to Grail's. If it does, your balance with Grail is not refunded, and Grail may take legal action and claim further damages.</span></span>
+        </p>
+        <label class="excl confirm" id="excl" for="in-excl"><input id="in-excl" type="checkbox">I confirm Grail is our exclusive supplier</label>
+        <div class="row" style="justify-content: center">
+          <button class="cta" type="button" id="sign" disabled>Sign with DocuSign</button>
+          <span class="tipw"><button class="info" type="button" aria-label="About signing" aria-describedby="t-sign"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-sign">DocuSign opens the full Terms and Conditions for the person who signs for your company. A signed copy arrives by email. In this demo nothing is sent.</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- top-up -->
+    <section class="step" id="s-topup" aria-labelledby="h-topup" hidden>
+      <div class="task">
+        <button class="kick" type="button" data-go="sign"><svg class="ic" aria-hidden="true"><use href="#i-back"></use></svg>Back</button>
+        <h1 id="h-topup" tabindex="-1">Fund your shop.</h1>
+        <p class="amount amt" id="amount">$10,000</p>
+        <div class="range-w">
+          <input class="range" id="in-amount" type="range" min="1000" max="50000" step="250" value="10000" aria-label="First top-up" aria-describedby="mcv-line">
+          <div class="ticks" id="ticks" aria-hidden="true"></div>
+        </div>
+        <div class="row">
+          <button class="cta num" type="button" id="pay">Pay $10,000</button>
+          <span class="tipw"><button class="info" type="button" aria-label="About the payment" aria-describedby="t-pay"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-pay">From $1,000, by card, crypto or bank transfer on the next screen. You can do this later, but your shop goes live only after a first top-up. The balance is not refunded if your shop uses another supplier. In this demo no payment is taken.</span></span>
+          <button class="linkbtn" type="button" id="pay-later">Do this later</button>
+        </div>
+      </div>
+      <div class="scene">
+        <div class="mcv" id="mcv-line">Max Card Value <b class="num" id="mcv">$4,000</b>
+          <span class="tipw"><button class="info" type="button" aria-label="About Max Card Value" aria-describedby="t-mcv"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-mcv">The most one card can be worth in your shop: 20% of your Available Balance, 40% from $10,000, 60% from $50,000, 80% from $100,000. A pack turns on once it covers the pack's top chase card.</span></span>
+        </div>
+        <div class="packs" id="packs"></div>
+      </div>
+    </section>
+
+    <!-- in line -->
+    <section class="step" id="s-review" aria-labelledby="h-review" hidden>
+      <div class="task">
+        <h1 id="h-review" tabindex="-1">Almost live.</h1>
+        <ul class="status" id="status"></ul>
+        <div class="row">
+          <button class="ghost" type="button" id="sandbox">Open the Sandbox</button>
+          <span class="tipw"><button class="info" type="button" aria-label="About the Sandbox" aria-describedby="t-sand"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-sand">A copy of the API on test money, with its own key and its own packs. Build your site on it while Grail checks your company. The live key unlocks when Grail approves your shop.</span></span>
+        </div>
+        <div class="demo"><span id="demo-note">Demo control</span><button class="ghost" type="button" id="approve">Approve as Grail</button></div>
+      </div>
+      <div class="scene" aria-hidden="true">
+        <div class="stack">
+          <div class="slab" style="--w: 8.25rem; --d: 1s; --img: url(../cards/GR-0163-4.jpg)"><div class="slab-lab"><span>BGS 8</span><span>$4,500</span></div><div class="slab-win"><img src="../cards/GR-0163-4.jpg" alt="" width="360" height="493" loading="lazy"></div></div>
+          <div class="slab" style="--w: 8.25rem; --d: 3s; --img: url(../cards/GR-0117-3.jpg)"><div class="slab-lab"><span>PSA 9</span><span>$820</span></div><div class="slab-win"><img src="../cards/GR-0117-3.jpg" alt="" width="360" height="502" loading="lazy"></div></div>
+          <div class="pass">
+            <div class="pass-top"><span class="brand"><span class="logo"><svg class="ic"><use href="#i-gem"></use></svg></span>Grail Collective</span><span class="tag">Starter</span></div>
+            <div class="pass-shop empty" data-bind="shop">Your shop</div>
+            <div class="pass-foot"><span class="pass-who">Admin<b class="empty" data-bind="name">Your name</b></span><span class="tag wait" data-bind="state">In review</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- live -->
+    <section class="step solo" id="s-live" aria-labelledby="h-live" hidden>
+      <div class="task">
+        <h1 id="h-live" tabindex="-1">You are live.</h1>
+        <p class="sub" id="live-sub">1 of 4 packs is on.</p>
+        <div class="wall" id="wall" aria-hidden="true"></div>
+        <div class="row" style="justify-content: center">
+          <a class="cta" href="../">Open dashboard</a>
+          <button class="ghost" type="button" data-go="topup" id="more">Top up more</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot in">
+    <span>Sample data
+      <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="t-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-sample">Card photos, grades and values come from the same Grail inventory sample as the dashboard. Signing, payment and approval are simulated, and nothing you type leaves this page.</span></span>
+    </span>
+    <span class="looks" id="looks" role="group" aria-label="Look">Look
+      <button class="linkbtn" type="button" data-look="navy" aria-pressed="true">Navy</button>
+      <button class="linkbtn" type="button" data-look="black" aria-pressed="false">Black</button>
+      <button class="linkbtn" type="button" data-look="mono" aria-pressed="false">Mono</button>
+    </span>
+    <button class="linkbtn" type="button" id="restart">Start over</button>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var all = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- the rules, same as the dashboard ----------
+  var STEPS = ['hello', 'you', 'company', 'documents', 'deal', 'sign', 'topup', 'review', 'live'];
+  var WIZ = [['you', 'You'], ['company', 'Company'], ['documents', 'Documents'], ['deal', 'Fees'], ['sign', 'One supplier'], ['topup', 'First top-up']];
+  var TIERS = [[0, 10000, 0.2], [10000, 50000, 0.4], [50000, 100000, 0.6], [100000, Infinity, 0.8]];
+  function share(av) { for (var i = TIERS.length - 1; i >= 0; i--) { if (av >= TIERS[i][0]) return TIERS[i][2]; } return 0.2; }
+  function maxCard(av) { return Math.max(0, av) * share(av); }
+  // Smallest Available Balance at which a card of this value is allowed.
+  function need(top) {
+    for (var i = 0; i < TIERS.length; i++) { var v = Math.max(TIERS[i][0], top / TIERS[i][2]); if (v < TIERS[i][1]) return Math.ceil(v); }
+    return Math.ceil(top / 0.8);
+  }
+  var PACKS = [
+    { id: 'GR-0117', name: 'Modern Hits', price: 25, top: 1900, grade: 'PSA 9', imgs: ['GR-0117-2', 'GR-0117-3', 'GR-0117-1'] },
+    { id: 'GR-0142', name: 'Fire Legends', price: 100, top: 6300, grade: 'PSA 9', imgs: ['GR-0142-2', 'GR-0142-4', 'GR-0142-1'] },
+    { id: 'GR-0158', name: 'Ghost Hunt', price: 250, top: 11400, grade: 'PSA 8', imgs: ['GR-0158-3', 'GR-0158-4', 'GR-0158-1'] },
+    { id: 'GR-0163', name: 'Vintage Grails', price: 500, top: 13500, grade: 'PSA 7', imgs: ['GR-0163-3', 'GR-0163-4', 'GR-0163-1'] }
+  ];
+  PACKS.forEach(function (p) { p.need = need(p.top); });
+  var LEVELS = ['Starter', 'Silver', 'Gold', 'Platinum', 'Black'];
+  var REACH = ['Every new shop starts here. Your level moves up by itself as your volume grows.', '$1M in 30 days, or a $25K average balance.', '$5M in 30 days, or a $100K average balance.', '$20M in 30 days, or a $250K average balance.', '$50M in 30 days.'];
+  var FEES = { basic: [1.10, 0.95, 0.80, 0.65, 0.50], chase: [0.80, 0.68, 0.55, 0.43, 0.30], ship: [8, 6, 4, 2, 1] };
+  var DOCS = [
+    ['Incorporation', 'Certificate of incorporation.'],
+    ['Articles', 'Articles of association.'],
+    ['Business address', 'Proof of business address.'],
+    ['Directors and shareholders', 'Register of directors and shareholders.'],
+    ['Owner ID', 'ID and proof of address for each owner with 25% or more. One file per owner.']
+  ];
+  var MIN = 1000, MAX = 50000;
+
+  function usd(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+  function pct(n, f) { return (f === 'ship' ? String(n) : n.toFixed(2)) + '%'; }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  // ---------- state ----------
+  function fresh() { return { step: 'hello', reached: 0, name: '', shop: '', docs: [0, 0, 0, 0, 0], excl: false, signed: false, signing: false, amount: 10000, fee: 'chase', paid: false, approved: false }; }
+  var S = fresh();
+  var liveBefore = {};
+
+  // ---------- one-time markup ----------
+  function build() {
+    $('prog').innerHTML = WIZ.map(function (w, i) { return '<li><button type="button" data-go="' + w[0] + '" aria-label="Step ' + (i + 1) + ' of ' + WIZ.length + ', ' + w[1] + '"></button></li>'; }).join('');
+    $('docs').innerHTML = DOCS.map(function (d, i) {
+      return '<div class="doc-w"><button class="doc" type="button" data-doc="' + i + '" aria-pressed="false"><span class="doc-ic"><svg class="ic add" aria-hidden="true"><use href="#i-up"></use></svg><svg class="ic ok" aria-hidden="true"><use href="#i-check"></use></svg></span><b>' + esc(d[0]) + '</b></button>' +
+        '<span class="tipw"><button class="info" type="button" aria-label="About this document" aria-describedby="t-doc' + i + '"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="t-doc' + i + '">' + esc(d[1]) + ' PDF, JPG or PNG.</span></span></div>';
+    }).join('');
+    $('bars').innerHTML = LEVELS.map(function (n, i) {
+      return '<li class="bar' + (i === 0 ? ' you' : '') + '"><span class="tipw" data-down><button class="col" type="button" aria-describedby="t-lv' + i + '">' + (i === 0 ? '<span class="me">You</span>' : '') +
+        '<span class="v num"></span><i></i><span class="n">' + n + '</span></button><span class="tip" role="tooltip" id="t-lv' + i + '">' + esc(n + '. ' + REACH[i]) + '</span></span></li>';
+    }).join('');
+    $('packs').innerHTML = PACKS.map(function (p, i) {
+      return '<article class="pack" data-pack="' + i + '"><div class="cards" aria-hidden="true">' + p.imgs.map(function (m) { return '<img src="../cards/' + m + '.jpg" alt="" loading="lazy">'; }).join('') + '</div>' +
+        '<div class="pack-row"><b>' + esc(p.name) + '</b><span class="pack-st num"></span></div></article>';
+    }).join('');
+    $('ticks').innerHTML = PACKS.map(function (p) { return '<i style="left: ' + ((p.need - MIN) / (MAX - MIN) * 100).toFixed(3) + '%"></i>'; }).join('');
+    $('wall').innerHTML = PACKS.map(function (p) { var m = p.imgs[2];
+      return '<div class="slab" style="--img: url(../cards/' + m + '.jpg)"><div class="slab-lab"><span>' + p.grade + '</span><span>' + usd(p.top) + '</span></div><div class="slab-win"><img src="../cards/' + m + '.jpg" alt="" loading="lazy"></div></div>'; }).join('');
+  }
+
+  // ---------- paint what depends on state ----------
+  function paint() {
+    var w = WIZ.map(function (x) { return x[0]; }), wi = w.indexOf(S.step), n = S.docs.reduce(function (a, b) { return a + b; }, 0);
+    var open = { documents: n < 5, topup: !S.paid };   // the two steps a shop may leave for later
+    $('prog').hidden = wi < 0;
+    all('#prog li').forEach(function (li, k) {
+      li.className = k < wi ? (open[w[k]] ? 'later' : 'done') : k === wi ? 'now' : '';
+      var b = li.firstChild; b.disabled = STEPS.indexOf(w[k]) > S.reached;
+      if (k === wi) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    });
+
+    // the pass
+    all('[data-bind="shop"]').forEach(function (el) { el.textContent = S.shop || 'Your shop'; el.classList.toggle('empty', !S.shop); });
+    all('[data-bind="name"]').forEach(function (el) { el.textContent = S.name || 'Your name'; el.classList.toggle('empty', !S.name); });
+
+    // documents
+    all('.doc').forEach(function (b, k) { var on = !!S.docs[k]; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+    $('doc-count').textContent = n + ' of 5 added'; $('docs-next').disabled = n < 5; $('docs-later').hidden = n === 5;
+
+    // fees, and the one-supplier confirmation
+    $('in-excl').checked = S.excl;
+    var sign = $('sign');
+    if (S.signed) { sign.disabled = false; sign.textContent = 'Signed. Continue'; }
+    else if (S.signing) { sign.disabled = true; sign.innerHTML = '<span class="spin" aria-hidden="true"></span>Opening DocuSign'; }
+    else { sign.disabled = !S.excl; sign.textContent = 'Sign with DocuSign'; }
+    $('excl').classList.toggle('signed', S.signed);
+    var fees = FEES[S.fee], top = fees[0];
+    all('#bars .bar').forEach(function (li, k) { li.style.setProperty('--r', (fees[k] / top).toFixed(4)); li.querySelector('.v').textContent = pct(fees[k], S.fee); });
+    all('[data-fee]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-fee') === S.fee ? 'true' : 'false'); });
+
+    // top-up
+    var mc = maxCard(S.amount), on = 0;
+    $('amount').textContent = usd(S.amount);
+    var r = $('in-amount'); r.value = S.amount; r.style.setProperty('--p', ((S.amount - MIN) / (MAX - MIN) * 100).toFixed(2) + '%');
+    r.setAttribute('aria-valuetext', usd(S.amount));
+    $('mcv').textContent = usd(mc);
+    $('pay').textContent = S.paid ? 'Paid. Continue' : 'Pay ' + usd(S.amount); $('pay-later').hidden = S.paid;
+    all('.pack').forEach(function (el, k) {
+      var p = PACKS[k], live = p.top <= mc; if (live) on++;
+      el.classList.toggle('on', live);
+      el.querySelector('.pack-st').innerHTML = live ? '<svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>On' : '<svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg><span><span class="from">From </span>' + usd(p.need) + '</span>';
+      if (live && liveBefore[k] === false && !still) { el.querySelector('.cards').animate([{ transform: 'scale(0.94)' }, { transform: 'scale(1.04)' }, { transform: 'scale(1)' }], { duration: 420, easing: 'ease-out' }); }
+      liveBefore[k] = live;
+    });
+    all('#ticks i').forEach(function (t, k) { t.classList.toggle('hit', PACKS[k].need <= S.amount); });
+
+    // in line
+    var ready = n === 5 && S.signed && S.paid;
+    var rows = [
+      n < 5 ? ['todo', 'Company check', (5 - n) + ' to add', 'documents'] : S.approved ? ['ok', 'Company check', 'Passed'] : ['wait', 'Company check', 'In review'],
+      S.signed ? ['ok', 'Terms and exclusivity', 'Signed'] : ['todo', 'Terms and exclusivity', 'Not signed', 'sign'],
+      S.paid ? ['ok', 'First top-up', usd(S.amount) + ' in'] : ['todo', 'First top-up', 'Top up now', 'topup'],
+      S.approved ? ['ok', 'Grail approval', 'Approved'] : ['wait', 'Grail approval', ready ? 'Waiting' : 'After the open items']
+    ];
+    $('approve').disabled = !ready; $('demo-note').textContent = ready ? 'Demo control' : 'Demo control. Finish the open items first.';
+    $('status').innerHTML = rows.map(function (x) {
+      return '<li class="' + x[0] + '"><span class="dot"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></span><b>' + x[1] + '</b>' +
+        (x[3] ? '<button class="linkbtn num" type="button" data-go="' + x[3] + '">' + x[2] + '</button>' : '<span class="s num">' + x[2] + '</span>') + '</li>';
+    }).join('');
+    all('#s-review [data-bind="state"]').forEach(function (el) { el.textContent = S.approved ? 'Live' : 'In review'; el.className = 'tag ' + (S.approved ? 'live' : 'wait'); });
+
+    // live
+    all('#wall .slab').forEach(function (el, k) { el.classList.toggle('off', PACKS[k].top > mc); });
+    $('live-sub').textContent = on === 4 ? 'All 4 packs are on.' : on ? on + ' of 4 packs ' + (on === 1 ? 'is' : 'are') + ' on.' : 'Your first pack turns on at ' + usd(PACKS[0].need) + '.';
+    $('more').hidden = on === 4;
+  }
+
+  // ---------- moving between steps ----------
+  // Hover tooltips wait until the pointer really moves after a step change (see .calm in the styles).
+  var app = document.querySelector('.app'), lastXY = '';
+  document.addEventListener('mousemove', function (e) { var k = e.screenX + ',' + e.screenY; if (k !== lastXY) { lastXY = k; app.classList.remove('calm'); } });
+  function show(step, quiet) {
+    if (STEPS.indexOf(step) < 0) step = 'hello';
+    S.step = step; S.reached = Math.max(S.reached, STEPS.indexOf(step));
+    STEPS.forEach(function (s) { var el = $('s-' + s); el.hidden = s !== step; el.classList.remove('go'); });
+    var el = $('s-' + step);
+    if (!quiet) { app.classList.add('calm'); void el.offsetWidth; el.classList.add('go'); window.scrollTo(0, 0); var h = $('h-' + step); if (h) { try { h.focus({ preventScroll: true }); } catch (e) { h.focus(); } } }
+    paint();
+    if (step === 'live' && !quiet && !still) {
+      // the wall lights up one card at a time
+      all('#wall .slab').filter(function (c) { return !c.classList.contains('off'); }).forEach(function (c, k) {
+        c.classList.add('off'); setTimeout(function () { if (S.step === 'live') c.classList.remove('off'); }, 350 + k * 220);
+      });
+    }
+    if (!quiet && ('#' + step) !== location.hash) { try { history.replaceState(null, '', '#' + step); } catch (e) { location.hash = step; } }
+  }
+  function next() { show(STEPS[Math.min(STEPS.length - 1, STEPS.indexOf(S.step) + 1)]); }
+
+  var toastT = null;
+  function toast(msg) { var t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; }, 3200); }
+
+  // ---------- events ----------
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest ? e.target.closest('[data-go], [data-doc], [data-fee]') : null;
+    if (!t || t.disabled) return;
+    if (t.hasAttribute('data-go')) { if (t.tagName === 'A') e.preventDefault(); show(t.getAttribute('data-go')); }
+    else if (t.hasAttribute('data-doc')) { var k = Number(t.getAttribute('data-doc')); S.docs[k] = S.docs[k] ? 0 : 1; paint(); }
+    else if (t.hasAttribute('data-fee')) { S.fee = t.getAttribute('data-fee'); paint(); }
+  });
+  // the two names that go on the pass are the only fields this demo insists on
+  function must(input, err) { var ok = !!input.value.trim(); err.hidden = ok; if (ok) input.removeAttribute('aria-invalid'); else { input.setAttribute('aria-invalid', 'true'); input.focus(); } return ok; }
+  $('f-you').addEventListener('submit', function (e) { e.preventDefault(); if (must($('in-name'), $('e-name'))) show('company'); });
+  $('f-company').addEventListener('submit', function (e) { e.preventDefault(); if (must($('in-shop'), $('e-shop'))) show('documents'); });
+  $('in-name').addEventListener('input', function () { S.name = this.value.trim().slice(0, 40); if (S.name) { $('e-name').hidden = true; this.removeAttribute('aria-invalid'); } paint(); });
+  $('in-shop').addEventListener('input', function () { S.shop = this.value.trim().slice(0, 28); if (S.shop) { $('e-shop').hidden = true; this.removeAttribute('aria-invalid'); } paint(); });
+  $('in-excl').addEventListener('change', function () { S.excl = this.checked; if (!S.excl) S.signed = false; paint(); });
+  $('sign').addEventListener('click', function () {
+    if (S.signed) { show('topup'); return; }
+    if (!S.excl || S.signing) return;
+    S.signing = true; paint();
+    setTimeout(function () { S.signing = false; S.signed = true; paint(); toast('Signed with DocuSign. Demo only, nothing was sent.'); }, still ? 0 : 1200);
+  });
+  $('in-amount').addEventListener('input', function () { S.amount = Number(this.value); S.paid = false; paint(); });
+  $('pay').addEventListener('click', function () { if (!S.paid) { S.paid = true; toast('Top-up of ' + usd(S.amount) + ' received. Demo only, no payment was taken.'); } show(S.approved ? 'live' : 'review'); });
+  // The company check and the first top-up can wait. The shop goes live only after both, so the review step lists them and links back.
+  function afterDocs() { show(S.reached >= STEPS.indexOf('review') ? 'review' : 'deal'); }
+  $('docs-next').addEventListener('click', afterDocs);
+  $('docs-later').addEventListener('click', afterDocs);
+  $('pay-later').addEventListener('click', function () { show('review'); });
+  $('approve').addEventListener('click', function () { S.approved = true; show('live'); });
+  $('sandbox').addEventListener('click', function () { toast('In the product this opens the Sandbox on the Integration page.'); });
+  $('restart').addEventListener('click', function () {
+    S = fresh(); liveBefore = {};
+    all('input[type="text"], input[type="password"], input[type="url"]').forEach(function (i) { i.value = ''; i.removeAttribute('aria-invalid'); }); all('.err').forEach(function (x) { x.hidden = true; });
+    show('hello');
+  });
+  window.addEventListener('hashchange', function () { var h = location.hash.replace('#', ''); if (h !== S.step && STEPS.indexOf(h) >= 0) show(h); });
+
+  // keep a tooltip inside the screen: slide it sideways, and open it downward when there is no room above.
+  // Measured from the trigger, not from the tooltip, so a tooltip that is still moving cannot fool it.
+  function place(w) {
+    var tip = w.querySelector('.tip'); if (!tip) return;
+    var a = w.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight, vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    var left = a.left + a.width / 2 - tw / 2, dx = 0;
+    if (left < 12) dx = 12 - left; else if (left + tw > vw - 12) dx = vw - 12 - left - tw;
+    tip.style.setProperty('--dx', Math.round(dx) + 'px');
+    var up = a.top - th - 10 >= 2, down = a.bottom + th + 10 <= vh - 2;
+    w.classList.toggle('down', w.hasAttribute('data-down') ? (down || !up) : (!up && down));
+  }
+  document.addEventListener('mouseover', function (e) { var w = e.target.closest ? e.target.closest('.tipw') : null; if (w) place(w); });
+  document.addEventListener('focusin', function (e) { var w = e.target.closest ? e.target.closest('.tipw') : null; if (w) place(w); });
+  // a tap pins a tooltip open, because touch screens have no hover; a tap elsewhere or Escape closes it
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('.info, .col') : null, w = b ? b.closest('.tipw') : null;
+    all('.tipw.open').forEach(function (o) { if (o !== w) o.classList.remove('open'); });
+    if (w) { place(w); w.classList.toggle('open'); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    all('.tipw.open').forEach(function (o) { o.classList.remove('open'); });
+    var a = document.activeElement; if (a && a.closest && a.closest('.tipw')) a.blur();
+  });
+
+  // ---------- looks: one palette is the default, two more sit at the foot of the page to compare ----------
+  var LOOKS = ['navy', 'black', 'mono'];
+  function setLook(l, keep) {
+    if (LOOKS.indexOf(l) < 0) l = 'navy';
+    if (l === 'navy') document.documentElement.removeAttribute('data-look'); else document.documentElement.setAttribute('data-look', l);
+    all('button[data-look]', $('looks')).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-look') === l ? 'true' : 'false'); });
+    if (keep) { try { localStorage.setItem('grail-onboarding-look', l); } catch (e) { /* the choice just lasts for this visit */ } }
+  }
+  $('looks').addEventListener('click', function (e) { var b = e.target.closest ? e.target.closest('button[data-look]') : null; if (b) setLook(b.getAttribute('data-look'), true); });
+  var savedLook = null; try { savedLook = localStorage.getItem('grail-onboarding-look'); } catch (e) { savedLook = null; }
+  setLook(savedLook || 'navy');
+
+  // ---------- start ----------
+  build();
+  var first = location.hash.replace('#', '');
+  show(STEPS.indexOf(first) >= 0 ? first : 'hello', true);
+  // warm the photos the later steps use, so nothing pops in
+  setTimeout(function () { PACKS.forEach(function (p) { p.imgs.forEach(function (m) { var im = new Image(); im.src = '../cards/' + m + '.jpg'; }); }); }, 600);
+})();
+</script>
+</body>
+</html>
