@@ -28,7 +28,7 @@ img { max-width: 100%; }
 @font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/inter-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 </style>
 <style>
-/* Layout: one shell with a top bar of eight pages, some with pages under them. Stone ground, white panels, one navy balance band, one green accent, one typeface. */
+/* Layout: one shell with a top bar of eight pages, most with pages under them. Stone ground, white panels, one navy balance band, one green accent, one typeface. */
 :root {
   --sans: Inter, 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
 
@@ -731,6 +731,49 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
 
 @media (pointer: coarse) { .subtab { min-height: 44px; } }
 
+/* ================= added with reconciliation, cases, launch checks, notifications and the funding rules ================= */
+.cols { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.25rem; }
+.cols > * { flex: 1 1 24rem; min-width: 0; }
+.cols.wide-left > :first-child { flex: 1.8 1 32rem; }
+.cols > .stack-v { gap: 1.25rem; }
+.form-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(9rem, 13rem); align-items: center; gap: 0.75rem 1.25rem; }
+.form-grid label { font-size: 0.9375rem; color: var(--t2); }
+.form-grid .field { width: 100%; }
+select.field { -webkit-appearance: none; appearance: none; padding-right: 2rem; background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%); background-position: calc(100% - 1.0625rem) 50%, calc(100% - 0.75rem) 50%; background-size: 0.3125rem 0.3125rem; background-repeat: no-repeat; }
+select.field:disabled, input.field:disabled { opacity: 0.6; }
+@media (max-width: 620px) { .form-grid { grid-template-columns: minmax(0, 1fr); gap: 0.375rem; } .form-grid .field { margin-bottom: 0.625rem; } }
+.notice.is-warn { border-color: var(--warn); }
+.notice.is-warn strong, .notice.is-warn svg.ic { color: var(--warn); }
+.notice.is-ok { border-color: var(--live); }
+.notice.is-ok svg.ic { color: var(--live); }
+.hero .tag { color: var(--hero-text); border-color: var(--hero-line); text-decoration: none; }
+
+/* ---- who may change what: the record of changes and the two guards ---- */
+.guards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1rem 2.5rem; }
+.guard { display: flex; align-items: flex-start; gap: 0.75rem; }
+.guard svg.ic { margin-top: 0.1875rem; color: var(--live); }
+.guard b { display: block; font-size: 1rem; font-weight: 600; line-height: 1.3; }
+.guard small { display: block; padding-top: 0.125rem; font-size: 0.875rem; line-height: 1.45; color: var(--t2); }
+
+/* ---- a case: its evidence ---- */
+.evid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+.evid button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.125rem; min-height: 4.75rem; padding: 0.625rem; border-radius: 0.75rem; border: 1px dashed var(--btn-border); background: transparent; font: inherit; font-size: 0.9375rem; font-weight: 600; color: var(--ink); cursor: pointer; }
+.evid button small { font-size: 0.8125rem; font-weight: 400; color: var(--t3); }
+.evid button:hover { border-color: var(--ink); }
+.evid button.has { border-style: solid; border-color: var(--live); cursor: default; }
+.evid button.has small { color: var(--live); }
+.evid button:disabled { cursor: default; }
+
+/* ---- notifications: one row per alert ---- */
+.alert-tbl td { vertical-align: middle; }
+.alert-tbl .field-select { width: 100%; min-width: 10.5rem; }
+.test-row { align-items: center; }
+.test-row .tag { flex: none; min-width: 6.25rem; justify-content: center; }
+.kpi-grid.tight { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.875rem; }
+.kpi-grid.tight .kpi-num { font-size: min(1.5rem, 5.6vw); }
+.notice p { flex-basis: 13rem; }
+#case-rows td.strong, #rec-rows td:nth-child(3) { white-space: nowrap; }
+
 /* on a touch screen every control takes a full fingertip, whatever size it is drawn */
 @media (pointer: coarse) {
   .btn, .fchip, .seg-btn, .namebtn, .linkbtn, .iconbtn, .info, .switch, .tickbox { position: relative; }
@@ -798,7 +841,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     <div class="head">
       <div class="row wrap">
         <h2 class="h-panel" id="onboard-title">Finish setting up your shop</h2>
-        <span class="meta" data-bind="onbcount">0 of 3 done</span>
+        <span class="meta" data-bind="onbcount">0 of 4 done</span>
       </div>
     </div>
     <ol class="steps" id="onboard-steps"></ol>
@@ -832,10 +875,11 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       </div>
     </div>
     <div class="hero-actions rel">
-      <div class="auto" data-can="topup">
+      <div class="auto" data-can="auto">
         <span class="hero-lbl" id="auto-label">Auto top-up</span>
         <span class="tipw"><button class="info" type="button" aria-label="About Auto top-up" aria-describedby="tip-auto"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-br" role="tooltip" id="tip-auto" data-bind="autotip">Adds $10,000 whenever your Available Balance falls below $20,000. You can pay with crypto, card or Apple Pay.</span></span>
         <button class="switch" type="button" role="switch" aria-checked="false" aria-labelledby="auto-label" id="auto-switch" data-auto><span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span></button>
+        <a class="tag" id="auto-paused-tag" href="#autotopup" hidden>Paused</a>
       </div>
       <button class="btn btn-hero" type="button" id="open-topup" data-can="topup"><svg class="ic" aria-hidden="true"><use href="#i-plus"></use></svg>Top up</button>
     </div>
@@ -1415,6 +1459,29 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
         </table>
       </div>
     </section>
+    <section class="panel pad" aria-labelledby="hist-title">
+      <div class="head rel" style="padding-bottom: 0.875rem">
+        <div class="row wrap">
+          <h2 class="h-panel" id="hist-title">Change history</h2>
+          <span class="tipw"><button class="info" type="button" aria-label="About the change history" aria-describedby="tip-hist"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-hist">A record of every change to roles, users, payment methods, funding rules, keys and notifications: who made it, when, and what it was before and after.</span></span>
+          <span class="meta" id="hist-count"></span>
+        </div>
+        <button class="btn" type="button" id="hist-more">View full history</button>
+      </div>
+      <div class="list" id="hist-list"></div>
+    </section>
+    <section class="panel pad" aria-label="How access is protected">
+      <div class="guards">
+        <div class="guard">
+          <svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>
+          <div><b>Permissions are checked on every action</b><small>People see and do only what their role allows.</small></div>
+        </div>
+        <div class="guard">
+          <svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg>
+          <div><b>A sensitive change asks you to confirm it is you</b><small>A change to payments, funding or team access takes one more verification step.</small></div>
+        </div>
+      </div>
+    </section>
   </div>
 </div>
 
@@ -1431,19 +1498,6 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
         <input class="field" type="text" id="shop-name" maxlength="40" placeholder="[Your Shop]" autocomplete="off">
       </div>
     </section>
-    <section class="panel pad stack-v" aria-labelledby="set-auto" style="gap: 1rem">
-      <div class="head">
-        <h2 class="h-panel" id="set-auto">Auto top-up</h2>
-        <button class="switch" type="button" role="switch" aria-checked="false" aria-labelledby="set-auto" id="auto-switch-2" data-auto><span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span></button>
-      </div>
-      <div class="form-row">
-        <label for="auto-amount">Add</label>
-        <input class="field field-sm" type="text" id="auto-amount" inputmode="decimal" autocomplete="off" spellcheck="false" value="$10,000">
-        <label for="auto-below">when the Available Balance falls below</label>
-        <input class="field field-sm" type="text" id="auto-below" inputmode="decimal" autocomplete="off" spellcheck="false" value="$20,000">
-      </div>
-      <p class="note" data-bind="autopay"></p>
-    </section>
     <section class="panel pad stack-v" aria-labelledby="set-look" style="gap: 1rem">
       <h2 class="h-panel" id="set-look">Appearance</h2>
       <div class="seg" role="radiogroup" aria-labelledby="set-look">
@@ -1452,6 +1506,277 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
         <label class="opt"><input type="radio" name="look" id="look-dark" value="dark"><span>Dark</span></label>
       </div>
     </section>
+  </div>
+</div>
+
+<!-- ================= Returns and claims ================= -->
+<div class="page" id="view-cases" hidden>
+  <div class="phead">
+    <div class="row wrap">
+      <h1 class="h-page">Returns and claims</h1>
+      <span class="tipw"><button class="info" type="button" aria-label="About returns and claims" aria-describedby="tip-cases"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-cases">Delivery problems, claims and return requests, one case each. Every case shows who owns it, what happens next, the evidence and its history. What a decision leads to follows your agreed policy.</span></span>
+      <span class="meta" data-when="live" id="case-meta"></span>
+    </div>
+    <span data-when="live"><button class="btn btn-primary" type="button" id="case-new" data-can="cases">New case</button></span>
+  </div>
+  <div class="pbody stack-v" data-when="live">
+    <div class="toolbar">
+      <div class="search">
+        <svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg>
+        <input class="field" type="search" id="case-search" aria-label="Search cases" placeholder="Case, shipment, customer or card" autocomplete="off" spellcheck="false" enterkeyhint="search">
+      </div>
+      <div class="chips" role="group" aria-label="Show" id="case-filters"></div>
+    </div>
+    <section class="panel pad" aria-label="Cases">
+      <div class="tbl-wrap">
+        <table class="tbl" id="case-table" style="min-width: 54rem">
+          <thead><tr><th>Case</th><th>Shipment</th><th>Issue</th><th>Status</th><th>Who acts next</th><th>Updated</th><th></th></tr></thead>
+          <tbody id="case-rows"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="case-empty" hidden></div>
+    </section>
+    <p class="note" style="padding: 0 0.25rem">Refunds, replacements and returns follow your agreed policy: [RETURNS AND CLAIMS POLICY]. The cases and their steps are a sample.</p>
+  </div>
+  <div class="pbody" data-when="new">
+    <section class="panel blank"><b>No cases yet</b><span>A delivery problem, a claim or a return request shows up here, with its owner and its next step.</span></section>
+  </div>
+</div>
+
+<!-- ================= Reconciliation ================= -->
+<div class="page" id="view-reconcile" hidden>
+  <div class="phead">
+    <div class="row wrap">
+      <h1 class="h-page">Daily reconciliation</h1>
+      <span class="tipw"><button class="info" type="button" aria-label="About the daily reconciliation" aria-describedby="tip-rec"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-rec">Each day, the records your shop platform sends are matched against Grail’s: the purchase, the hold, the release, the fees and the shipping. A record that differs or is missing on one side is listed for review.</span></span>
+      <span class="meta" data-when="live" id="rec-meta"></span>
+    </div>
+    <div class="row wrap" data-when="live">
+      <label class="lbl" for="rec-day">Day</label>
+      <select class="field field-select" id="rec-day"></select>
+      <button class="btn btn-primary" type="button" id="rec-export">Export CSV</button>
+    </div>
+  </div>
+  <div class="pbody stack-v" data-when="live">
+    <section class="panel pad" aria-label="Result of the day">
+      <div class="kpi-grid three">
+        <div class="kpi"><span class="kpi-num" id="k-rec-ok">0</span><span class="kpi-lbl">Purchases matched</span></div>
+        <div class="kpi"><span class="kpi-num" id="k-rec-review">0</span><span class="kpi-lbl">Need review</span></div>
+        <div class="kpi"><span class="kpi-num" id="k-rec-import"></span><span class="kpi-lbl">Last import from your shop platform</span></div>
+      </div>
+    </section>
+    <section class="panel pad" aria-labelledby="rec-title">
+      <div class="head" style="padding-bottom: 0.875rem">
+        <h2 class="h-panel" id="rec-title">Your records and Grail’s records</h2>
+        <div class="chips" role="group" aria-label="Show" id="rec-filters"></div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl" id="rec-table" style="min-width: 50rem">
+          <thead><tr><th>Shop platform transaction</th><th>Grail purchase</th><th>Record</th><th class="r">Card value</th><th>Result</th><th></th></tr></thead>
+          <tbody id="rec-rows"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="rec-empty" hidden></div>
+      <div class="more" id="rec-more-wrap"><button class="btn" type="button" id="rec-more">Show more</button></div>
+    </section>
+    <p class="note" style="padding: 0 0.25rem">Checked on every record: the purchase, the hold, the release, the fees and the shipping. All amounts are in US dollars. These are sample records, not accounting data.</p>
+  </div>
+  <div class="pbody" data-when="new">
+    <section class="panel blank"><b>Nothing to reconcile yet</b><span>From your first Temporary Purchase, each day’s records from your shop platform are matched here against Grail’s.</span></section>
+  </div>
+</div>
+
+<!-- ================= Auto top-up ================= -->
+<div class="page" id="view-autotopup" hidden>
+  <div class="phead">
+    <div class="row wrap">
+      <h1 class="h-page">Auto top-up</h1>
+      <span class="tipw"><button class="info" type="button" aria-label="About Auto top-up" aria-describedby="tip-autopage"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-autopage">Keeps your balance funded on its own, inside limits you set: when to add money, how much each time and how much a day at most. A failed payment pauses it until someone has looked at the payment.</span></span>
+      <span class="meta" id="auto-state">Off</span>
+    </div>
+    <div class="row" data-can="auto">
+      <span class="lbl" id="auto-label-2">Auto top-up</span>
+      <button class="switch" type="button" role="switch" aria-checked="false" aria-labelledby="auto-label-2" id="auto-switch-2" data-auto><span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span></button>
+    </div>
+  </div>
+  <div class="pbody stack-v">
+    <div class="notice is-warn" id="auto-banner" role="status" hidden>
+      <svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>
+      <p><strong>Paused after a failed payment.</strong> <span id="auto-banner-who"></span> No further attempt is made until the payment has been looked at.</p>
+      <a class="btn btn-sm" href="#billing" data-jump="methods-title">Review payment</a>
+    </div>
+    <div class="notice" id="auto-cap-note" role="status" hidden>
+      <svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>
+      <p><strong>Today’s limit is reached.</strong> Auto top-up starts again at midnight. You can still top up by hand.</p>
+    </div>
+    <div class="cols">
+      <section class="panel pad" aria-labelledby="rules-title">
+        <form id="auto-form" class="stack-v" style="gap: 1.125rem" novalidate>
+          <div>
+            <h2 class="h-panel" id="rules-title">Funding rules</h2>
+            <p class="note" style="padding-top: 0.25rem">When to add money to your balance, and how much.</p>
+          </div>
+          <div class="form-grid">
+            <label for="auto-below">Top up when the Available Balance is below</label>
+            <input class="field" type="text" id="auto-below" inputmode="decimal" autocomplete="off" spellcheck="false">
+            <label for="auto-amount">Add each time</label>
+            <input class="field" type="text" id="auto-amount" inputmode="decimal" autocomplete="off" spellcheck="false">
+            <label for="auto-cap">Daily limit</label>
+            <input class="field" type="text" id="auto-cap" inputmode="decimal" autocomplete="off" spellcheck="false">
+            <label for="auto-method">Payment method</label>
+            <select class="field" id="auto-method"></select>
+          </div>
+          <p class="note">The daily limit starts again at midnight in your shop’s time zone. Auto top-up stops at the limit, and it never switches to another payment method on its own.</p>
+          <div class="row wrap" data-can="auto">
+            <button class="btn btn-primary" type="submit">Save rules</button>
+            <span class="note" id="auto-saved" role="status"></span>
+          </div>
+        </form>
+      </section>
+      <div class="stack-v">
+        <section class="panel pad stack-v" aria-labelledby="auto-today-title" style="gap: 0.875rem">
+          <h2 class="h-panel" id="auto-today-title">Today’s automatic funding</h2>
+          <div class="kpi-grid tight">
+            <div class="kpi"><span class="kpi-num" id="k-auto-cap">$30,000</span><span class="kpi-lbl">Daily limit</span></div>
+            <div class="kpi"><span class="kpi-num" id="k-auto-today">$0</span><span class="kpi-lbl">Added today</span></div>
+            <div class="kpi"><span class="kpi-num" id="k-auto-left">$30,000</span><span class="kpi-lbl">Left for today</span></div>
+          </div>
+        </section>
+        <section class="panel pad stack-v" aria-labelledby="auto-fail-title" style="gap: 0.875rem">
+          <div>
+            <h2 class="h-panel" id="auto-fail-title">When a payment fails</h2>
+            <p class="note" style="padding-top: 0.25rem">Three steps keep one failed payment from turning into repeated charges.</p>
+          </div>
+          <div class="list">
+            <div class="item"><div class="item-main"><b>Automatic attempts stop</b><small>No further top-up is tried.</small></div></div>
+            <div class="item"><div class="item-main"><b>The team is notified</b><small id="auto-fail-who">The Auto top-up failed alert goes out at once.</small></div></div>
+            <div class="item"><div class="item-main"><b>Someone looks at the payment</b><small>Auto top-up starts again only when a person resumes it.</small></div></div>
+          </div>
+          <div class="row wrap" data-can="auto">
+            <button class="btn" type="button" id="auto-test">Test payment method</button>
+            <button class="btn btn-primary" type="button" id="auto-resume">Resume Auto top-up</button>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="row wrap" style="padding: 0 0.25rem" data-can="auto">
+      <span class="lbl">Demo controls</span>
+      <button class="btn btn-sm" type="button" data-demo="payfail">Fail a payment</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= Launch checks ================= -->
+<div class="page" id="view-launch" hidden>
+  <div class="phead">
+    <div class="row wrap">
+      <h1 class="h-page">Launch checks</h1>
+      <span class="tipw"><button class="info" type="button" aria-label="About the launch checks" aria-describedby="tip-launch"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-launch">Six tests of the purchase, top-up and shipping flow, run in the Sandbox against your shop platform before your shop takes real purchases. Every test has to pass before the launch can be approved.</span></span>
+      <span class="meta" id="launch-meta"></span>
+    </div>
+    <div class="row wrap">
+      <span class="tag">Sandbox</span>
+      <button class="btn btn-primary" type="button" id="launch-run" data-can="keys">Run tests again</button>
+    </div>
+  </div>
+  <div class="pbody stack-v">
+    <section class="panel pad stack-v" aria-label="Result" style="gap: 1.125rem">
+      <div class="kpi-grid three">
+        <div class="kpi"><span class="kpi-num" id="k-t-pass">0</span><span class="kpi-lbl">Passed</span></div>
+        <div class="kpi"><span class="kpi-num" id="k-t-fix">0</span><span class="kpi-lbl">Need fixing</span></div>
+        <div class="kpi"><span class="kpi-num" id="k-t-none">0</span><span class="kpi-lbl">Not tested</span></div>
+      </div>
+      <div class="notice" id="launch-state" role="status"><svg class="ic" aria-hidden="true"><use id="launch-state-icon" href="#i-lock"></use></svg><p id="launch-state-text"></p></div>
+    </section>
+    <div class="cols wide-left">
+      <section class="panel pad" aria-labelledby="tests-title">
+        <div style="padding-bottom: 0.875rem">
+          <h2 class="h-panel" id="tests-title">Purchase, top-up and shipping tests</h2>
+          <p class="note" style="padding-top: 0.25rem">Each test runs in the Sandbox against your shop platform. No real balance moves.</p>
+        </div>
+        <div class="list" id="test-list"></div>
+      </section>
+      <section class="panel pad stack-v" aria-labelledby="approve-title" style="gap: 0.875rem">
+        <h2 class="h-panel" id="approve-title">Launch approval</h2>
+        <p class="note" id="approve-text"></p>
+        <span data-can="keys"><button class="btn btn-primary btn-wide" type="button" id="approve-go">Approve launch</button></span>
+        <div><button class="linkbtn" type="button" id="test-hist-toggle" aria-expanded="false" aria-controls="test-hist" style="padding-left: 0">View test history</button></div>
+        <div class="list" id="test-hist" hidden></div>
+      </section>
+    </div>
+    <p class="note" style="padding: 0 0.25rem">Sample results. No test has been run against a real shop.</p>
+  </div>
+</div>
+
+<!-- ================= Notifications ================= -->
+<div class="page" id="view-alerts" hidden>
+  <div class="phead">
+    <div class="row wrap">
+      <h1 class="h-page">Notifications</h1>
+      <span class="tipw"><button class="info" type="button" aria-label="About notifications" aria-describedby="tip-alerts"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-alerts">Each alert goes to the role that can act on it, by the channel and at the time you choose. A payment failure is always sent at once.</span></span>
+    </div>
+  </div>
+  <div class="pbody stack-v">
+    <section class="panel pad" aria-labelledby="route-title">
+      <form id="alert-form" class="stack-v" style="gap: 1rem" novalidate>
+        <div>
+          <h2 class="h-panel" id="route-title">Who gets notified</h2>
+          <p class="note" style="padding-top: 0.25rem">The recipient, the channel and the timing of each alert.</p>
+        </div>
+        <div class="tbl-wrap">
+          <table class="tbl alert-tbl" style="min-width: 40rem">
+            <thead><tr><th>Alert</th><th>Recipient</th><th>Channel</th><th>Timing</th></tr></thead>
+            <tbody id="alert-rows"></tbody>
+          </table>
+        </div>
+        <div class="row wrap" data-can="settings">
+          <button class="btn btn-primary" type="submit">Save preferences</button>
+          <span class="note" id="alert-saved" role="status"></span>
+        </div>
+      </form>
+    </section>
+    <div class="cols">
+      <section class="panel pad stack-v" aria-labelledby="deliv-title" style="gap: 0.875rem">
+        <h2 class="h-panel" id="deliv-title">Delivery settings</h2>
+        <div class="form-row">
+          <label for="alert-daily">Daily summary at</label>
+          <select class="field field-select" id="alert-daily"><option>07:00</option><option>08:00</option><option selected>09:00</option><option>10:00</option><option>12:00</option></select>
+        </div>
+        <div class="head">
+          <span class="form-lbl" id="alert-group-l">Group repeated alerts</span>
+          <button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="alert-group-l" id="alert-group"><span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span></button>
+        </div>
+        <p class="note">Alerts of the same kind are combined into one message. Times are in your shop’s time zone.</p>
+        <div class="notice">
+          <svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg>
+          <p><strong>A payment failure is always sent at once.</strong> It is never held for the daily summary.</p>
+        </div>
+      </section>
+      <section class="panel pad stack-v" aria-labelledby="testn-title" style="gap: 0.875rem">
+        <h2 class="h-panel" id="testn-title">Test notification</h2>
+        <div class="form-row">
+          <label for="alert-test-to">Recipient</label>
+          <select class="field field-select" id="alert-test-to"></select>
+          <button class="btn" type="button" id="alert-test">Send test</button>
+        </div>
+      </section>
+    </div>
+    <section class="panel pad" aria-labelledby="sent-title">
+      <div class="head" style="padding-bottom: 0.875rem">
+        <div class="row wrap">
+          <h2 class="h-panel" id="sent-title">Delivery history</h2>
+          <span class="meta" id="sent-meta"></span>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl" id="sent-table" style="min-width: 40rem">
+          <thead><tr><th style="width: 8.5rem">Sent</th><th>Alert</th><th>To</th><th>Channel</th><th>Delivery</th></tr></thead>
+          <tbody id="sent-rows"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="sent-empty" hidden>No alert has been sent yet.</div>
+    </section>
+    <p class="note" style="padding: 0 0.25rem">Recipients, channels and the history are a sample. This demo sends nothing.</p>
   </div>
 </div>
 
@@ -1466,7 +1791,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
 
 <footer class="foot rel">
   <span>Sample data</span>
-  <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="tip-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-al" role="tooltip" id="tip-sample">Card names and market values are from the Grail inventory of 11 November 2026, and a card still at grading shows the grade it is valued at. Balances, sales, fees, customers, shipments, keys, invoices, references, events and the card mix of each pack are sample numbers. Who acts next on a shipping problem is a proposal. Card photos were supplied by the shop owner, and a slab without one is an empty photo slot. Nothing you do here moves money. New shop shows the same dashboard for a shop that is still onboarding.</span></span>
+  <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="tip-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-al" role="tooltip" id="tip-sample">Card names and market values are from the Grail inventory of 11 November 2026, and a card still at grading shows the grade it is valued at. Balances, sales, fees, customers, shipments, keys, invoices, references, events, reconciliation records, cases, test results, alerts, the change history and the card mix of each pack are a sample. Who acts next on a shipping problem or a case is a proposal. Card photos were supplied by the shop owner, and a slab without one is an empty photo slot. Nothing you do here moves money. New shop shows the same dashboard for a shop that is still onboarding.</span></span>
   <button class="linkbtn" type="button" id="reset">Reset</button>
   <div class="foot-ctl">
     <span class="lbl">Shop</span>
@@ -1578,6 +1903,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   <div class="sheet-body">
     <h2 class="h-page" id="ask-title" style="font-size: 1.375rem"></h2>
     <p class="note" id="ask-text"></p>
+    <p class="note" id="ask-guard" hidden>The live product asks you to confirm this with your sign-in. The demo asks only for this click.</p>
     <div class="sheet-actions">
       <button class="btn" type="button" data-close="ask">Cancel</button>
       <button class="btn btn-primary" type="button" id="ask-yes"></button>
@@ -1736,10 +2062,98 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       <div><dt>Shipping cost</dt><dd>At cost<small>From the carrier’s quote for each shipment. Not part of this sample.</small></dd></div>
       <div><dt>Insurance</dt><dd>No insurance fee</dd></div>
       <div><dt>Duties and import taxes</dt><dd>[DUTIES AND IMPORT TAXES]</dd></div>
-      <div><dt>Claims</dt><dd>[CLAIMS PROCESS]</dd></div>
+      <div><dt>Claims and returns</dt><dd>Handled as cases<small>Under Fulfilment, Returns and claims. A decision follows your agreed policy: [RETURNS AND CLAIMS POLICY]</small></dd></div>
     </dl>
     <p class="note">Who acts next on a shipping problem, and what each action does, are proposed. They are confirmed in the operating policy.</p>
   </div>
+</dialog>
+
+<dialog class="sheet sheet-wide" id="rec" aria-labelledby="rec-sheet-title">
+  <div class="sheet-body">
+    <div class="head" style="align-items: flex-start">
+      <div>
+        <h2 class="h-page" id="rec-sheet-title" style="font-size: 1.375rem">Record</h2>
+        <p class="note" id="rec-sheet-sub" style="padding-top: 0.25rem"></p>
+      </div>
+      <button class="btn" type="button" data-close="rec">Close</button>
+    </div>
+    <dl class="kv" id="rec-sheet-rows"></dl>
+    <p class="note" id="rec-sheet-note"></p>
+    <div class="sheet-actions" style="justify-content: flex-start" id="rec-sheet-acts"></div>
+  </div>
+</dialog>
+
+<dialog class="sheet sheet-wide" id="export" aria-labelledby="export-title">
+  <div class="sheet-body">
+    <div class="head" style="align-items: flex-start">
+      <div>
+        <h2 class="h-page" id="export-title" style="font-size: 1.375rem">Export</h2>
+        <p class="note" id="export-sub" style="padding-top: 0.25rem"></p>
+      </div>
+      <button class="btn" type="button" data-close="export">Close</button>
+    </div>
+    <textarea class="payload" id="export-text" rows="9" readonly aria-label="The export as CSV" spellcheck="false" style="width: 100%; resize: vertical"></textarea>
+    <div class="sheet-actions" style="justify-content: flex-start">
+      <button class="btn btn-primary" type="button" id="export-copy">Copy CSV</button>
+      <button class="btn" type="button" id="export-save">Download CSV</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sheet sheet-wide" id="case" aria-labelledby="case-title">
+  <div class="sheet-body">
+    <div class="head" style="align-items: flex-start">
+      <div>
+        <h2 class="h-page" id="case-title" style="font-size: 1.375rem">Case</h2>
+        <p class="note" id="case-sub" style="padding-top: 0.25rem"></p>
+      </div>
+      <button class="btn" type="button" data-close="case">Close</button>
+    </div>
+    <dl class="facts four" id="case-facts"></dl>
+    <div class="notice" id="case-next"></div>
+    <div id="case-work">
+      <h3 class="sub-h">Evidence</h3>
+      <div class="evid" id="case-evidence"></div>
+      <p class="note" style="padding-top: 0.5rem">The demo marks a photo as added. It does not take files.</p>
+      <div class="sheet-actions" style="justify-content: flex-start; padding-top: 0.875rem" data-can="cases">
+        <button class="btn btn-primary" type="button" data-case-act="photos">Request photos</button>
+        <button class="btn" type="button" data-case-act="carrier">Contact carrier</button>
+      </div>
+    </div>
+    <div>
+      <h3 class="sub-h">Case history</h3>
+      <ol class="tl" id="case-hist" aria-label="Case history"></ol>
+    </div>
+    <div class="msg" id="case-decide" data-can="cases">
+      <p><strong>Review eligibility before deciding.</strong> Check the evidence and confirm whether the claim meets your policy.</p>
+      <div class="row wrap" id="case-decide-acts"></div>
+    </div>
+    <p class="note">Refunds, replacements and returns follow your agreed policy: [RETURNS AND CLAIMS POLICY]</p>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="newcase" aria-labelledby="newcase-title">
+  <form id="newcase-form">
+    <h2 class="h-page" id="newcase-title" style="font-size: 1.375rem">New case</h2>
+    <div class="form-row">
+      <label for="newcase-ship">Shipment</label>
+      <select class="field" id="newcase-ship" style="flex: 1 1 12rem" required></select>
+    </div>
+    <fieldset>
+      <legend>Issue</legend>
+      <div class="opts opts-2">
+        <label class="opt"><input type="radio" name="issue" id="issue-damaged" value="Damaged delivery" checked><span>Damaged delivery</span></label>
+        <label class="opt"><input type="radio" name="issue" id="issue-missing" value="Missing delivery"><span>Missing delivery</span></label>
+        <label class="opt"><input type="radio" name="issue" id="issue-return" value="Return request"><span>Return request</span></label>
+        <label class="opt"><input type="radio" name="issue" id="issue-other" value="Other"><span>Other</span></label>
+      </div>
+    </fieldset>
+    <p class="note">The case starts with your shop. From there you can request photos, contact the carrier or record a decision.</p>
+    <div class="sheet-actions">
+      <button class="btn" type="button" data-close="newcase">Cancel</button>
+      <button class="btn btn-primary" type="submit">Open case</button>
+    </div>
+  </form>
 </dialog>
 
 <div class="viz-tip" id="viz-tip" role="status" hidden></div>
@@ -1936,19 +2350,21 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   var PERMS = [
     ['sales', 'See sales, customers and analytics', 'Overview, Customers, Analytics'],
     ['packs', 'See and manage packs and the marketplace', 'Catalogue'],
-    ['ops', 'See the Vault and shipments', 'Fulfilment'],
-    ['billing', 'See billing and invoices', 'Billing'],
-    ['topup', 'Top up the balance', 'Top up and Auto top-up'],
+    ['ops', 'See the Vault, shipments and cases', 'Fulfilment'],
+    ['cases', 'Manage returns and claims', 'In Fulfilment'],
+    ['billing', 'See billing, invoices and the reconciliation', 'Billing'],
+    ['topup', 'Top up the balance', 'Top up'],
+    ['auto', 'Change Auto top-up', 'In Billing'],
     ['methods', 'Add and remove payment methods', 'In Billing'],
-    ['keys', 'Manage API keys, the Sandbox and event delivery', 'Integration'],
+    ['keys', 'Manage API keys, the Sandbox, event delivery and launch checks', 'Integration'],
     ['kyb', 'Manage KYB', 'Settings, KYB'],
     ['users', 'Add users and change roles', 'Settings, Team'],
-    ['settings', 'Change shop settings', 'Settings, Shop']
+    ['settings', 'Change shop settings and notifications', 'Settings, Shop and Notifications']
   ];
-  var PAGE_NEEDS = { overview: 'sales', packs: 'packs', marketplace: 'packs', vault: 'ops', shipments: 'ops', customers: 'sales', analytics: 'sales',
-    billing: 'billing', integration: 'keys', kyb: 'kyb', team: 'users', account: 'settings' };
-  var PAGE_NAMES = { overview: 'Overview', packs: 'Packs', marketplace: 'Marketplace', vault: 'Vault', shipments: 'Shipments', customers: 'Customers', analytics: 'Analytics',
-    billing: 'Billing', integration: 'Integration', kyb: 'KYB', team: 'Team', account: 'Shop settings' };
+  var PAGE_NEEDS = { overview: 'sales', packs: 'packs', marketplace: 'packs', vault: 'ops', shipments: 'ops', cases: 'ops', customers: 'sales', analytics: 'sales',
+    billing: 'billing', reconcile: 'billing', autotopup: 'billing', integration: 'keys', launch: 'keys', kyb: 'kyb', team: 'users', account: 'settings', alerts: 'settings' };
+  var PAGE_NAMES = { overview: 'Overview', packs: 'Packs', marketplace: 'Marketplace', vault: 'Vault', shipments: 'Shipments', cases: 'Returns and claims', customers: 'Customers', analytics: 'Analytics',
+    billing: 'Billing', reconcile: 'Reconciliation', autotopup: 'Auto top-up', integration: 'Integration', launch: 'Launch checks', kyb: 'KYB', team: 'Team', account: 'Shop settings', alerts: 'Notifications' };
 
   var PEOPLE = buildPeople();
   var SHIP = buildShipments();
@@ -1962,6 +2378,8 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   // Purchases of the last 24 hours, read off the same day-by-hour grid as the Analytics page. The sample's "now" is a Thursday at 16:00.
   var P24 = 0;
   (function () { for (var h = 0; h < 24; h++) P24 += h < 16 ? GRID[3 * 24 + h] / DAYS[3][3] : GRID[2 * 24 + h] / DAYS[2][3]; })();
+  var P_TODAY = 0;       // and of today so far
+  (function () { for (var h = 0; h < 16; h++) P_TODAY += GRID[3 * 24 + h] / DAYS[3][3]; })();
   var MIN = 60000;
   var PURCHASES = buildPurchases(), TEST_PURCHASES = buildTestPurchases();
   var EVENTS = buildEvents(PURCHASES, rng(3301)), EVENTS_TEST = buildEvents(TEST_PURCHASES, rng(3302));
@@ -1975,7 +2393,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
 
   // ---------- state ----------
   var START = { auto: false, autoAmount: 10000, autoBelow: 20000, shop: '', shown: 12, shipFilter: 'all', shipQuery: '', shipShown: 12,
-    vaultView: 'cards', ledgerFilter: 'all', ledgerShown: 10, topBy: 'sales', actMode: 'chart', evFilter: 'all', evShown: 8, evFocus: '' };
+    vaultView: 'cards', ledgerFilter: 'all', ledgerShown: 10, topBy: 'sales', actMode: 'chart', evFilter: 'all', evShown: 8, evFocus: '', autoCap: 30000, caseFilter: 'open', caseQuery: '', recDay: 0, recFilter: 'review', recShown: 10 };
   var S = {};
   function resetState(mode) {
     for (var k in START) S[k] = START[k];
@@ -1994,9 +2412,34 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     S.liveKey = live ? { tail: '7c2e', made: '9 Oct 2026' } : null;
     S.sandbox = { tail: '91b4', made: live ? '2 Oct 2026' : '10 Nov 2026' };
     S.acked = {}; S.synced = false;
+    // funding rules, the day's reconciliation, cases, launch checks, alerts and the record of changes
+    S.autoToday = 0; S.autoPaused = false; S.payTested = false; S.autoDirty = false;
+    S.recLinked = false; S.recFin = '';
+    S.cases = live ? buildCases() : []; S.caseSeq = 2104; S.caseOpen = ''; S.caseDeciding = '';
+    S.checks = live ? [1, 1, 1, 1, 1, 1] : [1, 1, 1, 2, 1, 0];      // 1 passed, 2 needs fixing, 0 not tested
+    S.checksOk = live; S.checksDate = live ? '8 Oct 2026' : '';
+    S.runs = live ? [['8 Oct 2026, 16:40', '6 of 6 passed'], ['8 Oct 2026, 11:05', '5 of 6 passed, 1 needed fixing'], ['7 Oct 2026, 17:22', '3 of 6 passed, 3 not tested']]
+      : [['12 Nov 2026, 14:20', '4 of 6 passed, 1 needs fixing, 1 not tested'], ['11 Nov 2026, 18:02', '2 of 6 passed, 4 not tested']];
+    S.alerts = live ? { low: ['Finance', 'Email and in-app', 'Immediate'], autofail: ['Finance+Admin', 'Email and in-app', 'Immediate'], paused: ['Admin', 'In-app', 'Immediate'],
+      ship: ['Support', 'Email and in-app', 'Immediate'], rec: ['Finance', 'Email and in-app', 'Daily summary'] }
+      : { low: ['', 'Email and in-app', 'Immediate'], autofail: ['', 'Email and in-app', 'Immediate'], paused: ['', 'In-app', 'Immediate'], ship: ['', 'Email and in-app', 'Immediate'], rec: ['', 'Email and in-app', 'Daily summary'] };
+    S.alertDaily = '09:00'; S.alertGroup = true; S.alertsDirty = false;
+    S.sent = live ? [[when(shipOf('SH-20420'), 5).getTime(), 'Shipping exception: SH-20420, held at customs', 'Support', 'Email and in-app'],
+      [when(shipOf('SH-20415'), 7).getTime(), 'Shipping exception: SH-20415, delivery attempt failed', 'Support', 'Email and in-app'],
+      [NOW - 114.4 * HOUR, 'Pack paused: Ghost Hunt', 'Admin', 'In-app']].sort(function (a, b) { return b[0] - a[0]; }) : [];
+    S.log = live ? [
+      { t: '12 Nov, 10:15', who: '[Your name], Admin', what: 'Support role updated', from: 'may not manage returns and claims', to: 'may manage returns and claims' },
+      { t: '12 Nov, 09:40', who: 'Ana P., Finance', what: 'Auto top-up trigger changed', from: '$15,000', to: '$20,000' },
+      { t: '12 Nov, 09:10', who: '[Your name], Admin', what: 'User invited', from: '', to: 'Marco T. as Support' },
+      { t: '9 Nov, 14:02', who: '[Your name], Admin', what: 'Payment method added', from: '', to: 'Apple Pay' },
+      { t: '9 Oct, 11:30', who: '[Your name], Admin', what: 'Live API key generated', from: '', to: '' },
+      { t: '8 Oct, 16:45', who: '[Your name], Admin', what: 'Launch approved', from: '', to: 'All six checks passed' },
+      { t: '2 Oct, 10:20', who: 'Julia K., Developer', what: 'Sandbox key generated', from: '', to: '' }
+    ] : [];
+    S.histAll = false;
     SHIP.forEach(function (s) { delete s.asked; delete s.up; delete s.caseId; });
     S.as = 'Admin';
-    S.roles = { Finance: { sales: 1, ops: 1, billing: 1, topup: 1 }, Support: { sales: 1, ops: 1 }, Developer: { packs: 1, keys: 1 } };
+    S.roles = { Finance: { sales: 1, ops: 1, billing: 1, topup: 1, auto: 1 }, Support: { sales: 1, ops: 1, cases: 1 }, Developer: { packs: 1, keys: 1 } };
     S.users = [{ name: '[Your name]', email: '[YOUR EMAIL]', role: 'Admin', status: 'Active', last: 'Now', you: true }].concat(live ? [
       { name: 'Ana P.', email: 'finance@yourshop.example', role: 'Finance', status: 'Active', last: '12 Nov, 11:20' },
       { name: 'Marco T.', email: 'support@yourshop.example', role: 'Support', status: 'Active', last: '12 Nov, 15:02' },
@@ -2195,6 +2638,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       var c = POOL[10 + Math.floor(r() * 20)], who = PEOPLE[Math.floor(r() * PEOPLE.length)];
       out.push(refs({ n: c[0], s: c[1], g: c[2], v: c[3], who: who.id, pack: PACKS[Math.floor(r() * 2)].id, stage: 'released', ago: 6.5 + i * 4 + r() * 3, after: 1 + r() * 3.5 }, r));
     }
+    refs(SHIP[0], r);     // the newest shipment keeps its references too, for the reconciliation
     return out;
   }
   // The Sandbox of a shop that is still onboarding: five test purchases.
@@ -2297,6 +2741,9 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     $('ship-filters').innerHTML = chips(FILTERS, 'data-filter');
     $('ledger-filters').innerHTML = chips(LEDGER_FILTERS, 'data-ledger');
     $('ev-filters').innerHTML = chips([['all', 'All'], ['wait', 'Needs retry']], 'data-ev');
+    $('case-filters').innerHTML = chips(CASE_FILTERS, 'data-case-f');
+    $('rec-filters').innerHTML = chips([['all', 'All'], ['review', 'Needs review'], ['ok', 'Matched']], 'data-rec-f');
+    $('rec-day').innerHTML = [0, 1, 2, 3, 4, 5, 6].map(function (d) { return '<option value="' + d + '">' + day(recDate(d)) + (d ? '' : ', today so far') + '</option>'; }).join('');
     $('ship-meta').textContent = SHIP.length + ' in the last 30 days, $' + abbr(SHIP_ALL) + ' in cards';
     setShort('k-bought', TOTAL_BOUGHT);
     setShort('k-buyers', BUYERS);
@@ -2417,12 +2864,13 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   function render() {
     renderSeq++;   // figures that are still counting up stop when a newer picture of the state is drawn
     // Auto top-up keeps the Available Balance above its line.
-    var guard = 0, pay = defaultMethod();
-    while (S.auto && S.autoAmount > 0 && (S.balance - S.held) < S.autoBelow && guard < 20) {
-      S.balance += S.autoAmount; guard++;
+    var guard = 0, pay = defaultMethod(), capped = false;
+    while (S.auto && !S.autoPaused && S.autoAmount > 0 && (S.balance - S.held) < S.autoBelow && guard < 20) {
+      if (S.autoToday + S.autoAmount > S.autoCap) { capped = true; break; }     // it stops at the daily limit
+      S.balance += S.autoAmount; S.autoToday += S.autoAmount; guard++;
       S.extra.unshift({ age: 0, kind: 'top', w: 'Auto top-up' + (pay ? ', ' + pay.label : ''), c: S.autoAmount * 100, bal: S.balance * 100 });
     }
-    if (guard) toast('Auto top-up added ' + money(guard * S.autoAmount) + '.');
+    if (guard) toast('Auto top-up added ' + money(guard * S.autoAmount) + '.' + (capped ? ' It has reached today’s limit.' : ''));
 
     var av = S.balance - S.held, mx = maxCard(av), ok = approved(), live = S.mode === 'live';
     // when the Max Card Value changes, the marker on the pack rail travels to its new place
@@ -2436,8 +2884,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     bind('maxcard', money(mx));
     bind('maxtip', maxTip(av));
     bind('staging', money(live ? STAGING.reduce(function (t, c) { return t + c.v; }, 0) : 0));
-    bind('autotip', 'Adds ' + money(S.autoAmount) + ' whenever your Available Balance falls below ' + money(S.autoBelow) + '. It is paid with your default payment method.');
-    bind('autopay', pay ? 'Paid with your default payment method, ' + pay.label + '. You can change it in Billing.' : 'Add a payment method in Billing to pay for Auto top-up.');
+    bind('autotip', 'Adds ' + money(S.autoAmount) + ' whenever your Available Balance falls below ' + money(S.autoBelow) + ', up to ' + money(S.autoCap) + ' a day. It is paid with your default payment method. The rules are under Billing, on the Auto top-up page.');
     bind('shopname', S.shop || '[Your Shop]');
     bind('levelchip', live ? 'Silver' : ok ? 'Starter' : 'Onboarding');
     $('tip-balance').textContent = 'Your balance is ' + money(S.balance) + '. ' + (S.held ? money(S.held) + ' is held for ' + VAULT.length + ' cards in the Vault, for up to 48 hours.' : 'Nothing is held.') + ' Your Max Card Value is ' + money(mx) + '.';
@@ -2499,8 +2946,6 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     }).join('');
 
     all('[data-auto]').forEach(function (sw) { sw.setAttribute('aria-checked', S.auto ? 'true' : 'false'); });
-    if (document.activeElement !== $('auto-amount')) $('auto-amount').value = money(S.autoAmount);
-    if (document.activeElement !== $('auto-below')) $('auto-below').value = money(S.autoBelow);
     if (document.activeElement !== $('shop-name')) $('shop-name').value = S.shop;
     renderOnboarding();
     renderVault();
@@ -2515,6 +2960,12 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     renderTodo();
     renderConn();
     renderEvents();
+    renderAuto();
+    renderRec();
+    renderCases();
+    renderLaunch();
+    renderAlerts();
+    renderHistory();
     applyAccess();
     layoutRail();
   }
@@ -2564,19 +3015,21 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
         a: kyb === 'draft' ? '<a class="btn btn-sm" href="#kyb" data-can="kyb">Open KYB</a>' : '' },
       { t: 'Make a first top-up of $1,000', done: dep, p: dep ? 'Your first top-up is in.' : '$1,000 is the smallest balance a shop can run on.',
         a: dep ? '' : '<button class="btn btn-sm" type="button" data-first-topup data-can="topup">Top up $1,000</button>' },
-      { t: 'Get approved by Grail', done: S.adminOk, p: S.adminOk ? 'Your shop is approved.' : kyb === 'approved' && dep ? 'Grail is reviewing your shop. Nothing more is needed from you.' : 'A Grail admin approves your shop once KYB and the first top-up are done.', a: '' }
+      { t: 'Pass the launch checks', done: S.checksOk, p: S.checksOk ? 'All six checks passed in the Sandbox.' : 'Run the six checks in the Sandbox, fix what fails and approve the launch.',
+        a: S.checksOk ? '' : '<a class="btn btn-sm" href="#launch" data-can="keys">Open launch checks</a>' },
+      { t: 'Get approved by Grail', done: S.adminOk, p: S.adminOk ? 'Your shop is approved.' : kyb === 'approved' && dep && S.checksOk ? 'Grail is reviewing your shop. Nothing more is needed from you.' : 'A Grail admin approves your shop once KYB, the first top-up and the launch checks are done.', a: '' }
     ];
     var now = -1, n = 0;
     steps.forEach(function (s, i) { if (s.done) n++; else if (now < 0) now = i; });
     $('onboard-steps').innerHTML = steps.map(function (s, i) {
-      return '<li class="step' + (s.done ? ' done' : i === now ? ' now' : '') + '"' + (i === now ? ' aria-current="step"' : '') + '><div class="step-top"><span>Step ' + (i + 1) + ' of 3</span>' +
+      return '<li class="step' + (s.done ? ' done' : i === now ? ' now' : '') + '"' + (i === now ? ' aria-current="step"' : '') + '><div class="step-top"><span>Step ' + (i + 1) + ' of 4</span>' +
         '<span class="tag' + (s.done ? ' tag-on' : '') + '">' + (s.done ? 'Done' : i === now ? 'Next' : 'Waiting') + '</span></div><b>' + s.t + '</b><p>' + s.p + '</p>' + s.a + '</li>';
     }).join('');
-    bind('onbcount', n + ' of 3 done');
+    bind('onbcount', n + ' of 4 done');
     $('onboard-note').textContent = ok ? 'Your shop is approved. The live API key is unlocked, and each pack goes live once your balance covers its top chase card.'
-      : 'Until all three are done you can build in the Sandbox, but the live API key and live packs stay off.';
+      : 'Until all four are done you can build in the Sandbox, but the live API key and live packs stay off.';
     all('[data-demo="kyb"]').forEach(function (b) { b.disabled = kyb !== 'review'; b.title = kyb === 'draft' ? 'Send the documents for review first' : ''; });
-    all('[data-demo="admin"]').forEach(function (b) { b.disabled = S.adminOk || kyb !== 'approved' || !dep; b.title = b.disabled && !S.adminOk ? 'Needs KYB and the first top-up' : ''; });
+    all('[data-demo="admin"]').forEach(function (b) { b.disabled = S.adminOk || kyb !== 'approved' || !dep || !S.checksOk; b.title = b.disabled && !S.adminOk ? 'Needs KYB, the first top-up and the launch checks' : ''; });
   }
 
   function viewCell(c) { return '<td class="r"><button class="btn btn-sm" type="button" data-purchase="' + c.tp + '" aria-label="View the purchase of ' + esc(c.n) + '">View</button></td>'; }
@@ -2796,6 +3249,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     var ok = approved(), k = S.liveKey, sb = S.sandbox, left = [], html;
     if (S.kyb !== 'approved') left.push('KYB approval');
     if (!deposited()) left.push('a first top-up of $1,000');
+    if (!S.checksOk) left.push('the launch checks');
     if (!S.adminOk) left.push('approval by Grail');
     $('lock-note').hidden = ok;
     $('lock-text').innerHTML = '<strong>The live API key is locked until your shop is approved.</strong> Still needed: ' + left.join(', ') + '. You can build in the Sandbox in the meantime.';
@@ -2820,13 +3274,16 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   function makeKey(which) {
     var full = newKey(which === 'live' ? 'grl_live_' : 'grl_test_'), k = { full: full, tail: full.slice(-4), made: '12 Nov 2026' };
     if (which === 'live') S.liveKey = k; else S.sandbox = k;
+    log(which === 'live' ? 'Live API key generated' : 'Sandbox key generated');
     renderKeys();
     toast(which === 'live' ? 'Live key generated. Copy it now.' : 'Sandbox ready. Copy its key now.');
   }
-  var askThen = null;
-  function ask(title, text, yes, then) {
+  var askThen = null, askElse = null;
+  // "otherwise" runs when the sheet is closed without a yes, for a control that has to go back to what it showed.
+  function ask(title, text, yes, then, otherwise) {
     $('ask-title').textContent = title; $('ask-text').textContent = text; $('ask-yes').textContent = yes;
-    askThen = then;
+    $('ask-guard').hidden = true;
+    askThen = then; askElse = otherwise || null;
     openSheet($('ask'));
   }
 
@@ -2896,6 +3353,14 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       if (f) parts.push(f + ' failed delivery');
       items.push(['warn', warn.length + (warn.length === 1 ? ' shipment needs' : ' shipments need') + ' attention', parts.join(', '), '<a class="btn btn-sm btn-primary" href="#shipments" data-ship-warn>Resolve</a>']);
     }
+    if (S.autoPaused && can('billing')) items.unshift(['warn', 'Auto top-up is paused', 'A payment failed. It starts again after someone has looked at the payment.', '<a class="btn btn-sm btn-primary" href="#autotopup">Review</a>']);
+    var mine = S.cases.filter(function (c) { return c.status !== 'done' && c.owner === 'Your shop'; });
+    if (mine.length && can('ops')) {
+      items.push(['warn', mine.length === 1 ? 'Case ' + mine[0].id + ' waits for your shop' : mine.length + ' cases wait for your shop', mine.length === 1 ? mine[0].type + '. ' + mine[0].next + '.' : 'Each case shows its next step.',
+        mine.length === 1 ? '<button class="btn btn-sm" type="button" data-case="' + mine[0].id + '">Open case</button>' : '<a class="btn btn-sm" href="#cases">Open cases</a>']);
+    }
+    var diff = S.mode === 'live' ? recIssues(0).filter(function (x) { return !x.done; }).length : 0;
+    if (diff && can('billing')) items.push(['warn', diff + (diff === 1 ? ' record needs' : ' records need') + ' review', 'Today’s reconciliation found a difference between your records and Grail’s.', '<a class="btn btn-sm" href="#reconcile">Review</a>']);
     PACKS.filter(function (p) { return !p.live; }).sort(function (a, b) { return a.cards[0].v - b.cards[0].v; }).forEach(function (p) {
       var gap = Math.max(0, need(p.cards[0].v) - av);
       if (!gap) return;
@@ -3066,7 +3531,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       next = ['The customer', (s.asked ? 'Sends their tax ID.' : 'Has to send their tax ID.') + ' Your shop follows up.'];
       acts = (s.asked ? '<button class="btn btn-sm" type="button" data-copy="' + esc(customerMessage(s, st)) + '">Copy request</button>'
         : '<button class="btn btn-sm btn-primary" type="button" data-exc="ask" data-id="' + s.id + '">Request tax ID</button>') +
-        (s.caseId ? '<span class="tag">Case ' + s.caseId + ' open</span>' : '<button class="btn btn-sm" type="button" data-exc="case" data-id="' + s.id + '">Open support case</button>') + track;
+        (s.caseId ? '<button class="btn btn-sm" type="button" data-case="' + s.caseId + '">Case ' + s.caseId + '</button>' : '<button class="btn btn-sm" type="button" data-exc="case" data-id="' + s.id + '">Open support case</button>') + track;
     } else {
       status = ['Delivery attempt failed', 'Carrier retry: ' + st.again];
       next = s.up ? ['Grail support', 'Escalated ' + s.up + '.'] : ['The carrier', 'Nothing for you to do yet.'];
@@ -3084,17 +3549,350 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     var s = SHIP.filter(function (x) { return x.id === id; })[0], now = clock(new Date(NOW));
     if (!s) return;
     if (kind === 'ask') { s.asked = now; renderShipments(); openTrack(id); }
-    else if (kind === 'case') { s.caseId = 'CS-' + (2105 + SHIP.filter(function (x) { return x.caseId; }).length); renderShipments(); toast('Support case ' + s.caseId + ' is open with Grail support.'); }
+    else if (kind === 'case') { s.caseId = newCase(s.id, 'Held at customs', 'Grail support', 'customer', 'The customer sends their tax ID').id; renderShipments(); toast('Case ' + s.caseId + ' is open with Grail support.'); }
     else if (kind === 'up') { s.up = now; renderShipments(); toast('Escalated to Grail support.'); }
+  }
+
+  var framed = (function () { try { return window.self !== window.top; } catch (err) { return true; } })();   // inside another page, where a file cannot be saved
+
+  // ---------- a record of every change, and one more step before a sensitive one ----------
+  function whoNow() {
+    if (S.as === 'Admin') return '[Your name], Admin';
+    var u = S.users.filter(function (x) { return x.role === S.as; })[0];
+    return (u ? u.name : 'A user') + ', ' + S.as;
+  }
+  function log(what, from, to, who) {
+    S.log.unshift({ t: clock(new Date(NOW)), who: who || whoNow(), what: what, from: from || '', to: to || '' });
+    renderHistory();
+  }
+  function renderHistory() {
+    var list = S.histAll ? S.log : S.log.slice(0, 3);
+    $('hist-list').innerHTML = list.length ? list.map(function (e) {
+      var change = e.from && e.to ? ' Before: ' + esc(e.from) + '. After: ' + esc(e.to) + '.' : e.to ? ' ' + esc(e.to) + '.' : '';
+      return item(esc(e.what), e.t + ', ' + esc(e.who) + '.' + change);
+    }).join('') : '<p class="note">No changes yet. Every change to roles, users, payment methods, funding rules, keys and notifications is listed here.</p>';
+    $('hist-count').textContent = S.log.length ? S.log.length + (S.log.length === 1 ? ' change' : ' changes') : '';
+    $('hist-more').hidden = S.log.length <= 3;
+    $('hist-more').textContent = S.histAll ? 'Show the latest only' : 'View full history';
+  }
+  // A change to payments, funding or team access asks once more before it happens. The live product asks for the sign-in here.
+  function sure(title, text, yes, then, otherwise) {
+    ask(title, text, yes, then, otherwise);
+    $('ask-guard').hidden = false;
+  }
+  function lower(t) { return t.charAt(0).toLowerCase() + t.slice(1); }
+  function methodName(id) { var m = S.methods.filter(function (x) { return x.id === id; })[0]; return m ? m.label : 'None'; }
+
+  // ---------- Auto top-up: the rules, today's use of the limit, and what a failed payment does ----------
+  function autoState() {
+    if (!S.auto) return 'Off';
+    if (S.autoPaused) return 'Paused';
+    return (S.balance - S.held) < S.autoBelow && S.autoToday + S.autoAmount > S.autoCap ? 'Daily limit reached' : 'On';
+  }
+  function autoSummary() {
+    var pay = defaultMethod();
+    return 'It adds ' + money(S.autoAmount) + ' whenever your Available Balance falls below ' + money(S.autoBelow) + ', up to ' + money(S.autoCap) + ' a day' + (pay ? ', paid with ' + pay.label : '') + '.';
+  }
+  function alertTo(key) { var a = S.alerts[key]; return a && a[0] ? a[0].replace('+', ' and ') : ''; }
+  function renderAuto(force) {
+    var st = autoState(), form = $('auto-form'), may = can('auto'), who = alertTo('autofail');
+    $('auto-state').textContent = st;
+    $('auto-banner').hidden = st !== 'Paused';
+    $('auto-cap-note').hidden = st !== 'Daily limit reached';
+    $('auto-banner-who').textContent = who ? who + (who.indexOf(' and ') > 0 ? ' were' : ' was') + ' notified.' : 'Nobody was notified, because the alert has no recipient.';
+    $('auto-fail-who').textContent = who ? 'The Auto top-up failed alert goes to ' + who + ' at once.' : 'The Auto top-up failed alert has no recipient yet. Set one under Settings, Notifications.';
+    if (force || !(S.autoDirty || form.contains(document.activeElement))) {
+      $('auto-below').value = money(S.autoBelow); $('auto-amount').value = money(S.autoAmount); $('auto-cap').value = money(S.autoCap);
+      $('auto-method').innerHTML = S.methods.length ? S.methods.map(function (m) { return '<option value="' + m.id + '">' + esc(m.label) + '</option>'; }).join('') : '<option value="">Add a payment method in Billing</option>';
+      $('auto-method').value = (defaultMethod() || { id: '' }).id;
+      all('#auto-form .field').forEach(function (f) { f.classList.remove('is-bad'); });
+    }
+    all('#auto-form .field').forEach(function (f) { f.disabled = !may; });
+    $('k-auto-cap').textContent = money(S.autoCap);
+    $('k-auto-today').textContent = money(S.autoToday);
+    $('k-auto-left').textContent = money(Math.max(0, S.autoCap - S.autoToday));
+    $('auto-test').disabled = !S.methods.length;
+    $('auto-resume').disabled = !(S.autoPaused && S.payTested);
+    $('auto-resume').title = S.autoPaused && !S.payTested ? 'Test the payment method first' : '';
+    $('auto-paused-tag').hidden = st !== 'Paused';
+  }
+
+  // ---------- daily reconciliation: the shop platform's records against Grail's ----------
+  function recCount(d) {
+    if (!d) return Math.round(P_TODAY);
+    var di = (3 - d + 70) % 7, t = 0;
+    for (var h = 0; h < 24; h++) t += GRID[di * 24 + h] / DAYS[di][3];
+    return Math.round(t);
+  }
+  function recDate(d) { return new Date(NOW - d * 24 * HOUR); }
+  // Two records of today do not agree: a Fulfilment fee the shop platform has not booked, and a purchase it holds without Grail's reference.
+  function recIssues(d) {
+    if (d !== 0) return [];
+    var s = SHIP[0], w = VAULT[VAULT.length - 1], linked = S.recLinked || !!S.acked[w.holdEvent.id];
+    return [{ kind: 'fee', tx: s.tx, tp: s.tp, what: 'Fulfilment fee, ' + s.n, v: s.v, done: false },
+      { kind: 'ref', tx: w.tx, tp: linked ? w.tp : '', what: 'Purchase, ' + w.n, v: w.v, c: w, done: linked }];
+  }
+  // Today's purchases that are still in the Vault or in Staging keep their real references. The rest of a day is filled with sample records.
+  function recReal() {
+    return PURCHASES.filter(function (c) { return c.stage !== 'released' && c.ago < 16 * 60 && c !== VAULT[VAULT.length - 1]; }).map(function (c) {
+      return { tx: c.tx, tp: c.tp, what: 'Purchase, ' + (c.stage === 'vault' ? 'in the Vault' : 'in Staging'), v: c.v, fee: txFee(c.v), c: c };
+    });
+  }
+  function recRow(d, i) {
+    if (!d) { var real = recReal(); if (i < real.length) return real[i]; i -= real.length; }
+    var r = rng(77000 + d * 1009 + i * 7), v = Math.round(5 + Math.pow(r(), 4) * 1400), x = r(), shipped = x < 0.01;
+    return { tx: 'TX-' + digits(r, 8), tp: 'TP-' + digits(r, 6), what: shipped ? 'Purchase, fulfilled' : x < 0.03 && d < 2 ? 'Purchase, in the Vault' : 'Purchase, released', v: v, fee: shipped ? fee(v, RATE.ship) : txFee(v) };
+  }
+  function renderRec() {
+    var d = S.recDay, issues = recIssues(d), open = issues.filter(function (x) { return !x.done; }), settled = issues.filter(function (x) { return x.done; });
+    var total = recCount(d), n = { all: total, review: open.length, ok: total - open.length }, f = S.recFilter;
+    $('rec-day').value = String(d);
+    $('rec-meta').textContent = open.length ? open.length + (open.length === 1 ? ' record needs' : ' records need') + ' review' : 'Everything matches';
+    $('k-rec-ok').textContent = count(n.ok);
+    $('k-rec-review').textContent = n.review;
+    $('k-rec-review').classList.toggle('warn', n.review > 0);
+    $('k-rec-import').textContent = d ? day(recDate(d - 1)) + ', 00:15' : '12 Nov, 15:45';
+    all('[data-rec-f]').forEach(function (b) {
+      var k = b.getAttribute('data-rec-f');
+      b.setAttribute('aria-pressed', k === f ? 'true' : 'false');
+      b.querySelector('b').textContent = count(n[k]);
+      b.classList.toggle('has-warn', k === 'review' && n[k] > 0);
+    });
+    var rows = f === 'ok' ? [] : open.slice(), inAll = rows.length + (f === 'review' ? 0 : n.ok);
+    if (f !== 'review') { rows = rows.concat(settled); for (var i = 0; rows.length < S.recShown && i < n.ok - settled.length; i++) rows.push(recRow(d, i)); }
+    $('rec-rows').innerHTML = rows.slice(0, S.recShown).map(function (x) {
+      var bad = x.kind && !x.done, act = '';
+      if (x.kind === 'fee') act = '<button class="btn btn-sm" type="button" data-rec="fee">Review</button>';
+      else if (bad) act = '<button class="btn btn-sm" type="button" data-rec="ref">Link purchase</button>';
+      else if (x.c) act = '<button class="btn btn-sm" type="button" data-purchase="' + x.c.tp + '" aria-label="View the purchase of ' + esc(x.c.n) + '">View</button>';
+      var tag = !bad ? '<span class="tag tag-on">Matched</span>' : x.kind === 'ref' ? '<span class="tag tag-warn">Reference missing</span>'
+        : '<span class="tag tag-warn">Fee difference ' + usd(shipFee(x.v)) + '</span>' + (S.recFin ? ' <span class="tag">With Finance</span>' : '');
+      return '<tr' + (act ? ' data-row' : '') + '><td class="num">' + x.tx + '</td><td class="num">' + (x.tp || '<span class="warn">Missing</span>') + '</td><td>' + esc(x.what) + '</td><td class="r">' + money(x.v) + '</td>' +
+        '<td style="white-space: nowrap">' + tag + '</td><td class="r">' + act + '</td></tr>';
+    }).join('');
+    $('rec-table').hidden = !rows.length;
+    $('rec-empty').hidden = rows.length > 0;
+    $('rec-empty').textContent = 'Nothing to review. Every record of this day matches.';
+    var left = inAll - S.recShown;
+    $('rec-more-wrap').hidden = left <= 0;
+    $('rec-more').textContent = 'Show ' + Math.min(20, Math.max(left, 0)) + ' more';
+  }
+  function openRec(kind) {
+    var s = SHIP[0], w = VAULT[VAULT.length - 1], rows, acts;
+    if (kind === 'fee') {
+      $('rec-sheet-title').textContent = 'Fee difference';
+      $('rec-sheet-sub').textContent = s.tx + ', ' + cardName(s) + ', shipment ' + s.id + '.';
+      rows = [['Grail’s record', usd(fee(s.v, RATE.ship)), 'The Fulfilment fee: ' + usd(txFee(s.v)) + ' charged at the purchase, and ' + usd(shipFee(s.v)) + ' at shipping'],
+        ['Your record', usd(txFee(s.v)), 'The transaction fee only'], ['Difference', usd(shipFee(s.v)), 'The part of the Fulfilment fee that was charged at shipping']];
+      $('rec-sheet-note').textContent = S.recFin ? 'Assigned to Finance on ' + S.recFin + '. The record is matched once your shop platform books the fee and sends its records again.'
+        : 'The record is matched once your shop platform books the fee charged at shipping and sends its records again.';
+      acts = '<button class="btn btn-primary" type="button" data-track="' + s.id + '">Open shipment</button>' + (S.recFin ? '' : '<button class="btn" type="button" data-rec-act="assign" data-can="billing">Assign to Finance</button>');
+    } else {
+      var t0 = clock(new Date(NOW - w.ago * MIN));
+      $('rec-sheet-title').textContent = 'Reference missing';
+      $('rec-sheet-sub').textContent = w.tx + ', ' + money(w.v) + ', ' + t0 + '.';
+      rows = [['Your record', w.tx, 'No Grail purchase is stored with it'], ['Closest Grail purchase', w.tp, w.n + ', ' + money(w.v) + ', ' + t0],
+        ['Why it is missing', 'Event not acknowledged', 'The event that carries the reference, Vault hold created, did not reach your shop platform']];
+      $('rec-sheet-note').textContent = 'Linking stores Grail’s reference with your record. Sending the event again from Integration does the same.';
+      acts = '<button class="btn btn-primary" type="button" data-rec-act="link" data-can="billing">Link purchase</button><button class="btn" type="button" data-purchase="' + w.tp + '">View purchase</button>';
+    }
+    $('rec-sheet-rows').innerHTML = rows.map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '<small>' + r[2] + '</small></dd></div>'; }).join('');
+    $('rec-sheet-acts').innerHTML = acts;
+    applyAccess();
+    if (!$('rec').open) openSheet($('rec'));
+  }
+  function recAct(kind) {
+    if (kind === 'assign') { S.recFin = clock(new Date(NOW)); notify('rec', 'Reconciliation difference: a Fulfilment fee is not in your records'); renderRec(); renderAlerts(); openRec('fee'); }
+    else if (kind === 'link') { S.recLinked = true; closeSheet($('rec')); renderRec(); renderTodo(); toast('Linked. The record is matched.'); }
+  }
+  function recCsv() {
+    var d = S.recDay, date = recDate(d).toISOString().slice(0, 10), issues = recIssues(d), lines = ['date,shop_platform_transaction,grail_purchase,record,card_value_usd,grail_fee_usd,your_fee_usd,result'];
+    function line(x, grail, yours, result) { lines.push([date, x.tx, x.tp, '"' + x.what.replace(/"/g, '""') + '"', x.v.toFixed(2), (grail / 100).toFixed(2), (yours / 100).toFixed(2), result].join(',')); }
+    issues.forEach(function (x) {
+      if (x.kind === 'fee') line(x, fee(x.v, RATE.ship), txFee(x.v), 'fee difference');
+      else line(x, txFee(x.v), txFee(x.v), x.done ? 'matched' : 'reference missing');
+    });
+    for (var i = 0, n = recCount(d) - issues.length; i < n; i++) { var r = recRow(d, i); line(r, r.fee, r.fee, 'matched'); }
+    return lines.join('\n');
+  }
+
+  // ---------- returns and claims: one case, its owner and its next step ----------
+  var CASE_STATUS = { 'new': 'New', photos: 'Awaiting photos', customer: 'Awaiting customer', carrier: 'Carrier review', review: 'Eligibility review', done: 'Resolved' };
+  var CASE_FILTERS = [['open', 'Open'], ['customer', 'Awaiting customer'], ['carrier', 'Carrier review'], ['done', 'Resolved']];
+  function shipOf(id) { return SHIP.filter(function (s) { return s.id === id; })[0]; }
+  function buildCases() {
+    var c = function (id, sid, type, status, owner, next, hist, ev, out) { return { id: id, sid: sid, type: type, status: status, owner: owner, next: next, hist: hist, ev: ev || [0, 0], out: out || '' }; };
+    return [
+      c('CS-2104', 'SH-20414', 'Damaged delivery', 'photos', 'Grail support', 'The customer sends photos', [['Case opened', 5.75], ['Photos requested from the customer', 5.67]]),
+      c('CS-2103', 'SH-20412', 'Missing delivery', 'carrier', shipOf('SH-20412').carrier, 'The carrier traces the parcel', [['Case opened', 25.5], ['Carrier asked to trace the parcel', 25.3]]),
+      c('CS-2102', 'SH-20413', 'Return request', 'review', 'Your shop', 'Your shop checks the request against the policy', [['Case opened', 45.9], ['Photos requested from the customer', 45.8], ['Photos received', 40.2]], [1, 1]),
+      c('CS-2101', 'SH-20409', 'Missing delivery', 'done', 'Grail support', '', [['Case opened', 98], ['Carrier asked to trace the parcel', 97.5], ['Found by the carrier and delivered', 74]], [0, 0], 'Found and delivered'),
+      c('CS-2100', 'SH-20407', 'Damaged delivery', 'done', 'Grail support', '', [['Case opened', 120], ['Photos received', 112], ['Decision recorded: claim accepted', 104]], [1, 1], 'Claim accepted'),
+      c('CS-2099', 'SH-20406', 'Return request', 'done', 'Your shop', '', [['Case opened', 130], ['Decision recorded: claim declined', 126]], [0, 1], 'Claim declined'),
+      c('CS-2098', 'SH-20408', 'Missing delivery', 'done', 'Grail support', '', [['Case opened', 150], ['Carrier contacted', 149], ['Delivered on the second attempt', 131]], [0, 0], 'Delivered')
+    ];
+  }
+  function caseOf(id) { return S.cases.filter(function (c) { return c.id === id; })[0]; }
+  function caseIn(c, f) { return f === 'open' ? c.status !== 'done' : f === 'customer' ? c.status === 'photos' || c.status === 'customer' : c.status === f; }
+  function caseTag(c) { return '<span class="tag' + (c.status === 'done' ? ' tag-on' : c.status === 'photos' || c.status === 'customer' ? ' tag-warn' : '') + '">' + (c.status === 'done' && c.out ? esc(c.out) : CASE_STATUS[c.status]) + '</span>'; }
+  function touch(c, label) { c.hist.push([label, 0]); }
+  function renderCases() {
+    var q = fold(S.caseQuery.trim()), found = S.cases.filter(function (c) {
+      var s = shipOf(c.sid);
+      return !q || fold([c.id, c.sid, c.type, s.who, s.cid, s.n, s.order].join(' ')).indexOf(q) >= 0;
+    });
+    all('[data-case-f]').forEach(function (b) {
+      var k = b.getAttribute('data-case-f');
+      b.setAttribute('aria-pressed', k === S.caseFilter ? 'true' : 'false');
+      b.querySelector('b').textContent = found.filter(function (c) { return caseIn(c, k); }).length;
+    });
+    var rows = found.filter(function (c) { return caseIn(c, S.caseFilter); });
+    $('case-rows').innerHTML = rows.map(function (c) {
+      var s = shipOf(c.sid), last = c.hist[c.hist.length - 1];
+      return '<tr data-row><td class="strong">' + c.id + '</td><td class="cell2"><b>' + s.id + '</b><small>' + esc(s.who) + '</small></td><td class="cell2"><b>' + c.type + '</b><small>' + esc(s.n) + '</small></td>' +
+        '<td>' + caseTag(c) + '</td><td class="cell2"><b>' + (c.status === 'done' ? 'Nobody' : esc(c.owner)) + '</b><small>' + (c.status === 'done' ? 'Closed' : esc(c.next)) + '</small></td>' +
+        '<td style="white-space: nowrap">' + day(new Date(NOW - last[1] * HOUR)) + '</td>' +
+        '<td class="r"><button class="btn btn-sm" type="button" data-case="' + c.id + '" aria-label="Open case ' + c.id + '">Open</button></td></tr>';
+    }).join('');
+    $('case-table').hidden = !rows.length;
+    $('case-empty').hidden = rows.length > 0;
+    $('case-empty').textContent = q ? 'No case matches “' + S.caseQuery.trim() + '”.' : 'No cases here right now.';
+    var open = S.cases.filter(function (c) { return c.status !== 'done'; }).length;
+    $('case-meta').textContent = open + ' open, ' + (S.cases.length - open) + ' resolved';
+  }
+  function openCase(id) {
+    var c = caseOf(id);
+    if (!c) return;
+    var s = shipOf(c.sid), done = c.status === 'done', may = can('cases');
+    S.caseOpen = id;
+    $('case-title').textContent = 'Case ' + c.id;
+    $('case-sub').textContent = c.type + ', ' + cardName(s) + '.';
+    var facts = [['Owner', done ? 'Closed' : esc(c.owner)], ['Shipment', s.id + '<button class="btn btn-sm" type="button" data-track="' + s.id + '">Track</button>'], ['Customer', nameBtn(PEOPLE.by[s.cid])], ['Issue', c.type]];
+    $('case-facts').innerHTML = facts.map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
+    $('case-next').className = 'notice' + (done ? ' is-ok' : '');
+    $('case-next').innerHTML = '<p>' + (done ? '<strong>Resolved.</strong> ' + esc(c.out) + '.' : '<strong>Next:</strong> ' + esc(c.next) + '.') + '</p>' + (done ? '<span class="tag tag-on">Resolved</span>' : caseTag(c));
+    $('case-work').hidden = done;
+    $('case-evidence').innerHTML = ['Packaging', 'Card condition'].map(function (name, i) {
+      return '<button type="button" data-case-ev="' + i + '"' + (c.ev[i] ? ' class="has" disabled' : may ? '' : ' disabled') + '>' + name + '<small>' + (c.ev[i] ? 'Photo added' : 'Add photo') + '</small></button>';
+    }).join('');
+    $('case-hist').innerHTML = c.hist.map(function (h, i) {
+      return '<li class="done' + (i === c.hist.length - 1 && !done ? ' now' : '') + '"><span>' + esc(h[0]) + '</span><time>' + clock(new Date(NOW - h[1] * HOUR)) + '</time></li>';
+    }).join('');
+    $('case-decide').hidden = done || !may;
+    $('case-decide-acts').innerHTML = S.caseDeciding === id ? '<button class="btn btn-primary" type="button" data-case-act="accept">Accept the claim</button><button class="btn" type="button" data-case-act="decline">Decline the claim</button>'
+      : '<button class="btn" type="button" data-case-act="decide">Record decision</button>';
+    applyAccess();
+    $('case-decide').hidden = done || !may;
+    if (!$('case').open) openSheet($('case'));
+  }
+  function caseAct(kind) {
+    var c = caseOf(S.caseOpen);
+    if (!c || !can('cases')) return;
+    if (kind === 'photos') { c.status = 'photos'; c.next = 'The customer sends photos'; touch(c, 'Photos requested from the customer'); }
+    else if (kind === 'carrier') { c.status = 'carrier'; c.owner = shipOf(c.sid).carrier; c.next = 'The carrier answers'; touch(c, 'Carrier contacted'); }
+    else if (kind === 'decide') { S.caseDeciding = c.id; openCase(c.id); return; }
+    else if (kind === 'accept' || kind === 'decline') { c.status = 'done'; c.next = ''; c.out = kind === 'accept' ? 'Claim accepted' : 'Claim declined'; touch(c, 'Decision recorded: claim ' + (kind === 'accept' ? 'accepted' : 'declined')); S.caseDeciding = ''; }
+    renderCases(); renderShipments(); renderTodo(); openCase(c.id);
+  }
+  function caseEvidence(i) {
+    var c = caseOf(S.caseOpen);
+    if (!c || c.ev[i] || !can('cases')) return;
+    c.ev[i] = 1; touch(c, (i ? 'Card condition' : 'Packaging') + ' photo added');
+    if (c.ev[0] && c.ev[1] && c.status !== 'review') { c.status = 'review'; c.owner = 'Your shop'; c.next = 'Your shop checks the evidence against the policy'; }
+    renderCases(); renderTodo(); openCase(c.id);
+  }
+  function newCase(sid, type, owner, status, next) {
+    var c = { id: 'CS-' + (++S.caseSeq), sid: sid, type: type, status: status || 'new', owner: owner || 'Your shop', next: next || 'Your shop requests photos or contacts the carrier', hist: [['Case opened', 0]], ev: [0, 0], out: '' };
+    S.cases.unshift(c);
+    renderCases(); renderTodo();
+    return c;
+  }
+
+  // ---------- launch checks: test in the Sandbox before the shop takes real purchases ----------
+  var TESTS = [
+    ['A purchase creates one Temporary Purchase', 'One purchase request was sent. Grail created one Temporary Purchase, and your shop platform acknowledged it.'],
+    ['A repeated request does not create a second purchase', 'The same request was sent twice with the same idempotency key. Grail kept one Temporary Purchase.'],
+    ['A pack above your Max Card Value is not offered', 'The test balance was lowered below what the pack needs. The pack left the list, and a request for it was refused.'],
+    ['A failed top-up sends an alert', 'A top-up payment was made to fail. The Auto top-up failed alert has to reach someone.'],
+    ['A shipping request before hour 48 is accepted', 'Shipping was requested for a card in the Vault. Grail accepted it and took the card price from the held amount.'],
+    ['A shipping request after hour 48 is refused', 'Shipping was requested for a card that had already been released. Grail refused it.']
+  ];
+  function runTest(i) { S.checks[i] = i === 3 && !alertTo('autofail') ? 2 : 1; }
+  function testCounts() { var n = [0, 0, 0]; S.checks.forEach(function (c) { n[c]++; }); return { none: n[0], pass: n[1], fix: n[2] }; }
+  function renderLaunch() {
+    var n = testCounts(), all6 = n.pass === TESTS.length, live = S.mode === 'live';
+    $('k-t-pass').textContent = n.pass; $('k-t-fix').textContent = n.fix; $('k-t-none').textContent = n.none;
+    $('k-t-fix').classList.toggle('warn', n.fix > 0);
+    $('launch-meta').textContent = S.checksOk ? 'Approved on ' + S.checksDate : all6 ? 'Ready to approve' : 'Not ready';
+    $('launch-state').className = 'notice' + (S.checksOk ? ' is-ok' : all6 ? '' : ' is-warn');
+    $('launch-state-icon').setAttribute('href', S.checksOk || all6 ? '#i-check' : '#i-lock');
+    $('launch-state-text').innerHTML = S.checksOk ? '<strong>Launch approved on ' + S.checksDate + '.</strong> ' + (live ? 'Your shop has taken real purchases since 9 Oct 2026.' : 'Grail can now approve your shop.')
+      : all6 ? '<strong>Every check passed.</strong> You can approve the launch.'
+      : '<strong>Going live is blocked.</strong> ' + (n.fix ? 'Fix the failed test' + (n.none ? ' and run the one that was not tested.' : '.') : 'Run every test first.');
+    $('test-list').innerHTML = TESTS.map(function (t, i) {
+      var st = S.checks[i], tag = st === 1 ? '<span class="tag tag-on">Passed</span>' : st === 2 ? '<span class="tag tag-warn">Needs fixing</span>' : '<span class="tag">Not tested</span>';
+      var act = st === 1 ? '<button class="btn btn-sm" type="button" data-test="' + i + '" aria-label="View the result of: ' + t[0] + '">View result</button>'
+        : st === 2 ? '<button class="btn btn-sm btn-primary" type="button" data-test="' + i + '">Fix issue</button>' : '<button class="btn btn-sm" type="button" data-test="' + i + '" data-can="keys">Run test</button>';
+      return '<div class="item test-row">' + tag + '<div class="item-main"><b>' + t[0] + '</b></div><div class="item-acts">' + act + '</div></div>';
+    }).join('');
+    $('approve-text').textContent = S.checksOk ? 'The launch was approved on ' + S.checksDate + '. Run the tests again after any change to your integration.'
+      : all6 ? 'Every check passed. Approving the launch tells Grail your shop is ready for real purchases.' : 'Fix the failed test and complete every check. The launch cannot be approved before that.';
+    $('approve-go').disabled = !all6 || S.checksOk;
+    $('approve-go').textContent = S.checksOk ? 'Launch approved' : 'Approve launch';
+    $('test-hist').innerHTML = S.runs.map(function (r) { return item(r[1], r[0]); }).join('');
+  }
+  function openTest(i) {
+    var t = TESTS[i], st = S.checks[i];
+    if (st === 0) { runTest(i); S.runs.unshift(['12 Nov 2026, 16:00', 'One test run: ' + lower(t[0]) + '. ' + (S.checks[i] === 1 ? 'Passed.' : 'Needs fixing.')]); render(); toast(S.checks[i] === 1 ? 'Passed: ' + lower(t[0]) + '.' : 'Needs fixing: ' + lower(t[0]) + '.'); return; }
+    if (st === 2) ask(t[0], 'No alert went out, because the Auto top-up failed alert has no recipient. Choose who gets it under Settings, Notifications, save, and run the test again.', 'Open notifications', function () { go('alerts', 'route-title'); });
+    else ask(t[0], 'Passed in the Sandbox. ' + t[1], 'Run again', function () { runTest(i); render(); toast(S.checks[i] === 1 ? 'Passed again.' : 'Needs fixing: ' + lower(t[0]) + '.'); });
+  }
+
+  // ---------- notifications: who is told about what, by which channel and when ----------
+  var ALERTS = [['low', 'Low balance', 'Your Available Balance falls below the Auto top-up trigger.'], ['autofail', 'Auto top-up failed', 'An automatic top-up could not be paid.'],
+    ['paused', 'Pack paused', 'A pack is paused and hidden from your customers.'], ['ship', 'Shipping exception', 'A shipment needs attention.'], ['rec', 'Reconciliation difference', 'A day’s records do not match.']];
+  var ALERT_TO = [['', 'Not set'], ['Admin', 'Admin'], ['Finance', 'Finance'], ['Support', 'Support'], ['Developer', 'Developer'], ['Finance+Admin', 'Finance and Admin']];
+  var ALERT_VIA = ['Email and in-app', 'In-app', 'Email'], ALERT_WHEN = ['Immediate', 'Daily summary'];
+  function options(list, value) { return list.map(function (o) { var v = o.pop ? o[0] : o, t = o.pop ? o[1] : o; return '<option value="' + v + '"' + (v === value ? ' selected' : '') + '>' + t + '</option>'; }).join(''); }
+  function renderAlerts(force) {
+    var may = can('settings'), off = may ? '' : ' disabled';
+    if (force || !S.alertsDirty) {
+      $('alert-rows').innerHTML = ALERTS.map(function (a) {
+        var v = S.alerts[a[0]], lock = a[0] === 'autofail';
+        return '<tr><td class="perm"><b>' + a[1] + '</b><small>' + a[2] + '</small></td>' +
+          '<td><select class="field field-select" data-alert="' + a[0] + '" data-part="0" aria-label="Recipient of ' + a[1] + '"' + off + '>' + options(ALERT_TO, v[0]) + '</select></td>' +
+          '<td><select class="field field-select" data-alert="' + a[0] + '" data-part="1" aria-label="Channel of ' + a[1] + '"' + off + '>' + options(ALERT_VIA, v[1]) + '</select></td>' +
+          '<td><select class="field field-select" data-alert="' + a[0] + '" data-part="2" aria-label="Timing of ' + a[1] + '"' + (lock ? ' disabled title="A payment failure is always sent at once"' : off) + '>' + options(lock ? ['Immediate'] : ALERT_WHEN, v[2]) + '</select></td></tr>';
+      }).join('');
+      $('alert-daily').value = S.alertDaily;
+    }
+    $('alert-daily').disabled = !may;
+    $('alert-group').setAttribute('aria-checked', S.alertGroup ? 'true' : 'false');
+    $('alert-group').disabled = !may;
+    if (!$('alert-test-to').options.length) $('alert-test-to').innerHTML = options(ROLES, 'Finance');
+    $('sent-rows').innerHTML = S.sent.map(function (m) {
+      return '<tr><td style="white-space: nowrap">' + clock(new Date(m[0])) + '</td><td class="strong">' + esc(m[1]) + '</td><td>' + esc(m[2]) + '</td><td>' + m[3] + '</td><td style="white-space: nowrap"><span class="dot dot-on" aria-hidden="true"></span>Delivered</td></tr>';
+    }).join('');
+    $('sent-table').hidden = !S.sent.length;
+    $('sent-empty').hidden = S.sent.length > 0;
+    $('sent-meta').textContent = S.sent.length ? 'Latest first' : '';
+  }
+  // An alert that has a recipient goes into the history. One without a recipient reaches nobody.
+  function notify(key, text) {
+    var a = S.alerts[key];
+    if (!a || !a[0]) return false;
+    S.sent.unshift([NOW, text, a[0].replace('+', ' and '), a[1]]);
+    return true;
   }
 
   // ---------- pages ----------
   // Eight pages in the bar. Some hold more than one page, and those show a second row to move between them.
-  var GROUPS = [['overview', 'Overview', ['overview']], ['catalogue', 'Catalogue', ['packs', 'marketplace']], ['fulfilment', 'Fulfilment', ['vault', 'shipments']],
-    ['customers', 'Customers', ['customers']], ['analytics', 'Analytics', ['analytics']], ['billing', 'Billing', ['billing']],
-    ['integration', 'Integration', ['integration']], ['settings', 'Settings', ['account', 'team', 'kyb']]];
+  var GROUPS = [['overview', 'Overview', ['overview']], ['catalogue', 'Catalogue', ['packs', 'marketplace']], ['fulfilment', 'Fulfilment', ['vault', 'shipments', 'cases']],
+    ['customers', 'Customers', ['customers']], ['analytics', 'Analytics', ['analytics']], ['billing', 'Billing', ['billing', 'reconcile', 'autotopup']],
+    ['integration', 'Integration', ['integration', 'launch']], ['settings', 'Settings', ['account', 'team', 'alerts', 'kyb']]];
   var VIEWS = GROUPS.reduce(function (a, g) { return a.concat(g[2]); }, []);
-  var SUB_NAMES = { packs: 'Packs', marketplace: 'Marketplace singles', vault: 'Vault', shipments: 'Shipments', account: 'Shop', team: 'Team', kyb: 'KYB' };
+  var SUB_NAMES = { packs: 'Packs', marketplace: 'Marketplace singles', vault: 'Vault', shipments: 'Shipments', cases: 'Returns and claims', billing: 'Fees and invoices', reconcile: 'Reconciliation',
+    autotopup: 'Auto top-up', integration: 'Connection', launch: 'Launch checks', account: 'Shop', team: 'Team', alerts: 'Notifications', kyb: 'KYB' };
   var OLD_NAMES = { activity: 'analytics', catalogue: 'packs', fulfilment: 'vault' };   // addresses from before the pages were grouped
   var current = 'overview', jumpTo = null;
   function groupOf(view) { return GROUPS.filter(function (g) { return g[2].indexOf(view) >= 0; })[0]; }
@@ -3267,14 +4065,19 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     e.preventDefault();
     var name = $('method-name').value.trim(), kind = (document.querySelector('input[name="kind"]:checked') || {}).value || 'Card';
     if (!name) return;
-    var m = { id: 'm' + (++S.seq), kind: kind, label: name };
-    S.methods.push(m);
-    if ($('method-default').checked || !S.defaultMethod) S.defaultMethod = m.id;
+    var def = $('method-default').checked;
     closeSheet($('method'));
-    render();
-    toast('Added ' + name + '.');
+    sure('Add ' + name + '?', kind + (def || !S.defaultMethod ? ', as the default payment method. The default pays for Auto top-up.' : '. You can make it the default later.'), 'Add payment method', function () {
+      var m = { id: 'm' + (++S.seq), kind: kind, label: name };
+      S.methods.push(m);
+      if (def || !S.defaultMethod) S.defaultMethod = m.id;
+      log('Payment method added', '', name);
+      render();
+      toast('Added ' + name + '.');
+    });
   });
-  $('ask-yes').addEventListener('click', function () { var f = askThen; askThen = null; closeSheet($('ask')); if (f) f(); });
+  $('ask-yes').addEventListener('click', function () { var f = askThen; askThen = askElse = null; closeSheet($('ask')); if (f) f(); });
+  $('ask').addEventListener('close', function () { if ($('ask').open) return; var g = askElse; askThen = askElse = null; if (g) g(); });
 
   // ---------- clicks ----------
   document.addEventListener('click', function (e) {
@@ -3312,20 +4115,26 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     if ((el = t.closest('[data-user-remove]'))) {
       var who = S.users[Number(el.getAttribute('data-user-remove'))];
       if (!who) return;
-      ask('Remove ' + who.name + '?', 'They lose access to this dashboard at once.', 'Remove', function () {
+      sure('Remove ' + who.name + '?', 'They lose access to this dashboard at once.', 'Remove', function () {
         S.users = S.users.filter(function (u) { return u !== who; });
-        render(); toast('Removed ' + who.name + '.');
+        log('User removed', '', who.name + ', ' + who.role); render(); toast('Removed ' + who.name + '.');
       });
       return;
     }
-    if ((el = t.closest('[data-method-default]'))) { S.defaultMethod = el.getAttribute('data-method-default'); render(); toast('Default payment method changed.'); return; }
+    if ((el = t.closest('[data-method-default]'))) {
+      v = el.getAttribute('data-method-default');
+      sure('Make ' + methodName(v) + ' the default?', 'The default payment method pays for Auto top-up.', 'Make default', function () {
+        log('Default payment method changed', methodName(S.defaultMethod), methodName(v)); S.defaultMethod = v; render(); toast('Default payment method changed.');
+      });
+      return;
+    }
     if ((el = t.closest('[data-method-remove]'))) {
       v = el.getAttribute('data-method-remove');
       var gone = S.methods.filter(function (m) { return m.id === v; })[0];
       if (!gone) return;
-      ask('Remove ' + gone.label + '?', 'It will no longer be offered when you top up.', 'Remove', function () {
+      sure('Remove ' + gone.label + '?', 'It will no longer be offered when you top up.', 'Remove', function () {
         S.methods = S.methods.filter(function (m) { return m.id !== v; });
-        render(); toast('Removed ' + gone.label + '.');
+        log('Payment method removed', '', gone.label); render(); toast('Removed ' + gone.label + '.');
       });
       return;
     }
@@ -3334,7 +4143,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       if (v === 'live-new') { if (approved()) makeKey('live'); }
       else if (v === 'sand-new') makeKey('sand');
       else if (v === 'live-roll') ask('Regenerate the live key?', 'The current key stops working at once, so your site must switch to the new one.', 'Regenerate', function () { makeKey('live'); });
-      else if (v === 'live-kill') ask('Revoke the live key?', 'Your site stops taking purchases until you generate a new key.', 'Revoke', function () { S.liveKey = null; renderKeys(); toast('Live key revoked.'); });
+      else if (v === 'live-kill') ask('Revoke the live key?', 'Your site stops taking purchases until you generate a new key.', 'Revoke', function () { S.liveKey = null; log('Live API key revoked'); renderKeys(); toast('Live key revoked.'); });
       else if (v === 'sand-roll') ask('Reset the Sandbox?', 'It gets a new key and a fresh test balance. Test purchases made so far are cleared.', 'Reset Sandbox', function () { makeKey('sand'); });
       return;
     }
@@ -3347,10 +4156,22 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     }
     if ((el = t.closest('[data-demo]'))) {
       if (el.getAttribute('data-demo') === 'kyb') { S.kyb = 'approved'; S.kybDate = '12 Nov 2026'; render(); toast('KYB approved.'); }
+      else if (el.getAttribute('data-demo') === 'payfail') {
+        S.auto = true; S.autoPaused = true; S.payTested = false;
+        var told = notify('autofail', 'Auto top-up failed: the payment was declined');
+        log('Auto top-up paused after a failed payment', 'On', 'Paused', 'Grail, automatic');
+        render();
+        toast('A payment failed, so Auto top-up is paused.' + (told ? '' : ' Nobody was notified, because the alert has no recipient.') + ' This is a demo, and nothing was charged.');
+      }
       else { S.adminOk = true; render(); toast('Your shop is approved. The live API key is unlocked.'); }
       return;
     }
-    if ((el = t.closest('[data-auto]'))) { S.auto = !S.auto; render(); toast(S.auto ? 'Auto top-up is on.' : 'Auto top-up is off.'); return; }
+    if ((el = t.closest('[data-auto]'))) {
+      // turning it off is always safe, and turning it on allows automatic charges, so that asks once more
+      if (S.auto) { S.auto = false; S.autoPaused = false; log('Auto top-up turned off', 'On', 'Off'); render(); toast('Auto top-up is off.'); }
+      else sure('Turn on Auto top-up?', autoSummary(), 'Turn on', function () { S.auto = true; log('Auto top-up turned on', 'Off', 'On'); render(); toast('Auto top-up is on.'); });
+      return;
+    }
     if ((el = t.closest('[data-topup-exact]'))) { all('dialog[open]').forEach(closeSheet); openTopup(Number(el.getAttribute('data-topup-exact'))); return; }
     if ((el = t.closest('[data-pack-details]'))) { openPack(el.getAttribute('data-pack-details')); return; }
     if ((el = t.closest('[data-purchase]'))) { if ($('event').open) closeSheet($('event')); openPurchase(el.getAttribute('data-purchase')); return; }
@@ -3361,10 +4182,18 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     // these two are links: the click sets what the page shows, and the link opens the page
     if ((el = t.closest('[data-ship-warn]'))) { S.shipFilter = 'warn'; S.shipQuery = ''; $('ship-search').value = ''; S.shipShown = START.shipShown; renderShipments(); return; }
     if ((el = t.closest('[data-jump]'))) { jumpTo = el.getAttribute('data-jump'); if (current === el.getAttribute('href').slice(1)) { e.preventDefault(); landed(); } return; }
+    if ((el = t.closest('[data-case-ev]'))) { caseEvidence(Number(el.getAttribute('data-case-ev'))); return; }
+    if ((el = t.closest('[data-case-act]'))) { caseAct(el.getAttribute('data-case-act')); return; }
+    if ((el = t.closest('[data-case-f]'))) { S.caseFilter = el.getAttribute('data-case-f'); renderCases(); return; }
+    if ((el = t.closest('[data-case]'))) { openCase(el.getAttribute('data-case')); return; }
+    if ((el = t.closest('[data-rec-f]'))) { S.recFilter = el.getAttribute('data-rec-f'); S.recShown = START.recShown; renderRec(); return; }
+    if ((el = t.closest('[data-rec-act]'))) { recAct(el.getAttribute('data-rec-act')); return; }
+    if ((el = t.closest('[data-rec]'))) { openRec(el.getAttribute('data-rec')); return; }
+    if ((el = t.closest('[data-test]'))) { openTest(Number(el.getAttribute('data-test'))); return; }
     // a row with one clear action takes the click anywhere along it, not only on its small button
     if ((el = t.closest('tr[data-row]')) && !t.closest('button, a, input, select, label')) {
       if (window.getSelection && String(window.getSelection())) return;   // dragging across a row to select its text is not a click on it
-      var act = el.querySelector('[data-track], [data-purchase], [data-event], .btn[data-person], [data-invoice]');
+      var act = el.querySelector('[data-track], [data-purchase], [data-event], [data-case], [data-rec], .btn[data-person], [data-invoice]');
       if (act) act.click();
       return;
     }
@@ -3402,7 +4231,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     var id = S.evOpen;
     if (!id) return;
     S.acked[id] = true; S.synced = true;
-    renderConn(); renderEvents(); openEvent(id);
+    renderConn(); renderEvents(); renderRec(); renderTodo(); openEvent(id);
     if ($('purchase').open) openPurchase(S.purchaseOpen);
   });
   // a purchase leads on to its events and to the ledger
@@ -3424,6 +4253,143 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     managing = p; $('manage-name').value = p.label; $('manage-id').textContent = p.id; openSheet($('manage'));
   });
   $('terms-open').addEventListener('click', function () { openSheet($('terms')); });
+  // Auto top-up: the rules are saved together, after one more confirmation. Amounts take "25k" or "$25,000" alike.
+  $('auto-form').addEventListener('input', function (e) { S.autoDirty = true; $('auto-saved').textContent = ''; if (e.target.classList) e.target.classList.remove('is-bad'); });
+  $('auto-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!can('auto')) return;
+    var f = { below: $('auto-below'), amount: $('auto-amount'), cap: $('auto-cap') }, v = {}, bad = null;
+    ['below', 'amount', 'cap'].forEach(function (k) {
+      v[k] = Math.floor(parseMoney(f[k].value));
+      var ok = k === 'below' ? v[k] >= 0 : v[k] > 0;
+      f[k].classList.toggle('is-bad', !ok);
+      if (!ok && !bad) bad = f[k];
+    });
+    if (!bad && v.cap < v.amount) { bad = f.cap; f.cap.classList.add('is-bad'); $('auto-saved').textContent = 'The daily limit has to cover at least one top-up.'; }
+    if (bad) { shake(bad); bad.focus(); return; }
+    var method = $('auto-method').value, was = (defaultMethod() || { id: '' }).id, changes = [];
+    if (v.below !== S.autoBelow) changes.push(['Auto top-up trigger changed', money(S.autoBelow), money(v.below)]);
+    if (v.amount !== S.autoAmount) changes.push(['Auto top-up amount changed', money(S.autoAmount), money(v.amount)]);
+    if (v.cap !== S.autoCap) changes.push(['Auto top-up daily limit changed', money(S.autoCap), money(v.cap)]);
+    if (method && method !== was) changes.push(['Default payment method changed', methodName(was), methodName(method)]);
+    if (!changes.length) { S.autoDirty = false; renderAuto(true); $('auto-saved').textContent = 'Nothing has changed.'; return; }
+    sure('Save the funding rules?', changes.map(function (c) { return c[0].replace(' changed', '') + ': ' + c[1] + ' becomes ' + c[2]; }).join('. ') + '.', 'Save rules', function () {
+      S.autoBelow = v.below; S.autoAmount = v.amount; S.autoCap = v.cap;
+      if (method) S.defaultMethod = method;
+      changes.forEach(function (c) { log(c[0], c[1], c[2]); });
+      S.autoDirty = false;
+      render(); renderAuto(true);
+      $('auto-saved').textContent = 'Saved.';
+      toast('Funding rules saved.');
+    });
+  });
+  $('auto-test').addEventListener('click', function () { S.payTested = true; renderAuto(); toast('The payment method works. No money moved.'); });
+  $('auto-resume').addEventListener('click', function () {
+    if (!S.autoPaused || !S.payTested) return;
+    S.autoPaused = false; S.payTested = false;
+    log('Auto top-up resumed', 'Paused', 'On');
+    render();
+    toast('Auto top-up is on again.');
+  });
+
+  // reconciliation: the day, more rows, and the export
+  $('rec-day').addEventListener('change', function () {
+    S.recDay = Number(this.value); S.recShown = START.recShown;
+    S.recFilter = recIssues(S.recDay).some(function (x) { return !x.done; }) ? 'review' : 'all';
+    renderRec();
+  });
+  $('rec-more').addEventListener('click', function () { S.recShown += 20; renderRec(); });
+  $('rec-export').addEventListener('click', function () {
+    S.csv = recCsv();
+    $('export-title').textContent = 'Export of ' + day(recDate(S.recDay)) + ' 2026';
+    $('export-sub').textContent = count(S.csv.split('\n').length - 1) + ' records, one on each line, under a line of column names.';
+    $('export-text').value = S.csv;
+    $('export-save').hidden = framed;
+    openSheet($('export'));
+  });
+  $('export-copy').addEventListener('click', function () { copyText(S.csv, this); });
+  $('export-save').addEventListener('click', function () {
+    try {
+      var a = document.createElement('a'), url = URL.createObjectURL(new Blob([S.csv], { type: 'text/csv' }));
+      a.href = url; a.download = 'grail-reconciliation-' + recDate(S.recDay).toISOString().slice(0, 10) + '.csv';
+      $('export').appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+    } catch (err) { /* the copy button still gives the same text */ }
+  });
+
+  // returns and claims: search, and a new case
+  $('case-search').addEventListener('input', function () { S.caseQuery = this.value; renderCases(); });
+  $('case-search').addEventListener('keydown', function (e) { if (e.key === 'Escape' && this.value) { e.preventDefault(); this.value = ''; S.caseQuery = ''; renderCases(); } });
+  $('case-new').addEventListener('click', function () {
+    $('newcase-form').reset();
+    $('newcase-ship').innerHTML = SHIP.slice(0, 24).map(function (s) { return '<option value="' + s.id + '">' + s.id + ', ' + esc(s.who) + ', ' + esc(s.n) + '</option>'; }).join('');
+    openSheet($('newcase'));
+  });
+  $('newcase-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var c = newCase($('newcase-ship').value, (document.querySelector('input[name="issue"]:checked') || {}).value || 'Other');
+    closeSheet($('newcase'));
+    S.caseFilter = 'open'; S.caseQuery = ''; $('case-search').value = '';
+    renderCases();
+    openCase(c.id);
+  });
+
+  // launch checks: run them all, approve, and look back
+  $('launch-run').addEventListener('click', function () {
+    TESTS.forEach(function (t, i) { runTest(i); });
+    var n = testCounts();
+    S.runs.unshift(['12 Nov 2026, 16:00', n.pass + ' of 6 passed' + (n.fix ? ', ' + n.fix + ' needs fixing' : '')]);
+    render();
+    toast(n.fix ? n.pass + ' of 6 passed. One needs fixing.' : 'All six checks passed.');
+  });
+  $('approve-go').addEventListener('click', function () {
+    if (testCounts().pass !== TESTS.length || S.checksOk) return;
+    S.checksOk = true; S.checksDate = '12 Nov 2026';
+    log('Launch approved', '', 'All six checks passed');
+    render();
+    toast('Launch approved. Grail can now approve your shop.');
+  });
+  $('test-hist-toggle').addEventListener('click', function () {
+    var h = $('test-hist');
+    h.hidden = !h.hidden;
+    this.setAttribute('aria-expanded', h.hidden ? 'false' : 'true');
+    this.textContent = h.hidden ? 'View test history' : 'Hide test history';
+  });
+
+  // notifications: the routing is saved together, the delivery settings at once
+  $('alert-form').addEventListener('change', function () { S.alertsDirty = true; $('alert-saved').textContent = ''; });
+  $('alert-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!can('settings')) return;
+    var next = {}, changes = [];
+    ALERTS.forEach(function (a) { next[a[0]] = S.alerts[a[0]].slice(); });
+    all('#alert-rows select').forEach(function (s) { next[s.getAttribute('data-alert')][Number(s.getAttribute('data-part'))] = s.value; });
+    next.autofail[2] = 'Immediate';       // a payment failure is never held for the daily summary
+    ALERTS.forEach(function (a) {
+      var was = S.alerts[a[0]], now = next[a[0]], show = function (v) { return (v[0] ? v[0].replace('+', ' and ') : 'Not set') + ', ' + lower(v[1]) + ', ' + lower(v[2]); };
+      if (was.join('|') !== now.join('|')) changes.push([a[1] + ' alert changed', show(was), show(now)]);
+    });
+    S.alertsDirty = false;
+    if (!changes.length) { $('alert-saved').textContent = 'Nothing has changed.'; return; }
+    S.alerts = next;
+    changes.forEach(function (c) { log(c[0], c[1], c[2]); });
+    render(); renderAlerts(true);
+    $('alert-saved').textContent = 'Saved.';
+    toast('Notification preferences saved.');
+  });
+  $('alert-daily').addEventListener('change', function () { var was = S.alertDaily; S.alertDaily = this.value; log('Daily summary time changed', was, S.alertDaily); toast('The daily summary now goes out at ' + S.alertDaily + '.'); });
+  $('alert-group').addEventListener('click', function () {
+    S.alertGroup = !S.alertGroup;
+    log('Grouping of repeated alerts changed', S.alertGroup ? 'Off' : 'On', S.alertGroup ? 'On' : 'Off');
+    renderAlerts();
+  });
+  $('alert-test').addEventListener('click', function () {
+    var to = $('alert-test-to').value;
+    S.sent.unshift([NOW, 'Test notification', to, 'Email and in-app']);
+    renderAlerts();
+    toast('Test alert sent to ' + to + '. This demo sends nothing.');
+  });
+  $('hist-more').addEventListener('click', function () { S.histAll = !S.histAll; renderHistory(); });
   // team: add a user, change a role, tick a permission
   function userRoleNote() { var r = document.querySelector('input[name="newrole"]:checked'); $('user-role-note').textContent = r ? roleSees(r.value) : ''; }
   $('user-add').addEventListener('click', function () {
@@ -3442,26 +4408,42 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     var name = $('user-name').value.replace(/\s+/g, ' ').trim(), email = found ? found[0].toLowerCase() : '', role = (document.querySelector('input[name="newrole"]:checked') || {}).value || 'Support';
     if (!name) return;
     if (!email) { shake($('user-email')); $('user-email').focus(); return; }
-    S.users.push({ name: name, email: email, role: role, status: 'Invited', last: 'Not yet' });
     closeSheet($('user'));
-    render();
-    toast('Added ' + name + ' as ' + role + '.');
+    sure('Add ' + name + ' as ' + role + '?', roleSees(role), 'Add user', function () {
+      S.users.push({ name: name, email: email, role: role, status: 'Invited', last: 'Not yet' });
+      log('User invited', '', name + ' as ' + role);
+      render();
+      toast('Added ' + name + ' as ' + role + '.');
+    });
   });
+  // A tick in the permission table or a new role for a user is written to the change history.
+  // What touches payments, funding or team access asks once more first, and goes back to what it showed if the answer is no.
+  var GUARDED = { topup: 1, auto: 1, methods: 1, users: 1 };
   document.addEventListener('change', function (e) {
     var t = e.target;
     if (t.matches && t.matches('[data-perm]')) {
-      S.roles[t.getAttribute('data-role')][t.getAttribute('data-perm')] = t.checked ? 1 : 0;
-      applyAccess();
+      var role = t.getAttribute('data-role'), perm = t.getAttribute('data-perm'), on = t.checked, what = lower(PERMS.filter(function (p) { return p[0] === perm; })[0][1]);
+      var apply = function () {
+        S.roles[role][perm] = on ? 1 : 0;
+        log(role + ' role updated', (on ? 'may not ' : 'may ') + what, (on ? 'may ' : 'may not ') + what);
+        renderTeam(); applyAccess();
+      };
+      if (!GUARDED[perm]) { apply(); return; }
+      t.checked = !on;
+      sure((on ? 'Let ' + role + ' ' : 'Stop ' + role + ' from the right to ') + what + '?', 'This changes what everyone in the ' + role + ' role may do.', on ? 'Allow' : 'Remove', apply);
     } else if (t.matches && t.matches('[data-user-role]')) {
-      var u = S.users[Number(t.getAttribute('data-user-role'))];
-      if (u) { u.role = t.value; toast(u.name + ' is now ' + (u.role === 'Admin' ? 'an Admin' : 'in ' + u.role) + '.'); }
+      var u = S.users[Number(t.getAttribute('data-user-role'))], now = t.value;
+      if (!u) return;
+      t.value = u.role;
+      sure('Change ' + u.name + ' to ' + now + '?', roleSees(now), 'Change role', function () {
+        log('Role of ' + u.name + ' changed', u.role, now);
+        u.role = now; renderTeam();
+        toast(u.name + ' is now ' + (now === 'Admin' ? 'an Admin' : 'in ' + now) + '.');
+      });
     }
   });
   $('reset').addEventListener('click', function () { resetState(S.mode); $('ship-search').value = ''; render(); toast('Sample numbers are back to the start.'); });
   $('shop-name').addEventListener('input', function () { S.shop = this.value.trim(); bind('shopname', S.shop || '[Your Shop]'); });
-  // the two Auto top-up amounts take "10k" or "$10,000" alike, and are written back the standard way
-  $('auto-amount').addEventListener('change', function () { var v = Math.floor(parseMoney(this.value)); if (v > 0) S.autoAmount = v; else shake(this); this.value = money(S.autoAmount); render(); });
-  $('auto-below').addEventListener('change', function () { var v = Math.floor(parseMoney(this.value)); if (v >= 0) S.autoBelow = v; else shake(this); this.value = money(S.autoBelow); render(); });
 
   // ---------- charts: pointer and keyboard ----------
   // A mouse leaving the chart hides the tooltip. After a tap it stays until the next tap elsewhere.
