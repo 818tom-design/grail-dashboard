@@ -859,6 +859,118 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 #src-refresh.is-busy svg.ic { animation: spin 600ms var(--out); }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ---- packs for a first balance, what each pack still needs, pack details with its presentation, and the fees at the purchase and at shipping ---- */
+/* five packs: the rail carries five pins, and the tiles sit three to a row with a note in the sixth place */
+.rail-pins { grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: clamp(0.25rem, 1.6vw, 1.25rem); }
+.pin-cell { font-size: clamp(0.8125rem, 3.4vw, 0.9375rem); }
+.packs { grid-template-columns: repeat(auto-fit, minmax(max(16.375rem, min(50% - 0.625rem, (58rem - 100%) * 999), (100% - 2.5rem) / 3 - 0.25rem), 1fr)); }
+.fund { display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--hair); }
+.fund-row { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; font-size: 0.9375rem; line-height: 1.3; color: var(--t2); }
+.fund-row b { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+.fund-line { display: flex; align-items: center; gap: 0.5rem; min-height: 2.25rem; padding: 0.375rem 0.625rem; border-radius: 0.5rem; font-size: 0.9375rem; font-weight: 600; line-height: 1.3; }
+.fund-line svg.ic { width: 1rem; height: 1rem; flex: none; stroke-width: 2.4; }
+.fund-line.ok { color: var(--live); background: color-mix(in srgb, var(--live) 10%, transparent); }
+/* on its own tint the warning red is a shade deeper, so it keeps 4.5 to 1 on a paused tile too */
+.fund-line.warn { color: color-mix(in srgb, var(--warn) 85%, var(--ink)); background: color-mix(in srgb, var(--warn) 10%, transparent); }
+.fund small { font-size: 0.8125rem; line-height: 1.4; color: var(--t2); }
+.pack-acts.one { grid-template-columns: minmax(0, 1fr); }
+.pack-info { border-radius: 0.875rem; padding: 1.125rem; display: flex; flex-direction: column; justify-content: center; gap: 1.125rem; background: var(--soft); box-shadow: none; }
+.pack-info h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.01em; }
+.info-item { display: flex; flex-direction: column; gap: 0.25rem; }
+.info-item b { font-size: 0.9375rem; font-weight: 600; }
+.info-item p { font-size: 0.9375rem; line-height: 1.5; color: var(--t2); }
+
+/* the pack sheet: its funding, and the two things a shop may change */
+.sheet .present { padding: 0; gap: 0.875rem; }
+.present-grid { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 1rem 1.25rem; align-items: start; }
+.art { position: relative; aspect-ratio: 3 / 4; border-radius: 0.75rem; overflow: hidden; border: 1px solid var(--border); background: var(--soft); }
+.art svg, .art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.present-fields { display: flex; flex-direction: column; gap: 0.75rem; min-width: 0; }
+.present-fields label { font-size: 0.9375rem; color: var(--t2); }
+.present-fields .field { width: 100%; }
+.present-fields small { font-size: 0.8125rem; line-height: 1.45; color: var(--t3); }
+.kit { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.saved { font-size: 0.9375rem; color: var(--live); font-weight: 600; }
+
+/* billing: the fee of each purchase, and the hold beside it */
+.paid-line { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.625rem; margin-top: 1.125rem; padding-top: 1rem; border-top: 1px solid var(--hair); font-size: 0.9375rem; line-height: 1.45; color: var(--t2); }
+.paid-line svg.ic { width: 1.125rem; height: 1.125rem; flex: none; color: var(--live); stroke-width: 2.4; }
+.paid-line b { font-weight: 600; color: var(--ink); }
+.fee-ok { display: inline-flex !important; align-items: center; gap: 0.375rem; color: var(--live); }
+.fee-ok svg.ic { width: 0.875rem; height: 0.875rem; stroke-width: 2.6; }
+.hold-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding-top: 0.25rem; }
+.hold-cell { display: flex; flex-direction: column; gap: 0.125rem; min-width: 0; padding: 0 1.5rem; border-left: 1px solid var(--hair); }
+.hold-cell:first-child { padding-left: 0; border-left: none; }
+.hold-cell:last-child { padding-right: 0; }
+.hold-cell span { font-size: 0.875rem; color: var(--t3); }
+.hold-cell b { font-size: 1.375rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.hold-cell small { font-size: 0.875rem; line-height: 1.4; color: var(--t2); }
+
+/* a shipment: what the card cost in fees, and what left the balance when it shipped */
+.money2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.875rem; }
+.money2 .kv div { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 0.125rem 0.75rem; font-size: 0.875rem; }
+.money2 .kv dd { margin: 0; max-width: none; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.kv .kv-sum { margin: 0.25rem -0.625rem; padding: 0.5rem 0.625rem; border-top: none; border-radius: 0.5rem; background: color-mix(in srgb, var(--live) 10%, transparent); }
+.kv .kv-sum dt, .kv .kv-sum dd { color: var(--ink); font-weight: 600; }
+.kv .kv-sum + div { border-top: none; }
+.art-col { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; min-width: 0; }
+.art-col .art { width: 100%; }
+@media (max-width: 620px) {
+  .present-grid { grid-template-columns: 6.5rem minmax(0, 1fr); }
+  .kit .btn { flex: 1 1 100%; }
+  .hold-grid { grid-template-columns: minmax(0, 1fr); }
+  .hold-cell { padding: 0.875rem 0; border-left: none; border-top: 1px solid var(--hair); }
+  .hold-cell:first-child { padding-top: 0; border-top: none; }
+  .hold-cell:last-child { padding-bottom: 0; }
+  .money2 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- Reserve Card and the Vault: two stages in order, each with its heading and its explanation in view ---- */
+.stage-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.375rem 1rem; }
+.stage-name { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.625rem; min-width: 0; }
+.stage-n { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.625rem; height: 1.625rem; border-radius: 50%; border: 1.5px solid var(--ink); font-size: 0.875rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.tag-solid { background: var(--ink); border-color: var(--ink); color: var(--panel); }
+.stage-note { max-width: 46rem; padding: 0.5rem 0 1rem; font-size: 0.9375rem; line-height: 1.5; color: var(--t2); }
+.stage-sum { margin-top: 0.875rem; padding: 0.625rem 0.875rem; border-radius: 0.625rem; background: color-mix(in srgb, var(--live) 10%, transparent); font-size: 0.9375rem; line-height: 1.4; }
+.stage-sum b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.stage-clock { display: flex; align-items: flex-start; gap: 0.625rem; padding: 0.875rem 1.125rem; border-radius: 0.875rem; border: 1px solid var(--border); background: var(--soft); font-size: 0.9375rem; line-height: 1.5; color: var(--t2); }
+.stage-clock svg.ic { flex: none; width: 1.25rem; height: 1.25rem; margin-top: 0.0625rem; color: var(--ink); }
+.stage-clock b { font-weight: 600; color: var(--ink); }
+.held2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 2.5rem; }
+.tbl.held-tbl { min-width: 0; }
+.held-tbl .share { min-width: 7rem; }
+
+/* ---- shipping coverage: where a card can ship and how long it takes, marked as an example ---- */
+:root { --wait: #8A5A00; --wait-dot: #C98A0B; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --wait: #EBC26E; --wait-dot: #D9A63C; } }
+:root[data-theme="dark"] { --wait: #EBC26E; --wait-dot: #D9A63C; }
+#view-shipments[data-ship="coverage"] .ship-track, #view-shipments[data-ship="coverage"] #ship-meta, #view-shipments[data-ship="coverage"] #ship-fresh { display: none !important; }
+#view-shipments:not([data-ship="coverage"]) #ship-cover { display: none; }
+.example-note { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.875rem 1.125rem; border-radius: 0.875rem; border: 1px solid color-mix(in srgb, var(--wait-dot) 55%, transparent); background: color-mix(in srgb, var(--wait-dot) 12%, var(--panel)); }
+.example-note svg.ic { flex: none; width: 1.375rem; height: 1.375rem; margin-top: 0.0625rem; color: var(--wait); stroke-width: 2.2; }
+.example-note div { display: flex; flex-direction: column; gap: 0.125rem; font-size: 0.9375rem; line-height: 1.45; }
+.example-note b { font-weight: 600; color: var(--wait); }
+.dot-wait { background: var(--wait-dot); }
+.cover-tbl td:first-child { font-weight: 600; }
+.cover2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.say { margin: 0; padding: 1rem 1.125rem; border-radius: 0.75rem; border: 1px solid var(--border); background: var(--soft); font-size: 1rem; line-height: 1.55; }
+.plain-list { list-style: none; margin: 0; padding: 0; }
+.plain-list li { padding: 0.625rem 0; border-top: 1px solid var(--hair); font-size: 0.9375rem; line-height: 1.4; }
+.plain-list li:first-child { border-top: none; padding-top: 0; }
+.plain-list li:last-child { padding-bottom: 0; }
+.cover-cost { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 1.25rem; padding: 0 0.25rem; font-size: 0.9375rem; color: var(--t2); }
+.cover-cost b { font-weight: 600; color: var(--ink); }
+@media (max-width: 900px) { .held2 { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 620px) {
+  .cover2 { grid-template-columns: minmax(0, 1fr); }
+  .col-share { display: none; }
+}
+.held-tbl .cell2 b, .held-tbl .cell2 small { white-space: normal; }
+@media (max-width: 620px) { .held-tbl th, .held-tbl td { padding-right: 0.625rem; } }
+
+/* a pack that is only a proposal says so beside its name */
+.pack-nm { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.5rem; min-width: 0; }
+
 /* on a touch screen every control takes a full fingertip, whatever size it is drawn */
 @media (pointer: coarse) {
   .btn, .fchip, .seg-btn, .namebtn, .linkbtn, .iconbtn, .info, .switch, .tickbox { position: relative; }
@@ -886,6 +998,10 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"></path><path d="M10 20.5a2 2 0 0 0 4 0"></path></symbol>
     <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="18.5" cy="12" r="1"></circle></symbol>
     <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.3L4 8.5"></path><path d="M4 4v4.5h4.5"></path><path d="M4 13a8 8 0 0 0 14.3 4.3L20 15.5"></path><path d="M20 20v-4.5h-4.5"></path></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5"></path><path d="M12 16.5v.01"></path></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4.5v10.5"></path><path d="M7.5 10.5L12 15l4.5-4.5"></path><path d="M5 19.5h14"></path></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 15V4.5"></path><path d="M7.5 9L12 4.5 16.5 9"></path><path d="M5 19.5h14"></path></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.2 2"></path></symbol>
   </defs>
 </svg>
 
@@ -963,8 +1079,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
         <div class="stat"><span class="hero-lbl">Held</span><span class="stat-num" data-bind="held">$4,650</span></div>
         <div class="stat">
           <div class="row rel">
-            <span class="hero-lbl">Potential Staging holds</span>
-            <span class="tipw"><button class="info" type="button" aria-label="About potential Staging holds" aria-describedby="tip-stage"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-stage">Cards in their first 5 minutes. Nothing is held for them yet. A card that is not released by then moves to the Vault, and its value is held.</span></span>
+            <span class="hero-lbl">Potential Reserve Card holds</span>
+            <span class="tipw"><button class="info" type="button" aria-label="About potential Reserve Card holds" aria-describedby="tip-stage"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-stage">Cards in their first 5 minutes. Nothing is held for them yet. A card that is not released by then moves to the Vault, and its value is held.</span></span>
           </div>
           <span class="stat-num" data-bind="staging">$1,535</span>
         </div>
@@ -1047,8 +1163,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   <div class="phead">
     <div class="row wrap">
       <h1 class="h-page">Your packs</h1>
-      <span class="tipw"><button class="info" type="button" aria-label="About your packs" aria-describedby="tip-packs"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-packs">Built and stocked by Grail. You call a pack by its ID, and you can rename it. A pack is live while its top chase card is within your Max Card Value, and each paused pack shows what it still needs.</span></span>
-      <span class="meta" data-bind="packcount">2 live, 2 paused</span>
+      <span class="tipw"><button class="info" type="button" aria-label="About your packs" aria-describedby="tip-packs"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-packs">Built and stocked by Grail. You call a pack by its ID, and you can change its name and artwork. A pack is live while its top chase card is within your Max Card Value, and each paused pack shows what it still needs.</span></span>
+      <span class="meta" data-bind="packcount">3 live, 2 paused</span>
     </div>
     <dl class="pstats">
       <div><dt>Available Balance</dt><dd class="num" data-bind="available">$26,750</dd></div>
@@ -1062,7 +1178,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     <p class="note" id="fund-note"></p>
     <div class="row wrap">
       <span id="fund-topup-wrap"><button class="btn btn-primary" type="button" id="fund-topup" data-can="topup"></button></span>
-      <a class="btn" href="#overview">See what is left</a>
+      <a class="btn" href="#overview" id="fund-left">See what is left</a>
     </div>
   </section>
 
@@ -1112,44 +1228,78 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 <div class="page" id="view-vault" hidden>
   <div class="phead">
     <div class="row wrap">
-      <h1 class="h-page">Vault</h1>
-      <span class="tipw"><button class="info" type="button" aria-label="About the Vault" aria-describedby="tip-vault-page"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-vault-page">A card that is not released in its first 5 minutes moves to the Vault and its full value is held from your balance, so the held amount is your open liability. It stays up to 48 hours. The customer can ask for shipping until then. After that it is released: the hold is lifted and the transaction fee stays. Open a card to see its references on both sides and every event sent to your shop platform.</span></span>
-      <span class="meta" data-when="live">8 cards, $4,650 held</span>
-      <span class="meta" data-when="live">Staging: 3 cards, $1,535, not held</span>
-    </div>
-    <div class="segs" role="group" aria-label="Group the Vault" data-when="live">
-      <button class="seg-btn" type="button" data-vault-view="cards" aria-pressed="true">All cards</button>
-      <button class="seg-btn" type="button" data-vault-view="packs" aria-pressed="false">By pack</button>
-      <button class="seg-btn" type="button" data-vault-view="people" aria-pressed="false">By customer</button>
+      <h1 class="h-page">Reserve Card &amp; Vault</h1>
+      <span class="meta" data-when="live">Two stages, one after the other</span>
     </div>
   </div>
   <div class="pbody stack-v" data-when="live">
-    <section class="panel pad" aria-label="Held in the Vault">
+    <section class="panel pad" aria-labelledby="reserve-title">
+      <div class="stage-head">
+        <div class="stage-name">
+          <span class="stage-n" aria-hidden="true">1</span>
+          <h2 class="h-panel" id="reserve-title">Reserve Card: first 5 minutes</h2>
+          <span class="tag">Not held</span>
+        </div>
+        <span class="meta" id="reserve-meta"></span>
+      </div>
+      <p class="stage-note">The transaction fee is already charged. Nothing is held in these 5 minutes. A card that is not released by then moves to the Vault.</p>
       <div class="tbl-wrap">
-        <table class="tbl" id="vault-table" style="min-width: 50rem">
-          <thead id="vault-head"></thead>
+        <table class="tbl cards-tbl" style="min-width: 50rem">
+          <thead><tr><th style="width: 32%">Card</th><th>Customer</th><th>Pack</th><th class="r">Value</th><th>Reserve time left</th><th></th></tr></thead>
+          <tbody id="staging-rows"></tbody>
+        </table>
+      </div>
+      <p class="stage-sum" id="reserve-sum"></p>
+    </section>
+    <section class="panel pad" aria-labelledby="vault-title">
+      <div class="stage-head">
+        <div class="stage-name">
+          <span class="stage-n" aria-hidden="true">2</span>
+          <h2 class="h-panel" id="vault-title">Vault: after 5 minutes</h2>
+          <span class="tag tag-solid">Held</span>
+        </div>
+        <span class="meta" id="vault-meta"></span>
+      </div>
+      <p class="stage-note">The full value of a card is held only after its 5 minutes of Reserve Card. The held amount is blocked on your balance, not deducted, until the card ships or is released.</p>
+      <div class="tbl-wrap">
+        <table class="tbl cards-tbl" id="vault-table" style="min-width: 50rem">
+          <thead id="vault-head"><tr><th style="width: 30%">Card</th><th>Customer</th><th>Pack</th><th>Class</th><th class="r">Held</th><th>Time left</th><th></th></tr></thead>
           <tbody id="vault-rows"></tbody>
         </table>
       </div>
     </section>
-    <section class="panel pad" aria-labelledby="staging-title">
-      <div class="head rel" style="padding-bottom: 0.875rem">
+    <p class="stage-clock"><svg class="ic" aria-hidden="true"><use href="#i-clock"></use></svg><span><b>The 48-hour shipping window starts at the Temporary Purchase.</b> The 5 minutes of Reserve Card are part of it. A card that is not shipped by hour 48 is released: the hold is lifted and the transaction fee stays.</span></p>
+    <section class="panel pad" aria-labelledby="held-title">
+      <div class="head" style="padding-bottom: 1rem">
         <div class="row wrap">
-          <h2 class="h-panel" id="staging-title">In Staging</h2>
-          <span class="tipw"><button class="info" type="button" aria-label="About Staging" aria-describedby="tip-staging"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-staging">The first 5 minutes after a Temporary Purchase. Nothing is held yet. A card that is not released by then moves to the Vault. The transaction fee is charged at the purchase, also when the card is released in these 5 minutes.</span></span>
-          <span class="meta">3 cards, $1,535, not held</span>
+          <h2 class="h-panel" id="held-title">Where the held amount sits</h2>
+          <span class="meta" id="held-meta"></span>
         </div>
       </div>
-      <div class="tbl-wrap">
-        <table class="tbl cards-tbl" style="min-width: 50rem">
-          <thead><tr><th style="width: 32%">Card</th><th>Customer</th><th>Pack</th><th class="r">Value</th><th>Time left in Staging</th><th></th></tr></thead>
-          <tbody id="staging-rows"></tbody>
-        </table>
+      <div class="held2">
+        <div>
+          <h3 class="sub-h">By pack</h3>
+          <div class="tbl-wrap">
+            <table class="tbl held-tbl">
+              <thead><tr><th>Pack</th><th class="r">Cards</th><th class="r">Held</th><th class="col-share">Share of held</th><th>Next release</th></tr></thead>
+              <tbody id="held-packs"></tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h3 class="sub-h">By customer</h3>
+          <div class="tbl-wrap">
+            <table class="tbl held-tbl">
+              <thead><tr><th>Customer</th><th class="r">Cards</th><th class="r">Held</th><th class="col-share">Share of held</th><th>Next release</th></tr></thead>
+              <tbody id="held-people"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </section>
   </div>
   <div class="pbody" data-when="new">
-    <section class="panel blank"><b>Nothing in the Vault</b><span>A card lands here 5 minutes after a Temporary Purchase that was not released, and its value is held from your balance.</span></section>
+    <section class="panel blank"><b>No cards yet</b><span>A Temporary Purchase first reserves the card for 5 minutes, with nothing held. A card that is not released by then moves to the Vault, and its full value is held from your balance.</span></section>
   </div>
 </div>
 
@@ -1158,12 +1308,16 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   <div class="phead">
     <div class="row wrap">
       <h1 class="h-page">Shipments</h1>
-      <span class="tipw"><button class="info" type="button" aria-label="About shipments" aria-describedby="tip-shipments"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-shipments">Every card a customer asked to ship, with its tracking. A customer can ask for shipping until hour 48. The card price is paid from the held amount. A card that ships pays the Fulfilment fee instead of the transaction fee, never both: the transaction fee was charged at the purchase, so shipping charges only the difference. Cards ship from Hong Kong. A shipment with a problem shows who acts next.</span></span>
+      <span class="tipw"><button class="info" type="button" aria-label="About shipments" aria-describedby="tip-shipments"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-shipments">Every card a customer asked to ship, with its tracking. A customer can ask for shipping until hour 48. The card price is paid from the held amount. A card that ships pays the Fulfilment fee instead of the transaction fee, never both: the transaction fee was charged at the purchase, so shipping charges only the difference. The shipping itself is charged at the carrier’s cost, with no markup. Cards ship from Hong Kong. A shipment with a problem shows who acts next.</span></span>
       <span class="meta" data-when="live" id="ship-meta">74 in the last 30 days</span>
       <span class="meta" data-when="live" id="ship-fresh"></span>
     </div>
+    <div class="segs" role="group" aria-label="Tracking or shipping coverage">
+      <button class="seg-btn" type="button" data-ship-view="tracking" aria-pressed="true">Tracking</button>
+      <button class="seg-btn" type="button" data-ship-view="coverage" aria-pressed="false">Shipping coverage</button>
+    </div>
   </div>
-  <div class="pbody stack-v" data-when="live">
+  <div class="pbody stack-v ship-track" data-when="live">
     <div class="toolbar">
       <div class="search">
         <svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg>
@@ -1193,8 +1347,48 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       </div>
     </section>
   </div>
-  <div class="pbody" data-when="new">
+  <div class="pbody ship-track" data-when="new">
     <section class="panel blank"><b>No shipments yet</b><span>When a customer asks for a card to be shipped, it shows up here with its tracking.</span></section>
+  </div>
+  <div class="pbody stack-v" id="ship-cover">
+    <div class="example-note" role="note">
+      <svg class="ic" aria-hidden="true"><use href="#i-alert"></use></svg>
+      <div><b>Illustrative data only</b><span>The countries and times below are examples, not confirmed Grail services.</span></div>
+    </div>
+    <section class="panel pad" aria-labelledby="cover-title">
+      <div class="head" style="padding-bottom: 0.875rem">
+        <div class="row wrap">
+          <h2 class="h-panel" id="cover-title">Destinations and service times</h2>
+          <span class="meta">Ships from Hong Kong</span>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl cards-tbl cover-tbl">
+          <thead><tr><th style="width: 28%">Destination</th><th>Status</th><th>Handling before dispatch</th><th>Estimated carrier transit</th></tr></thead>
+          <tbody id="cover-rows"></tbody>
+        </table>
+      </div>
+      <p class="note" style="padding-top: 0.875rem">Handling runs from the shipping request until the card is handed to the carrier. Transit is the carrier’s estimate from there. Live availability is published only after Grail confirms a route.</p>
+    </section>
+    <div class="cover2">
+      <section class="panel pad" aria-labelledby="say-title">
+        <div class="head" style="padding-bottom: 0.875rem">
+          <h2 class="h-panel" id="say-title">What your support team can say</h2>
+          <span class="tag">Example only</span>
+        </div>
+        <blockquote class="say" id="cover-say"></blockquote>
+        <div class="row" style="padding-top: 0.875rem"><button class="btn" type="button" id="cover-copy" data-copy="">Copy text</button></div>
+      </section>
+      <section class="panel pad" aria-labelledby="route-title">
+        <h2 class="h-panel" id="route-title" style="padding-bottom: 0.875rem">Before a route goes live</h2>
+        <ul class="plain-list">
+          <li>Destination and carrier confirmed</li>
+          <li>Handling and transit estimates confirmed</li>
+          <li>Duties and importer details agreed</li>
+        </ul>
+      </section>
+    </div>
+    <p class="cover-cost"><span><b>Shipping cost:</b> carrier quote at cost, no markup.</span><button class="linkbtn" type="button" data-terms>View duties, insurance and claims</button></p>
   </div>
 </div>
 
@@ -1299,13 +1493,41 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       <div class="kpi-grid three">
         <div class="kpi">
           <span class="kpi-num" id="k-today">$213.80</span>
-          <span class="kpi-lbl row rel">Transaction fees today
+          <span class="kpi-lbl row rel">Transaction fees charged today
             <span class="tipw"><button class="info" type="button" aria-label="About today’s transaction fees" aria-describedby="tip-today"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-today"></span></span>
           </span>
         </div>
         <div class="kpi"><span class="kpi-num" id="k-paid-month"></span><span class="kpi-lbl">Paid in November</span></div>
         <div class="kpi"><span class="kpi-num" id="k-paid-30"></span><span class="kpi-lbl">Paid in the last 30 days</span></div>
       </div>
+      <p class="paid-line"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg><b>Already paid from your balance.</b><span>Each transaction fee is charged at once, when the Temporary Purchase is made.</span><span id="paid-rates"></span></p>
+    </section>
+
+    <section class="panel pad" data-when="live" aria-labelledby="fees-title">
+      <div class="head rel" style="padding-bottom: 0.875rem">
+        <div class="row wrap">
+          <h2 class="h-panel" id="fees-title">Transaction fees, purchase by purchase</h2>
+          <span class="tipw"><button class="info" type="button" aria-label="About the fee of each purchase" aria-describedby="tip-fees"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-fees">The transaction fee of a purchase comes off your balance at the moment the purchase is made. It is charged while the card is still in Reserve Card, and it stays when the card is released. The balance activity further down adds each day’s fees into one line.</span></span>
+          <span class="meta" id="fees-meta"></span>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl cards-tbl" style="min-width: 46rem">
+          <thead><tr><th>Purchase</th><th class="r">Card value</th><th>Class</th><th class="r">Transaction fee</th><th>Card status</th><th>Fee</th><th></th></tr></thead>
+          <tbody id="fee-rows"></tbody>
+        </table>
+      </div>
+      <div class="more" id="fee-more-wrap"><button class="btn" type="button" id="fee-more">Show more</button></div>
+    </section>
+
+    <section class="panel pad" data-when="live" aria-labelledby="hold-title">
+      <div class="head rel" style="padding-bottom: 0.875rem">
+        <div class="row wrap">
+          <h2 class="h-panel" id="hold-title">A hold is separate from the fees</h2>
+          <span class="tipw"><button class="info" type="button" aria-label="About holds and fees" aria-describedby="tip-hold"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-hold">A card that is not released in its first 5 minutes moves to the Vault, and its value is held on your balance for up to 48 hours. A hold is not a charge: it is lifted on Release, and it pays the card price if the card ships. The transaction fee was charged at the purchase either way.</span></span>
+        </div>
+      </div>
+      <div class="hold-grid" id="hold-cells"></div>
     </section>
 
     <section class="panel pad" data-when="live" aria-labelledby="comm-title">
@@ -1338,6 +1560,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
           <tbody id="inv-rows"></tbody>
         </table>
       </div>
+      <p class="note" style="padding-top: 0.875rem">An invoice records fees that were already paid from your balance. Nothing is owed.</p>
     </section>
 
     <section class="panel pad" aria-labelledby="ledger-title">
@@ -1925,7 +2148,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
 <footer class="foot rel">
   <span>Sample data</span>
-  <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="tip-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-al" role="tooltip" id="tip-sample">Card names and market values are from the Grail inventory of 11 November 2026, and a card still at grading shows the grade it is valued at. Balances, sales, fees, customers, shipments, keys, invoices, references, events, reconciliation records, cases, test results, alerts, update times, the change history and the card mix of each pack are a sample. Who acts next on a shipping problem or a case is a proposal. Card photos were supplied by the shop owner, and a slab without one is an empty photo slot. Nothing you do here moves money. New shop shows the same dashboard for a shop that is still onboarding.</span></span>
+  <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="tip-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-al" role="tooltip" id="tip-sample">Card names and market values are from the Grail inventory of 11 November 2026, and a card still at grading shows the grade it is valued at. Balances, sales, fees, customers, shipments, keys, invoices, references, events, reconciliation records, cases, test results, alerts, update times, the change history, the carrier quotes, the shipping destinations and times, and the packs with their prices, card mix, artwork and product copy are a sample. Who acts next on a shipping problem or a case is a proposal. Card photos were supplied by the shop owner, and a slab without one is an empty photo slot. Nothing you do here moves money. New shop shows the same dashboard for a shop that is still onboarding.</span></span>
   <button class="linkbtn" type="button" id="reset">Reset</button>
   <div class="foot-ctl">
     <span class="lbl">Shop</span>
@@ -1983,21 +2206,6 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     <div class="sheet-actions">
       <button class="btn" type="button" data-close="topup">Cancel</button>
       <button class="btn btn-primary" type="submit" id="topup-confirm">Add $5,000</button>
-    </div>
-  </form>
-</dialog>
-
-<dialog class="sheet" id="manage" aria-labelledby="manage-title">
-  <form id="manage-form">
-    <h2 class="h-page" id="manage-title" style="font-size: 1.375rem">Manage pack</h2>
-    <div class="form-row">
-      <label for="manage-name">Name in your shop</label>
-      <input class="field" type="text" id="manage-name" maxlength="32" autocomplete="off" style="flex: 1 1 12rem" required>
-    </div>
-    <p class="note">Pack ID <strong id="manage-id" style="color: var(--ink)">GR-0117</strong>. The ID and the cards stay the same when you rename the pack.</p>
-    <div class="sheet-actions">
-      <button class="btn" type="button" data-close="manage">Cancel</button>
-      <button class="btn btn-primary" type="submit">Save name</button>
     </div>
   </form>
 </dialog>
@@ -2073,6 +2281,15 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     </div>
     <dl class="facts" id="track-facts"></dl>
     <ol class="tl" id="track-steps" aria-label="Tracking"></ol>
+    <div class="money2">
+      <div class="msg"><h3 class="lbl">Card and fees</h3><dl class="kv" id="track-fees"></dl></div>
+      <div class="msg"><h3 class="lbl">Balance movement at shipping</h3><dl class="kv" id="track-debit"></dl></div>
+    </div>
+    <div>
+      <h3 class="sub-h">When the fees were charged</h3>
+      <ol class="tl ev" id="track-charges" aria-label="Fee charges"></ol>
+      <p class="note" style="padding-top: 0.5rem">Shipping is charged at the carrier’s cost, with no markup. Fees are recorded card by card.</p>
+    </div>
     <div>
       <h3 class="sub-h">How current this is</h3>
       <dl class="kv" id="track-fresh"></dl>
@@ -2134,9 +2351,13 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       <button class="btn" type="button" data-close="pack">Close</button>
     </div>
     <dl class="facts four" id="pack-facts"></dl>
-    <div class="route" id="pack-route" style="border-top: none; padding-top: 0" hidden></div>
+    <div class="msg" id="pack-funding">
+      <h3 class="lbl">Funding</h3>
+      <dl class="kv" id="pack-fund"></dl>
+      <div class="route" id="pack-route" style="border-top: none; padding-top: 0.25rem" hidden></div>
+    </div>
     <div>
-      <h3 class="sub-h">Top chase cards</h3>
+      <h3 class="sub-h" id="pack-cards-h">Top chase cards</h3>
       <div id="pack-cards"></div>
     </div>
     <div>
@@ -2144,9 +2365,34 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       <div id="pack-mix"></div>
       <p class="note" style="padding-top: 0.5rem">Sample numbers. Grail sets the card mix of each pack, and it is the same in every shop.</p>
     </div>
+    <form class="present" id="pack-form" novalidate>
+      <h3 class="sub-h">Your shop presentation</h3>
+      <div class="present-grid">
+        <div class="art-col"><div class="art" id="pack-art"></div><span class="tag" id="pack-art-tag"></span></div>
+        <div class="present-fields">
+          <label for="pack-name-in">Name in your shop</label>
+          <input class="field" type="text" id="pack-name-in" maxlength="32" autocomplete="off" required>
+          <div class="row wrap">
+            <button class="btn" type="button" id="pack-art-pick"><svg class="ic" aria-hidden="true"><use href="#i-up"></use></svg>Upload artwork</button>
+            <button class="linkbtn" type="button" id="pack-art-clear" hidden>Use Grail artwork</button>
+          </div>
+          <input type="file" id="pack-art-file" accept="image/png,image/jpeg" hidden>
+          <small id="pack-art-msg" role="status"></small>
+          <div class="row wrap">
+            <button class="btn btn-primary" type="submit">Save presentation</button>
+            <span class="saved" id="pack-saved" role="status"></span>
+          </div>
+        </div>
+      </div>
+      <p class="note">Only the name and the artwork can change. The Grail ID, the price and the cards stay fixed.</p>
+    </form>
+    <div>
+      <h3 class="sub-h">Marketing material</h3>
+      <div class="kit" id="pack-kit" style="padding-top: 0.375rem"></div>
+      <p class="note" id="pack-kit-note" style="padding-top: 0.625rem"></p>
+    </div>
     <p class="note" id="pack-note"></p>
     <div class="sheet-actions" style="justify-content: flex-start">
-      <button class="btn" type="button" id="pack-rename">Rename</button>
       <button class="btn" type="button" id="pack-copy">Copy pack ID</button>
     </div>
   </div>
@@ -2216,7 +2462,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       <div><dt>Shipping request</dt><dd>Until hour 48<small>Counted from the Temporary Purchase</small></dd></div>
       <div><dt>Card price</dt><dd>Paid from the held amount</dd></div>
       <div><dt>Fulfilment fee</dt><dd><span id="terms-fee">6% on Silver</span><small>The transaction fee charged at the purchase counts toward it, so shipping charges only the difference</small></dd></div>
-      <div><dt>Shipping cost</dt><dd>At cost<small>From the carrier’s quote for each shipment. Not part of this sample.</small></dd></div>
+      <div><dt>Shipping cost</dt><dd>At cost, no markup<small>The carrier’s quote is listed on each shipment, apart from the card price and the fees. The quotes shown here are sample numbers.</small></dd></div>
       <div><dt>Insurance</dt><dd>No insurance fee</dd></div>
       <div><dt>Duties and import taxes</dt><dd>[DUTIES AND IMPORT TAXES]</dd></div>
       <div><dt>Claims and returns</dt><dd>Handled as cases<small>Under Fulfilment, Returns and claims. A decision follows your agreed policy: [RETURNS AND CLAIMS POLICY]</small></dd></div>
@@ -2322,7 +2568,11 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
   // ---------- sample data: real card names and values from the Grail inventory ----------
   var PACKS = [
-    { id: 'GR-0117', name: 'Modern Hits', price: 25, bought: 14842, buyers: 3120, cards: [
+    // the entry pack holds Basic cards only, so a first balance of $1,000 covers it: its top card is within a Max Card Value of $200
+    { id: 'GR-0101', name: 'Entry Pack', price: 10, bought: 6120, buyers: 1960, proposed: true, cards: [
+      { n: 'Psyduck', s: '#226', g: 'PSA 10', v: 190 }, { n: 'Charizard VMAX', s: 'Japanese #308', g: 'PSA 10', v: 180 },
+      { n: 'Rayquaza VMAX', s: '#111', g: 'PSA 10', v: 150 }, { n: 'Mega Gengar ex', s: '#269', g: 'PSA 10', v: 145 }] },
+    { id: 'GR-0117', name: 'Modern Hits', price: 25, bought: 8722, buyers: 2140, cards: [
       { n: 'Umbreon VMAX', g: 'PSA 9', v: 1900 }, { n: 'Mega Dragonite ex SIR', g: 'PSA 10', v: 857 },
       { n: 'Gengar VMAX Alt Art', g: 'PSA 9', v: 820 }, { n: 'Charizard V Full Art', g: 'PSA 10', v: 760 }] },
     { id: 'GR-0142', name: 'Fire Legends', price: 100, bought: 6200, buyers: 1640, cards: [
@@ -2496,7 +2746,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   var DOCS = [
     ['Quick start', 'Generate a Sandbox, call a pack by its ID, and show your customer the card they got.'],
     ['Packs and pack IDs', 'How to list your packs, read which ones are live, and what your site should do when a pack is paused.'],
-    ['From Temporary Purchase to Release', 'The stages a card goes through, Staging, Vault and Release, and the status your site receives at each one.'],
+    ['From Temporary Purchase to Release', 'The stages a card goes through, Reserve Card, Vault and Release, and the status your site receives at each one.'],
     ['Shipping requests', 'How a customer asks for shipping before hour 48, and how to read the tracking for a shipment.'],
     ['Marketplace singles', 'How to show the shared list of singles on your site and add your service fee.'],
     ['Balance, holds and top-ups', 'How a hold works, and how to read your Available Balance and your Max Card Value.'],
@@ -2525,6 +2775,11 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
   var PEOPLE = buildPeople();
   var SHIP = buildShipments();
+  // What the carrier quoted for each shipment, in cents, and how many hours before the shipping request the card was bought. Sample numbers.
+  (function () {
+    var r = rng(20261113), base = { Brazil: 3600, Mexico: 2900, Peru: 3400, Chile: 3500, Colombia: 3200 };
+    SHIP.forEach(function (s) { s.quote = (base[s.country] || 3300) + (s.carrier === 'FedEx' ? 250 : 0) + Math.floor(r() * 16) * 25; s.pre = 0.4 + r() * 43; });
+  })();
   var TOTAL_BOUGHT = PACKS.reduce(function (t, p) { return t + p.bought; }, 0);
   var GRID = buildHours(TOTAL_BOUGHT);
   var LEDGER = buildLedger();
@@ -2550,7 +2805,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
   // ---------- state ----------
   var START = { auto: false, autoAmount: 10000, autoBelow: 20000, shop: '', shown: 12, shipFilter: 'all', shipQuery: '', shipShown: 12,
-    vaultView: 'cards', ledgerFilter: 'all', ledgerShown: 10, topBy: 'sales', actMode: 'chart', evFilter: 'all', evShown: 8, evFocus: '', autoCap: 30000, caseFilter: 'open', caseQuery: '', recDay: 0, recFilter: 'review', recShown: 10, q: '', searchType: 'all', searchShown: 12 };
+    ledgerFilter: 'all', ledgerShown: 10, topBy: 'sales', actMode: 'chart', evFilter: 'all', evShown: 8, evFocus: '', autoCap: 30000, caseFilter: 'open', caseQuery: '', recDay: 0, recFilter: 'review', recShown: 10, q: '', searchType: 'all', searchShown: 12, feeShown: 6 };
   var S = {};
   function resetState(mode) {
     for (var k in START) S[k] = START[k];
@@ -2601,7 +2856,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       { name: 'Ana P.', email: 'finance@yourshop.example', role: 'Finance', status: 'Active', last: '12 Nov, 11:20' },
       { name: 'Marco T.', email: 'support@yourshop.example', role: 'Support', status: 'Active', last: '12 Nov, 15:02' },
       { name: 'Julia K.', email: 'dev@yourshop.example', role: 'Developer', status: 'Active', last: '11 Nov, 18:44' }] : []);
-    PACKS.forEach(function (p) { p.label = p.name; });
+    PACKS.forEach(function (p) { p.label = p.name; delete p.art; });
   }
   resetState('live');
   // What the signed-in role may do. Admin may do everything.
@@ -2767,11 +3022,12 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     var rest = fee(VOL30.basic, RATE.basic) + fee(VOL30.chase, RATE.chase) - today - nov.reduce(add, 0);
     out.push({ age: 0.05, kind: 'fee', w: 'Transaction fees, today so far', c: -today });
     nov.concat(spread(rest, 18, r)).forEach(function (c, k) { var age = 16.5 + 24 * k; out.push({ age: age, kind: 'fee', w: 'Transaction fees, ' + day(new Date(NOW - age * HOUR)), c: -c }); });
-    // At shipping the card price is paid from the held amount, and the Fulfilment fee is charged less the transaction fee the card already paid.
-    SHIP.forEach(function (s) { out.push({ age: s.age, kind: 'ship', w: 'Fulfilment, ' + s.n + ': card ' + money2(s.v) + ', fee at shipping ' + usd(shipFee(s.v)), c: -(s.v * 100 + shipFee(s.v)) }); });
+    // At shipping the card price is paid from the held amount, the Fulfilment fee is charged less the transaction fee the card already paid,
+    // and the carrier's cost is passed on as quoted.
+    SHIP.forEach(function (s) { out.push({ age: s.age, kind: 'ship', w: 'Fulfilment, ' + s.n + ': card ' + money2(s.v) + ', fee at shipping ' + usd(shipFee(s.v)) + ', shipping at cost ' + usd(s.quote), c: -(s.v * 100 + shipFee(s.v) + s.quote) }); });
     TOPUPS.forEach(function (t) { out.push({ age: t[0], kind: 'top', w: 'Top-up, ' + t[2], c: t[1] * 100 }); });
     out.sort(function (a, b) { return b.age - a.age; });
-    var bal = OPENING;
+    var bal = OPENING + SHIP.reduce(function (t, s) { return t + s.quote; }, 0);      // the balance of 30 days ago also covered what the carriers charged since
     out.forEach(function (e) { bal += e.c; e.bal = bal; });
     return out.reverse();
   }
@@ -2784,6 +3040,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   // Every card in the Vault or in Staging is one Temporary Purchase, with a reference on each side: the shop platform's transaction and Grail's purchase.
   function hex(r, n) { var s = ''; while (s.length < n) s += Math.floor(r() * 16).toString(16); return s; }
   function refs(c, r) { c.tp = 'TP-' + digits(r, 6); c.tx = 'TX-' + digits(r, 8); c.card = 'CARD-' + digits(r, 6); return c; }
+  // A card that is one of the entry pack's own cards came from that pack.
+  function entryOr(c, other) { return PACKS[0].cards.some(function (x) { return x.n === c[0] && x.s === c[1]; }) ? PACKS[0].id : other; }
   function buildPurchases() {
     var r = rng(8128), out = [];
     // minutes since the purchase: a Vault card has used up 48 hours less what is left, a Staging card 5 minutes less what is left
@@ -2793,7 +3051,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     // a few purchases of the last half hour that were released within their 5 minutes
     for (var i = 0; i < 7; i++) {
       var c = POOL[10 + Math.floor(r() * 20)], who = PEOPLE[Math.floor(r() * PEOPLE.length)];
-      out.push(refs({ n: c[0], s: c[1], g: c[2], v: c[3], who: who.id, pack: PACKS[Math.floor(r() * 2)].id, stage: 'released', ago: 6.5 + i * 4 + r() * 3, after: 1 + r() * 3.5 }, r));
+      out.push(refs({ n: c[0], s: c[1], g: c[2], v: c[3], who: who.id, pack: entryOr(c, ['GR-0117', 'GR-0142'][Math.floor(r() * 2)]), stage: 'released', ago: 6.5 + i * 4 + r() * 3, after: 1 + r() * 3.5 }, r));
     }
     refs(SHIP[0], r);     // the newest shipment keeps its references too, for the reconciliation
     return out;
@@ -2803,7 +3061,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     var r = rng(8129);
     return [[12, 'vault', 7], [15, 'released', 12], [22, 'vault', 26], [18, 'released', 41], [20, 'vault', 58]].map(function (t) {
       var c = POOL[t[0]];
-      return refs({ n: c[0], s: c[1], g: c[2], v: c[3], who: '', pack: PACKS[0].id, stage: t[1], ago: t[2], after: 2.4, test: true }, r);
+      return refs({ n: c[0], s: c[1], g: c[2], v: c[3], who: '', pack: 'GR-0117', stage: t[1], ago: t[2], after: 2.4, test: true }, r);
     });
   }
   // Grail sends the shop platform an event at each step of a purchase, and the platform acknowledges it.
@@ -2813,8 +3071,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       var t0 = NOW - c.ago * MIN;
       function ev(kind, label, t) { var e = { id: 'EV-' + digits(r, 7), key: 'idem_' + hex(r, 16), kind: kind, label: label, t: t, p: c, tries: 1 }; out.push(e); return e; }
       ev('purchase', 'Purchase received', t0);
-      if (c.stage === 'vault') { ev('staging', 'Staging completed', t0 + 5 * MIN); c.holdEvent = ev('hold', 'Vault hold created: ' + money(c.v), t0 + 5 * MIN + 2000); }
-      if (c.stage === 'released') ev('release', 'Released in Staging', t0 + c.after * MIN);
+      if (c.stage === 'vault') { ev('staging', 'Reserve Card completed', t0 + 5 * MIN); c.holdEvent = ev('hold', 'Vault hold created: ' + money(c.v), t0 + 5 * MIN + 2000); }
+      if (c.stage === 'released') ev('release', 'Released in Reserve Card', t0 + c.after * MIN);
     });
     out.sort(function (a, b) { return b.t - a.t; });
     return out;
@@ -2886,15 +3144,18 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
         '<div class="pack-head"><div class="pack-top rel"><span class="st-wrap"><span class="st st-live"><i aria-hidden="true"></i>Live</span>' +
         '<span class="st st-paused"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg><span data-why="' + p.id + '">Paused</span></span>' + infoTip('tip-' + p.id, 'Why this pack is paused', 'tip-fill') + '</span>' +
         '<span class="pack-id">' + p.id + '</span></div>' +
-        '<div class="pack-title"><h2 class="pack-name" data-name="' + p.id + '"></h2><span class="pack-price">' + money(p.price) + '</span></div></div>' +
+        '<div class="pack-title">' + (p.proposed ? '<div class="pack-nm"><h2 class="pack-name" data-name="' + p.id + '"></h2><span class="tag">Proposed example</span></div>' : '<h2 class="pack-name" data-name="' + p.id + '"></h2>') +
+        '<span class="pack-price">' + money(p.price) + '</span></div></div>' +
         '<div class="stack">' + order.map(function (i) { return slab(p.cards[i], 's' + (i + 1)); }).join('') + '</div>' +
         '<div class="rows">' + p.cards.map(function (c) { return '<div><span>' + esc(c.n) + '</span><b>' + money(c.v) + '</b></div>'; }).join('') + '</div>' +
         '<div class="pack-stats" data-when="live"><div><b title="' + count(p.bought) + '">' + abbr(p.bought) + '</b><span>Purchases</span></div>' +
         '<div><b title="' + count(p.buyers) + '">' + abbr(p.buyers) + '</b><span>Buyers</span></div></div>' +
-        '<div class="route" data-route="' + p.id + '" hidden></div>' +
-        '<div class="pack-acts"><button class="btn" type="button" data-pack-details="' + p.id + '">View details</button>' +
-        '<button class="btn" type="button" data-manage="' + p.id + '">Rename</button></div></article>';
-    }).join('');
+        '<div class="fund" data-fund="' + p.id + '"></div>' +
+        '<div class="pack-acts" data-acts="' + p.id + '"></div></article>';
+    }).join('') + '<aside class="panel pack-info" aria-labelledby="pack-info-title"><h2 id="pack-info-title">How packs work</h2>' +
+      '<div class="info-item"><b>Start from $1,000</b><p>A first top-up of $1,000 covers <span data-bind="entryname"></span>. Going live also needs approval by Grail.</p></div>' +
+      '<div class="info-item"><b>Fixed by Grail</b><p>The price and the cards of a pack are the same in every shop. You can change its name and its artwork.</p></div>' +
+      '<div class="info-item"><b>Paused, not gone</b><p>A pack whose top card is above your Max Card Value is hidden from your customers. It returns when your balance covers it.</p></div></aside>';
     $('ship-filters').innerHTML = chips(FILTERS, 'data-filter');
     $('ledger-filters').innerHTML = chips(LEDGER_FILTERS, 'data-ledger');
     $('ev-filters').innerHTML = chips([['all', 'All'], ['wait', 'Needs retry']], 'data-ev');
@@ -3059,24 +3320,28 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       if (p.live && was === false && !quiet()) comeAlive(p);
       document.querySelector('[data-name="' + p.id + '"]').textContent = p.label;
       document.querySelector('[data-why="' + p.id + '"]').textContent = 'Paused: ' + pausedWhy(p, av, ok);
-      var rt = document.querySelector('[data-route="' + p.id + '"]');
-      rt.hidden = p.live;
-      rt.innerHTML = p.live ? '' : routeHtml(p, av, ok);
+      document.querySelector('[data-fund="' + p.id + '"]').innerHTML = fundHtml(p, av, ok);
+      // the buttons of a tile are drawn again only when their set changes, so the one in focus stays in place
+      var acts = document.querySelector('[data-acts="' + p.id + '"]'), set = p.live ? 'live' : need(top) > av ? 'gap' : 'covered';
+      if (acts.getAttribute('data-set') !== set) { acts.innerHTML = actsHtml(p, av); acts.setAttribute('data-set', set); acts.classList.toggle('one', acts.children.length === 1); }
       $('tip-' + p.id).textContent = p.live ? '' : !ok ? 'Packs go live once your shop is approved. This one also needs ' + money(need(top)) + ' available, for its top chase card of ' + money(top) + '.'
         : 'Its top chase card, ' + money(top) + ', is above your Max Card Value. It goes live at ' + money(need(top)) + ' available, and is hidden from customers until then.';
     });
     bind('packcount', paused ? on + ' live, ' + paused + ' paused' : on + ' live');
+    bind('entryname', PACKS[0].label);
 
-    // a new shop: what it takes to get the first pack live
-    var first = PACKS[0], firstNeed = need(first.cards[0].v), firstGap = Math.max(0, firstNeed - av);
-    $('fund-facts').innerHTML = [['First top-up', '$1,000 or more'], ['First pack live from', money(firstNeed) + ' available'], ['Also needed', 'KYB and approval by Grail']].map(function (f) {
+    // a new shop: the first top-up of $1,000 covers the entry pack, and the approval of the shop makes it live
+    var first = PACKS[0], firstNeed = need(first.cards[0].v), firstGap = Math.max(0, firstNeed - av), firstTop = Math.max(firstGap, 1000 - S.balance);
+    $('fund-facts').innerHTML = [['First top-up', '$1,000 or more'], ['It covers', esc(first.label) + ', top card ' + money(first.cards[0].v)], ok ? ['Approval', 'Approved by Grail'] : ['Also needed', 'KYB and approval by Grail']].map(function (f) {
       return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>';
     }).join('');
-    $('fund-note').textContent = firstGap ? 'A pack goes live when your shop is approved and your Available Balance covers its top chase card. The first top-up alone does not make a pack live: ' + first.label + ', the first pack, needs ' + money(firstNeed) + ' available.'
+    $('fund-note').textContent = firstGap ? 'A shop can start from $1,000. That balance gives a Max Card Value of $200, which covers ' + first.label + '. Every other pack shows what it still needs.'
+      : ok ? first.label + ' is live. Every other pack goes live once your balance covers its top card.'
       : 'Your balance covers ' + first.label + '. It goes live once your shop is approved.';
     $('fund-topup-wrap').hidden = !firstGap;
-    $('fund-topup').textContent = 'Top up ' + money(firstGap);
-    $('fund-topup').setAttribute('data-topup-exact', firstGap);
+    $('fund-left').hidden = ok;
+    $('fund-topup').textContent = 'Top up ' + money(firstTop);
+    $('fund-topup').setAttribute('data-topup-exact', firstTop);
 
     // the fees of the shop's level, on the overview and in the shipping terms
     var lv = LEVELS.filter(function (l) { return l[0] === levelName(); })[0];
@@ -3086,6 +3351,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       return '<div class="fee"><span class="fee-num">' + f[1] + '</span><span class="kpi-lbl">' + f[0] + '</span></div>';
     }).join('');
     $('terms-fee').textContent = lv[3] + ' on ' + lv[0];
+    $('paid-rates').textContent = lv[0] + ' rates: Basic ' + lv[1] + ', Chase ' + lv[2] + '.';
 
     $('id-rows').innerHTML = PACKS.map(function (p) {
       return '<tr><td class="strong">' + esc(p.label) + '</td><td>' + p.id + '</td><td><span class="dot' + (p.live ? ' dot-on' : '') + '" aria-hidden="true"></span>' + (p.live ? 'Live' : 'Paused') + '</td>' +
@@ -3111,6 +3377,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     renderVault();
     renderTop();
     renderLedger();
+    renderFees();
+    renderCover();
     renderMethods();
     renderShipments();
     renderKeys();
@@ -3203,39 +3471,34 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   }
 
   function viewCell(c) { return '<td class="r"><button class="btn btn-sm" type="button" data-purchase="' + c.tp + '" aria-label="View the purchase of ' + esc(c.n) + '">View</button></td>'; }
-  // ---------- the Vault, as cards, by pack and by customer ----------
+  // ---------- Reserve Card and the Vault: the two stages of a card, in the order it goes through them ----------
+  // Both stages are always in view, each under its own heading. Nothing here is behind a switch or a tooltip.
   function renderVault() {
-    var total = VAULT.reduce(function (t, c) { return t + c.v; }, 0), head, rows;
-    pressed('data-vault-view', S.vaultView);
-    if (S.vaultView === 'packs') {
-      head = '<tr><th style="width: 26%">Pack</th><th>Status</th><th class="r">Cards</th><th class="r">Held</th><th style="width: 26%">Share of held</th><th>Next release</th></tr>';
-      rows = PACKS.map(function (p) {
-        var cs = VAULT.filter(function (c) { return c.pack === p.id; }), held = cs.reduce(function (t, c) { return t + c.v; }, 0);
-        return '<tr><td class="cell2"><b>' + esc(p.label) + '</b><small>' + p.id + '</small></td><td><span class="dot' + (p.live ? ' dot-on' : '') + '" aria-hidden="true"></span>' + (p.live ? 'Live' : 'Paused') + '</td>' +
-          '<td class="r">' + cs.length + '</td><td class="r strong">' + money(held) + '</td><td>' + meter(held / total) + '</td>' +
-          '<td>' + (cs.length ? 'In ' + Math.min.apply(null, cs.map(function (c) { return c.h; })) + 'h' : '<span class="muted">Nothing held</span>') + '</td></tr>';
-      });
-    } else if (S.vaultView === 'people') {
-      head = '<tr><th style="width: 26%">Customer</th><th class="r">Cards</th><th class="r">Held</th><th style="width: 26%">Share of held</th><th>Next release</th><th></th></tr>';
-      rows = PEOPLE.filter(function (p) { return p.held > 0; }).sort(function (a, b) { return b.held - a.held; }).map(function (p) {
-        var cs = VAULT.filter(function (c) { return c.who === p.id; });
-        return '<tr data-row>' + whoCell(p) + '<td class="r">' + p.cards + '</td><td class="r strong">' + money(p.held) + '</td><td>' + meter(p.held / total) + '</td>' +
-          '<td>In ' + Math.min.apply(null, cs.map(function (c) { return c.h; })) + 'h</td>' +
-          '<td class="r"><button class="btn btn-sm" type="button" data-person="' + p.id + '" aria-label="View ' + esc(p.name) + '">View</button></td></tr>';
-      });
-    } else {
-      head = '<tr><th style="width: 30%">Card</th><th>Customer</th><th>Pack</th><th>Class</th><th class="r">Held</th><th>Time left</th><th></th></tr>';
-      rows = VAULT.map(function (c) {
-        return '<tr data-row><td>' + cardCell(c, true) + '</td>' + whoCell(PEOPLE.by[c.who], 'Customer') + packCell(c.pack, 'Pack') + '<td data-l="Class"><span class="tag">' + (c.v >= 500 ? 'Chase' : 'Basic') + '</span></td>' +
-          '<td class="r strong" data-l="Held">' + money(c.v) + '</td><td data-l="Time left">' + timeLeft(c.h) + '</td>' + viewCell(c) + '</tr>';
-      });
-    }
-    $('vault-head').innerHTML = head;
-    $('vault-table').classList.toggle('cards-tbl', S.vaultView === 'cards');
-    $('vault-rows').innerHTML = rows.join('');
+    var held = VAULT.reduce(function (t, c) { return t + c.v; }, 0), wait = STAGING.reduce(function (t, c) { return t + c.v; }, 0), n = STAGING.length;
+    $('reserve-meta').textContent = plural(n, 'card', 'cards') + ', ' + money(wait) + ', not held';
     $('staging-rows').innerHTML = STAGING.map(function (c) {
       return '<tr data-row><td>' + cardCell(c, true) + '</td>' + whoCell(PEOPLE.by[c.who], 'Customer') + packCell(c.pack, 'Pack') + '<td class="r strong" data-l="Value, not held">' + money(c.v) + '</td>' +
-        '<td data-l="Time left in Staging"><span class="time">' + ring(c.m / 5, c.m + ' of 5 minutes left') + c.m + ' min left</span></td>' + viewCell(c) + '</tr>';
+        '<td data-l="Reserve time left"><span class="time">' + ring(c.m / 5, c.m + ' of 5 minutes left') + c.m + ' min left</span></td>' + viewCell(c) + '</tr>';
+    }).join('');
+    $('reserve-sum').hidden = !n;
+    $('reserve-sum').innerHTML = n ? '<span>Potential hold if ' + (n === 1 ? 'it moves' : 'all ' + n + ' move') + ' to the Vault: <b>' + money(wait) + '</b></span>' : '';
+    $('vault-meta').textContent = plural(VAULT.length, 'card', 'cards') + ', ' + money(held) + ' held';
+    $('vault-rows').innerHTML = VAULT.map(function (c) {
+      return '<tr data-row><td>' + cardCell(c, true) + '</td>' + whoCell(PEOPLE.by[c.who], 'Customer') + packCell(c.pack, 'Pack') + '<td data-l="Class"><span class="tag">' + (c.v >= 500 ? 'Chase' : 'Basic') + '</span></td>' +
+        '<td class="r strong" data-l="Held">' + money(c.v) + '</td><td data-l="Time left">' + timeLeft(c.h) + '</td>' + viewCell(c) + '</tr>';
+    }).join('');
+    // the same held amount, by pack and by customer
+    var next = function (cs) { return 'In ' + Math.min.apply(null, cs.map(function (c) { return c.h; })) + 'h'; };
+    var tail = function (cs, sum) { return '<td class="r">' + cs.length + '</td><td class="r strong">' + money(sum) + '</td><td class="col-share">' + meter(sum / held) + '</td><td>' + next(cs) + '</td></tr>'; };
+    $('held-meta').textContent = money(held) + ' in ' + plural(VAULT.length, 'card', 'cards');
+    $('held-packs').innerHTML = PACKS.map(function (p) {
+      var cs = VAULT.filter(function (c) { return c.pack === p.id; });
+      return { p: p, cs: cs, sum: cs.reduce(function (t, c) { return t + c.v; }, 0) };
+    }).filter(function (x) { return x.cs.length; }).sort(function (a, b) { return b.sum - a.sum; }).map(function (x) {
+      return '<tr><td class="cell2"><b>' + esc(x.p.label) + '</b><small>' + x.p.id + (x.p.live ? '' : ', paused') + '</small></td>' + tail(x.cs, x.sum);
+    }).join('');
+    $('held-people').innerHTML = PEOPLE.filter(function (p) { return p.held > 0; }).sort(function (a, b) { return b.held - a.held; }).map(function (p) {
+      return '<tr>' + whoCell(p) + tail(VAULT.filter(function (c) { return c.who === p.id; }), p.held);
     }).join('');
   }
 
@@ -3319,8 +3582,53 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       return '<tr><td>' + l[0] + '</td><td class="r">' + l[1] + '</td><td class="r">' + l[2] + '</td><td class="r strong">' + l[3] + '</td></tr>';
     }).join('') + '<tr class="total-row"><td>Total</td><td class="r">' + money(b.basic + b.chase) + '</td><td></td><td class="r">' + usd(f.total) + '</td></tr>';
     $('invoice-note').textContent = (b.open ? 'This month is still open. The fees so far have already come off your balance, so nothing is owed.' : 'Every fee on this invoice came off your balance when it was charged. Nothing is owed.') +
-      ' The transaction fee is charged when a purchase is made. A card that ships is then charged the difference to the Fulfilment fee.';
+      ' The transaction fee is charged when a purchase is made. A card that ships is then charged the difference to the Fulfilment fee. Card prices and shipping at cost are not fees, and the balance activity lists them.';
     openSheet($('invoice'));
+  }
+
+  // Every transaction fee is charged at its purchase, whatever happens to the card afterwards. The list shows the latest purchases, newest first,
+  // and the hold of a card beside it: held in the Vault, not held in Reserve Card, and never part of the fee.
+  function renderFees() {
+    if (S.mode !== 'live') return;
+    var list = PURCHASES.slice().sort(function (a, b) { return a.ago - b.ago; });
+    $('fees-meta').textContent = 'The ' + list.length + ' latest purchases';
+    $('fee-rows').innerHTML = list.slice(0, S.feeShown).map(function (c) {
+      var open = c.stage !== 'released';
+      var st = c.stage === 'staging' ? ['In Reserve Card', 'Not held, ' + c.m + ' min left'] : c.stage === 'vault' ? ['In the Vault', money(c.v) + ' held, ' + c.h + 'h left'] : ['Released', 'In Reserve Card, nothing was held'];
+      return '<tr' + (open ? ' data-row' : '') + '><td class="cell2"><b class="num">' + c.tp + '</b><small>' + esc(c.n) + '</small></td>' +
+        '<td class="r" data-l="Card value">' + money(c.v) + '</td><td data-l="Class"><span class="tag">' + (c.v >= 500 ? 'Chase' : 'Basic') + '</span></td>' +
+        '<td class="r strong" data-l="Transaction fee">' + usd(txFee(c.v)) + '</td>' +
+        '<td class="cell2" data-l="Card status"><b>' + st[0] + '</b><small>' + st[1] + '</small></td>' +
+        '<td class="cell2" data-l="Fee"><b class="fee-ok">' + CHECK + 'Charged</b><small>' + clock(new Date(NOW - c.ago * MIN)) + '</small></td>' +
+        '<td class="r">' + (open ? '<button class="btn btn-sm" type="button" data-purchase="' + c.tp + '" aria-label="View the purchase ' + c.tp + '">View</button>' : '') + '</td></tr>';
+    }).join('');
+    var left = list.length - S.feeShown;
+    $('fee-more-wrap').hidden = left <= 0;
+    $('fee-more').textContent = 'Show ' + Math.max(left, 0) + ' more';
+    var sum = function (cards, f) { return cards.reduce(function (t, c) { return t + f(c.v); }, 0); }, same = function (v) { return v; };
+    var cell = function (label, value, small) { return '<div class="hold-cell"><span>' + label + '</span><b>' + value + '</b><small>' + small + '</small></div>'; };
+    $('hold-cells').innerHTML = cell('In the Vault', money(sum(VAULT, same)), 'Held on your balance, ' + plural(VAULT.length, 'card', 'cards')) +
+      cell('In Reserve Card', money(sum(STAGING, same)), 'Not held, ' + plural(STAGING.length, 'card', 'cards')) +
+      cell('Transaction fees on these ' + (VAULT.length + STAGING.length) + ' cards', usd(sum(VAULT, txFee) + sum(STAGING, txFee)), 'Already charged, at each purchase');
+  }
+
+  // ---------- shipping coverage: where a card can ship, the handling before dispatch and the carrier's transit ----------
+  // All of it is an example. The destinations of the sample shipments are listed as supported, so this view and the tracking never disagree.
+  var COVER = { on: ['dot-on', 'Supported (example)'], wait: ['dot-wait', 'Awaiting confirmation'], off: ['dot-warn', 'Not enabled'] };
+  var COVER_TIMES = ['1 to 2 business days', '4 to 7 business days'];
+  function renderCover() {
+    var seen = {}, rows = [['United States', 'on']];
+    PLACES.forEach(function (p) { if (!seen[p[1]]) { seen[p[1]] = 1; rows.push([p[1], 'on']); } });
+    rows.sort(function (a, b) { return a[0] < b[0] ? -1 : 1; });
+    rows.push(['United Kingdom', 'wait'], ['Other destinations', 'off']);
+    $('cover-rows').innerHTML = rows.map(function (r) {
+      var st = COVER[r[1]], on = r[1] === 'on', none = '<span class="muted">Not set</span>';
+      return '<tr><td>' + r[0] + '</td><td data-l="Status"><span class="dot ' + st[0] + '" aria-hidden="true"></span>' + st[1] + '</td>' +
+        '<td data-l="Handling before dispatch">' + (on ? COVER_TIMES[0] : none) + '</td><td data-l="Estimated carrier transit">' + (on ? COVER_TIMES[1] : none) + '</td></tr>';
+    }).join('');
+    var say = 'Estimated dispatch in ' + COVER_TIMES[0] + '. Carrier transit typically ' + COVER_TIMES[1] + ' after dispatch. Customs delays may extend delivery.';
+    $('cover-say').textContent = say;
+    $('cover-copy').setAttribute('data-copy', say);
   }
 
   // ---------- shipments ----------
@@ -3389,8 +3697,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       ['Customer', nameBtn(PEOPLE.by[s.cid])], ['Order', s.order], ['Ships to', esc(s.city + ', ' + s.country)],
       ['Tracking', s.carrier + (has ? ' <span class="num trk">' + chunks(s.track) + '</span><button class="btn btn-sm" type="button" data-copy="' + s.track + '">Copy number</button>' : ', number assigned at pickup'), 'wide'],
       ['Card value', money(s.v)],
-      ['Card', esc(cardName(s)), 'wide'], ['Fulfilment fee', money2(s.v * FEE_RATE)],
-      ['Charged at shipping', usd(shipFee(s.v)) + '<span class="muted">after the ' + usd(txFee(s.v)) + ' transaction fee charged at the purchase</span>', 'wide']
+      ['Card', esc(cardName(s)), 'wide'], ['Class', s.v >= 500 ? 'Chase' : 'Basic']
     ];
     $('track-facts').innerHTML = facts.map(function (f) { return '<div' + (f[2] ? ' class="' + f[2] + '"' : '') + '><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
     var html = '';
@@ -3402,6 +3709,16 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       if (s.issue === 2 && k === 6) html += '<li class="warn"><span>Delivery attempt failed, nobody was available</span><time>' + clock(when(s, 7)) + '</time></li>';
     });
     $('track-steps').innerHTML = html;
+    // the fees of this card, and what left the balance when the shipping request was accepted
+    var tx = txFee(s.v), gross = fee(s.v, RATE.ship), more = gross - tx, price = s.v * 100, lvl = LEVELS.filter(function (l) { return l[0] === levelName(); })[0];
+    var kvRow = function (r) { return '<div' + (r[3] ? ' class="kv-sum"' : '') + '><dt>' + r[0] + (r[2] ? '<small>' + r[2] + '</small>' : '') + '</dt><dd>' + r[1] + '</dd></div>'; };
+    $('track-fees').innerHTML = [['Card value', usd(price)], ['Transaction fee', usd(tx), 'Paid at the purchase. ' + (s.v >= 500 ? 'Chase, ' + lvl[2] : 'Basic, ' + lvl[1])],
+      ['Fulfilment fee at ' + lvl[0], usd(gross), lvl[3] + ' of the card value'], ['Less the transaction fee', usd(-tx), 'Already paid'],
+      ['Additional fee at shipping', usd(more), '', 1], ['Total Grail fee for this card', usd(gross)]].map(kvRow).join('');
+    $('track-debit').innerHTML = [['Card price', usd(price), 'Paid from the held amount'], ['Additional Fulfilment fee', usd(more)],
+      ['Shipping at cost', usd(s.quote), esc(s.carrier) + ' quote, no markup. Sample number.'], ['Total debit at shipping', usd(price + more + s.quote), '', 1], ['Held decreases by', usd(price)]].map(kvRow).join('');
+    $('track-charges').innerHTML = '<li class="done"><span>At the purchase: transaction fee ' + usd(tx) + ' paid</span><time>' + clock(new Date(NOW - (s.age + s.pre) * HOUR)) + '</time></li>' +
+      '<li class="done"><span>At shipping: additional fee ' + usd(more) + ' paid</span><time>' + clock(when(s, 0)) + '</time></li>';
     $('track-fresh').innerHTML = '<div><dt>Shipment record<small>From Grail</small></dt><dd>Updated ' + clock(new Date(fr.grail)) + '<span class="tag tag-on">Up to date</span></dd></div>' +
       '<div><dt>Carrier tracking<small>From ' + s.carrier + '</small></dt><dd>' + (fr.carrier ? 'Last update ' + clock(new Date(fr.at)) : 'Starts at pickup') +
       (fr.carrier ? '<span class="tag ' + (fr.stale ? 'tag-warn">Last known status' : fr.done ? 'tag-on">Final' : 'tag-on">Up to date') + '</span>' : '') + '</dd></div>';
@@ -3519,8 +3836,10 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     $('rail-stem').style.left = x + 'px';
     var tag = $('rail-tag'), half = tag.offsetWidth / 2;
     tag.style.left = Math.max(half, Math.min(W - half, x)) + 'px';
-    // near an end of the rail the tooltip opens toward the middle, so it stays on the screen
-    var tip = $('tip-max-rail'), end = x < W * 0.3 ? 'start' : x > W * 0.7 ? 'end' : '';
+    // the tooltip opens centred under the tag, and toward the middle when half of it would leave the screen
+    var mid = box.left + Math.max(half, Math.min(W - half, x)), vw = document.documentElement.clientWidth;
+    var halfTip = Math.min(20 * parseFloat(getComputedStyle(document.documentElement).fontSize), vw * 0.8) / 2;
+    var tip = $('tip-max-rail'), end = mid - halfTip < 8 ? 'start' : mid + halfTip > vw - 8 ? 'end' : '';
     tip.classList.toggle('tip-bc', !end);
     tip.classList.toggle('tip-br', end === 'end');
   }
@@ -3612,7 +3931,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   // What the shop platform receives. The names are a sample, and the docs hold the real ones.
   function iso(t) { return new Date(Math.round(t / 1000) * 1000).toISOString().replace('.000Z', 'Z'); }
   function payload(e) {
-    var p = e.p, types = { purchase: 'purchase.received', staging: 'staging.completed', hold: 'vault.hold_created', release: 'purchase.released' };
+    var p = e.p, types = { purchase: 'purchase.received', staging: 'reserve.completed', hold: 'vault.hold_created', release: 'purchase.released' };
     var o = { id: e.id, type: types[e.kind], created: iso(e.t), idempotency_key: e.key,
       purchase: { id: p.tp, platform_transaction: p.tx, customer: p.who || 'test-customer', pack: p.pack },
       card: { id: p.card, name: p.n, set: p.s, grade: p.g, value: p.v.toFixed(2), currency: 'USD' } };
@@ -3650,7 +3969,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     S.purchaseOpen = tp;
     $('purchase-slab').innerHTML = slab(c, 'slab-md');
     $('purchase-title').textContent = c.n;
-    $('purchase-sub').textContent = c.s + ', ' + c.g + '. ' + (vault ? 'In the Vault, ' + c.h + ' of 48 hours left.' : 'In Staging, ' + c.m + (c.m === 1 ? ' minute' : ' minutes') + ' left.');
+    $('purchase-sub').textContent = c.s + ', ' + c.g + '. ' + (vault ? 'In the Vault, ' + c.h + ' of 48 hours left.' : 'In Reserve Card, ' + c.m + (c.m === 1 ? ' minute' : ' minutes') + ' left.');
     var copy = function (v) { return '<span class="num">' + v + '</span><button class="btn btn-sm" type="button" data-copy="' + v + '">Copy</button>'; };
     var facts = [['Customer', nameBtn(who) + '<span class="muted">' + who.id + '</span>'], ['Shop platform transaction', copy(c.tx)], ['Grail purchase', copy(c.tp)],
       ['Card', '<span class="num">' + c.card + '</span>'], ['Pack', (can('packs') ? relBtn('data-pack-details', pack.id, pack.label) : esc(pack.label)) + '<span class="muted">' + pack.id + '</span>'], ['Class', chase ? 'Chase' : 'Basic']];
@@ -3660,9 +3979,9 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       return '<li class="' + (w ? 'wait' : 'done') + '"><span>' + esc(e.label) + '</span><span class="tl-end"><span class="tag ' + (w ? 'tag-warn' : 'tag-on') + '">' + (w ? 'Awaiting acknowledgement' : 'Acknowledged') + '</span><time>' + clock(new Date(e.t)) + '</time></span></li>';
     }).join('');
     html += vault ? '<li><span>Release, unless the customer asks for shipping</span><span class="tl-end"><time>' + clock(new Date(t0 + 48 * HOUR)) + '</time></span></li>'
-      : '<li><span>Staging ends. The card moves to the Vault unless it is released</span><span class="tl-end"><time>' + clock(new Date(t0 + 5 * MIN)) + '</time></span></li>';
+      : '<li><span>Reserve Card ends. The card moves to the Vault unless it is released</span><span class="tl-end"><time>' + clock(new Date(t0 + 5 * MIN)) + '</time></span></li>';
     $('purchase-events').innerHTML = html;
-    var rows = [[vault ? 'Current hold' : 'Hold', vault ? money(c.v) : 'None yet', vault ? 'Blocked on your balance, not deducted' : money(c.v) + ' is held if the card is not released in Staging'],
+    var rows = [[vault ? 'Current hold' : 'Hold', vault ? money(c.v) : 'None yet', vault ? 'Blocked on your balance, not deducted' : money(c.v) + ' is held if the card is not released in its first 5 minutes'],
       ['Transaction fee', usd(tx), (chase ? 'Chase, 0.68%' : 'Basic, 0.95%') + ', charged at the purchase'],
       ['If the card is released', 'No further fee', (vault ? 'The hold is lifted, and the' : 'The') + ' transaction fee stays'],
       ['If the card ships', usd(more) + ' more', 'The Fulfilment fee of ' + usd(tx + more) + ' (6%), less the ' + usd(tx) + ' already charged']];
@@ -3670,8 +3989,21 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     if (!$('purchase').open) openSheet($('purchase'));
   }
 
-  // ---------- packs: the route to going live, and the details of a pack ----------
-  // What a paused pack still needs: the Available Balance that covers its top chase card, how much of it is missing, and a button for exactly that amount.
+  // ---------- packs: what a pack needs to go live, and the details of a pack ----------
+  var CHECK = '<svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>', ALERT = '<svg class="ic" aria-hidden="true"><use href="#i-alert"></use></svg>';
+  // On a pack tile: the Available Balance its top card needs, and whether the shop has it.
+  function fundHtml(p, av, ok) {
+    var req = need(p.cards[0].v), gap = Math.max(0, req - av), row = '<div class="fund-row"><span>Required available</span><b>' + money(req) + '</b></div>';
+    if (p.live) return '<div class="fund-line ok">' + CHECK + '<span>Within your Max Card Value</span></div>' + row;
+    if (gap) return row + '<div class="fund-line warn">' + ALERT + '<span>' + money(gap) + ' more needed</span></div>' + (ok ? '' : '<small>Your shop also has to be approved.</small>');
+    return row + '<div class="fund-line ok">' + CHECK + '<span>Covered by your balance</span></div><small>It goes live once your shop is approved.</small>';
+  }
+  // A paused pack that needs money leads with its funding. Every pack opens its details.
+  function actsHtml(p, av) {
+    var gap = Math.max(0, need(p.cards[0].v) - av), details = '<button class="btn" type="button" data-pack-details="' + p.id + '">Pack details</button>';
+    return !p.live && gap ? '<button class="btn btn-primary" type="button" data-pack-funding="' + p.id + '">View funding</button>' + details : details;
+  }
+  // In the pack sheet: the Available Balance that covers the top card, how much of it is missing, and a button for exactly that amount.
   function routeHtml(p, av, ok) {
     var req = need(p.cards[0].v), gap = Math.max(0, req - av);
     if (!gap) return '<small>Your balance covers this pack. It goes live once your shop is approved.</small>';
@@ -3680,31 +4012,124 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       '<button class="btn btn-primary btn-wide" type="button" data-topup-exact="' + gap + '" data-can="topup">Top up ' + money(gap) + '</button>' +
       (ok ? '' : '<small>Your shop also has to be approved.</small>');
   }
-  // The first thing that keeps a pack paused. A shop that is not approved yet reads its balance gap in the block under the cards.
+  // The first thing that keeps a pack paused.
   function pausedWhy(p, av, ok) { return ok ? 'balance' : 'approval'; }
-  // The card mix is set by Grail for each pack. These are sample numbers.
-  var MIX = { 'GR-0117': [86, 11, 2.7, 0.3], 'GR-0142': [84, 12.5, 3.1, 0.4], 'GR-0158': [82, 13.5, 4, 0.5], 'GR-0163': [80, 14.5, 4.9, 0.6] };
+  // The card mix and the series are set by Grail for each pack. These are sample values. The entry pack holds Basic cards only.
+  var MIX = { 'GR-0101': [88.5, 9.5, 2], 'GR-0117': [86, 11, 2.7, 0.3], 'GR-0142': [84, 12.5, 3.1, 0.4], 'GR-0158': [82, 13.5, 4, 0.5], 'GR-0163': [80, 14.5, 4.9, 0.6] };
   var MIX_NAMES = ['Common', 'Uncommon', 'Rare', 'Chase'];
-  function openPack(id) {
+  var SERIES = { 'GR-0101': 'Pokémon, modern sets', 'GR-0117': 'Pokémon, modern sets', 'GR-0142': 'Pokémon, Charizard, all eras', 'GR-0158': 'Pokémon, Gengar, all eras', 'GR-0163': 'Pokémon, vintage sets' };
+  var TINT = { 'GR-0101': '#8FD3C1', 'GR-0117': '#9DB7F0', 'GR-0142': '#F0A36B', 'GR-0158': '#B79AE8', 'GR-0163': '#E7C873' };
+
+  // Grail's own artwork for a pack, drawn here as a sample: four card outlines, the name the shop gave the pack, its ID and its price.
+  function coverSvg(p, asFile) {
+    var words = String(p.label).split(/\s+/), lines = [''], tint = TINT[p.id] || '#9DB7F0';
+    words.forEach(function (w) { var k = lines.length - 1; if (lines[k] && (lines[k] + ' ' + w).length > 13 && lines.length < 3) lines.push(w); else lines[k] = lines[k] ? lines[k] + ' ' + w : w; });
+    var longest = Math.max.apply(null, lines.map(function (l) { return l.length; })), size = longest > 16 ? 40 : longest > 12 ? 52 : 64, y0 = 668 - (lines.length - 1) * size * 1.12;
+    var fan = [[-21, -118, 0.3], [-7, -42, 0.5], [7, 42, 0.75], [21, 118, 1]].map(function (f) {
+      return '<rect x="-92" y="-130" width="184" height="260" rx="16" transform="translate(' + f[1] + ' ' + Math.abs(f[0]) * 1.3 + ') rotate(' + f[0] + ')" opacity="' + f[2] + '"></rect>';
+    }).join('');
+    // a file of its own has to name the SVG namespace, and inside the page it does not
+    return '<svg' + (asFile ? ' xmlns="http:' + '//www.w3.org/2000/svg"' : '') + ' viewBox="0 0 600 800" role="img" aria-label="Grail artwork for ' + esc(p.label) + '" font-family="Inter, Arial, sans-serif">' +
+      '<defs><linearGradient id="cover-' + p.id + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B2745"></stop><stop offset="1" stop-color="#0A1122"></stop></linearGradient></defs>' +
+      '<rect width="600" height="800" fill="url(#cover-' + p.id + ')"></rect>' +
+      '<g fill="none" stroke="' + tint + '" stroke-width="3" transform="translate(300 300)">' + fan + '</g>' +
+      '<text x="48" y="80" fill="#B9BFCC" font-size="24" font-weight="600">Grail Collective</text>' +
+      lines.map(function (l, i) { return '<text x="48" y="' + Math.round(y0 + i * size * 1.12) + '" fill="#F4F1E8" font-size="' + size + '" font-weight="700" letter-spacing="-1.5">' + esc(l) + '</text>'; }).join('') +
+      '<text x="48" y="748" fill="#B9BFCC" font-size="26">' + p.id + '</text>' +
+      '<text x="552" y="748" text-anchor="end" fill="' + tint + '" font-size="34" font-weight="700">' + money(p.price) + '</text></svg>';
+  }
+  // The artwork a shop sees for a pack: its own if it saved one, otherwise Grail's. A choice made in the sheet waits there until it is saved.
+  var packDraft = null;
+  function drawArt(p) {
+    var art = packDraft !== null ? packDraft : (p.art || ''), unsaved = packDraft !== null && packDraft !== (p.art || '');
+    $('pack-art').innerHTML = art ? '<img src="' + esc(art) + '" alt="Your artwork for ' + esc(p.label) + '">' : coverSvg(p);
+    $('pack-art-tag').textContent = unsaved ? 'Not saved yet' : art ? 'Your artwork' : 'Grail artwork';
+    $('pack-art-tag').classList.toggle('tag-warn', unsaved);
+    $('pack-art-clear').hidden = !art;
+  }
+  // What a shop can put on its own product page. Sample wording, without the cards of the pack.
+  function packCopy(p) {
+    var mix = MIX[p.id].map(function (x, i) { return MIX_NAMES[i] + ' ' + x + '%'; }).join(', ');
+    return p.label + '\n' + SERIES[p.id] + '. One graded card in every pack.\nFixed price: ' + money(p.price) + '.\nCard mix by rarity group: ' + mix + '.\n' +
+      'Your card is kept for you for 48 hours. Ask for shipping in that time and it is sent to your door.\n';
+  }
+  function packMix(p) { return 'Group,Share\n' + MIX[p.id].map(function (x, i) { return MIX_NAMES[i] + ',' + x + '%'; }).join('\n') + '\n'; }
+  // Hands the viewer a file. On a page of its own the browser saves it. Inside a claude.ai artifact a page may not save by itself:
+  // the viewer's own save prompt does it, when the artifact was given that ability. Inside any other page the texts are offered to copy.
+  var saver = null, saverAsked = false;
+  function askSaver() {
+    if (saverAsked || !framed || !window.claude || typeof window.claude.use !== 'function') return;
+    saverAsked = true;
+    try { Promise.resolve(window.claude.use('downloads')).then(function (d) { saver = d || null; if (saver && $('pack').open) drawKit(); }, function () {}); } catch (err) { saver = null; }
+  }
+  function saveFile(name, type, data, isUrl) {
+    try {
+      var a = document.createElement('a'), url = isUrl ? data : URL.createObjectURL(new Blob([data], { type: type }));
+      a.href = url; a.download = name;
+      $('pack').appendChild(a); a.click(); a.remove();
+      if (!isUrl) setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+    } catch (err) { toast('The file could not be saved here.'); }
+  }
+  // The bytes of an image that was read as a data address.
+  function bytesOf(url) { var b = atob(url.slice(url.indexOf(',') + 1)), n = b.length, out = new Uint8Array(n); while (n--) out[n] = b.charCodeAt(n); return out; }
+  function drawKit() {
+    var files = !framed || !!saver;
+    $('pack-kit').innerHTML = files
+      ? ['art', 'copy', 'mix'].map(function (k, i) { return '<button class="btn" type="button" data-kit="' + k + '"><svg class="ic" aria-hidden="true"><use href="#i-down"></use></svg>Download ' + ['artwork', 'product copy', 'card mix'][i] + '</button>'; }).join('')
+      : '<button class="btn" type="button" data-kit="copy">Copy product copy</button><button class="btn" type="button" data-kit="mix">Copy card mix</button>';
+    $('pack-kit-note').textContent = (files ? 'The artwork downloads as an image, the product copy as text and the card mix as a CSV file.'
+      : 'In this preview the product copy and the card mix are copied as text. On the published page they download as files, together with the artwork.') + ' Sample material: the product copy names the series and the card mix, not the cards.';
+  }
+  function kitGo(kind, btn) {
+    var p = packOf(S.packOpen);
+    if (!p) return;
+    var what = kind === 'art' ? 'The artwork of ' : kind === 'copy' ? 'The product copy of ' : 'The card mix of ', own = kind === 'art' && p.art, png = own && /^data:image\/png/.test(p.art);
+    var name = p.id + (kind === 'art' ? '-artwork.' + (own ? (png ? 'png' : 'jpg') : 'svg') : kind === 'copy' ? '-product-copy.txt' : '-card-mix.csv');
+    var text = kind === 'art' ? (own ? '' : coverSvg(p, true)) : kind === 'copy' ? packCopy(p) : packMix(p);
+    if (saver) {
+      saver.save({ filename: name, data: own ? bytesOf(p.art) : text }).then(function () { toast(what + p.label + ' was saved.'); }, function (err) {
+        var code = err && err.code;
+        if (code !== 'declined') toast(code === 'rate_limited' ? 'Another save is still open. Try again in a moment.' : 'The file could not be saved here.');
+      });
+      return;
+    }
+    if (framed) { if (kind !== 'art') copyText(text, btn); return; }
+    if (own) saveFile(name, '', p.art, true);
+    else saveFile(name, kind === 'art' ? 'image/svg+xml' : kind === 'copy' ? 'text/plain' : 'text/csv', text);
+    toast(what + p.label + ' is downloading.');
+  }
+  function openPack(id, focus) {
     var p = packOf(id);
     if (!p) return;
-    var av = S.balance - S.held, top = p.cards[0].v, req = need(top), gap = Math.max(0, req - av), ok = approved();
+    var av = S.balance - S.held, top = p.cards[0].v, req = need(top), ok = approved();
+    if (S.packOpen !== id || !$('pack').open) packDraft = null;      // a choice that was not saved does not follow to another pack
+    askSaver();
     S.packOpen = id;
     $('pack-title').textContent = p.label;
-    $('pack-sub').textContent = p.id + ', ' + money(p.price) + ' a pack, one card in each. ' + (p.live ? 'Live: your customers can buy it.' : 'Paused: hidden from your customers.');
-    var facts = [['Availability', p.live ? 'Live' : 'Paused: ' + pausedWhy(p, av, ok)], ['Top chase card', money(top)], ['Needs available', money(req)],
-      p.live ? ['Purchases, 30 days', S.mode === 'live' ? count(p.bought) : '0'] : ['Still needed', gap ? money(gap) : 'Approval only']];
-    $('pack-facts').innerHTML = facts.map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
+    $('pack-sub').textContent = (p.live ? 'Live: your customers can buy it.' : 'Paused: hidden from your customers.') + (p.proposed ? ' A proposed example.' : '');
+    $('pack-facts').innerHTML = [['Grail ID', p.id], ['Fixed price', money(p.price)], ['Series', esc(SERIES[p.id])], ['Cards in a pack', '1']].map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
+    var rows = [['Availability', p.live ? 'Live' : 'Paused: ' + pausedWhy(p, av, ok)], ['Highest card value', money(top)], ['Required available', money(req)], ['Your Available Balance', money(av)]];
+    if (p.live) rows.push(['Purchases, 30 days', S.mode === 'live' ? count(p.bought) : '0']);
+    $('pack-fund').innerHTML = rows.map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>'; }).join('');
     $('pack-route').hidden = p.live;
     $('pack-route').innerHTML = p.live ? '' : routeHtml(p, av, ok);
+    $('pack-cards-h').textContent = top >= 500 ? 'Top chase cards' : 'Top cards';
     $('pack-cards').innerHTML = p.cards.map(function (c) {
       return '<div class="vrow">' + slab(c, 'slab-sm') + '<div class="vname"><b>' + esc(c.n) + '</b><span>' + esc(c.g) + '</span></div><div class="vend"><span class="vval">' + money(c.v) + '</span></div></div>';
     }).join('');
     $('pack-mix').innerHTML = MIX[p.id].map(function (x, i) { return '<div class="mixrow"><span>' + MIX_NAMES[i] + '</span>' + meter(x / 100) + '</div>'; }).join('');
-    $('pack-note').textContent = 'Grail builds and stocks this pack, and its contents are the same in every shop. This version is built from the Grail inventory of 11 November 2026. You can change its name, and nothing else.';
+    $('pack-name-in').value = p.label;
+    $('pack-name-in').classList.remove('is-bad');
+    $('pack-saved').textContent = '';
+    $('pack-art-msg').textContent = 'JPG or PNG. 1200 by 1600 px works best. In this demo the image stays on your device.';
+    drawArt(p);
+    drawKit();
+    $('pack-note').textContent = p.proposed ? 'A proposed example of a pack that fits a first balance of $1,000. Its Grail ID, its price and its cards are sample values until Grail confirms them.'
+      : 'Grail builds and stocks this pack, and its contents are the same in every shop. This version is built from the Grail inventory of 11 November 2026.';
     $('pack-copy').setAttribute('data-copy', p.id);
     applyAccess();
     if (!$('pack').open) openSheet($('pack'));
+    if (focus === 'funding') $('pack-funding').scrollIntoView({ block: 'start' });
   }
 
   // ---------- a shipment with a problem: what happened, who acts next, and what the shop can do ----------
@@ -3820,7 +4245,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   // Today's purchases that are still in the Vault or in Staging keep their real references. The rest of a day is filled with sample records.
   function recReal() {
     return PURCHASES.filter(function (c) { return c.stage !== 'released' && c.ago < 16 * 60 && c !== VAULT[VAULT.length - 1]; }).map(function (c) {
-      return { tx: c.tx, tp: c.tp, what: 'Purchase, ' + (c.stage === 'vault' ? 'in the Vault' : 'in Staging'), v: c.v, fee: txFee(c.v), c: c };
+      return { tx: c.tx, tp: c.tp, what: 'Purchase, ' + (c.stage === 'vault' ? 'in the Vault' : 'in Reserve Card'), v: c.v, fee: txFee(c.v), c: c };
     });
   }
   function recRow(d, i) {
@@ -4143,7 +4568,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     var x = r.rec, kind, title, sub, rel, open, s;
     if (r.type === 'purchase') {
       kind = 'Purchase'; title = x.tp;
-      sub = cardName(x) + '. ' + (x.stage === 'vault' ? 'In the Vault, ' + money(x.v) + ' held, ' + plural(x.h, 'hour', 'hours') + ' left' : 'In Staging, ' + money(x.v) + ', not held') + '. Transaction ' + x.tx + '.';
+      sub = cardName(x) + '. ' + (x.stage === 'vault' ? 'In the Vault, ' + money(x.v) + ' held, ' + plural(x.h, 'hour', 'hours') + ' left' : 'In Reserve Card, ' + money(x.v) + ', not held') + '. Transaction ' + x.tx + '.';
       rel = [nameBtn(PEOPLE.by[x.who]), can('packs') ? relBtn('data-pack-details', x.pack, packOf(x.pack).label) : '<span>' + esc(packOf(x.pack).label) + '</span>'];
       open = ['data-purchase', x.tp, 'Open purchase'];
     } else if (r.type === 'customer') {
@@ -4235,7 +4660,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     // the search of the bar steps aside on the search page, and says "/" only where "/" leads to it
     $('gsearch').hidden = !mayFind() || current === 'search';
     $('gsearch-go').hidden = !mayFind();
-    $('gsearch').classList.toggle('no-key', current === 'shipments' || current === 'cases');
+    $('gsearch').classList.toggle('no-key', [$('ship-search'), $('case-search')].some(function (b) { return b.getClientRects().length; }));
   }
 
   // ---------- pages ----------
@@ -4253,6 +4678,9 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   function route() {
     var name = (location.hash || '').replace('#', '');
     if (OLD_NAMES[name]) name = OLD_NAMES[name];
+    // the shipping coverage is the second view of the Shipments page, with an address of its own
+    var cover = name === 'coverage';
+    if (cover) name = 'shipments';
     if (name !== 'search' && VIEWS.indexOf(name) < 0) name = 'overview';
     // a page the signed-in role may not open falls back to the first one it may
     if (name === 'search' ? !mayFind() : !can(PAGE_NEEDS[name])) name = opens(VIEWS)[0] || 'none';
@@ -4266,6 +4694,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
         if (a.classList.contains('tab') && a.scrollIntoView) a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       } else a.removeAttribute('aria-current');
     });
+    $('view-shipments').setAttribute('data-ship', cover ? 'coverage' : 'tracking');
+    pressed('data-ship-view', cover ? 'coverage' : 'tracking');
     subnav();
     if (name === 'search' && came && !(byTouch() && S.q)) $('search-q').focus();     // arriving at the search you can type at once, unless a phone already shows results
     hideTip();
@@ -4284,7 +4714,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     el.scrollIntoView({ block: pack ? 'center' : 'start' });
     if (pack) { el.classList.add('is-target'); setTimeout(function () { el.classList.remove('is-target'); }, 1800); }
   }
-  function go(view, target) { jumpTo = target || null; if (current === view) landed(); else location.hash = view; }
+  function go(view, target) { jumpTo = target || null; if (current === view && !(view === 'shipments' && location.hash === '#coverage')) landed(); else location.hash = view; }
   window.addEventListener('hashchange', function () { route(); landed(); });
 
   // ---------- toast ----------
@@ -4404,16 +4834,6 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     };
     flight.onfinish = land; flight.oncancel = land;
   }
-  var managing = null;
-  $('manage-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var v = $('manage-name').value.trim();
-    if (!v || !managing) return;
-    managing.label = v;
-    closeSheet($('manage'));
-    render();
-    toast('Renamed to ' + v + '.');
-  });
   $('method-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var name = $('method-name').value.trim(), kind = (document.querySelector('input[name="kind"]:checked') || {}).value || 'Card';
@@ -4440,10 +4860,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     if ((el = t.closest('[data-close]'))) { closeSheet($(el.getAttribute('data-close'))); return; }
     if ((el = t.closest('#open-topup, [data-open-topup]'))) { openTopup(); return; }
     if ((el = t.closest('[data-first-topup]'))) { openTopup(1000); return; }
-    if ((el = t.closest('[data-manage]'))) {
-      managing = packOf(el.getAttribute('data-manage'));
-      $('manage-name').value = managing.label; $('manage-id').textContent = managing.id; openSheet($('manage')); return;
-    }
+    if ((el = t.closest('[data-ship-view]'))) { location.hash = el.getAttribute('data-ship-view') === 'coverage' ? 'coverage' : 'shipments'; return; }
+    if ((el = t.closest('[data-terms]'))) { openSheet($('terms')); return; }
     if ((el = t.closest('[data-copy]'))) { copyText(el.getAttribute('data-copy'), el); return; }
     if ((el = t.closest('[data-track]'))) { onlySheet('track'); openTrack(el.getAttribute('data-track')); return; }
     if ((el = t.closest('[data-person]'))) { onlySheet('person'); openPerson(el.getAttribute('data-person')); return; }
@@ -4451,7 +4869,6 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     if ((el = t.closest('[data-filter]'))) { S.shipFilter = el.getAttribute('data-filter'); S.shipShown = START.shipShown; renderShipments(); return; }
     if ((el = t.closest('[data-clear-ship]'))) { S.shipQuery = ''; S.shipFilter = 'all'; $('ship-search').value = ''; renderShipments(); $('ship-search').focus(); return; }
     if ((el = t.closest('[data-ledger]'))) { S.ledgerFilter = el.getAttribute('data-ledger'); S.ledgerShown = START.ledgerShown; renderLedger(); return; }
-    if ((el = t.closest('[data-vault-view]'))) { S.vaultView = el.getAttribute('data-vault-view'); renderVault(); return; }
     if ((el = t.closest('[data-top-by]'))) { S.topBy = el.getAttribute('data-top-by'); renderTop(); return; }
     if ((el = t.closest('[data-act-mode]'))) { S.actMode = el.getAttribute('data-act-mode'); setActivityMode(); return; }
     if ((el = t.closest('[data-mode-set]'))) {
@@ -4526,6 +4943,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       return;
     }
     if ((el = t.closest('[data-topup-exact]'))) { all('dialog[open]').forEach(closeSheet); openTopup(Number(el.getAttribute('data-topup-exact'))); return; }
+    if ((el = t.closest('[data-pack-funding]'))) { onlySheet('pack'); openPack(el.getAttribute('data-pack-funding'), 'funding'); return; }
+    if ((el = t.closest('[data-kit]'))) { kitGo(el.getAttribute('data-kit'), el); return; }
     if ((el = t.closest('[data-pack-details]'))) { onlySheet('pack'); openPack(el.getAttribute('data-pack-details')); return; }
     if ((el = t.closest('[data-purchase]'))) { onlySheet('purchase'); openPurchase(el.getAttribute('data-purchase')); return; }
     if ((el = t.closest('[data-event]'))) { openEvent(el.getAttribute('data-event')); return; }
@@ -4608,12 +5027,6 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     all('dialog[open]').forEach(closeSheet);
     S.ledgerFilter = 'fee'; S.ledgerShown = START.ledgerShown;
     renderLedger(); go('billing', 'ledger-title');
-  });
-  $('pack-rename').addEventListener('click', function () {
-    var p = packOf(S.packOpen);
-    closeSheet($('pack'));
-    if (!p) return;
-    managing = p; $('manage-name').value = p.label; $('manage-id').textContent = p.id; openSheet($('manage'));
   });
   $('terms-open').addEventListener('click', function () { openSheet($('terms')); });
   // Auto top-up: the rules are saved together, after one more confirmation. Amounts take "25k" or "$25,000" alike.
@@ -4749,6 +5162,50 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     toast('Test alert sent to ' + to + '. This demo sends nothing.');
   });
   $('hist-more').addEventListener('click', function () { S.histAll = !S.histAll; renderHistory(); });
+  // the pack sheet: the name and the artwork are saved together, and an image that was only chosen waits for the save
+  $('pack-art-pick').addEventListener('click', function () { $('pack-art-file').click(); });
+  $('pack-art-file').addEventListener('change', function () {
+    var f = this.files && this.files[0], p = packOf(S.packOpen);
+    this.value = '';
+    if (!f || !p) return;
+    if (!/^image\/(png|jpeg)$/.test(f.type)) { $('pack-art-msg').textContent = 'Choose a JPG or a PNG image.'; return; }
+    if (f.size > 4 * 1024 * 1024) { $('pack-art-msg').textContent = 'Choose an image under 4 MB.'; return; }
+    var rd = new FileReader();
+    rd.onload = function () {
+      if (packOf(S.packOpen) !== p) return;      // another pack was opened meanwhile
+      packDraft = String(rd.result);
+      $('pack-art-msg').textContent = 'Save the presentation to keep this image.';
+      $('pack-saved').textContent = '';
+      drawArt(p);
+    };
+    rd.onerror = function () { $('pack-art-msg').textContent = 'The image could not be read. Try another file.'; };
+    rd.readAsDataURL(f);
+  });
+  $('pack-art-clear').addEventListener('click', function () {
+    var p = packOf(S.packOpen);
+    if (!p) return;
+    packDraft = '';
+    $('pack-art-msg').textContent = p.art ? 'Save the presentation to go back to the Grail artwork.' : 'JPG or PNG. 1200 by 1600 px works best. In this demo the image stays on your device.';
+    $('pack-saved').textContent = '';
+    drawArt(p);
+    $('pack-art-pick').focus();
+  });
+  $('pack-name-in').addEventListener('input', function () { this.classList.remove('is-bad'); $('pack-saved').textContent = ''; });
+  $('pack-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var p = packOf(S.packOpen), box = $('pack-name-in'), v = box.value.trim();
+    if (!p) return;
+    if (!v) { box.classList.add('is-bad'); shake(box); box.focus(); return; }
+    p.label = v;
+    if (packDraft !== null) { if (packDraft) p.art = packDraft; else delete p.art; packDraft = null; }
+    render();
+    openPack(p.id);
+    $('pack-saved').textContent = 'Saved';
+    toast('Saved. Your shop shows this pack as ' + v + '.');
+  });
+  $('fee-more').addEventListener('click', function () { S.feeShown += 12; renderFees(); });
+  // inside a claude.ai artifact the viewer's own save prompt hands over a file, once the artifact answers that it may
+  askSaver();
   // search: the box in the bar and the box on the page ask the same question
   $('gsearch').addEventListener('submit', function (e) {
     e.preventDefault();
