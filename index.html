@@ -28,7 +28,7 @@ img { max-width: 100%; }
 @font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/inter-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 </style>
 <style>
-/* Layout: one shell with a top bar that switches seven pages. Stone ground, white panels, one navy balance band, one green accent, one typeface. */
+/* Layout: one shell with a top bar of eight pages, some with pages under them. Stone ground, white panels, one navy balance band, one green accent, one typeface. */
 :root {
   --sans: Inter, 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
 
@@ -210,10 +210,7 @@ svg.ic { width: 1.125rem; height: 1.125rem; flex: none; fill: none; stroke: curr
 .kpi-lbl { font-size: 0.9375rem; color: var(--t2); }
 .kpis { position: relative; z-index: 6; display: flex; flex-direction: column; gap: 0.875rem; margin-top: 1.25rem; }
 
-/* ---- level and vault on the overview ---- */
-.two { position: relative; z-index: 5; display: flex; flex-wrap: wrap; align-items: stretch; gap: 1.25rem; margin-top: 1.25rem; }
-.two > section { flex: 1 1 28.75rem; min-width: 0; display: flex; flex-direction: column; }
-.level { gap: 1.125rem; }
+/* ---- the level ladder, the fee figures and the rows of a card list ---- */
 .level-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 1rem; }
 .level-name { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.025em; line-height: 1.1; }
 .ladder { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
@@ -236,7 +233,6 @@ svg.ic { width: 1.125rem; height: 1.125rem; flex: none; fill: none; stroke: curr
 .bar-top em { font-style: normal; color: var(--t3); }
 .bar-track { position: relative; height: 0.5rem; border-radius: 999px; background: var(--track); box-shadow: var(--track-shadow); }
 .bar-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; background: var(--accent); }
-.vault-mini { gap: 0.625rem; padding-bottom: 0.875rem; }
 .head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; }
 .vrow { border-top: 1px solid var(--hair); display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.875rem; padding: 0.5625rem 0; }
 .vname { flex: 1 1 6.5rem; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.625rem; }
@@ -578,13 +574,13 @@ dialog.sheet::backdrop { background: var(--scrim); }
    People open this many times a day, so it moves very little. Pages switch at once, filters answer at once, and anything started
    from the keyboard appears without animation. Motion is kept for a press (it answers within a tenth of a second), for the rare
    event that matters (a top-up), and for the first look of a visit. With "reduce motion" on, nothing moves at all. */
-:root { --t1: 120ms; --t2: 180ms; --t3: 320ms; --out: cubic-bezier(.2,.7,.2,1); --io: cubic-bezier(.6,0,.2,1); --spring: cubic-bezier(.3,1.45,.5,1); }
+:root { --m1: 120ms; --m2: 180ms; --m3: 320ms; --out: cubic-bezier(.2,.7,.2,1); --io: cubic-bezier(.6,0,.2,1); --spring: cubic-bezier(.3,1.45,.5,1); }
 ::selection { background: var(--accent); color: var(--on-accent); }
 button, a, label, input, summary { -webkit-tap-highlight-color: transparent; }
 button, a, label, summary { touch-action: manipulation; }
 
 /* a press: the control gives a little and springs back. The two filled buttons are keys with some height, so they squash wider and flatter. */
-.btn, .fchip, .seg-btn, .iconbtn, .opt span, .info, .field { transition: transform var(--t2) var(--spring), background-color var(--t1), border-color var(--t1), color var(--t1), box-shadow var(--t1); }
+.btn, .fchip, .seg-btn, .iconbtn, .opt span, .info, .field { transition: transform var(--m2) var(--spring), background-color var(--m1), border-color var(--m1), color var(--m1), box-shadow var(--m1); }
 .btn:active, .fchip:active, .seg-btn:active, .opt input:active + span { transform: scale(0.97); transition: transform 60ms var(--out); }
 .iconbtn:active, .info:active { transform: scale(0.9); transition: transform 60ms var(--out); }
 .btn-primary, .btn-hero { box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -2px 0 rgba(0,0,0,0.14), 0 0.5rem 0.875rem -0.625rem rgba(10,17,34,0.7); }
@@ -593,14 +589,14 @@ button, a, label, summary { touch-action: manipulation; }
 .opt input { z-index: 1; }   /* the real control lies over the drawn one, unseen, and stays on top while the drawn one gives */
 .tab:active { color: var(--ink); }
 .namebtn:active, .linkbtn:active { opacity: 0.6; }
-.btn-hero svg.ic { transition: transform var(--t2) var(--spring); }
+.btn-hero svg.ic { transition: transform var(--m2) var(--spring); }
 .btn-hero:hover svg.ic { transform: rotate(90deg); }   /* the plus winds up before the sheet opens */
 .btn.did { border-color: var(--live); color: var(--live); }   /* "Copied" */
 .field:focus-visible { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 .field.is-bad { border-color: var(--warn); }
 
 /* the switch: the knob stretches toward where it is going while it is held, then lands a touch past the mark */
-.switch-knob { border-radius: 999px; transition: transform var(--t2) var(--spring), width var(--t1) var(--out), left var(--t1) var(--out); }
+.switch-knob { border-radius: 999px; transition: transform var(--m2) var(--spring), width var(--m1) var(--out), left var(--m1) var(--out); }
 .switch:active .switch-knob { width: 1.5rem; }
 .switch[aria-checked="true"]:active .switch-knob { left: -0.1875rem; }
 
@@ -623,13 +619,13 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
 @keyframes sheet-in { from { opacity: 0; transform: translateY(0.625rem) scale(0.985); } }
 @keyframes fade-in { from { opacity: 0; } }
 @media (max-width: 620px) { .sheet-actions .btn { flex: 1 1 7rem; min-height: 3rem; } }
-.toast { animation: toast-in var(--t3) var(--out); }
+.toast { animation: toast-in var(--m3) var(--out); }
 @keyframes toast-in { 0% { opacity: 0; transform: translateX(-50%) translateY(0.75rem) scale(0.97); } 65% { opacity: 1; transform: translateX(-50%) translateY(-2px); animation-timing-function: var(--io); } }
 :root[data-via="keys"] dialog.sheet[open], :root[data-via="keys"] dialog.sheet[open]::backdrop, :root[data-via="keys"] .toast { animation: none; }
 
 /* cards have weight: under the pointer a single lifts off the page, and the four cards of a pack fan apart, one after another */
 @media (hover: hover) {
-  .single .slab, .stack .slab { transition: transform var(--t3) var(--spring), box-shadow var(--t2); }
+  .single .slab, .stack .slab { transition: transform var(--m3) var(--spring), box-shadow var(--m2); }
   .single:hover .slab { transform: translateY(-0.375rem) rotate(-1.5deg); box-shadow: 0 1.5rem 1.75rem -1.125rem rgba(15,26,46,0.7); }
   .pack:not(.is-paused):hover .stack .s1 { transform: translate(-0.3125rem, -0.25rem) rotate(-3deg); }
   .pack:not(.is-paused):hover .stack .s2 { transform: translate(0.0625rem, -0.125rem) rotate(-1deg); transition-delay: 25ms; }
@@ -637,8 +633,8 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   .pack:not(.is-paused):hover .stack .s4 { transform: translate(0.875rem, 0.125rem) rotate(4deg); transition-delay: 75ms; }
 }
 /* when the balance changes, the marker on the pack rail travels to its new place instead of jumping */
-.rail.moving .rail-fill { transition: width var(--t3) var(--io); }
-.rail.moving .rail-stem, .rail.moving .rail-tag { transition: left var(--t3) var(--io); }
+.rail.moving .rail-fill { transition: width var(--m3) var(--io); }
+.rail.moving .rail-stem, .rail.moving .rail-tag { transition: left var(--m3) var(--io); }
 /* a top-up: the amount travels from the button to the balance, and the balance takes the hit */
 .fly { position: fixed; z-index: 80; left: 0; top: 0; padding: 0.375rem 0.75rem; border-radius: 0.625rem; background: var(--hero-accent); color: var(--hero-accent-ink); font-size: 1rem; font-weight: 700; white-space: nowrap; pointer-events: none; box-shadow: var(--tip-shadow); }
 .hero-num { transform-origin: 0 60%; }
@@ -657,8 +653,83 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
 @keyframes rise { from { opacity: 0; transform: translateY(0.625rem); } }
 /* light to dark and back: colours cross over instead of snapping, and the icon turns in */
 :root.theming, :root.theming *, :root.theming *::before, :root.theming *::after { transition: background-color 180ms linear, color 180ms linear, border-color 180ms linear, fill 180ms linear, stroke 180ms linear !important; }
-#theme-toggle.turn svg.ic { animation: turn var(--t3) var(--out); }
+#theme-toggle.turn svg.ic { animation: turn var(--m3) var(--out); }
 @keyframes turn { from { opacity: 0; transform: rotate(-90deg) scale(0.6); } }
+
+/* ================= added with the grouped pages =================
+   Eight pages in the bar, some with pages of their own under them. The overview leads with what needs doing, a paused pack shows what it
+   takes to go live, a purchase shows its whole trace, a shipping problem shows who acts next, and the integration shows whether events arrive. */
+
+/* ---- the pages under a page ---- */
+.subtabs { position: relative; z-index: 21; display: flex; flex-wrap: wrap; gap: 0.25rem; padding: 0.75rem 0.125rem 0; }
+.subtab { display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0 0.875rem; border-radius: 0.625rem; border: 1px solid transparent; font-size: 0.9375rem; font-weight: 500; color: var(--t2); text-decoration: none; white-space: nowrap; }
+.subtab:hover { color: var(--ink); }
+.subtab[aria-current="page"] { color: var(--ink); font-weight: 600; background: var(--panel); border-color: var(--btn-border); }
+.subtabs:not([hidden]) + main .phead { padding-top: 1rem; }
+.h-panel, .pack { scroll-margin-top: 1.25rem; }
+.warn { color: var(--warn); }
+.toast { pointer-events: none; }   /* a message never takes a click meant for what is under it */
+.item-main b .dot { margin-right: 0.625rem; }
+
+/* ---- overview: next actions beside the connection and the fees ---- */
+.ov-grid { position: relative; z-index: 5; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.25rem; margin-top: 1.25rem; }
+.ov-main { flex: 1.5 1 30rem; min-width: 0; }
+.ov-side { flex: 1 1 22rem; min-width: 0; display: flex; flex-direction: column; gap: 1.25rem; }
+
+/* ---- packs: what a paused pack still needs ---- */
+.pstats { display: flex; flex-wrap: wrap; gap: 0.375rem 2rem; margin: 0; }
+.pstats div { display: flex; flex-direction: column; gap: 0.125rem; }
+.pstats dt { font-size: 0.875rem; color: var(--t3); }
+.pstats dd { margin: 0; font-size: 1.1875rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; transform-origin: 0 60%; }
+.pstats dd.bump { animation: bump 420ms var(--out); }
+.route { display: flex; flex-direction: column; gap: 0.75rem; padding-top: 0.875rem; border-top: 1px solid var(--hair); }
+.route .bar-top { font-size: 0.875rem; }
+.route small { font-size: 0.8125rem; line-height: 1.4; color: var(--t2); }
+.pack-acts { margin-top: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+.pack .pack-acts .btn, .pack .route .btn { margin-top: 0; }
+.pack-acts .btn { padding: 0 0.5rem; }
+.pack.is-target { outline: 2px solid var(--accent); outline-offset: 3px; }
+.pack-id, .st-paused { white-space: nowrap; }
+.mixrow { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); align-items: center; gap: 0.75rem; padding: 0.3125rem 0; font-size: 0.9375rem; }
+
+/* ---- a purchase: its references, its events, its hold and its fees ---- */
+.slab-md { --w: 3.25rem; }
+.tl-end { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.25rem 0.625rem; margin-left: auto; }
+.tl.ev li { flex-wrap: wrap; padding-top: 0.3125rem; padding-bottom: 0.3125rem; }
+.tl li.wait { color: var(--ink); font-weight: 600; }
+.tl li.wait::before { border-color: var(--warn); box-shadow: 0 0 0 0.25rem var(--accent-soft); }
+.tl li.wait time { font-weight: 400; }
+.kv { display: flex; flex-direction: column; margin: 0; }
+.kv div { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.125rem 1.25rem; padding: 0.5625rem 0; border-top: 1px solid var(--hair); font-size: 0.9375rem; line-height: 1.4; }
+.kv div:first-child { border-top: none; padding-top: 0; }
+.kv div:last-child { padding-bottom: 0; }
+.kv dt { color: var(--t2); }
+.kv dd { margin: 0 0 0 auto; max-width: 30rem; font-weight: 600; text-align: right; overflow-wrap: anywhere; }
+.kv dd small { display: block; font-size: 0.8125rem; font-weight: 400; color: var(--t3); }
+.payload { margin: 0; padding: 0.875rem 1rem; max-height: 17rem; overflow: auto; border-radius: 0.625rem; background: var(--soft); border: 1px solid var(--border); color: var(--ink); font: 0.8125rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; }
+.facts dd .muted { font-weight: 400; }
+/* the title of a sheet and its Close button stay on one line, however long the line under the title is */
+.sheet-body > .head { flex-wrap: nowrap; }
+.sheet-body > .head > :first-child { min-width: 0; }
+
+/* ---- a shipment with a problem: what happened, who acts next, what you can do ---- */
+.excs { display: flex; flex-direction: column; gap: 0.875rem; }
+.exc { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.25fr); gap: 1rem 1.75rem; padding: 1.125rem clamp(1.125rem, 2.2vw, 1.75rem); }
+.exc-what { display: flex; flex-direction: column; gap: 0.625rem; min-width: 0; }
+.exc-what > small { font-size: 0.875rem; color: var(--t3); }
+.exc-id { gap: 0.25rem 0.75rem; font-size: 1.0625rem; }
+.exc-id b { font-weight: 600; }
+.exc-col { display: flex; flex-direction: column; gap: 0.1875rem; min-width: 0; }
+.exc-lbl { font-size: 0.8125rem; color: var(--t3); padding-bottom: 0.1875rem; }
+.exc-col b { font-size: 0.9375rem; font-weight: 600; line-height: 1.35; }
+.exc-col small { font-size: 0.875rem; line-height: 1.4; color: var(--t2); }
+.exc .item-acts { padding-top: 0.125rem; }
+@media (max-width: 620px) { .exc { grid-template-columns: repeat(2, minmax(0, 1fr)); } .exc-what, .exc-acts { grid-column: 1 / -1; } }
+
+/* ---- the level, now on the billing page ---- */
+.level-now { display: flex; flex-direction: column; gap: 1.125rem; padding-bottom: 1.5rem; }
+
+@media (pointer: coarse) { .subtab { min-height: 44px; } }
 
 /* on a touch screen every control takes a full fingertip, whatever size it is drawn */
 @media (pointer: coarse) {
@@ -700,24 +771,23 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
         <svg class="ic theme-moon" aria-hidden="true"><use href="#i-moon"></use></svg>
         <svg class="ic theme-sun" aria-hidden="true"><use href="#i-sun"></use></svg>
       </button>
-      <a class="iconbtn" href="#account" data-nav="account" aria-label="Settings"><svg class="ic" aria-hidden="true"><use href="#i-gear"></use></svg></a>
+      <a class="iconbtn" href="#account" data-group="settings" aria-label="Settings"><svg class="ic" aria-hidden="true"><use href="#i-gear"></use></svg></a>
     </div>
   </div>
   <nav class="tabs" aria-label="Main">
-    <a class="tab" href="#overview" data-nav="overview" aria-current="page">Overview</a>
-    <a class="tab" href="#packs" data-nav="packs">Packs</a>
-    <a class="tab" href="#marketplace" data-nav="marketplace">Marketplace</a>
-    <a class="tab" href="#vault" data-nav="vault">Vault</a>
-    <a class="tab" href="#shipments" data-nav="shipments">Shipments</a>
-    <a class="tab" href="#customers" data-nav="customers">Customers</a>
-    <a class="tab" href="#activity" data-nav="activity">Activity</a>
+    <a class="tab" href="#overview" data-group="overview" aria-current="page">Overview</a>
+    <a class="tab" href="#packs" data-group="catalogue">Catalogue</a>
+    <a class="tab" href="#vault" data-group="fulfilment">Fulfilment</a>
+    <a class="tab" href="#customers" data-group="customers">Customers</a>
+    <a class="tab" href="#analytics" data-group="analytics">Analytics</a>
     <span class="tab-sep" aria-hidden="true"></span>
-    <a class="tab" href="#billing" data-nav="billing">Billing</a>
-    <a class="tab" href="#integration" data-nav="integration">Integration</a>
-    <a class="tab" href="#kyb" data-nav="kyb">KYB</a>
-    <a class="tab" href="#team" data-nav="team">Team</a>
+    <a class="tab" href="#billing" data-group="billing">Billing</a>
+    <a class="tab" href="#integration" data-group="integration">Integration</a>
+    <a class="tab" href="#account" data-group="settings">Settings</a>
   </nav>
 </header>
+
+<nav class="subtabs" id="subtabs" hidden></nav>
 
 <main>
 
@@ -754,10 +824,10 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
         <div class="stat"><span class="hero-lbl">Held</span><span class="stat-num" data-bind="held">$4,650</span></div>
         <div class="stat">
           <div class="row rel">
-            <span class="hero-lbl">Max Card Value</span>
-            <span class="tipw"><button class="info" type="button" aria-label="About Max Card Value" aria-describedby="tip-max"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-max" data-bind="maxtip">40% of your Available Balance, and 60% from $50,000. A pack is live while its top chase card is within this value.</span></span>
+            <span class="hero-lbl">Potential Staging holds</span>
+            <span class="tipw"><button class="info" type="button" aria-label="About potential Staging holds" aria-describedby="tip-stage"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-stage">Cards in their first 5 minutes. Nothing is held for them yet. A card that is not released by then moves to the Vault, and its value is held.</span></span>
           </div>
-          <span class="stat-num" data-bind="maxcard">$10,700</span>
+          <span class="stat-num" data-bind="staging">$1,535</span>
         </div>
       </div>
     </div>
@@ -771,68 +841,53 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     </div>
   </section>
 
-  <section class="panel blank" data-when="new" style="margin-top: 1.25rem"><b>No sales yet</b><span>Your sales, your level and your Vault show up here after the first Temporary Purchase.</span></section>
+  <section class="panel blank" data-when="new" style="margin-top: 1.25rem"><b>No sales yet</b><span>Your sales, your fees and what needs your attention show up here after the first Temporary Purchase.</span></section>
 
   <section class="panel pad kpis" data-when="live" aria-labelledby="month-title">
     <div class="row rel">
       <h2 class="lbl" id="month-title">Last 30 days</h2>
-      <span class="tipw"><button class="info" type="button" aria-label="About the last 30 days" aria-describedby="tip-month"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-month">Temporary Purchases made through your packs came to $1,240,000, up 18% on the 30 days before. $29,500 shipped, $4,650 is still in the Vault and $1,205,850 was cancelled on release. Your margin was $121,050 and Grail fees were $11,800.</span></span>
+      <span class="tipw"><button class="info" type="button" aria-label="About the last 30 days" aria-describedby="tip-month"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-month">The card value of the Temporary Purchases made through your packs came to $1,240,000, up 18% on the 30 days before. $1,205,850 was released, $29,500 was fulfilled and shipped, and $4,650 is still in the Vault. Your margin was $121,050. Grail fees were $11,800, which is 0.95% of the card value.</span></span>
     </div>
     <div class="kpi-grid">
-      <div class="kpi"><span class="kpi-num" title="$1,240,000">$1.24M</span><span class="kpi-lbl">Total sales</span></div>
-      <div class="kpi"><span class="kpi-num" title="$29,500">$29.5K</span><span class="kpi-lbl">Fulfilled</span></div>
-      <div class="kpi"><span class="kpi-num" title="$4,650">$4.65K</span><span class="kpi-lbl">In the Vault</span></div>
-      <div class="kpi"><span class="kpi-num" title="$1,205,850">$1.21M</span><span class="kpi-lbl">Temporary sales cancelled</span></div>
+      <div class="kpi"><span class="kpi-num" title="$1,240,000">$1.24M</span><span class="kpi-lbl">Temporary Purchases, card value</span></div>
+      <div class="kpi"><span class="kpi-num" title="$1,205,850">$1.21M</span><span class="kpi-lbl">Released, card value</span></div>
+      <div class="kpi"><span class="kpi-num" title="$29,500">$29.5K</span><span class="kpi-lbl">Fulfilled, card value</span></div>
+      <div class="kpi"><span class="kpi-num" id="k-fees" title="$11,800.00">$11.8K</span><span class="kpi-lbl">Grail fees</span></div>
     </div>
   </section>
 
-  <div class="two" data-when="live">
-    <section class="panel pad level" aria-labelledby="level-title">
-      <div class="row rel">
-        <span class="lbl">Your level</span>
-        <span class="tipw"><button class="info" type="button" aria-label="About your level and fees" aria-describedby="tip-level"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-level">You are on Silver, the second of five levels. You pay one fee per card: the transaction fee, or the Fulfilment fee if the card ships. No setup fee, no monthly minimum, no storage fees.</span></span>
-      </div>
-      <div class="level-head">
-        <h2 class="level-name" id="level-title">Silver</h2>
-        <span class="lbl">Level 2 of 5</span>
-      </div>
-      <ol class="ladder" aria-label="The five levels">
-        <li class="done"><span class="node" aria-hidden="true"></span>Starter</li>
-        <li class="now" aria-current="step"><span class="node" aria-hidden="true"></span>Silver<span class="here">You are here</span></li>
-        <li><span class="node" aria-hidden="true"></span>Gold</li>
-        <li><span class="node" aria-hidden="true"></span>Platinum</li>
-        <li><span class="node" aria-hidden="true"></span>Black</li>
-      </ol>
-      <div class="fees">
-        <div class="fee"><span class="fee-num">0.95%</span><span class="kpi-lbl">Basic</span></div>
-        <div class="fee"><span class="fee-num">0.68%</span><span class="kpi-lbl">Chase</span></div>
-        <div class="fee"><span class="fee-num">6%</span><span class="kpi-lbl">Fulfilment</span></div>
-      </div>
-      <div class="next row rel">
-        <span>Next: Gold</span>
-        <span class="tipw"><button class="info" type="button" aria-label="About reaching Gold" aria-describedby="tip-next"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-next">Reach either target and you move up. At your volume, Gold would save you about $2,300 a month.</span></span>
-      </div>
-      <div class="bar">
-        <div class="bar-top"><span>30-day volume</span><span><strong title="$1,240,000">$1.24M</strong> <em>of $5M</em></span></div>
-        <div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width: 24.8%"></div></div>
-      </div>
-      <div class="bar">
-        <div class="bar-top"><span>Average balance</span><span><strong title="$28,900">$28.9K</strong> <em>of $100K</em></span></div>
-        <div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width: 28.9%"></div></div>
-      </div>
-    </section>
-
-    <section class="panel pad vault-mini" aria-labelledby="vault-title">
-      <div class="head rel">
+  <div class="ov-grid">
+    <section class="panel pad ov-main" data-when="live" aria-labelledby="todo-title">
+      <div class="head" style="padding-bottom: 0.875rem">
         <div class="row wrap">
-          <h2 class="h-panel" id="vault-title">In the Vault</h2>
-          <span class="tipw"><button class="info" type="button" aria-label="About the Vault" aria-describedby="tip-vault"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-vault">A card stays up to 48 hours, and the customer can ask for shipping until then. After that it is released and the hold is lifted. 3 more cards are in Staging and are not held.</span></span>
-          <span class="meta">8 cards, $4,650 held</span>
+          <h2 class="h-panel" id="todo-title">Needs attention</h2>
+          <span class="meta" id="todo-count"></span>
         </div>
-        <a class="btn" href="#vault" data-can="ops">See all</a>
       </div>
-      <div id="vault-mini-rows"></div>
+      <div class="list" id="todo-list"></div>
     </section>
+    <div class="ov-side">
+      <section class="panel pad" aria-labelledby="conn-mini-title">
+        <div class="head">
+          <div class="row wrap">
+            <h2 class="h-panel" id="conn-mini-title">Shop platform</h2>
+            <span class="tag" id="conn-mini-env">Live</span>
+          </div>
+          <a class="btn btn-sm" href="#integration" data-can="keys">Open integration</a>
+        </div>
+        <p class="note" id="conn-mini-text" style="padding-top: 0.625rem"></p>
+      </section>
+      <section class="panel pad" aria-labelledby="lvl-mini-title">
+        <div class="head">
+          <div class="row wrap">
+            <h2 class="h-panel" id="lvl-mini-title">Silver fees</h2>
+            <span class="meta" id="lvl-mini-meta">Level 2 of 5</span>
+          </div>
+          <a class="btn btn-sm" href="#billing" data-jump="levels-title" data-can="billing">View level details</a>
+        </div>
+        <div class="fees" id="lvl-mini-fees" style="margin-top: 0.875rem"></div>
+      </section>
+    </div>
   </div>
 </div>
 
@@ -841,10 +896,24 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   <div class="phead">
     <div class="row wrap">
       <h1 class="h-page">Your packs</h1>
-      <span class="tipw"><button class="info" type="button" aria-label="About your packs" aria-describedby="tip-packs"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-packs">Built and stocked by Grail. You call a pack by its ID, and you can rename it. Each pack shows its top 4 chase cards.</span></span>
+      <span class="tipw"><button class="info" type="button" aria-label="About your packs" aria-describedby="tip-packs"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-packs">Built and stocked by Grail. You call a pack by its ID, and you can rename it. A pack is live while its top chase card is within your Max Card Value, and each paused pack shows what it still needs.</span></span>
       <span class="meta" data-bind="packcount">2 live, 2 paused</span>
     </div>
+    <dl class="pstats">
+      <div><dt>Available Balance</dt><dd class="num" data-bind="available">$26,750</dd></div>
+      <div><dt>Max Card Value</dt><dd class="num" data-bind="maxcard">$10,700</dd></div>
+    </dl>
   </div>
+
+  <section class="panel pad stack-v" data-when="new" aria-labelledby="fund-title" style="gap: 1rem; margin-top: 1rem">
+    <h2 class="h-panel" id="fund-title">Funding a new shop</h2>
+    <dl class="facts plain" id="fund-facts"></dl>
+    <p class="note" id="fund-note"></p>
+    <div class="row wrap">
+      <span id="fund-topup-wrap"><button class="btn btn-primary" type="button" id="fund-topup" data-can="topup"></button></span>
+      <a class="btn" href="#overview">See what is left</a>
+    </div>
+  </section>
 
   <section class="panel pad kpis over-rail" data-when="live" aria-labelledby="packs-month">
     <div class="row rel">
@@ -893,8 +962,9 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   <div class="phead">
     <div class="row wrap">
       <h1 class="h-page">Vault</h1>
-      <span class="tipw"><button class="info" type="button" aria-label="About the Vault" aria-describedby="tip-vault-page"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-vault-page">A card that is not released in its first 5 minutes moves to the Vault and its full value is held from your balance, so the held amount is your open liability. It stays up to 48 hours. The customer can ask for shipping until then. After that it is released and the hold is lifted.</span></span>
+      <span class="tipw"><button class="info" type="button" aria-label="About the Vault" aria-describedby="tip-vault-page"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-vault-page">A card that is not released in its first 5 minutes moves to the Vault and its full value is held from your balance, so the held amount is your open liability. It stays up to 48 hours. The customer can ask for shipping until then. After that it is released: the hold is lifted and the transaction fee stays. Open a card to see its references on both sides and every event sent to your shop platform.</span></span>
       <span class="meta" data-when="live">8 cards, $4,650 held</span>
+      <span class="meta" data-when="live">Staging: 3 cards, $1,535, not held</span>
     </div>
     <div class="segs" role="group" aria-label="Group the Vault" data-when="live">
       <button class="seg-btn" type="button" data-vault-view="cards" aria-pressed="true">All cards</button>
@@ -905,7 +975,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   <div class="pbody stack-v" data-when="live">
     <section class="panel pad" aria-label="Held in the Vault">
       <div class="tbl-wrap">
-        <table class="tbl" style="min-width: 46rem">
+        <table class="tbl" style="min-width: 50rem">
           <thead id="vault-head"></thead>
           <tbody id="vault-rows"></tbody>
         </table>
@@ -915,13 +985,13 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       <div class="head rel" style="padding-bottom: 0.875rem">
         <div class="row wrap">
           <h2 class="h-panel" id="staging-title">In Staging</h2>
-          <span class="tipw"><button class="info" type="button" aria-label="About Staging" aria-describedby="tip-staging"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-staging">The first 5 minutes after a Temporary Purchase. Nothing is held yet. A card that is not released by then moves to the Vault.</span></span>
+          <span class="tipw"><button class="info" type="button" aria-label="About Staging" aria-describedby="tip-staging"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-staging">The first 5 minutes after a Temporary Purchase. Nothing is held yet. A card that is not released by then moves to the Vault. The transaction fee is charged at the purchase, also when the card is released in these 5 minutes.</span></span>
           <span class="meta">3 cards, $1,535, not held</span>
         </div>
       </div>
       <div class="tbl-wrap">
-        <table class="tbl" style="min-width: 46rem">
-          <thead><tr><th style="width: 34%">Card</th><th>Customer</th><th>Pack</th><th class="r">Value</th><th>Time left in Staging</th></tr></thead>
+        <table class="tbl" style="min-width: 50rem">
+          <thead><tr><th style="width: 32%">Card</th><th>Customer</th><th>Pack</th><th class="r">Value</th><th>Time left in Staging</th><th></th></tr></thead>
           <tbody id="staging-rows"></tbody>
         </table>
       </div>
@@ -937,7 +1007,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   <div class="phead">
     <div class="row wrap">
       <h1 class="h-page">Shipments</h1>
-      <span class="tipw"><button class="info" type="button" aria-label="About shipments" aria-describedby="tip-shipments"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-shipments">Every card a customer asked to ship, with its tracking. A customer can ask for shipping until hour 48. The card price is paid from the held amount, and you pay the Fulfilment fee instead of the transaction fee. Cards ship from Hong Kong.</span></span>
+      <span class="tipw"><button class="info" type="button" aria-label="About shipments" aria-describedby="tip-shipments"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-shipments">Every card a customer asked to ship, with its tracking. A customer can ask for shipping until hour 48. The card price is paid from the held amount. A card that ships pays the Fulfilment fee instead of the transaction fee, never both: the transaction fee was charged at the purchase, so shipping charges only the difference. Cards ship from Hong Kong. A shipment with a problem shows who acts next.</span></span>
       <span class="meta" data-when="live" id="ship-meta">74 in the last 30 days</span>
     </div>
   </div>
@@ -950,7 +1020,8 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       </div>
       <div class="chips" role="group" aria-label="Show" id="ship-filters"></div>
     </div>
-    <section class="panel pad" aria-label="Shipments">
+    <div class="excs" id="ship-exc" role="group" aria-label="Shipments that need attention" hidden></div>
+    <section class="panel pad" aria-label="Shipments" id="ship-panel">
       <div class="tbl-wrap">
         <table class="tbl ship-tbl" id="ship-table">
           <thead><tr><th>Shipment</th><th>Customer</th><th>Card</th><th>Ships to</th><th>Tracking</th><th>Status</th><th></th></tr></thead>
@@ -959,6 +1030,15 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       </div>
       <div class="empty" id="ship-empty" hidden></div>
       <div class="more" id="ship-more-wrap"><button class="btn" type="button" id="ship-more">Show more</button></div>
+    </section>
+    <section class="panel pad" aria-labelledby="terms-title">
+      <div class="head">
+        <div class="row wrap">
+          <h2 class="h-panel" id="terms-title">Shipping terms</h2>
+          <span class="meta">Ships from Hong Kong</span>
+        </div>
+        <button class="btn" type="button" id="terms-open">View duties, insurance and claims</button>
+      </div>
     </section>
   </div>
   <div class="pbody" data-when="new">
@@ -1005,12 +1085,12 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   </div>
 </div>
 
-<!-- ================= Activity ================= -->
-<div class="page" id="view-activity" hidden>
+<!-- ================= Analytics ================= -->
+<div class="page" id="view-analytics" hidden>
   <div class="phead">
     <div class="row wrap">
-      <h1 class="h-page">Activity</h1>
-      <span class="tipw"><button class="info" type="button" aria-label="About activity" aria-describedby="tip-activity"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-activity">When your customers buy. A purchase is one pack bought by a customer. Hours are in your shop’s time zone.</span></span>
+      <h1 class="h-page">Analytics</h1>
+      <span class="tipw"><button class="info" type="button" aria-label="About analytics" aria-describedby="tip-activity"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-activity">When your customers buy. A purchase is one pack bought by a customer. Hours are in your shop’s time zone.</span></span>
       <span class="meta" data-when="live" id="act-meta">Last 30 days</span>
     </div>
     <div class="segs" role="group" aria-label="Show as" data-when="live">
@@ -1058,7 +1138,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   <div class="phead">
     <div class="row wrap">
       <h1 class="h-page">Billing</h1>
-      <span class="tipw"><button class="info" type="button" aria-label="About billing" aria-describedby="tip-billing"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-billing">You pay one fee per card: the transaction fee, or the Fulfilment fee if the card ships. Fees come off your balance as they are charged, so there is never a bill to pay later. No setup fee, no monthly minimum, no storage fees.</span></span>
+      <span class="tipw"><button class="info" type="button" aria-label="About billing" aria-describedby="tip-billing"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-billing">The transaction fee is charged on every Temporary Purchase, at the moment it is made. A card that ships pays the Fulfilment fee instead, never both, so shipping charges only the difference. Fees come off your balance as they are charged, so there is never a bill to pay later. No setup fee, no monthly minimum, no storage fees.</span></span>
     </div>
     <button class="btn" type="button" data-open-topup data-can="topup">Top up</button>
   </div>
@@ -1066,9 +1146,9 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     <section class="panel pad" data-when="live" aria-label="Fees">
       <div class="kpi-grid three">
         <div class="kpi">
-          <span class="kpi-num" id="k-accruing">$213.80</span>
-          <span class="kpi-lbl row rel">Accruing today
-            <span class="tipw"><button class="info" type="button" aria-label="About fees accruing today" aria-describedby="tip-accruing"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-accruing"></span></span>
+          <span class="kpi-num" id="k-today">$213.80</span>
+          <span class="kpi-lbl row rel">Transaction fees today
+            <span class="tipw"><button class="info" type="button" aria-label="About today’s transaction fees" aria-describedby="tip-today"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-today"></span></span>
           </span>
         </div>
         <div class="kpi"><span class="kpi-num" id="k-paid-month"></span><span class="kpi-lbl">Paid in November</span></div>
@@ -1090,18 +1170,19 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
         </table>
       </div>
       <p class="note" id="comm-note" style="padding-top: 0.875rem"></p>
+      <p class="note" id="comm-open" style="padding-top: 0.5rem"></p>
     </section>
 
     <section class="panel pad" data-when="live" aria-labelledby="inv-title">
       <div class="head rel" style="padding-bottom: 0.875rem">
         <div class="row wrap">
           <h2 class="h-panel" id="inv-title">Invoices</h2>
-          <span class="tipw"><button class="info" type="button" aria-label="About invoices" aria-describedby="tip-invoices"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-invoices">One invoice per calendar month. Fees are paid from your balance when they are charged, so an invoice is a record of what was paid, not a bill.</span></span>
+          <span class="tipw"><button class="info" type="button" aria-label="About invoices" aria-describedby="tip-invoices"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-invoices">One invoice per calendar month. Fees are paid from your balance when they are charged, so an invoice is a record of what was paid, not a bill. The transaction fees are those of every purchase in the month. The Fulfilment column is what shipping added on the cards that shipped.</span></span>
         </div>
       </div>
       <div class="tbl-wrap">
         <table class="tbl" style="min-width: 46rem">
-          <thead><tr><th>Invoice</th><th>Period</th><th class="r">Transaction fees</th><th class="r">Fulfilment fees</th><th class="r">Total</th><th>Status</th><th></th></tr></thead>
+          <thead><tr><th>Invoice</th><th>Period</th><th class="r">Transaction fees</th><th class="r">Fulfilment, at shipping</th><th class="r">Total</th><th>Status</th><th></th></tr></thead>
           <tbody id="inv-rows"></tbody>
         </table>
       </div>
@@ -1140,6 +1221,31 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
           <span class="tipw"><button class="info" type="button" aria-label="About levels" aria-describedby="tip-levels"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-levels">Your level follows the higher of your 30-day volume or your 30-day average balance, and it moves up or down on its own. The level sets the rate on all of your volume.</span></span>
         </div>
       </div>
+      <div class="level-now" data-when="live">
+        <div class="level-head">
+          <h3 class="level-name">Silver</h3>
+          <span class="lbl">Level 2 of 5</span>
+        </div>
+        <ol class="ladder" aria-label="The five levels">
+          <li class="done"><span class="node" aria-hidden="true"></span>Starter</li>
+          <li class="now" aria-current="step"><span class="node" aria-hidden="true"></span>Silver<span class="here">You are here</span></li>
+          <li><span class="node" aria-hidden="true"></span>Gold</li>
+          <li><span class="node" aria-hidden="true"></span>Platinum</li>
+          <li><span class="node" aria-hidden="true"></span>Black</li>
+        </ol>
+        <div class="next row rel">
+          <span>Next: Gold</span>
+          <span class="tipw"><button class="info" type="button" aria-label="About reaching Gold" aria-describedby="tip-next"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-next">Reach either target and you move up. At your volume, Gold would save you about $2,300 a month.</span></span>
+        </div>
+        <div class="bar">
+          <div class="bar-top"><span>30-day volume</span><span><strong title="$1,240,000">$1.24M</strong> <em>of $5M</em></span></div>
+          <div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width: 24.8%"></div></div>
+        </div>
+        <div class="bar">
+          <div class="bar-top"><span>Average balance</span><span><strong title="$28,900">$28.9K</strong> <em>of $100K</em></span></div>
+          <div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width: 28.9%"></div></div>
+        </div>
+      </div>
       <div class="tbl-wrap">
         <table class="tbl">
           <thead><tr><th>Level</th><th class="r">Basic</th><th class="r">Chase</th><th class="r">Fulfilment</th><th>How to reach it</th></tr></thead>
@@ -1155,7 +1261,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   <div class="phead">
     <div class="row wrap">
       <h1 class="h-page">Integration</h1>
-      <span class="tipw"><button class="info" type="button" aria-label="About the integration" aria-describedby="tip-integration"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-integration">What your developers need: API keys, a Sandbox, your pack IDs and the docs. Build against the Sandbox first, then switch to the live key.</span></span>
+      <span class="tipw"><button class="info" type="button" aria-label="About the integration" aria-describedby="tip-integration"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-integration">Whether the link between your shop platform and Grail works: the last sync, the events your platform acknowledged and the ones to send again. Below that is what your developers need: API keys, a Sandbox, your pack IDs and the docs.</span></span>
     </div>
   </div>
   <div class="pbody stack-v">
@@ -1164,6 +1270,45 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       <p id="lock-text"></p>
       <a class="btn btn-sm" href="#overview">See what is left</a>
     </div>
+    <section class="panel pad stack-v" aria-labelledby="conn-title" style="gap: 1.125rem">
+      <div class="head rel">
+        <div class="row wrap">
+          <h2 class="h-panel" id="conn-title">Shop platform connection</h2>
+          <span class="tipw"><button class="info" type="button" aria-label="About the connection" aria-describedby="tip-conn"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-conn">Grail tells your shop platform about every step of a purchase, and your platform acknowledges each event. An event that is not acknowledged is kept, and you can send it again safely.</span></span>
+          <span class="tag" id="conn-env">Live</span>
+        </div>
+        <div class="item-acts">
+          <button class="btn" type="button" id="conn-test" data-can="keys">Test connection</button>
+          <button class="btn" type="button" id="conn-docs">View docs</button>
+        </div>
+      </div>
+      <div class="kpi-grid three">
+        <div class="kpi"><span class="kpi-num" id="k-sync">2 min ago</span><span class="kpi-lbl">Last successful sync</span></div>
+        <div class="kpi"><span class="kpi-num" id="k-acked">0</span><span class="kpi-lbl">Acknowledged events, last 24 hours</span></div>
+        <div class="kpi"><span class="kpi-num" id="k-retry">0</span><span class="kpi-lbl">Needs retry</span></div>
+      </div>
+    </section>
+    <section class="panel pad" aria-labelledby="ev-title">
+      <div class="head" style="padding-bottom: 0.875rem">
+        <div class="row wrap">
+          <h2 class="h-panel" id="ev-title">Event delivery</h2>
+          <span class="meta" id="ev-meta">Latest events</span>
+        </div>
+        <div class="chips" role="group" aria-label="Show" id="ev-filters"></div>
+      </div>
+      <div class="notice" id="ev-focus" style="margin-bottom: 0.875rem" hidden>
+        <p>Showing the events of purchase <strong id="ev-focus-id"></strong>.</p>
+        <button class="btn btn-sm" type="button" data-ev-clear>Show all events</button>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl" id="ev-table" style="min-width: 48rem">
+          <thead><tr><th style="width: 7.5rem">Sent</th><th>Event</th><th>Grail purchase</th><th>Shop platform transaction</th><th>Delivery</th><th></th></tr></thead>
+          <tbody id="ev-rows"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="ev-empty" hidden></div>
+      <div class="more" id="ev-more-wrap"><button class="btn" type="button" id="ev-more">Show more</button></div>
+    </section>
     <section class="panel pad" aria-labelledby="keys-title">
       <div class="head rel" style="padding-bottom: 0.875rem">
         <div class="row wrap">
@@ -1313,7 +1458,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
 <!-- ================= No access ================= -->
 <div class="page" id="view-none" hidden>
   <div class="pbody" style="padding-top: 1.875rem">
-    <section class="panel blank"><b>Nothing to open yet</b><span>This role may not open any page. An admin can change that under Team, in Roles and permissions.</span></section>
+    <section class="panel blank"><b>Nothing to open yet</b><span>This role may not open any page. An admin can change that under Settings, on the Team page.</span></section>
   </div>
 </div>
 
@@ -1321,7 +1466,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
 
 <footer class="foot rel">
   <span>Sample data</span>
-  <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="tip-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-al" role="tooltip" id="tip-sample">Card names and market values are from the Grail inventory of 11 November 2026, and a card still at grading shows the grade it is valued at. Balances, sales, fees, customers, shipments, keys and invoices are sample numbers. Card photos were supplied by the shop owner, and a slab without one is an empty photo slot. Nothing you do here moves money. New shop shows the same dashboard for a shop that is still onboarding.</span></span>
+  <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="tip-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-al" role="tooltip" id="tip-sample">Card names and market values are from the Grail inventory of 11 November 2026, and a card still at grading shows the grade it is valued at. Balances, sales, fees, customers, shipments, keys, invoices, references, events and the card mix of each pack are sample numbers. Who acts next on a shipping problem is a proposal. Card photos were supplied by the shop owner, and a slab without one is an empty photo slot. Nothing you do here moves money. New shop shows the same dashboard for a shop that is still onboarding.</span></span>
   <button class="linkbtn" type="button" id="reset">Reset</button>
   <div class="foot-ctl">
     <span class="lbl">Shop</span>
@@ -1496,6 +1641,107 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   </div>
 </dialog>
 
+<dialog class="sheet sheet-wide" id="pack" aria-labelledby="pack-title">
+  <div class="sheet-body">
+    <div class="head" style="align-items: flex-start">
+      <div>
+        <h2 class="h-page" id="pack-title" style="font-size: 1.375rem">Pack</h2>
+        <p class="note" id="pack-sub" style="padding-top: 0.25rem"></p>
+      </div>
+      <button class="btn" type="button" data-close="pack">Close</button>
+    </div>
+    <dl class="facts four" id="pack-facts"></dl>
+    <div class="route" id="pack-route" style="border-top: none; padding-top: 0" hidden></div>
+    <div>
+      <h3 class="sub-h">Top chase cards</h3>
+      <div id="pack-cards"></div>
+    </div>
+    <div>
+      <h3 class="sub-h">Card mix by rarity group</h3>
+      <div id="pack-mix"></div>
+      <p class="note" style="padding-top: 0.5rem">Sample numbers. Grail sets the card mix of each pack, and it is the same in every shop.</p>
+    </div>
+    <p class="note" id="pack-note"></p>
+    <div class="sheet-actions" style="justify-content: flex-start">
+      <button class="btn" type="button" id="pack-rename">Rename</button>
+      <button class="btn" type="button" id="pack-copy">Copy pack ID</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sheet sheet-wide" id="purchase" aria-labelledby="purchase-title">
+  <div class="sheet-body">
+    <div class="head" style="align-items: flex-start">
+      <div class="row" style="align-items: flex-start; gap: 0.875rem; min-width: 0">
+        <span id="purchase-slab"></span>
+        <div style="min-width: 0">
+          <h2 class="h-page" id="purchase-title" style="font-size: 1.375rem">Purchase</h2>
+          <p class="note" id="purchase-sub" style="padding-top: 0.25rem"></p>
+        </div>
+      </div>
+      <button class="btn" type="button" data-close="purchase">Close</button>
+    </div>
+    <dl class="facts" id="purchase-facts"></dl>
+    <div>
+      <h3 class="sub-h">Event history</h3>
+      <ol class="tl ev" id="purchase-events" aria-label="Events sent to your shop platform"></ol>
+    </div>
+    <div class="msg">
+      <h3 class="lbl">Hold and fees</h3>
+      <dl class="kv" id="purchase-money"></dl>
+    </div>
+    <div class="sheet-actions" style="justify-content: flex-start">
+      <button class="btn" type="button" id="purchase-events-go" data-can="keys">View event delivery</button>
+      <button class="btn" type="button" id="purchase-ledger-go" data-can="billing">View ledger</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sheet sheet-wide" id="event" aria-labelledby="event-title">
+  <div class="sheet-body">
+    <div class="head" style="align-items: flex-start">
+      <div>
+        <h2 class="h-page" id="event-title" style="font-size: 1.375rem">Event</h2>
+        <p class="note" id="event-sub" style="padding-top: 0.25rem"></p>
+      </div>
+      <button class="btn" type="button" data-close="event">Close</button>
+    </div>
+    <dl class="facts" id="event-facts"></dl>
+    <p class="note" id="event-note"></p>
+    <div id="event-payload-wrap" hidden>
+      <pre class="payload" id="event-payload" tabindex="0" aria-label="Event payload"></pre>
+      <p class="note" style="padding-top: 0.5rem">Sample payload. The field names follow the docs: [DOCS URL]</p>
+    </div>
+    <div class="sheet-actions" style="justify-content: flex-start">
+      <button class="btn btn-primary" type="button" id="event-retry" data-can="keys">Retry safely</button>
+      <button class="btn" type="button" id="event-show" aria-expanded="false" aria-controls="event-payload-wrap">View payload</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sheet sheet-wide" id="terms" aria-labelledby="terms-sheet-title">
+  <div class="sheet-body">
+    <div class="head" style="align-items: flex-start">
+      <div>
+        <h2 class="h-page" id="terms-sheet-title" style="font-size: 1.375rem">Shipping terms</h2>
+        <p class="note" style="padding-top: 0.25rem">What applies to every card that ships.</p>
+      </div>
+      <button class="btn" type="button" data-close="terms">Close</button>
+    </div>
+    <dl class="kv">
+      <div><dt>Ships from</dt><dd>Hong Kong</dd></div>
+      <div><dt>Shipping request</dt><dd>Until hour 48<small>Counted from the Temporary Purchase</small></dd></div>
+      <div><dt>Card price</dt><dd>Paid from the held amount</dd></div>
+      <div><dt>Fulfilment fee</dt><dd><span id="terms-fee">6% on Silver</span><small>The transaction fee charged at the purchase counts toward it, so shipping charges only the difference</small></dd></div>
+      <div><dt>Shipping cost</dt><dd>At cost<small>From the carrier’s quote for each shipment. Not part of this sample.</small></dd></div>
+      <div><dt>Insurance</dt><dd>No insurance fee</dd></div>
+      <div><dt>Duties and import taxes</dt><dd>[DUTIES AND IMPORT TAXES]</dd></div>
+      <div><dt>Claims</dt><dd>[CLAIMS PROCESS]</dd></div>
+    </dl>
+    <p class="note">Who acts next on a shipping problem, and what each action does, are proposed. They are confirmed in the operating policy.</p>
+  </div>
+</dialog>
+
 <div class="viz-tip" id="viz-tip" role="status" hidden></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
@@ -1653,15 +1899,18 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     ['Fri', 'Friday', 1.12, 4], ['Sat', 'Saturday', 1.22, 4], ['Sun', 'Sunday', 1.08, 4]];
 
   // Billing. Money moves are in cents so every total adds up exactly.
+  // The transaction fee is charged when a Temporary Purchase is made. A card that ships pays the Fulfilment fee instead, never both,
+  // so shipping charges the Fulfilment fee less the transaction fee the card already paid.
   var OPENING = 3270000;                                    // the balance 30 days ago
   var TOPUPS = [[21, 10000, 'Visa ending 4417'], [66, 5000, 'USDT wallet'], [243, 5000, 'Visa ending 4417'], [409, 10000, 'USDT wallet'], [606, 10000, 'USDT wallet']];
-  var VOL30 = { basic: 677860, chase: 527990 };             // volume that paid a transaction fee in the last 30 days
-  var VOL_TODAY = { basic: 20000, chase: 3500 };            // today's purchases so far, charged at the end of the day
+  var VOL30 = { basic: 676106, chase: 563894 };             // card value of every Temporary Purchase of the last 30 days, by class
+  var VOL_TODAY = { basic: 20000, chase: 3500 };            // today's purchases so far
   var NOV_HOURS = 280;                                      // hours since the start of November
+  // A month's purchases by class. "more" is shipped volume, and the transaction fees on it in cents, from before the 30 days of the shipment list.
   var BILLS = [
-    { id: 'GC-2026-11', name: 'November 2026', open: true, basic: 248400, chase: 208250 },
-    { id: 'GC-2026-10', name: 'October 2026', basic: 652300, chase: 498600, shipMore: 11640 },
-    { id: 'GC-2026-09', name: 'September 2026', basic: 548900, chase: 402300, ship: 21860 }
+    { id: 'GC-2026-11', name: 'November 2026', open: true, basic: 268400, chase: 211750 },
+    { id: 'GC-2026-10', name: 'October 2026', basic: 652300, chase: 498600, more: [11640, 8790] },
+    { id: 'GC-2026-09', name: 'September 2026', basic: 548900, chase: 402300, ship: 21860, shipTx: 16609 }
   ];
   var LEVELS = [
     ['Starter', '1.10%', '0.80%', '8%', 'Every new shop'],
@@ -1685,34 +1934,48 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   // Team: the roles, what a role may do, and the permission each page needs.
   var ROLES = ['Admin', 'Finance', 'Support', 'Developer'];
   var PERMS = [
-    ['sales', 'See sales, customers and activity', 'Overview, Customers, Activity'],
-    ['packs', 'See and manage packs and the marketplace', 'Packs, Marketplace'],
-    ['ops', 'See the Vault and shipments', 'Vault, Shipments'],
+    ['sales', 'See sales, customers and analytics', 'Overview, Customers, Analytics'],
+    ['packs', 'See and manage packs and the marketplace', 'Catalogue'],
+    ['ops', 'See the Vault and shipments', 'Fulfilment'],
     ['billing', 'See billing and invoices', 'Billing'],
     ['topup', 'Top up the balance', 'Top up and Auto top-up'],
     ['methods', 'Add and remove payment methods', 'In Billing'],
-    ['keys', 'Manage API keys and the Sandbox', 'Integration'],
-    ['kyb', 'Manage KYB', 'KYB'],
-    ['users', 'Add users and change roles', 'Team'],
-    ['settings', 'Change shop settings', 'Settings']
+    ['keys', 'Manage API keys, the Sandbox and event delivery', 'Integration'],
+    ['kyb', 'Manage KYB', 'Settings, KYB'],
+    ['users', 'Add users and change roles', 'Settings, Team'],
+    ['settings', 'Change shop settings', 'Settings, Shop']
   ];
-  var PAGE_NEEDS = { overview: 'sales', packs: 'packs', marketplace: 'packs', vault: 'ops', shipments: 'ops', customers: 'sales', activity: 'sales',
+  var PAGE_NEEDS = { overview: 'sales', packs: 'packs', marketplace: 'packs', vault: 'ops', shipments: 'ops', customers: 'sales', analytics: 'sales',
     billing: 'billing', integration: 'keys', kyb: 'kyb', team: 'users', account: 'settings' };
-  var PAGE_NAMES = { overview: 'Overview', packs: 'Packs', marketplace: 'Marketplace', vault: 'Vault', shipments: 'Shipments', customers: 'Customers', activity: 'Activity',
-    billing: 'Billing', integration: 'Integration', kyb: 'KYB', team: 'Team', account: 'Settings' };
+  var PAGE_NAMES = { overview: 'Overview', packs: 'Packs', marketplace: 'Marketplace', vault: 'Vault', shipments: 'Shipments', customers: 'Customers', analytics: 'Analytics',
+    billing: 'Billing', integration: 'Integration', kyb: 'KYB', team: 'Team', account: 'Shop settings' };
 
   var PEOPLE = buildPeople();
   var SHIP = buildShipments();
   var TOTAL_BOUGHT = PACKS.reduce(function (t, p) { return t + p.bought; }, 0);
   var GRID = buildHours(TOTAL_BOUGHT);
   var LEDGER = buildLedger();
-  var SHIP_ALL = shipVolume(1e9), SHIP_NOV = shipVolume(NOV_HOURS);
-  BILLS[0].ship = SHIP_NOV;
-  BILLS[1].ship = SHIP_ALL - SHIP_NOV + BILLS[1].shipMore;
+  var SHIP_ALL = shipVolume(1e9), SHIP_NOV = shipVolume(NOV_HOURS), SHIP_TX = shipTx(1e9), SHIP_TX_NOV = shipTx(NOV_HOURS);
+  BILLS[0].ship = SHIP_NOV; BILLS[0].shipTx = SHIP_TX_NOV;
+  BILLS[1].ship = SHIP_ALL - SHIP_NOV + BILLS[1].more[0]; BILLS[1].shipTx = SHIP_TX - SHIP_TX_NOV + BILLS[1].more[1];
+
+  // Purchases of the last 24 hours, read off the same day-by-hour grid as the Analytics page. The sample's "now" is a Thursday at 16:00.
+  var P24 = 0;
+  (function () { for (var h = 0; h < 24; h++) P24 += h < 16 ? GRID[3 * 24 + h] / DAYS[3][3] : GRID[2 * 24 + h] / DAYS[2][3]; })();
+  var MIN = 60000;
+  var PURCHASES = buildPurchases(), TEST_PURCHASES = buildTestPurchases();
+  var EVENTS = buildEvents(PURCHASES, rng(3301)), EVENTS_TEST = buildEvents(TEST_PURCHASES, rng(3302));
+  var ACK24 = Math.round(P24) * 3 - 8;       // three events for a typical purchase, less the few that are still on their way
+  // One event of the newest Vault card was not acknowledged: the shop platform timed out. The Sandbox has one of its own.
+  (function () {
+    var a = VAULT[VAULT.length - 1].holdEvent, b = TEST_PURCHASES[0].holdEvent;
+    a.wait = true; a.tries = 4; a.last = a.t + 15 * MIN;
+    b.wait = true; b.tries = 2; b.last = b.t + MIN;
+  })();
 
   // ---------- state ----------
   var START = { auto: false, autoAmount: 10000, autoBelow: 20000, shop: '', shown: 12, shipFilter: 'all', shipQuery: '', shipShown: 12,
-    vaultView: 'cards', ledgerFilter: 'all', ledgerShown: 10, topBy: 'sales', actMode: 'chart' };
+    vaultView: 'cards', ledgerFilter: 'all', ledgerShown: 10, topBy: 'sales', actMode: 'chart', evFilter: 'all', evShown: 8, evFocus: '' };
   var S = {};
   function resetState(mode) {
     for (var k in START) S[k] = START[k];
@@ -1729,7 +1992,9 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     S.docs = live ? [1, 1, 1, 1, 1] : [1, 1, 1, 0, 0];
     S.adminOk = live;
     S.liveKey = live ? { tail: '7c2e', made: '9 Oct 2026' } : null;
-    S.sandbox = live ? { tail: '91b4', made: '2 Oct 2026' } : null;
+    S.sandbox = { tail: '91b4', made: live ? '2 Oct 2026' : '10 Nov 2026' };
+    S.acked = {}; S.synced = false;
+    SHIP.forEach(function (s) { delete s.asked; delete s.up; delete s.caseId; });
     S.as = 'Admin';
     S.roles = { Finance: { sales: 1, ops: 1, billing: 1, topup: 1 }, Support: { sales: 1, ops: 1 }, Developer: { packs: 1, keys: 1 } };
     S.users = [{ name: '[Your name]', email: '[YOUR EMAIL]', role: 'Admin', status: 'Active', last: 'Now', you: true }].concat(live ? [
@@ -1856,6 +2121,9 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     return out;
   }
   function shipVolume(maxAge) { return SHIP.reduce(function (t, s) { return t + (s.age <= maxAge ? s.v : 0); }, 0); }
+  function shipTx(maxAge) { return SHIP.reduce(function (t, s) { return t + (s.age <= maxAge ? txFee(s.v) : 0); }, 0); }
+  function txFee(v) { return fee(v, v >= 500 ? RATE.chase : RATE.basic); }   // charged when the Temporary Purchase is made
+  function shipFee(v) { return fee(v, RATE.ship) - txFee(v); }               // charged at shipping: the Fulfilment fee less the transaction fee already charged
   function shipState(s) {
     var d = reached(s), eta = new Date(NOW + (STEPS[7].h * s.f - s.age) * HOUR), again = day(new Date(NOW + 20 * HOUR)), st;
     if (s.issue === 1) st = { kind: 'warn', done: Math.min(d, 5), label: 'Held at customs', sub: 'Needs the recipient’s tax ID', line: 'Held at customs, waiting for the recipient’s tax ID' };
@@ -1893,15 +2161,62 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   // Every balance movement of the last 30 days, newest first, with the balance after it.
   function buildLedger() {
     var r = rng(5150), out = [];
-    // Transaction fees are charged once a day. The three latest days are fixed, the rest are spread to match the invoices.
-    var daily = [33840, 32710, 34175].concat(spread(276865, 8, r), spread(625410, 19, r));
-    daily.forEach(function (c, k) { out.push({ age: 4 + 24 * k, kind: 'fee', w: 'Transaction fees for ' + day(new Date(NOW - (28 + 24 * k) * HOUR)), c: -c }); });
-    SHIP.forEach(function (s) { out.push({ age: s.age, kind: 'ship', w: 'Fulfilment, ' + s.n + ': card ' + money2(s.v) + ' and fee ' + money2(s.v * FEE_RATE), c: -s.v * 106 }); });
+    // The transaction fee comes off the balance at every Temporary Purchase, and the ledger adds each day's fees into one line.
+    // The latest days are fixed, and the earlier ones are spread so that the 30 days add up to the fees on the volume above.
+    var today = fee(VOL_TODAY.basic, RATE.basic) + fee(VOL_TODAY.chase, RATE.chase), nov = [33840, 32710, 34175].concat(spread(276865, 8, r));
+    var rest = fee(VOL30.basic, RATE.basic) + fee(VOL30.chase, RATE.chase) - today - nov.reduce(add, 0);
+    out.push({ age: 0.05, kind: 'fee', w: 'Transaction fees, today so far', c: -today });
+    nov.concat(spread(rest, 18, r)).forEach(function (c, k) { var age = 16.5 + 24 * k; out.push({ age: age, kind: 'fee', w: 'Transaction fees, ' + day(new Date(NOW - age * HOUR)), c: -c }); });
+    // At shipping the card price is paid from the held amount, and the Fulfilment fee is charged less the transaction fee the card already paid.
+    SHIP.forEach(function (s) { out.push({ age: s.age, kind: 'ship', w: 'Fulfilment, ' + s.n + ': card ' + money2(s.v) + ', fee at shipping ' + usd(shipFee(s.v)), c: -(s.v * 100 + shipFee(s.v)) }); });
     TOPUPS.forEach(function (t) { out.push({ age: t[0], kind: 'top', w: 'Top-up, ' + t[2], c: t[1] * 100 }); });
     out.sort(function (a, b) { return b.age - a.age; });
     var bal = OPENING;
     out.forEach(function (e) { bal += e.c; e.bal = bal; });
     return out.reverse();
+  }
+  // One month of fees: what the purchases were charged, and what shipping added on the cards that shipped.
+  function billFees(b) {
+    var tx = fee(b.basic, RATE.basic) + fee(b.chase, RATE.chase), gross = fee(b.ship, RATE.ship);
+    return { tx: tx, gross: gross, paid: b.shipTx, ship: gross - b.shipTx, total: tx + gross - b.shipTx };
+  }
+
+  // Every card in the Vault or in Staging is one Temporary Purchase, with a reference on each side: the shop platform's transaction and Grail's purchase.
+  function hex(r, n) { var s = ''; while (s.length < n) s += Math.floor(r() * 16).toString(16); return s; }
+  function refs(c, r) { c.tp = 'TP-' + digits(r, 6); c.tx = 'TX-' + digits(r, 8); c.card = 'CARD-' + digits(r, 6); return c; }
+  function buildPurchases() {
+    var r = rng(8128), out = [];
+    // minutes since the purchase: a Vault card has used up 48 hours less what is left, a Staging card 5 minutes less what is left
+    VAULT.forEach(function (c) { refs(c, r); c.stage = 'vault'; c.ago = (48 - c.h) * 60 - (6 + Math.floor(r() * 48)); out.push(c); });
+    VAULT[VAULT.length - 1].ago = 39;     // the newest card in the Vault
+    STAGING.forEach(function (c, i) { refs(c, r); c.stage = 'staging'; c.ago = 5 - c.m + [0.7, 0.4, 0.5][i]; out.push(c); });
+    // a few purchases of the last half hour that were released within their 5 minutes
+    for (var i = 0; i < 7; i++) {
+      var c = POOL[10 + Math.floor(r() * 20)], who = PEOPLE[Math.floor(r() * PEOPLE.length)];
+      out.push(refs({ n: c[0], s: c[1], g: c[2], v: c[3], who: who.id, pack: PACKS[Math.floor(r() * 2)].id, stage: 'released', ago: 6.5 + i * 4 + r() * 3, after: 1 + r() * 3.5 }, r));
+    }
+    return out;
+  }
+  // The Sandbox of a shop that is still onboarding: five test purchases.
+  function buildTestPurchases() {
+    var r = rng(8129);
+    return [[12, 'vault', 7], [15, 'released', 12], [22, 'vault', 26], [18, 'released', 41], [20, 'vault', 58]].map(function (t) {
+      var c = POOL[t[0]];
+      return refs({ n: c[0], s: c[1], g: c[2], v: c[3], who: '', pack: PACKS[0].id, stage: t[1], ago: t[2], after: 2.4, test: true }, r);
+    });
+  }
+  // Grail sends the shop platform an event at each step of a purchase, and the platform acknowledges it.
+  function buildEvents(list, r) {
+    var out = [];
+    list.forEach(function (c) {
+      var t0 = NOW - c.ago * MIN;
+      function ev(kind, label, t) { var e = { id: 'EV-' + digits(r, 7), key: 'idem_' + hex(r, 16), kind: kind, label: label, t: t, p: c, tries: 1 }; out.push(e); return e; }
+      ev('purchase', 'Purchase received', t0);
+      if (c.stage === 'vault') { ev('staging', 'Staging completed', t0 + 5 * MIN); c.holdEvent = ev('hold', 'Vault hold created: ' + money(c.v), t0 + 5 * MIN + 2000); }
+      if (c.stage === 'released') ev('release', 'Released in Staging', t0 + c.after * MIN);
+    });
+    out.sort(function (a, b) { return b.t - a.t; });
+    return out;
   }
 
   // Share of the Available Balance that one card may be worth.
@@ -1961,28 +2276,27 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
 
   // ---------- lists that do not change ----------
   function buildStatic() {
-    $('vault-mini-rows').innerHTML = VAULT.slice(0, 5).map(function (c) {
-      return '<div class="vrow">' + slab(c, 'slab-sm') + '<div class="vname"><b>' + esc(c.n) + '</b><span>' + esc(c.g) + '</span></div>' +
-        '<div class="vend"><span class="vval">' + money(c.v) + '</span>' + timeLeft(c.h) + '</div></div>';
-    }).join('');
     $('rail-pins').innerHTML = PACKS.map(function (p) {
       return '<div class="pin-cell" data-pin="' + p.id + '"><div class="pin" aria-hidden="true"><svg class="ic i-check"><use href="#i-check"></use></svg><svg class="ic i-lock"><use href="#i-lock"></use></svg></div>' + money(p.cards[0].v) + '</div>';
     }).join('');
     $('packs-grid').innerHTML = PACKS.map(function (p) {
       var order = [3, 2, 1, 0];
-      return '<article class="panel pack" data-pack="' + p.id + '">' +
+      return '<article class="panel pack" data-pack="' + p.id + '" id="pack-' + p.id + '">' +
         '<div class="pack-head"><div class="pack-top rel"><span class="st-wrap"><span class="st st-live"><i aria-hidden="true"></i>Live</span>' +
-        '<span class="st st-paused"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg>Paused</span>' + infoTip('tip-' + p.id, 'Why this pack is paused', 'tip-fill') + '</span>' +
+        '<span class="st st-paused"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg><span data-why="' + p.id + '">Paused</span></span>' + infoTip('tip-' + p.id, 'Why this pack is paused', 'tip-fill') + '</span>' +
         '<span class="pack-id">' + p.id + '</span></div>' +
         '<div class="pack-title"><h2 class="pack-name" data-name="' + p.id + '"></h2><span class="pack-price">' + money(p.price) + '</span></div></div>' +
         '<div class="stack">' + order.map(function (i) { return slab(p.cards[i], 's' + (i + 1)); }).join('') + '</div>' +
         '<div class="rows">' + p.cards.map(function (c) { return '<div><span>' + esc(c.n) + '</span><b>' + money(c.v) + '</b></div>'; }).join('') + '</div>' +
         '<div class="pack-stats" data-when="live"><div><b title="' + count(p.bought) + '">' + abbr(p.bought) + '</b><span>Purchases</span></div>' +
         '<div><b title="' + count(p.buyers) + '">' + abbr(p.buyers) + '</b><span>Buyers</span></div></div>' +
-        '<button class="btn btn-wide" type="button" data-manage="' + p.id + '">Manage</button></article>';
+        '<div class="route" data-route="' + p.id + '" hidden></div>' +
+        '<div class="pack-acts"><button class="btn" type="button" data-pack-details="' + p.id + '">View details</button>' +
+        '<button class="btn" type="button" data-manage="' + p.id + '">Rename</button></div></article>';
     }).join('');
     $('ship-filters').innerHTML = chips(FILTERS, 'data-filter');
     $('ledger-filters').innerHTML = chips(LEDGER_FILTERS, 'data-ledger');
+    $('ev-filters').innerHTML = chips([['all', 'All'], ['wait', 'Needs retry']], 'data-ev');
     $('ship-meta').textContent = SHIP.length + ' in the last 30 days, $' + abbr(SHIP_ALL) + ' in cards';
     setShort('k-bought', TOTAL_BOUGHT);
     setShort('k-buyers', BUYERS);
@@ -1993,24 +2307,24 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     $('k-c-avg').textContent = money(SALES / BUYERS);
     $('k-c-top').textContent = (PEOPLE.slice(0, 10).reduce(function (t, p) { return t + p.sales; }, 0) / SALES * 100).toFixed(1) + '%';
 
-    // billing
-    var feeBasic = fee(VOL30.basic, RATE.basic), feeChase = fee(VOL30.chase, RATE.chase), feeShip = fee(SHIP_ALL, RATE.ship), feeAll = feeBasic + feeChase + feeShip;
-    var held = VAULT.reduce(function (t, c) { return t + c.v; }, 0), heldChase = VAULT.reduce(function (t, c) { return t + (c.v >= 500 ? c.v : 0); }, 0);
-    var ifReleased = fee(held - heldChase, RATE.basic) + fee(heldChase, RATE.chase), ifShipped = fee(held, RATE.ship);
-    var today = fee(VOL_TODAY.basic, RATE.basic) + fee(VOL_TODAY.chase, RATE.chase);
-    var month = fee(BILLS[0].basic, RATE.basic) + fee(BILLS[0].chase, RATE.chase) + fee(BILLS[0].ship, RATE.ship);
-    $('k-accruing').textContent = usd(today);
-    $('tip-accruing').textContent = 'Transaction fees on today’s Temporary Purchases. They come off your balance at the end of the day.';
+    // billing: the transaction fee is charged at the purchase, and shipping charges the Fulfilment fee less what was already charged
+    var feeBasic = fee(VOL30.basic, RATE.basic), feeChase = fee(VOL30.chase, RATE.chase), shipGross = fee(SHIP_ALL, RATE.ship), feeShip = shipGross - SHIP_TX, feeAll = feeBasic + feeChase + feeShip;
+    var held = VAULT.reduce(function (t, c) { return t + c.v; }, 0), heldTx = VAULT.reduce(function (t, c) { return t + txFee(c.v); }, 0);
+    var today = fee(VOL_TODAY.basic, RATE.basic) + fee(VOL_TODAY.chase, RATE.chase), month = billFees(BILLS[0]).total;
+    $('k-fees').textContent = '$' + abbr(feeAll / 100); $('k-fees').title = usd(feeAll);
+    $('k-today').textContent = usd(today);
+    $('tip-today').textContent = 'Charged on today’s Temporary Purchases so far. Each transaction fee comes off your balance when the purchase is made.';
     $('k-paid-month').textContent = '$' + abbr(month / 100); $('k-paid-month').title = usd(month);
     $('k-paid-30').textContent = '$' + abbr(feeAll / 100); $('k-paid-30').title = usd(feeAll);
-    var lines = [['Basic transaction fee', '0.95%', VOL30.basic, feeBasic], ['Chase transaction fee', '0.68%', VOL30.chase, feeChase], ['Fulfilment fee', '6%', SHIP_ALL, feeShip]];
+    var lines = [['Basic transaction fee', '0.95%', VOL30.basic, feeBasic], ['Chase transaction fee', '0.68%', VOL30.chase, feeChase], ['Fulfilment fee, the difference at shipping', 'to 6%', SHIP_ALL, feeShip]];
     $('comm-rows').innerHTML = lines.map(function (l) {
       return '<tr><td class="strong">' + l[0] + '</td><td class="r">' + l[1] + '</td><td class="r">' + money(l[2]) + '</td><td class="r strong">' + usd(l[3]) + '</td><td>' + meter(l[3] / feeAll) + '</td></tr>';
-    }).join('') + '<tr class="total-row"><td>Total</td><td></td><td class="r">' + money(VOL30.basic + VOL30.chase + SHIP_ALL) + '</td><td class="r">' + usd(feeAll) + '</td><td class="muted" style="font-weight: 400">' + (feeAll / 100 / SALES * 100).toFixed(2) + '% of sales</td></tr>';
-    $('comm-note').textContent = 'Not charged yet: ' + money(held) + ' in the Vault. That is ' + usd(ifReleased) + ' if every card is released, or ' + usd(ifShipped) + ' if every card ships.';
+    }).join('') + '<tr class="total-row"><td>Total</td><td></td><td class="r">' + money(VOL30.basic + VOL30.chase) + '</td><td class="r">' + usd(feeAll) + '</td><td class="muted" style="font-weight: 400">' + (feeAll / 100 / SALES * 100).toFixed(2) + '% of sales</td></tr>';
+    $('comm-note').textContent = 'A card that ships pays the Fulfilment fee instead of the transaction fee, never both. On the ' + money(SHIP_ALL) + ' that shipped, the Fulfilment fee is ' + usd(shipGross) + '. ' + usd(SHIP_TX) + ' of it was already charged at the purchase, so shipping charged ' + usd(feeShip) + '.';
+    $('comm-open').textContent = 'In the Vault now: ' + VAULT.length + ' cards, ' + money(held) + '. Their transaction fee, ' + usd(heldTx) + ', is already charged. A card that ships is charged the difference to the Fulfilment fee, ' + usd(fee(held, RATE.ship) - heldTx) + ' if all of them ship.';
     $('inv-rows').innerHTML = BILLS.map(function (b) {
-      var tx = fee(b.basic, RATE.basic) + fee(b.chase, RATE.chase), sh = fee(b.ship, RATE.ship);
-      return '<tr data-row><td class="strong">' + b.id + '</td><td>' + b.name + '</td><td class="r">' + usd(tx) + '</td><td class="r">' + usd(sh) + '</td><td class="r strong">' + usd(tx + sh) + '</td>' +
+      var f = billFees(b);
+      return '<tr data-row><td class="strong">' + b.id + '</td><td>' + b.name + '</td><td class="r">' + usd(f.tx) + '</td><td class="r">' + usd(f.ship) + '</td><td class="r strong">' + usd(f.total) + '</td>' +
         '<td><span class="tag' + (b.open ? '' : ' tag-on') + '">' + (b.open ? 'Open, month to date' : 'Paid from balance') + '</span></td>' +
         '<td class="r"><button class="btn btn-sm" type="button" data-invoice="' + b.id + '" aria-label="View invoice ' + b.id + '">View</button></td></tr>';
     }).join('');
@@ -2121,11 +2435,12 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     bind('held', money(S.held));
     bind('maxcard', money(mx));
     bind('maxtip', maxTip(av));
+    bind('staging', money(live ? STAGING.reduce(function (t, c) { return t + c.v; }, 0) : 0));
     bind('autotip', 'Adds ' + money(S.autoAmount) + ' whenever your Available Balance falls below ' + money(S.autoBelow) + '. It is paid with your default payment method.');
     bind('autopay', pay ? 'Paid with your default payment method, ' + pay.label + '. You can change it in Billing.' : 'Add a payment method in Billing to pay for Auto top-up.');
     bind('shopname', S.shop || '[Your Shop]');
     bind('levelchip', live ? 'Silver' : ok ? 'Starter' : 'Onboarding');
-    $('tip-balance').textContent = 'Your balance is ' + money(S.balance) + '. ' + (S.held ? money(S.held) + ' is held for ' + VAULT.length + ' cards in the Vault, for up to 48 hours.' : 'Nothing is held.');
+    $('tip-balance').textContent = 'Your balance is ' + money(S.balance) + '. ' + (S.held ? money(S.held) + ' is held for ' + VAULT.length + ' cards in the Vault, for up to 48 hours.' : 'Nothing is held.') + ' Your Max Card Value is ' + money(mx) + '.';
 
     var on = 0, paused = 0;
     PACKS.forEach(function (p) {
@@ -2136,10 +2451,34 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       document.querySelector('[data-pin="' + p.id + '"]').classList.toggle('is-live', p.live);
       if (p.live && was === false && !quiet()) comeAlive(p);
       document.querySelector('[data-name="' + p.id + '"]').textContent = p.label;
+      document.querySelector('[data-why="' + p.id + '"]').textContent = 'Paused: ' + pausedWhy(p, av, ok);
+      var rt = document.querySelector('[data-route="' + p.id + '"]');
+      rt.hidden = p.live;
+      rt.innerHTML = p.live ? '' : routeHtml(p, av, ok);
       $('tip-' + p.id).textContent = p.live ? '' : !ok ? 'Packs go live once your shop is approved. This one also needs ' + money(need(top)) + ' available, for its top chase card of ' + money(top) + '.'
         : 'Its top chase card, ' + money(top) + ', is above your Max Card Value. It goes live at ' + money(need(top)) + ' available, and is hidden from customers until then.';
     });
     bind('packcount', paused ? on + ' live, ' + paused + ' paused' : on + ' live');
+
+    // a new shop: what it takes to get the first pack live
+    var first = PACKS[0], firstNeed = need(first.cards[0].v), firstGap = Math.max(0, firstNeed - av);
+    $('fund-facts').innerHTML = [['First top-up', '$1,000 or more'], ['First pack live from', money(firstNeed) + ' available'], ['Also needed', 'KYB and approval by Grail']].map(function (f) {
+      return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>';
+    }).join('');
+    $('fund-note').textContent = firstGap ? 'A pack goes live when your shop is approved and your Available Balance covers its top chase card. The first top-up alone does not make a pack live: ' + first.label + ', the first pack, needs ' + money(firstNeed) + ' available.'
+      : 'Your balance covers ' + first.label + '. It goes live once your shop is approved.';
+    $('fund-topup-wrap').hidden = !firstGap;
+    $('fund-topup').textContent = 'Top up ' + money(firstGap);
+    $('fund-topup').setAttribute('data-topup-exact', firstGap);
+
+    // the fees of the shop's level, on the overview and in the shipping terms
+    var lv = LEVELS.filter(function (l) { return l[0] === levelName(); })[0];
+    $('lvl-mini-title').textContent = lv[0] + ' fees';
+    $('lvl-mini-meta').textContent = 'Level ' + (LEVELS.indexOf(lv) + 1) + ' of 5';
+    $('lvl-mini-fees').innerHTML = [['Basic', lv[1]], ['Chase', lv[2]], ['Fulfilment', lv[3]]].map(function (f) {
+      return '<div class="fee"><span class="fee-num">' + f[1] + '</span><span class="kpi-lbl">' + f[0] + '</span></div>';
+    }).join('');
+    $('terms-fee').textContent = lv[3] + ' on ' + lv[0];
 
     $('id-rows').innerHTML = PACKS.map(function (p) {
       return '<tr><td class="strong">' + esc(p.label) + '</td><td>' + p.id + '</td><td><span class="dot' + (p.live ? ' dot-on' : '') + '" aria-hidden="true"></span>' + (p.live ? 'Live' : 'Paused') + '</td>' +
@@ -2173,6 +2512,9 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     renderKyb();
     renderTeam();
     setActivityMode();
+    renderTodo();
+    renderConn();
+    renderEvents();
     applyAccess();
     layoutRail();
   }
@@ -2201,7 +2543,12 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   }
   // Hide the pages and actions the signed-in role may not use.
   function applyAccess() {
-    all('[data-nav]').forEach(function (a) { a.hidden = !can(PAGE_NEEDS[a.getAttribute('data-nav')]); });
+    // a page of the bar shows while the role may open at least one of the pages under it, and it leads to the first of those
+    all('[data-group]').forEach(function (a) {
+      var open = opens(GROUPS.filter(function (g) { return g[0] === a.getAttribute('data-group'); })[0][2]);
+      a.hidden = !open.length;
+      if (open.length) a.setAttribute('href', '#' + open[0]);
+    });
     // the hairline between the two groups of pages shows only while both groups have a page to show
     var sep = document.querySelector('.tab-sep'), sides = [false, false], side = 0;
     if (sep) { Array.prototype.forEach.call(sep.parentNode.children, function (c) { if (c === sep) side = 1; else if (!c.hidden) sides[side] = true; }); sep.hidden = !(sides[0] && sides[1]); }
@@ -2232,6 +2579,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     all('[data-demo="admin"]').forEach(function (b) { b.disabled = S.adminOk || kyb !== 'approved' || !dep; b.title = b.disabled && !S.adminOk ? 'Needs KYB and the first top-up' : ''; });
   }
 
+  function viewCell(c) { return '<td class="r"><button class="btn btn-sm" type="button" data-purchase="' + c.tp + '" aria-label="View the purchase of ' + esc(c.n) + '">View</button></td>'; }
   // ---------- the Vault, as cards, by pack and by customer ----------
   function renderVault() {
     var total = VAULT.reduce(function (t, c) { return t + c.v; }, 0), head, rows;
@@ -2253,17 +2601,17 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
           '<td class="r"><button class="btn btn-sm" type="button" data-person="' + p.id + '" aria-label="View ' + esc(p.name) + '">View</button></td></tr>';
       });
     } else {
-      head = '<tr><th style="width: 34%">Card</th><th>Customer</th><th>Pack</th><th>Class</th><th class="r">Held</th><th>Time left</th></tr>';
+      head = '<tr><th style="width: 30%">Card</th><th>Customer</th><th>Pack</th><th>Class</th><th class="r">Held</th><th>Time left</th><th></th></tr>';
       rows = VAULT.map(function (c) {
-        return '<tr><td>' + cardCell(c, true) + '</td>' + whoCell(PEOPLE.by[c.who]) + packCell(c.pack) + '<td><span class="tag">' + (c.v >= 500 ? 'Chase' : 'Basic') + '</span></td>' +
-          '<td class="r strong">' + money(c.v) + '</td><td>' + timeLeft(c.h) + '</td></tr>';
+        return '<tr data-row><td>' + cardCell(c, true) + '</td>' + whoCell(PEOPLE.by[c.who]) + packCell(c.pack) + '<td><span class="tag">' + (c.v >= 500 ? 'Chase' : 'Basic') + '</span></td>' +
+          '<td class="r strong">' + money(c.v) + '</td><td>' + timeLeft(c.h) + '</td>' + viewCell(c) + '</tr>';
       });
     }
     $('vault-head').innerHTML = head;
     $('vault-rows').innerHTML = rows.join('');
     $('staging-rows').innerHTML = STAGING.map(function (c) {
-      return '<tr><td>' + cardCell(c, true) + '</td>' + whoCell(PEOPLE.by[c.who]) + packCell(c.pack) + '<td class="r strong">' + money(c.v) + '</td>' +
-        '<td><span class="time">' + ring(c.m / 5, c.m + ' of 5 minutes left') + c.m + ' min left</span></td></tr>';
+      return '<tr data-row><td>' + cardCell(c, true) + '</td>' + whoCell(PEOPLE.by[c.who]) + packCell(c.pack) + '<td class="r strong">' + money(c.v) + '</td>' +
+        '<td><span class="time">' + ring(c.m / 5, c.m + ' of 5 minutes left') + c.m + ' min left</span></td>' + viewCell(c) + '</tr>';
     }).join('');
   }
 
@@ -2332,18 +2680,19 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   function openInvoice(id) {
     var b = BILLS.filter(function (x) { return x.id === id; })[0];
     if (!b) return;
-    var lines = [['Basic transaction fee', b.basic, '0.95%', fee(b.basic, RATE.basic)], ['Chase transaction fee', b.chase, '0.68%', fee(b.chase, RATE.chase)], ['Fulfilment fee', b.ship, '6%', fee(b.ship, RATE.ship)]];
-    var total = lines.reduce(function (t, l) { return t + l[3]; }, 0);
+    var f = billFees(b);
+    var lines = [['Basic transaction fee', money(b.basic), '0.95%', usd(fee(b.basic, RATE.basic))], ['Chase transaction fee', money(b.chase), '0.68%', usd(fee(b.chase, RATE.chase))],
+      ['Fulfilment fee on the cards that shipped', money(b.ship), '6%', usd(f.gross)], ['Less the transaction fee already charged on them', '', '', usd(-f.paid)]];
     $('invoice-title').textContent = 'Invoice ' + b.id;
     $('invoice-sub').textContent = b.name + (b.open ? ', month to date' : '');
-    $('invoice-facts').innerHTML = [['From', 'Grail Collective'], ['Billed to', esc(S.shop || '[Your Shop]')], ['Status', b.open ? 'Open, closes at the end of the month' : 'Paid from balance']].map(function (f) {
-      return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>';
+    $('invoice-facts').innerHTML = [['From', 'Grail Collective'], ['Billed to', esc(S.shop || '[Your Shop]')], ['Status', b.open ? 'Open, closes at the end of the month' : 'Paid from balance']].map(function (x) {
+      return '<div><dt>' + x[0] + '</dt><dd>' + x[1] + '</dd></div>';
     }).join('');
     $('invoice-rows').innerHTML = lines.map(function (l) {
-      return '<tr><td>' + l[0] + '</td><td class="r">' + money(l[1]) + '</td><td class="r">' + l[2] + '</td><td class="r strong">' + usd(l[3]) + '</td></tr>';
-    }).join('') + '<tr class="total-row"><td>Total</td><td class="r">' + money(b.basic + b.chase + b.ship) + '</td><td></td><td class="r">' + usd(total) + '</td></tr>';
-    $('invoice-note').textContent = b.open ? 'This month is still open. The fees so far have already come off your balance, so nothing is owed.'
-      : 'Every fee on this invoice came off your balance when it was charged. Nothing is owed.';
+      return '<tr><td>' + l[0] + '</td><td class="r">' + l[1] + '</td><td class="r">' + l[2] + '</td><td class="r strong">' + l[3] + '</td></tr>';
+    }).join('') + '<tr class="total-row"><td>Total</td><td class="r">' + money(b.basic + b.chase) + '</td><td></td><td class="r">' + usd(f.total) + '</td></tr>';
+    $('invoice-note').textContent = (b.open ? 'This month is still open. The fees so far have already come off your balance, so nothing is owed.' : 'Every fee on this invoice came off your balance when it was charged. Nothing is owed.') +
+      ' The transaction fee is charged when a purchase is made. A card that ships is then charged the difference to the Fulfilment fee.';
     openSheet($('invoice'));
   }
 
@@ -2372,6 +2721,11 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       b.classList.toggle('has-warn', f === 'warn' && n[f] > 0);
     });
     var rows = found.filter(function (s) { return S.shipFilter === 'all' || shipState(s).kind === S.shipFilter; });
+    // a shipment with a problem leads the page: what happened, who acts next and what the shop can do
+    var exc = S.shipFilter === 'all' || S.shipFilter === 'warn' ? found.filter(function (s) { return s.issue; }) : [];
+    $('ship-exc').hidden = !exc.length;
+    $('ship-exc').innerHTML = exc.map(excCard).join('');
+    $('ship-panel').hidden = S.shipFilter === 'warn' && exc.length > 0;
     $('ship-rows').innerHTML = rows.slice(0, S.shipShown).map(shipRow).join('');
     $('ship-table').hidden = !rows.length;
     $('ship-empty').hidden = rows.length > 0;
@@ -2402,13 +2756,14 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     if (!s) return;
     var st = shipState(s), has = st.done >= 3;
     $('track-title').textContent = 'Shipment ' + s.id;
-    $('track-sub').textContent = st.line;
+    $('track-sub').textContent = st.line + (s.asked ? '. Tax ID requested ' + s.asked + '.' : '');
     $('track-sub').style.color = st.kind === 'warn' ? 'var(--warn)' : '';
     var facts = [
       ['Customer', esc(s.who)], ['Order', s.order], ['Ships to', esc(s.city + ', ' + s.country)],
       ['Tracking', s.carrier + (has ? ' <span class="num trk">' + chunks(s.track) + '</span><button class="btn btn-sm" type="button" data-copy="' + s.track + '">Copy number</button>' : ', number assigned at pickup'), 'wide'],
       ['Card value', money(s.v)],
-      ['Card', esc(cardName(s)), 'wide'], ['Fulfilment fee', money2(s.v * FEE_RATE)]
+      ['Card', esc(cardName(s)), 'wide'], ['Fulfilment fee', money2(s.v * FEE_RATE)],
+      ['Charged at shipping', usd(shipFee(s.v)) + '<span class="muted">after the ' + usd(txFee(s.v)) + ' transaction fee charged at the purchase</span>', 'wide']
     ];
     $('track-facts').innerHTML = facts.map(function (f) { return '<div' + (f[2] ? ' class="' + f[2] + '"' : '') + '><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
     var html = '';
@@ -2499,7 +2854,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   function setActivityMode() {
     var table = S.actMode === 'table';
     pressed('data-act-mode', S.actMode);
-    $('view-activity').classList.toggle('as-table', table);
+    $('view-analytics').classList.toggle('as-table', table);
     $('hours-chart-wrap').hidden = table;
     $('hours-table').hidden = !table;
     hideTip();
@@ -2526,22 +2881,242 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     $('rail-stem').style.left = x + 'px';
     var tag = $('rail-tag'), half = tag.offsetWidth / 2;
     tag.style.left = Math.max(half, Math.min(W - half, x)) + 'px';
+    // near an end of the rail the tooltip opens toward the middle, so it stays on the screen
+    var tip = $('tip-max-rail'), end = x < W * 0.3 ? 'start' : x > W * 0.7 ? 'end' : '';
+    tip.classList.toggle('tip-bc', !end);
+    tip.classList.toggle('tip-br', end === 'end');
+  }
+
+  // ---------- overview: what needs doing, the connection and the fees ----------
+  function renderTodo() {
+    var items = [], av = S.balance - S.held, warn = SHIP.filter(function (s) { return s.issue; });
+    if (warn.length && can('ops')) {
+      var c = warn.filter(function (s) { return s.issue === 1; }).length, f = warn.length - c, parts = [];
+      if (c) parts.push(c + ' held at customs');
+      if (f) parts.push(f + ' failed delivery');
+      items.push(['warn', warn.length + (warn.length === 1 ? ' shipment needs' : ' shipments need') + ' attention', parts.join(', '), '<a class="btn btn-sm btn-primary" href="#shipments" data-ship-warn>Resolve</a>']);
+    }
+    PACKS.filter(function (p) { return !p.live; }).sort(function (a, b) { return a.cards[0].v - b.cards[0].v; }).forEach(function (p) {
+      var gap = Math.max(0, need(p.cards[0].v) - av);
+      if (!gap) return;
+      var act = can('packs') ? '<a class="btn btn-sm" href="#packs" data-jump="pack-' + p.id + '">View pack</a>'
+        : can('topup') ? '<button class="btn btn-sm" type="button" data-topup-exact="' + gap + '">Top up ' + money(gap) + '</button>' : '';
+      items.push(['way', esc(p.label) + ' is paused', 'Add ' + money(gap) + ' to your Available Balance to make it live.', act]);
+    });
+    $('todo-list').innerHTML = items.length ? items.map(function (i) {
+      return item('<span class="dot dot-' + i[0] + '" aria-hidden="true"></span>' + i[1], i[2], i[3]);
+    }).join('') : '<p class="note">Nothing needs your attention right now.</p>';
+    $('todo-count').textContent = items.length ? items.length + (items.length === 1 ? ' item' : ' items') : '';
+  }
+
+  // ---------- the link to the shop platform: is it alive, and did every event arrive ----------
+  function evList() { return S.mode === 'live' ? EVENTS : S.sandbox ? EVENTS_TEST : []; }
+  function evWaiting(e) { return !!e.wait && !S.acked[e.id]; }
+  function renderConn() {
+    var live = S.mode === 'live', list = evList(), wait = list.filter(evWaiting).length, last = 0;
+    list.forEach(function (e) { if (!evWaiting(e) && e.t > last) last = e.t; });
+    var sync = !list.length ? 'Not yet' : S.synced ? 'Just now' : Math.max(1, Math.round((NOW - last) / MIN)) + ' min ago';
+    var acked = live ? ACK24 + Object.keys(S.acked).length : list.length - wait;
+    $('conn-env').textContent = live ? 'Live' : 'Sandbox';
+    $('conn-env').classList.toggle('tag-on', live);
+    $('k-sync').textContent = sync;
+    $('k-acked').textContent = count(acked);
+    $('k-retry').textContent = wait;
+    $('k-retry').classList.toggle('warn', wait > 0);
+    $('conn-docs').textContent = live ? 'View docs' : 'View Sandbox docs';
+    $('conn-test').disabled = !list.length;
+    $('conn-mini-env').textContent = live ? 'Live' : 'Sandbox';
+    $('conn-mini-env').classList.toggle('tag-on', live);
+    var retry = wait ? ' <strong class="warn">' + wait + (wait === 1 ? ' event needs' : ' events need') + ' a retry.</strong>' : '';
+    $('conn-mini-text').innerHTML = !list.length ? 'Not connected yet. Generate a Sandbox to start building.'
+      : live ? 'Connected. Last successful sync ' + sync.toLowerCase() + '.' + (retry || ' Every event was acknowledged.')
+      : 'Connected to the Sandbox only. Last successful sync ' + sync.toLowerCase() + '.' + retry + ' The live key unlocks once your shop is approved.';
+  }
+  function renderEvents() {
+    var list = evList(), focus = S.evFocus, scoped = focus ? list.filter(function (e) { return e.p.tp === focus; }) : list;
+    var n = { all: scoped.length, wait: scoped.filter(evWaiting).length };
+    all('[data-ev]').forEach(function (b) {
+      var k = b.getAttribute('data-ev');
+      b.setAttribute('aria-pressed', k === S.evFilter ? 'true' : 'false');
+      b.querySelector('b').textContent = n[k];
+      b.classList.toggle('has-warn', k === 'wait' && n[k] > 0);
+    });
+    // an event that needs a retry stays on top until it is acknowledged
+    var rows = scoped.filter(evWaiting).concat(S.evFilter === 'all' ? scoped.filter(function (e) { return !evWaiting(e); }) : []);
+    $('ev-rows').innerHTML = rows.slice(0, S.evShown).map(function (e) {
+      var w = evWaiting(e);
+      return '<tr data-row><td style="white-space: nowrap">' + clock(new Date(e.t)) + '</td><td class="strong" style="white-space: nowrap">' + esc(e.label) + '</td><td class="num">' + e.p.tp + '</td><td class="num">' + e.p.tx + '</td>' +
+        '<td class="cell2' + (w ? ' st-warn' : '') + '"><b' + (w ? '' : ' class="quiet"') + '><span class="dot' + (w ? ' dot-warn' : ' dot-on') + '" aria-hidden="true"></span>' + (w ? 'Awaiting acknowledgement' : 'Acknowledged') + '</b></td>' +
+        '<td class="r"><button class="btn btn-sm" type="button" data-event="' + e.id + '" aria-label="Inspect event ' + e.id + '">Inspect</button></td></tr>';
+    }).join('');
+    $('ev-table').hidden = !rows.length;
+    $('ev-empty').hidden = rows.length > 0;
+    $('ev-empty').textContent = !list.length ? 'No events yet. They show up here from your first test purchase.' : S.evFilter === 'wait' ? 'Every event was acknowledged. Nothing to send again.' : 'No events for this purchase.';
+    $('ev-focus').hidden = !focus;
+    $('ev-focus-id').textContent = focus;
+    $('ev-meta').textContent = focus ? '' : 'Latest events';
+    var left = rows.length - S.evShown;
+    $('ev-more-wrap').hidden = left <= 0;
+    $('ev-more').textContent = 'Show ' + Math.min(12, Math.max(left, 0)) + ' more';
+  }
+  // What the shop platform receives. The names are a sample, and the docs hold the real ones.
+  function iso(t) { return new Date(Math.round(t / 1000) * 1000).toISOString().replace('.000Z', 'Z'); }
+  function payload(e) {
+    var p = e.p, types = { purchase: 'purchase.received', staging: 'staging.completed', hold: 'vault.hold_created', release: 'purchase.released' };
+    var o = { id: e.id, type: types[e.kind], created: iso(e.t), idempotency_key: e.key,
+      purchase: { id: p.tp, platform_transaction: p.tx, customer: p.who || 'test-customer', pack: p.pack },
+      card: { id: p.card, name: p.n, set: p.s, grade: p.g, value: p.v.toFixed(2), currency: 'USD' } };
+    if (e.kind === 'hold') o.hold = { amount: p.v.toFixed(2), currency: 'USD', release_at: iso(NOW - p.ago * MIN + 48 * HOUR) };
+    if (p.test) o.sandbox = true;
+    return JSON.stringify(o, null, 2);
+  }
+  function openEvent(id) {
+    var e = evList().filter(function (x) { return x.id === id; })[0];
+    if (!e) return;
+    var w = evWaiting(e), p = e.p, fresh = S.evOpen !== id || !$('event').open;
+    S.evOpen = id;
+    $('event-title').textContent = e.label;
+    $('event-sub').textContent = w ? 'Awaiting acknowledgement by your shop platform' : S.acked[e.id] ? 'Sent again and acknowledged by your shop platform' : 'Acknowledged by your shop platform';
+    $('event-sub').style.color = w ? 'var(--warn)' : '';
+    var see = p.test || p.stage === 'released' ? '' : '<button class="btn btn-sm" type="button" data-purchase="' + p.tp + '">View purchase</button>';
+    var facts = [['Event ID', '<span class="num">' + e.id + '</span>'], ['Sent', clock(new Date(e.t))], ['Card', esc(p.n)],
+      ['Grail purchase', '<span class="num">' + p.tp + '</span>' + see], ['Shop platform transaction', '<span class="num">' + p.tx + '</span>', 'wide'],
+      ['Delivery', w ? 'Timed out. ' + e.tries + ' attempts, the last on ' + clock(new Date(e.last)) : S.acked[e.id] ? 'Acknowledged after your retry' : 'Acknowledged on the first attempt', 'wide'],
+      ['Idempotency key', '<span class="key">' + e.key + '</span><button class="btn btn-sm" type="button" data-copy="' + e.key + '">Copy</button>', 'wide']];
+    $('event-facts').innerHTML = facts.map(function (f) { return '<div' + (f[2] ? ' class="' + f[2] + '"' : '') + '><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
+    $('event-note').textContent = w ? 'Retry safely sends the same event again with the same idempotency key, so your shop platform cannot apply it twice.'
+      : 'Every attempt carries the same idempotency key, so your shop platform can tell a repeat from a new event.';
+    $('event-retry').hidden = !w || !can('keys');
+    $('event-payload').textContent = payload(e);
+    if (fresh) { $('event-payload-wrap').hidden = true; $('event-show').setAttribute('aria-expanded', 'false'); $('event-show').textContent = 'View payload'; }
+    if (!$('event').open) openSheet($('event'));
+  }
+
+  // ---------- one purchase, one trace: the references on both sides, the events, the hold and the fees ----------
+  function openPurchase(tp) {
+    var c = PURCHASES.filter(function (x) { return x.tp === tp; })[0];
+    if (!c || c.stage === 'released') return;
+    var who = PEOPLE.by[c.who], pack = packOf(c.pack), t0 = NOW - c.ago * MIN, chase = c.v >= 500, tx = txFee(c.v), more = shipFee(c.v), vault = c.stage === 'vault';
+    S.purchaseOpen = tp;
+    $('purchase-slab').innerHTML = slab(c, 'slab-md');
+    $('purchase-title').textContent = c.n;
+    $('purchase-sub').textContent = c.s + ', ' + c.g + '. ' + (vault ? 'In the Vault, ' + c.h + ' of 48 hours left.' : 'In Staging, ' + c.m + (c.m === 1 ? ' minute' : ' minutes') + ' left.');
+    var copy = function (v) { return '<span class="num">' + v + '</span><button class="btn btn-sm" type="button" data-copy="' + v + '">Copy</button>'; };
+    var facts = [['Customer', nameBtn(who) + '<span class="muted">' + who.id + '</span>'], ['Shop platform transaction', copy(c.tx)], ['Grail purchase', copy(c.tp)],
+      ['Card', '<span class="num">' + c.card + '</span>'], ['Pack', esc(pack.label) + '<span class="muted">' + pack.id + '</span>'], ['Class', chase ? 'Chase' : 'Basic']];
+    $('purchase-facts').innerHTML = facts.map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
+    var html = EVENTS.filter(function (e) { return e.p === c; }).sort(function (a, b) { return a.t - b.t; }).map(function (e) {
+      var w = evWaiting(e);
+      return '<li class="' + (w ? 'wait' : 'done') + '"><span>' + esc(e.label) + '</span><span class="tl-end"><span class="tag ' + (w ? 'tag-warn' : 'tag-on') + '">' + (w ? 'Awaiting acknowledgement' : 'Acknowledged') + '</span><time>' + clock(new Date(e.t)) + '</time></span></li>';
+    }).join('');
+    html += vault ? '<li><span>Release, unless the customer asks for shipping</span><span class="tl-end"><time>' + clock(new Date(t0 + 48 * HOUR)) + '</time></span></li>'
+      : '<li><span>Staging ends. The card moves to the Vault unless it is released</span><span class="tl-end"><time>' + clock(new Date(t0 + 5 * MIN)) + '</time></span></li>';
+    $('purchase-events').innerHTML = html;
+    var rows = [[vault ? 'Current hold' : 'Hold', vault ? money(c.v) : 'None yet', vault ? 'Blocked on your balance, not deducted' : money(c.v) + ' is held if the card is not released in Staging'],
+      ['Transaction fee', usd(tx), (chase ? 'Chase, 0.68%' : 'Basic, 0.95%') + ', charged at the purchase'],
+      ['If the card is released', 'No further fee', (vault ? 'The hold is lifted, and the' : 'The') + ' transaction fee stays'],
+      ['If the card ships', usd(more) + ' more', 'The Fulfilment fee of ' + usd(tx + more) + ' (6%), less the ' + usd(tx) + ' already charged']];
+    $('purchase-money').innerHTML = rows.map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '<small>' + r[2] + '</small></dd></div>'; }).join('');
+    if (!$('purchase').open) openSheet($('purchase'));
+  }
+
+  // ---------- packs: the route to going live, and the details of a pack ----------
+  // What a paused pack still needs: the Available Balance that covers its top chase card, how much of it is missing, and a button for exactly that amount.
+  function routeHtml(p, av, ok) {
+    var req = need(p.cards[0].v), gap = Math.max(0, req - av);
+    if (!gap) return '<small>Your balance covers this pack. It goes live once your shop is approved.</small>';
+    return '<div class="bar"><div class="bar-top"><span>Needs ' + money(req) + ' available</span><span><strong>' + money(gap) + '</strong> <em>more needed</em></span></div>' +
+      '<div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width: ' + (Math.max(0, av) / req * 100).toFixed(1) + '%"></div></div></div>' +
+      '<button class="btn btn-primary btn-wide" type="button" data-topup-exact="' + gap + '" data-can="topup">Top up ' + money(gap) + '</button>' +
+      (ok ? '' : '<small>Your shop also has to be approved.</small>');
+  }
+  // The first thing that keeps a pack paused. A shop that is not approved yet reads its balance gap in the block under the cards.
+  function pausedWhy(p, av, ok) { return ok ? 'balance' : 'approval'; }
+  // The card mix is set by Grail for each pack. These are sample numbers.
+  var MIX = { 'GR-0117': [86, 11, 2.7, 0.3], 'GR-0142': [84, 12.5, 3.1, 0.4], 'GR-0158': [82, 13.5, 4, 0.5], 'GR-0163': [80, 14.5, 4.9, 0.6] };
+  var MIX_NAMES = ['Common', 'Uncommon', 'Rare', 'Chase'];
+  function openPack(id) {
+    var p = packOf(id);
+    if (!p) return;
+    var av = S.balance - S.held, top = p.cards[0].v, req = need(top), gap = Math.max(0, req - av), ok = approved();
+    S.packOpen = id;
+    $('pack-title').textContent = p.label;
+    $('pack-sub').textContent = p.id + ', ' + money(p.price) + ' a pack, one card in each. ' + (p.live ? 'Live: your customers can buy it.' : 'Paused: hidden from your customers.');
+    var facts = [['Availability', p.live ? 'Live' : 'Paused: ' + pausedWhy(p, av, ok)], ['Top chase card', money(top)], ['Needs available', money(req)],
+      p.live ? ['Purchases, 30 days', S.mode === 'live' ? count(p.bought) : '0'] : ['Still needed', gap ? money(gap) : 'Approval only']];
+    $('pack-facts').innerHTML = facts.map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
+    $('pack-route').hidden = p.live;
+    $('pack-route').innerHTML = p.live ? '' : routeHtml(p, av, ok);
+    $('pack-cards').innerHTML = p.cards.map(function (c) {
+      return '<div class="vrow">' + slab(c, 'slab-sm') + '<div class="vname"><b>' + esc(c.n) + '</b><span>' + esc(c.g) + '</span></div><div class="vend"><span class="vval">' + money(c.v) + '</span></div></div>';
+    }).join('');
+    $('pack-mix').innerHTML = MIX[p.id].map(function (x, i) { return '<div class="mixrow"><span>' + MIX_NAMES[i] + '</span>' + meter(x / 100) + '</div>'; }).join('');
+    $('pack-note').textContent = 'Grail builds and stocks this pack, and its contents are the same in every shop. This version is built from the Grail inventory of 11 November 2026. You can change its name, and nothing else.';
+    $('pack-copy').setAttribute('data-copy', p.id);
+    applyAccess();
+    if (!$('pack').open) openSheet($('pack'));
+  }
+
+  // ---------- a shipment with a problem: what happened, who acts next, and what the shop can do ----------
+  function excCard(s) {
+    var st = shipState(s), customs = s.issue === 1, status, next, acts;
+    var track = '<button class="btn btn-sm" type="button" data-track="' + s.id + '" aria-label="Track shipment ' + s.id + '">' + (customs ? 'Track' : 'Track shipment') + '</button>';
+    if (customs) {
+      status = ['Held at customs', s.asked ? 'Tax ID requested ' + s.asked : 'Missing recipient tax ID'];
+      next = ['The customer', (s.asked ? 'Sends their tax ID.' : 'Has to send their tax ID.') + ' Your shop follows up.'];
+      acts = (s.asked ? '<button class="btn btn-sm" type="button" data-copy="' + esc(customerMessage(s, st)) + '">Copy request</button>'
+        : '<button class="btn btn-sm btn-primary" type="button" data-exc="ask" data-id="' + s.id + '">Request tax ID</button>') +
+        (s.caseId ? '<span class="tag">Case ' + s.caseId + ' open</span>' : '<button class="btn btn-sm" type="button" data-exc="case" data-id="' + s.id + '">Open support case</button>') + track;
+    } else {
+      status = ['Delivery attempt failed', 'Carrier retry: ' + st.again];
+      next = s.up ? ['Grail support', 'Escalated ' + s.up + '.'] : ['The carrier', 'Nothing for you to do yet.'];
+      acts = track + (s.up ? '<span class="tag">Escalated</span>' : '<button class="btn btn-sm" type="button" data-exc="up" data-id="' + s.id + '">Escalate</button>');
+    }
+    return '<article class="panel exc" data-exc-card="' + s.id + '">' +
+      '<div class="exc-what"><div><span class="tag' + (customs ? ' tag-warn' : '') + '">' + (customs ? 'Action required' : 'Monitoring') + '</span></div>' +
+      '<div class="row wrap exc-id"><b>' + s.id + '</b>' + nameBtn(PEOPLE.by[s.cid]) + '</div>' +
+      cardCell(s) + '<small>Requested ' + day(when(s, 0)) + ', order ' + s.order + '</small></div>' +
+      '<div class="exc-col"><span class="exc-lbl">Status</span><b>' + status[0] + '</b><small>' + status[1] + '</small></div>' +
+      '<div class="exc-col"><span class="exc-lbl">Who acts next</span><b>' + next[0] + '</b><small>' + next[1] + '</small></div>' +
+      '<div class="exc-col exc-acts"><span class="exc-lbl">Actions</span><div class="item-acts">' + acts + '</div></div></article>';
+  }
+  function excAct(kind, id) {
+    var s = SHIP.filter(function (x) { return x.id === id; })[0], now = clock(new Date(NOW));
+    if (!s) return;
+    if (kind === 'ask') { s.asked = now; renderShipments(); openTrack(id); }
+    else if (kind === 'case') { s.caseId = 'CS-' + (2105 + SHIP.filter(function (x) { return x.caseId; }).length); renderShipments(); toast('Support case ' + s.caseId + ' is open with Grail support.'); }
+    else if (kind === 'up') { s.up = now; renderShipments(); toast('Escalated to Grail support.'); }
   }
 
   // ---------- pages ----------
-  var VIEWS = ['overview', 'packs', 'marketplace', 'vault', 'shipments', 'customers', 'activity', 'billing', 'integration', 'kyb', 'team', 'account'];
+  // Eight pages in the bar. Some hold more than one page, and those show a second row to move between them.
+  var GROUPS = [['overview', 'Overview', ['overview']], ['catalogue', 'Catalogue', ['packs', 'marketplace']], ['fulfilment', 'Fulfilment', ['vault', 'shipments']],
+    ['customers', 'Customers', ['customers']], ['analytics', 'Analytics', ['analytics']], ['billing', 'Billing', ['billing']],
+    ['integration', 'Integration', ['integration']], ['settings', 'Settings', ['account', 'team', 'kyb']]];
+  var VIEWS = GROUPS.reduce(function (a, g) { return a.concat(g[2]); }, []);
+  var SUB_NAMES = { packs: 'Packs', marketplace: 'Marketplace singles', vault: 'Vault', shipments: 'Shipments', account: 'Shop', team: 'Team', kyb: 'KYB' };
+  var OLD_NAMES = { activity: 'analytics', catalogue: 'packs', fulfilment: 'vault' };   // addresses from before the pages were grouped
+  var current = 'overview', jumpTo = null;
+  function groupOf(view) { return GROUPS.filter(function (g) { return g[2].indexOf(view) >= 0; })[0]; }
+  function opens(views) { return views.filter(function (v) { return can(PAGE_NEEDS[v]); }); }
   function route() {
     var name = (location.hash || '').replace('#', '');
+    if (OLD_NAMES[name]) name = OLD_NAMES[name];
     if (VIEWS.indexOf(name) < 0) name = 'overview';
     // a page the signed-in role may not open falls back to the first one it may
-    if (!can(PAGE_NEEDS[name])) name = VIEWS.filter(function (v) { return can(PAGE_NEEDS[v]); })[0] || 'none';
+    if (!can(PAGE_NEEDS[name])) name = opens(VIEWS)[0] || 'none';
+    current = name;
     VIEWS.concat('none').forEach(function (v) { $('view-' + v).hidden = v !== name; });
-    all('[data-nav]').forEach(function (a) {
-      if (a.getAttribute('data-nav') === name) {
+    var g = name === 'none' ? null : groupOf(name), subs = g ? opens(g[2]) : [], nav = $('subtabs');
+    all('[data-group]').forEach(function (a) {
+      if (g && a.getAttribute('data-group') === g[0]) {
         a.setAttribute('aria-current', 'page');
         if (a.classList.contains('tab') && a.scrollIntoView) a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       } else a.removeAttribute('aria-current');
     });
+    nav.hidden = subs.length < 2;
+    nav.setAttribute('aria-label', g ? 'Pages in ' + g[1] : '');
+    nav.innerHTML = subs.length < 2 ? '' : subs.map(function (v) { return '<a class="subtab" href="#' + v + '"' + (v === name ? ' aria-current="page"' : '') + '>' + SUB_NAMES[v] + '</a>'; }).join('');
     hideTip();
     // a key is shown in full only until you leave the page
     if (S.liveKey && S.liveKey.full) delete S.liveKey.full;
@@ -2549,7 +3124,17 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     renderKeys();
     if (name === 'packs') layoutRail();
   }
-  window.addEventListener('hashchange', function () { route(); window.scrollTo(0, 0); });
+  // After a move: go to the part of the page that was asked for, or to the top.
+  function landed() {
+    var el = jumpTo && $(jumpTo);
+    jumpTo = null;
+    if (!el || !el.getClientRects().length) { window.scrollTo(0, 0); return; }
+    var pack = el.classList.contains('pack');
+    el.scrollIntoView({ block: pack ? 'center' : 'start' });
+    if (pack) { el.classList.add('is-target'); setTimeout(function () { el.classList.remove('is-target'); }, 1800); }
+  }
+  function go(view, target) { jumpTo = target || null; if (current === view) landed(); else location.hash = view; }
+  window.addEventListener('hashchange', function () { route(); landed(); });
 
   // ---------- toast ----------
   var toastTimer = null;
@@ -2606,8 +3191,10 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   }
   function openTopup(amount) {
     var def = defaultMethod(), list = payOptions(), on = def ? def.id : list[0].id;
-    other.value = '';
-    $('amt-' + (amount || 5000)).checked = true;
+    // one of the four round amounts, or exactly the amount a pack still needs
+    var preset = $('amt-' + (amount || 5000));
+    other.value = preset ? '' : money(amount);
+    all('input[name="amount"]').forEach(function (r) { r.checked = r === preset; });
     $('pay-list').innerHTML = list.map(function (m) {
       return '<label class="opt"><input type="radio" name="method" id="pay-' + m.id + '" value="' + m.id + '"' + (m.id === on ? ' checked' : '') + '><span>' + esc(m.label) + '</span></label>';
     }).join('');
@@ -2636,8 +3223,8 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   // A top-up is rare and it matters, so it is the one moment the dashboard performs: the amount travels on an arc from the
   // button to the balance, the balance takes the hit, and the three figures count up to their new values.
   function arrive(amt, was, from) {
-    var num = document.querySelector('[data-bind="available"]');
-    if (quiet() || !num || !num.getClientRects().length || !document.body.animate || !window.requestAnimationFrame) return;
+    var num = all('[data-bind="available"]').filter(function (el) { return el.getClientRects().length; })[0];
+    if (quiet() || !num || !document.body.animate || !window.requestAnimationFrame) return;
     var seq = renderSeq, now = { available: S.balance - S.held, balance: S.balance, maxcard: maxCard(S.balance - S.held) };
     var names = Object.keys(now).filter(function (k) { return now[k] !== was[k]; });
     names.forEach(function (k) { bind(k, money(was[k])); });   // hold the old figures until the amount lands
@@ -2718,7 +3305,7 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
     }
     if ((el = t.closest('[data-as]'))) {
       S.as = el.getAttribute('data-as');
-      applyAccess(); route(); window.scrollTo(0, 0);
+      renderTodo(); applyAccess(); route(); window.scrollTo(0, 0);
       toast(S.as === 'Admin' ? 'Signed in as an admin again.' : 'Showing what a ' + S.as + ' user sees.');
       return;
     }
@@ -2764,10 +3351,20 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
       return;
     }
     if ((el = t.closest('[data-auto]'))) { S.auto = !S.auto; render(); toast(S.auto ? 'Auto top-up is on.' : 'Auto top-up is off.'); return; }
+    if ((el = t.closest('[data-topup-exact]'))) { all('dialog[open]').forEach(closeSheet); openTopup(Number(el.getAttribute('data-topup-exact'))); return; }
+    if ((el = t.closest('[data-pack-details]'))) { openPack(el.getAttribute('data-pack-details')); return; }
+    if ((el = t.closest('[data-purchase]'))) { if ($('event').open) closeSheet($('event')); openPurchase(el.getAttribute('data-purchase')); return; }
+    if ((el = t.closest('[data-event]'))) { openEvent(el.getAttribute('data-event')); return; }
+    if ((el = t.closest('[data-ev]'))) { S.evFilter = el.getAttribute('data-ev'); S.evShown = START.evShown; renderEvents(); return; }
+    if ((el = t.closest('[data-ev-clear]'))) { S.evFocus = ''; S.evShown = START.evShown; renderEvents(); return; }
+    if ((el = t.closest('[data-exc]'))) { excAct(el.getAttribute('data-exc'), el.getAttribute('data-id')); return; }
+    // these two are links: the click sets what the page shows, and the link opens the page
+    if ((el = t.closest('[data-ship-warn]'))) { S.shipFilter = 'warn'; S.shipQuery = ''; $('ship-search').value = ''; S.shipShown = START.shipShown; renderShipments(); return; }
+    if ((el = t.closest('[data-jump]'))) { jumpTo = el.getAttribute('data-jump'); if (current === el.getAttribute('href').slice(1)) { e.preventDefault(); landed(); } return; }
     // a row with one clear action takes the click anywhere along it, not only on its small button
     if ((el = t.closest('tr[data-row]')) && !t.closest('button, a, input, select, label')) {
       if (window.getSelection && String(window.getSelection())) return;   // dragging across a row to select its text is not a click on it
-      var act = el.querySelector('[data-track], .btn[data-person], [data-invoice]');
+      var act = el.querySelector('[data-track], [data-purchase], [data-event], .btn[data-person], [data-invoice]');
       if (act) act.click();
       return;
     }
@@ -2791,6 +3388,42 @@ dialog.sheet::backdrop { -webkit-backdrop-filter: blur(3px); backdrop-filter: bl
   $('ledger-more').addEventListener('click', function () { S.ledgerShown += 20; renderLedger(); });
   $('method-add').addEventListener('click', function () { $('method-form').reset(); openSheet($('method')); });
   $('kyb-submit').addEventListener('click', function () { S.kyb = 'review'; render(); toast('Sent to Grail for review.'); });
+  // integration: test the link, read the docs, look at an event and send it again
+  $('ev-more').addEventListener('click', function () { S.evShown += 12; renderEvents(); });
+  $('conn-test').addEventListener('click', function () { S.synced = true; renderConn(); toast('Test event sent. Your shop platform acknowledged it.'); });
+  $('conn-docs').addEventListener('click', function () { var d = document.querySelector('#doc-list details'); if (d) d.open = true; jumpTo = 'docs-title'; landed(); });
+  $('event-show').addEventListener('click', function () {
+    var w = $('event-payload-wrap');
+    w.hidden = !w.hidden;
+    this.setAttribute('aria-expanded', w.hidden ? 'false' : 'true');
+    this.textContent = w.hidden ? 'View payload' : 'Hide payload';
+  });
+  $('event-retry').addEventListener('click', function () {
+    var id = S.evOpen;
+    if (!id) return;
+    S.acked[id] = true; S.synced = true;
+    renderConn(); renderEvents(); openEvent(id);
+    if ($('purchase').open) openPurchase(S.purchaseOpen);
+  });
+  // a purchase leads on to its events and to the ledger
+  $('purchase-events-go').addEventListener('click', function () {
+    var tp = S.purchaseOpen;
+    all('dialog[open]').forEach(closeSheet);
+    S.evFocus = tp; S.evFilter = 'all'; S.evShown = START.evShown;
+    renderEvents(); go('integration', 'ev-title');
+  });
+  $('purchase-ledger-go').addEventListener('click', function () {
+    all('dialog[open]').forEach(closeSheet);
+    S.ledgerFilter = 'fee'; S.ledgerShown = START.ledgerShown;
+    renderLedger(); go('billing', 'ledger-title');
+  });
+  $('pack-rename').addEventListener('click', function () {
+    var p = packOf(S.packOpen);
+    closeSheet($('pack'));
+    if (!p) return;
+    managing = p; $('manage-name').value = p.label; $('manage-id').textContent = p.id; openSheet($('manage'));
+  });
+  $('terms-open').addEventListener('click', function () { openSheet($('terms')); });
   // team: add a user, change a role, tick a permission
   function userRoleNote() { var r = document.querySelector('input[name="newrole"]:checked'); $('user-role-note').textContent = r ? roleSees(r.value) : ''; }
   $('user-add').addEventListener('click', function () {
