@@ -774,6 +774,91 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 .notice p { flex-basis: 13rem; }
 #case-rows td.strong, #rec-rows td:nth-child(3) { white-space: nowrap; }
 
+/* ================= added with the search, the update times and the phone layout ================= */
+.vh { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+.badge { display: inline-flex; align-items: center; justify-content: center; min-width: 1.25rem; height: 1.25rem; margin-left: 0.5rem; padding: 0 0.3125rem; border-radius: 999px; background: var(--warn); color: var(--panel); font-size: 0.75rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+
+/* ---- one search for everything, in the bar ---- */
+.search.gsearch { flex: 1 1 11rem; max-width: 25rem; margin: 0 auto; }
+.gsearch + .who { margin-left: 0; }
+.gsearch svg.ic { left: 0.75rem; width: 1rem; height: 1rem; }
+.gsearch .field { min-height: 2.375rem; padding-left: 2.25rem; padding-right: 2.5rem; font-size: 0.9375rem; background: var(--soft); text-overflow: ellipsis; }
+.gsearch.no-key .key-hint { display: none; }
+.only-sm { display: none; }
+.related { display: flex; flex-wrap: wrap; align-items: center; gap: 0.125rem 1rem; padding-top: 0.375rem; font-size: 0.875rem; line-height: 1.4; color: var(--t2); }
+.related .namebtn { font-size: 0.875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 0.18em; text-decoration-color: var(--btn-border); }
+.related .namebtn:hover { text-decoration-color: currentColor; }
+.related .exc-lbl { padding: 0; }
+.item-main b .tag { margin-right: 0.625rem; vertical-align: 0.0625rem; }
+.tries { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+#search-meta, #search-empty span { min-width: 0; overflow-wrap: anywhere; }
+.facts dd .namebtn { display: inline; white-space: normal; text-decoration: underline; text-underline-offset: 0.18em; text-decoration-color: var(--btn-border); }
+.vrow .tag { flex: none; }
+
+/* ---- how current a value is ---- */
+.kv dt small { display: block; font-size: 0.8125rem; color: var(--t3); }
+.kv dd .tag { margin-left: 0.625rem; vertical-align: 0.0625rem; }
+.src-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding-top: 1rem; }
+.src { display: flex; flex-direction: column; gap: 0.1875rem; min-width: 0; padding: 0 1.5rem; border-left: 1px solid var(--hair); }
+.src:first-child { padding-left: 0; border-left: none; }
+.src:last-child { padding-right: 0; }
+.src b { font-size: 1rem; font-weight: 600; line-height: 1.3; }
+.src small { font-size: 0.875rem; line-height: 1.4; color: var(--t3); }
+.src-at { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem 0.625rem; padding-top: 0.5rem; }
+.src-time { font-size: 0.875rem; color: var(--t2); font-variant-numeric: tabular-nums; }
+#src-refresh svg.ic { width: 0.9375rem; height: 0.9375rem; }
+
+/* ---- the pages, as a list for a phone ---- */
+.pagelist { display: flex; flex-direction: column; gap: 1rem; }
+.pagelist h3 { font-size: 0.8125rem; font-weight: 500; color: var(--t3); padding-bottom: 0.25rem; }
+.pagelist a { display: flex; align-items: center; justify-content: space-between; min-height: 2.875rem; padding: 0 0.25rem; border-top: 1px solid var(--hair); font-size: 1rem; font-weight: 600; text-decoration: none; }
+.pagelist a[aria-current="page"] { color: var(--live); }
+.botnav { display: none; }
+/* a message takes the width its words need, up to the screen, instead of half of it */
+.toast { width: max-content; }
+
+@media (max-width: 620px) {
+  /* the bar keeps the shop and the search, and the pages move to the bottom of the screen, under the thumb */
+  .search.gsearch { display: none; }
+  .only-sm { display: inline-flex; }
+  .tabs { display: none; }
+  .topbar { padding-bottom: 0.125rem; }
+  .who { flex: 1 1 100%; margin-left: 0; }
+  .who .chip { margin-right: auto; }
+  .src-grid { grid-template-columns: minmax(0, 1fr); }
+  .src { padding: 0.875rem 0; border-left: none; border-top: 1px solid var(--hair); }
+  .src:first-child { padding-top: 0; border-top: none; }
+  .src:last-child { padding-bottom: 0; }
+  .gutter { padding-bottom: calc(6.5rem + env(safe-area-inset-bottom, 0px)); }
+  .toast { bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px)); }
+  .botnav { position: fixed; z-index: 50; left: 0; right: 0; bottom: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); padding: 0.25rem max(16px, env(safe-area-inset-right, 0px)) calc(0.25rem + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: var(--panel); border-top: 1px solid var(--border); box-shadow: 0 -0.75rem 1.5rem -1.25rem rgba(15,26,46,0.45); }
+  .botnav a, .botnav button { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.1875rem; min-height: 3.5rem; padding: 0; border: none; background: none; font: inherit; font-size: 0.75rem; font-weight: 500; color: var(--t2); text-decoration: none; cursor: pointer; }
+  .botnav svg.ic { width: 1.375rem; height: 1.375rem; stroke-width: 1.7; }
+  .botnav [aria-current="page"] { color: var(--ink); font-weight: 600; }
+  .botnav [aria-current="page"]::before { content: ""; position: absolute; top: -0.25rem; left: 28%; right: 28%; height: 2px; border-radius: 2px; background: var(--accent); }
+  .botnav .badge { position: absolute; top: 0.375rem; left: calc(50% + 0.375rem); margin: 0; }
+
+  /* a list becomes one card per row: the card or the case on top, the rest in two columns with its label, and the button under the thumb */
+  .tbl.cards-tbl { min-width: 0 !important; }
+  .cards-tbl, .cards-tbl tbody { display: block; }
+  .cards-tbl thead { display: none; }
+  .cards-tbl tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 0.75rem 0.875rem; padding: 1rem 0; border-top: 1px solid var(--hair); }
+  .cards-tbl tr:first-child { border-top: none; padding-top: 0; }
+  .cards-tbl tr:last-child { padding-bottom: 0; }
+  .cards-tbl td { padding: 0; border: none; min-width: 0; }
+  .cards-tbl td:first-child { grid-column: 1 / -1; font-size: 1.0625rem; }
+  .cards-tbl td.r { text-align: left; }
+  .cards-tbl td[data-l]::before { content: attr(data-l); display: block; padding-bottom: 0.1875rem; font-size: 0.8125rem; font-weight: 400; color: var(--t3); }
+  .cards-tbl td:last-child:nth-child(even) { grid-column: 1 / -1; }
+  .cards-tbl td:last-child { align-self: end; }
+  .cards-tbl td:last-child .btn { width: 100%; min-height: 3rem; }
+  .cards-tbl .cell2 b, .cards-tbl .cell2 small { white-space: normal; }
+  #case-rows td.strong { white-space: normal; }
+  .ship-tbl td:nth-child(7) .btn { min-height: 3rem; padding: 0 1.25rem; }
+}
+#src-refresh.is-busy svg.ic { animation: spin 600ms var(--out); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
 /* on a touch screen every control takes a full fingertip, whatever size it is drawn */
 @media (pointer: coarse) {
   .btn, .fchip, .seg-btn, .namebtn, .linkbtn, .iconbtn, .info, .switch, .tickbox { position: relative; }
@@ -796,6 +881,11 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></symbol>
     <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"></path></symbol>
     <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3h.1a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8v.1a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"></path><path d="M6 10v9.5h12V10"></path></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 7h11v9H3z"></path><path d="M14 10h4l3 3v3h-7"></path><circle cx="7.5" cy="17.5" r="1.5"></circle><circle cx="17.5" cy="17.5" r="1.5"></circle></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"></path><path d="M10 20.5a2 2 0 0 0 4 0"></path></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="18.5" cy="12" r="1"></circle></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.3L4 8.5"></path><path d="M4 4v4.5h4.5"></path><path d="M4 13a8 8 0 0 0 14.3 4.3L20 15.5"></path><path d="M20 20v-4.5h-4.5"></path></symbol>
   </defs>
 </svg>
 
@@ -807,9 +897,15 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       <span class="logo" aria-hidden="true"><svg class="ic"><use href="#i-gem"></use></svg></span>
       <span class="brand-name">Grail Collective</span>
     </a>
+    <form class="search gsearch" id="gsearch" role="search">
+      <svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg>
+      <input class="field" type="search" id="gsearch-q" aria-label="Search purchases, customers, shipments and cases" aria-keyshortcuts="/" placeholder="Search purchases, customers, shipments, cases" autocomplete="off" spellcheck="false" enterkeyhint="search">
+      <kbd class="key-hint" aria-hidden="true">/</kbd>
+    </form>
     <div class="who">
       <span class="shop" data-bind="shopname">[Your Shop]</span>
       <span class="chip" data-bind="levelchip">Silver</span>
+      <a class="iconbtn only-sm" id="gsearch-go" href="#search" aria-label="Search"><svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg></a>
       <button class="iconbtn" type="button" id="theme-toggle" aria-label="Switch between light and dark">
         <svg class="ic theme-moon" aria-hidden="true"><use href="#i-moon"></use></svg>
         <svg class="ic theme-sun" aria-hidden="true"><use href="#i-sun"></use></svg>
@@ -933,6 +1029,17 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       </section>
     </div>
   </div>
+  <section class="panel pad" aria-labelledby="src-title" style="margin-top: 1.25rem">
+    <div class="head rel">
+      <div class="row wrap">
+        <h2 class="h-panel" id="src-title">Data sources</h2>
+        <span class="tipw"><button class="info" type="button" aria-label="About the data sources" aria-describedby="tip-sources"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-sources">Where each kind of figure comes from, and when it last changed. Your balance, holds and fees are Grail’s own records. Purchases and customers arrive from your shop platform. Tracking comes from the carrier, and a status the carrier has not updated for a day is shown as the last known status. Times are UTC.</span></span>
+        <span class="meta" id="src-viewed">Viewed at 16:00 UTC</span>
+      </div>
+      <button class="btn btn-sm" type="button" id="src-refresh"><svg class="ic" aria-hidden="true"><use href="#i-refresh"></use></svg>Refresh</button>
+    </div>
+    <div class="src-grid" id="src-list"></div>
+  </section>
 </div>
 
 <!-- ================= Packs ================= -->
@@ -1019,7 +1126,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   <div class="pbody stack-v" data-when="live">
     <section class="panel pad" aria-label="Held in the Vault">
       <div class="tbl-wrap">
-        <table class="tbl" style="min-width: 50rem">
+        <table class="tbl" id="vault-table" style="min-width: 50rem">
           <thead id="vault-head"></thead>
           <tbody id="vault-rows"></tbody>
         </table>
@@ -1034,7 +1141,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
         </div>
       </div>
       <div class="tbl-wrap">
-        <table class="tbl" style="min-width: 50rem">
+        <table class="tbl cards-tbl" style="min-width: 50rem">
           <thead><tr><th style="width: 32%">Card</th><th>Customer</th><th>Pack</th><th class="r">Value</th><th>Time left in Staging</th><th></th></tr></thead>
           <tbody id="staging-rows"></tbody>
         </table>
@@ -1053,6 +1160,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       <h1 class="h-page">Shipments</h1>
       <span class="tipw"><button class="info" type="button" aria-label="About shipments" aria-describedby="tip-shipments"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-shipments">Every card a customer asked to ship, with its tracking. A customer can ask for shipping until hour 48. The card price is paid from the held amount. A card that ships pays the Fulfilment fee instead of the transaction fee, never both: the transaction fee was charged at the purchase, so shipping charges only the difference. Cards ship from Hong Kong. A shipment with a problem shows who acts next.</span></span>
       <span class="meta" data-when="live" id="ship-meta">74 in the last 30 days</span>
+      <span class="meta" data-when="live" id="ship-fresh"></span>
     </div>
   </div>
   <div class="pbody stack-v" data-when="live">
@@ -1529,7 +1637,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     </div>
     <section class="panel pad" aria-label="Cases">
       <div class="tbl-wrap">
-        <table class="tbl" id="case-table" style="min-width: 54rem">
+        <table class="tbl cards-tbl" id="case-table" style="min-width: 54rem">
           <thead><tr><th>Case</th><th>Shipment</th><th>Issue</th><th>Status</th><th>Who acts next</th><th>Updated</th><th></th></tr></thead>
           <tbody id="case-rows"></tbody>
         </table>
@@ -1780,6 +1888,32 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   </div>
 </div>
 
+<!-- ================= Search ================= -->
+<div class="page" id="view-search" hidden>
+  <div class="phead">
+    <div class="row wrap">
+      <h1 class="h-page">Search</h1>
+      <span class="tipw"><button class="info" type="button" aria-label="About the search" aria-describedby="tip-search"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-search">One search for purchases, customers, shipments and cases. Type a name, a card or any reference: a purchase, a shop platform transaction, a shipment, an order, a tracking number or a case. Each result leads on to the records that belong to it.</span></span>
+      <span class="meta" id="search-meta" role="status"></span>
+    </div>
+  </div>
+  <div class="pbody stack-v">
+    <form class="toolbar" id="search-form" role="search">
+      <div class="search" style="max-width: none">
+        <svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg>
+        <input class="field" type="search" id="search-q" aria-label="Search purchases, customers, shipments and cases" placeholder="A name, a card or a reference" autocomplete="off" spellcheck="false" enterkeyhint="search">
+      </div>
+      <div class="chips" role="group" aria-label="Show" id="search-filters"></div>
+    </form>
+    <section class="panel pad" aria-label="Results">
+      <div class="list" id="search-list"></div>
+      <div class="empty" id="search-empty" hidden></div>
+      <div class="more" id="search-more-wrap"><button class="btn" type="button" id="search-more">Show more</button></div>
+    </section>
+    <p class="note" style="padding: 0 0.25rem">The search shows only what your role may open.</p>
+  </div>
+</div>
+
 <!-- ================= No access ================= -->
 <div class="page" id="view-none" hidden>
   <div class="pbody" style="padding-top: 1.875rem">
@@ -1791,7 +1925,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
 <footer class="foot rel">
   <span>Sample data</span>
-  <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="tip-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-al" role="tooltip" id="tip-sample">Card names and market values are from the Grail inventory of 11 November 2026, and a card still at grading shows the grade it is valued at. Balances, sales, fees, customers, shipments, keys, invoices, references, events, reconciliation records, cases, test results, alerts, the change history and the card mix of each pack are a sample. Who acts next on a shipping problem or a case is a proposal. Card photos were supplied by the shop owner, and a slab without one is an empty photo slot. Nothing you do here moves money. New shop shows the same dashboard for a shop that is still onboarding.</span></span>
+  <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="tip-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-al" role="tooltip" id="tip-sample">Card names and market values are from the Grail inventory of 11 November 2026, and a card still at grading shows the grade it is valued at. Balances, sales, fees, customers, shipments, keys, invoices, references, events, reconciliation records, cases, test results, alerts, update times, the change history and the card mix of each pack are a sample. Who acts next on a shipping problem or a case is a proposal. Card photos were supplied by the shop owner, and a slab without one is an empty photo slot. Nothing you do here moves money. New shop shows the same dashboard for a shop that is still onboarding.</span></span>
   <button class="linkbtn" type="button" id="reset">Reset</button>
   <div class="foot-ctl">
     <span class="lbl">Shop</span>
@@ -1810,6 +1944,23 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 </footer>
 
 </div></div>
+
+<nav class="botnav" id="botnav" aria-label="Pages">
+  <a href="#overview" data-bot="home"><svg class="ic" aria-hidden="true"><use href="#i-home"></use></svg><span>Home</span></a>
+  <a href="#vault" data-bot="fulfilment"><svg class="ic" aria-hidden="true"><use href="#i-truck"></use></svg><span>Fulfilment</span></a>
+  <a href="#overview" data-bot="alerts" data-jump="todo-title"><svg class="ic" aria-hidden="true"><use href="#i-bell"></use></svg><span>Alerts</span><b class="badge" id="bot-badge" hidden></b></a>
+  <button type="button" data-bot="more" id="bot-more" aria-haspopup="dialog"><svg class="ic" aria-hidden="true"><use href="#i-more"></use></svg><span>More</span></button>
+</nav>
+
+<dialog class="sheet" id="pages" aria-labelledby="pages-title">
+  <div class="sheet-body">
+    <div class="head">
+      <h2 class="h-page" id="pages-title" style="font-size: 1.375rem">All pages</h2>
+      <button class="btn" type="button" data-close="pages">Close</button>
+    </div>
+    <nav class="pagelist" id="pages-list" aria-label="All pages"></nav>
+  </div>
+</dialog>
 
 <dialog class="sheet" id="topup" aria-labelledby="topup-title">
   <form id="topup-form">
@@ -1922,6 +2073,11 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     </div>
     <dl class="facts" id="track-facts"></dl>
     <ol class="tl" id="track-steps" aria-label="Tracking"></ol>
+    <div>
+      <h3 class="sub-h">How current this is</h3>
+      <dl class="kv" id="track-fresh"></dl>
+    </div>
+    <div id="track-cases"></div>
     <div class="msg">
       <div class="head">
         <h3 class="lbl">Message for the customer</h3>
@@ -1944,6 +2100,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     <dl class="facts four" id="person-facts"></dl>
     <div id="person-vault"></div>
     <div id="person-ships"></div>
+    <div id="person-cases"></div>
   </div>
 </dialog>
 
@@ -2393,7 +2550,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
   // ---------- state ----------
   var START = { auto: false, autoAmount: 10000, autoBelow: 20000, shop: '', shown: 12, shipFilter: 'all', shipQuery: '', shipShown: 12,
-    vaultView: 'cards', ledgerFilter: 'all', ledgerShown: 10, topBy: 'sales', actMode: 'chart', evFilter: 'all', evShown: 8, evFocus: '', autoCap: 30000, caseFilter: 'open', caseQuery: '', recDay: 0, recFilter: 'review', recShown: 10 };
+    vaultView: 'cards', ledgerFilter: 'all', ledgerShown: 10, topBy: 'sales', actMode: 'chart', evFilter: 'all', evShown: 8, evFocus: '', autoCap: 30000, caseFilter: 'open', caseQuery: '', recDay: 0, recFilter: 'review', recShown: 10, q: '', searchType: 'all', searchShown: 12 };
   var S = {};
   function resetState(mode) {
     for (var k in START) S[k] = START[k];
@@ -2704,8 +2861,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     return '<span class="tipw st-info"><button class="info" type="button" aria-label="' + esc(about) + '" aria-describedby="' + id + '"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip ' + cls + '" role="tooltip" id="' + id + '"></span></span>';
   }
   function nameBtn(p) { return '<button class="namebtn" type="button" data-person="' + p.id + '">' + esc(p.name) + '</button>'; }
-  function whoCell(p) { return '<td class="cell2">' + nameBtn(p) + '<small>' + p.id + '</small></td>'; }
-  function packCell(id) { var p = packOf(id); return '<td class="cell2"><b>' + esc(p.label) + '</b><small>' + p.id + '</small></td>'; }
+  function whoCell(p, label) { return '<td class="cell2"' + (label ? ' data-l="' + label + '"' : '') + '>' + nameBtn(p) + '<small>' + p.id + '</small></td>'; }
+  function packCell(id, label) { var p = packOf(id); return '<td class="cell2"' + (label ? ' data-l="' + label + '"' : '') + '><b>' + esc(p.label) + '</b><small>' + p.id + '</small></td>'; }
   function meter(part) {
     var pct = Math.max(0, Math.min(100, part * 100));
     return '<div class="share"><div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width: ' + pct.toFixed(1) + '%"></div></div><span>' + pct.toFixed(1) + '%</span></div>';
@@ -2743,8 +2900,11 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     $('ev-filters').innerHTML = chips([['all', 'All'], ['wait', 'Needs retry']], 'data-ev');
     $('case-filters').innerHTML = chips(CASE_FILTERS, 'data-case-f');
     $('rec-filters').innerHTML = chips([['all', 'All'], ['review', 'Needs review'], ['ok', 'Matched']], 'data-rec-f');
+    $('search-filters').innerHTML = chips(SEARCH_TYPES, 'data-search-f');
     $('rec-day').innerHTML = [0, 1, 2, 3, 4, 5, 6].map(function (d) { return '<option value="' + d + '">' + day(recDate(d)) + (d ? '' : ', today so far') + '</option>'; }).join('');
     $('ship-meta').textContent = SHIP.length + ' in the last 30 days, $' + abbr(SHIP_ALL) + ' in cards';
+    var lag = tracking();
+    $('ship-fresh').textContent = 'Carrier tracking updated ' + clock(new Date(lag.newest)) + ' UTC' + (lag.stale ? ', ' + lag.stale + ' at ' + (lag.stale === 1 ? 'its' : 'their') + ' last known status' : '');
     setShort('k-bought', TOTAL_BOUGHT);
     setShort('k-buyers', BUYERS);
     $('k-per').textContent = (TOTAL_BOUGHT / BUYERS).toFixed(1);
@@ -2966,7 +3126,9 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     renderLaunch();
     renderAlerts();
     renderHistory();
+    renderSearch();
     applyAccess();
+    subnav();
     layoutRail();
   }
 
@@ -2999,6 +3161,14 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       var open = opens(GROUPS.filter(function (g) { return g[0] === a.getAttribute('data-group'); })[0][2]);
       a.hidden = !open.length;
       if (open.length) a.setAttribute('href', '#' + open[0]);
+    });
+    // the bar at the bottom of a phone: the first page the role may open, the fulfilment pages, and what needs attention
+    var first = opens(VIEWS)[0], ful = opens(['vault', 'shipments', 'cases']);
+    all('[data-bot]').forEach(function (a) {
+      var k = a.getAttribute('data-bot');
+      if (k === 'home') { a.hidden = !first; a.setAttribute('href', '#' + (first || 'overview')); }
+      else if (k === 'fulfilment') { a.hidden = !ful.length || first === ful[0]; if (ful.length) a.setAttribute('href', '#' + ful[0]); }
+      else if (k === 'alerts') a.hidden = !can('sales') || S.mode !== 'live';
     });
     // the hairline between the two groups of pages shows only while both groups have a page to show
     var sep = document.querySelector('.tab-sep'), sides = [false, false], side = 0;
@@ -3056,15 +3226,16 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     } else {
       head = '<tr><th style="width: 30%">Card</th><th>Customer</th><th>Pack</th><th>Class</th><th class="r">Held</th><th>Time left</th><th></th></tr>';
       rows = VAULT.map(function (c) {
-        return '<tr data-row><td>' + cardCell(c, true) + '</td>' + whoCell(PEOPLE.by[c.who]) + packCell(c.pack) + '<td><span class="tag">' + (c.v >= 500 ? 'Chase' : 'Basic') + '</span></td>' +
-          '<td class="r strong">' + money(c.v) + '</td><td>' + timeLeft(c.h) + '</td>' + viewCell(c) + '</tr>';
+        return '<tr data-row><td>' + cardCell(c, true) + '</td>' + whoCell(PEOPLE.by[c.who], 'Customer') + packCell(c.pack, 'Pack') + '<td data-l="Class"><span class="tag">' + (c.v >= 500 ? 'Chase' : 'Basic') + '</span></td>' +
+          '<td class="r strong" data-l="Held">' + money(c.v) + '</td><td data-l="Time left">' + timeLeft(c.h) + '</td>' + viewCell(c) + '</tr>';
       });
     }
     $('vault-head').innerHTML = head;
+    $('vault-table').classList.toggle('cards-tbl', S.vaultView === 'cards');
     $('vault-rows').innerHTML = rows.join('');
     $('staging-rows').innerHTML = STAGING.map(function (c) {
-      return '<tr data-row><td>' + cardCell(c, true) + '</td>' + whoCell(PEOPLE.by[c.who]) + packCell(c.pack) + '<td class="r strong">' + money(c.v) + '</td>' +
-        '<td><span class="time">' + ring(c.m / 5, c.m + ' of 5 minutes left') + c.m + ' min left</span></td>' + viewCell(c) + '</tr>';
+      return '<tr data-row><td>' + cardCell(c, true) + '</td>' + whoCell(PEOPLE.by[c.who], 'Customer') + packCell(c.pack, 'Pack') + '<td class="r strong" data-l="Value, not held">' + money(c.v) + '</td>' +
+        '<td data-l="Time left in Staging"><span class="time">' + ring(c.m / 5, c.m + ' of 5 minutes left') + c.m + ' min left</span></td>' + viewCell(c) + '</tr>';
     }).join('');
   }
 
@@ -3091,13 +3262,16 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     }).join('');
     $('person-vault').innerHTML = '<h3 class="sub-h">In the Vault</h3>' + (cards.length ? cards.map(function (c) {
       return '<div class="vrow">' + slab(c, 'slab-sm') + '<div class="vname"><b>' + esc(c.n) + '</b><span>' + esc(c.g) + ', ' + esc(packOf(c.pack).label) + '</span></div>' +
-        '<div class="vend"><span class="vval">' + money(c.v) + '</span>' + timeLeft(c.h) + '</div></div>';
+        '<div class="vend"><span class="vval">' + money(c.v) + '</span>' + timeLeft(c.h) +
+        (can('ops') ? '<button class="btn btn-sm" type="button" data-purchase="' + c.tp + '" aria-label="View the purchase of ' + esc(c.n) + '">View</button>' : '') + '</div></div>';
     }).join('') : '<p class="note">Nothing held for this customer.</p>');
     $('person-ships').innerHTML = '<h3 class="sub-h">Shipments</h3>' + (ships.length ? ships.map(function (s) {
       var st = shipState(s);
       return '<div class="vrow">' + slab(s, 'slab-sm') + '<div class="vname"><b>' + esc(s.n) + '</b><span>' + s.id + ', ' + st.line + '</span></div>' +
         '<div class="vend"><span class="vval">' + money(s.v) + '</span><button class="btn btn-sm" type="button" data-track="' + s.id + '" aria-label="Track shipment ' + s.id + '">Track</button></div></div>';
     }).join('') : '<p class="note">No shipments in the last 30 days.</p>');
+    var theirs = can('ops') ? S.cases.filter(function (k) { return shipOf(k.sid).cid === id; }) : [];
+    $('person-cases').innerHTML = theirs.length ? '<h3 class="sub-h">Cases</h3>' + theirs.map(function (k) { return caseRow(k, k.type + ', ' + k.sid); }).join('') : '';
     openSheet($('person'));
   }
 
@@ -3151,14 +3325,14 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
   // ---------- shipments ----------
   function shipRow(s) {
-    var st = shipState(s), dot = st.kind === 'done' ? ' dot-on' : st.kind === 'warn' ? ' dot-warn' : st.done >= 3 ? ' dot-way' : '';
+    var st = shipState(s), dot = st.kind === 'done' ? ' dot-on' : st.kind === 'warn' ? ' dot-warn' : st.done >= 3 ? ' dot-way' : '', fr = shipFresh(s);
     return '<tr data-row>' +
       '<td class="cell2"><b>' + s.id + '</b><small>Requested ' + day(when(s, 0)) + '</small></td>' +
       '<td class="cell2">' + nameBtn(PEOPLE.by[s.cid]) + '<small>Order ' + s.order + '</small></td>' +
       '<td>' + cardCell(s) + '</td>' +
       '<td class="cell2"><b>' + esc(s.city) + '</b><small>' + esc(s.country) + '</small></td>' +
       '<td class="cell2">' + (st.done >= 3 ? '<b class="num trk">' + chunks(s.track) + '</b>' : '<b class="quiet">Assigned at pickup</b>') + '<small>' + s.carrier + '</small></td>' +
-      '<td class="cell2 st-cell' + (st.kind === 'warn' ? ' st-warn' : '') + '"><b><span class="dot' + dot + '" aria-hidden="true"></span>' + st.label + '</b><small>' + st.sub + '</small></td>' +
+      '<td class="cell2 st-cell' + (st.kind === 'warn' ? ' st-warn' : '') + '"><b><span class="dot' + dot + '" aria-hidden="true"></span>' + st.label + '</b><small>' + (fr.stale && st.kind === 'way' ? 'Last known status, ' + day(new Date(fr.at)) : st.sub) + '</small></td>' +
       '<td class="r"><button class="btn btn-sm" type="button" data-track="' + s.id + '" aria-label="Track shipment ' + s.id + '">Track</button></td></tr>';
   }
   // The list follows the search box and the status filter. A search looks at every field a customer might quote.
@@ -3207,12 +3381,12 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   function openTrack(id) {
     var s = SHIP.filter(function (x) { return x.id === id; })[0];
     if (!s) return;
-    var st = shipState(s), has = st.done >= 3;
+    var st = shipState(s), has = st.done >= 3, fr = shipFresh(s), cases = can('ops') ? casesOf(s.id) : [];
     $('track-title').textContent = 'Shipment ' + s.id;
-    $('track-sub').textContent = st.line + (s.asked ? '. Tax ID requested ' + s.asked + '.' : '');
+    $('track-sub').textContent = st.line + (fr.stale ? '. This is the last known status, from ' + clock(new Date(fr.at)) : '') + (s.asked ? '. Tax ID requested ' + s.asked + '.' : fr.stale ? '.' : '');
     $('track-sub').style.color = st.kind === 'warn' ? 'var(--warn)' : '';
     var facts = [
-      ['Customer', esc(s.who)], ['Order', s.order], ['Ships to', esc(s.city + ', ' + s.country)],
+      ['Customer', nameBtn(PEOPLE.by[s.cid])], ['Order', s.order], ['Ships to', esc(s.city + ', ' + s.country)],
       ['Tracking', s.carrier + (has ? ' <span class="num trk">' + chunks(s.track) + '</span><button class="btn btn-sm" type="button" data-copy="' + s.track + '">Copy number</button>' : ', number assigned at pickup'), 'wide'],
       ['Card value', money(s.v)],
       ['Card', esc(cardName(s)), 'wide'], ['Fulfilment fee', money2(s.v * FEE_RATE)],
@@ -3228,6 +3402,13 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       if (s.issue === 2 && k === 6) html += '<li class="warn"><span>Delivery attempt failed, nobody was available</span><time>' + clock(when(s, 7)) + '</time></li>';
     });
     $('track-steps').innerHTML = html;
+    $('track-fresh').innerHTML = '<div><dt>Shipment record<small>From Grail</small></dt><dd>Updated ' + clock(new Date(fr.grail)) + '<span class="tag tag-on">Up to date</span></dd></div>' +
+      '<div><dt>Carrier tracking<small>From ' + s.carrier + '</small></dt><dd>' + (fr.carrier ? 'Last update ' + clock(new Date(fr.at)) : 'Starts at pickup') +
+      (fr.carrier ? '<span class="tag ' + (fr.stale ? 'tag-warn">Last known status' : fr.done ? 'tag-on">Final' : 'tag-on">Up to date') + '</span>' : '') + '</dd></div>';
+    $('track-cases').innerHTML = '<h3 class="sub-h">Cases</h3>' + cases.map(function (k) { return caseRow(k, k.type); }).join('') +
+      '<div class="vrow"><div class="vname"><span>' + (cases.length ? 'Something else went wrong with this shipment?' : 'No case for this shipment.') + '</span></div>' +
+      (can('cases') ? '<div class="vend"><button class="btn btn-sm" type="button" data-newcase="' + s.id + '">Open a case</button></div>' : '') + '</div>';
+    $('track-cases').hidden = !can('ops');
     var msg = customerMessage(s, st);
     $('track-msg').textContent = msg;
     $('track-copy').setAttribute('data-copy', msg);
@@ -3372,6 +3553,9 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       return item('<span class="dot dot-' + i[0] + '" aria-hidden="true"></span>' + i[1], i[2], i[3]);
     }).join('') : '<p class="note">Nothing needs your attention right now.</p>';
     $('todo-count').textContent = items.length ? items.length + (items.length === 1 ? ' item' : ' items') : '';
+    $('bot-badge').hidden = !items.length;
+    $('bot-badge').textContent = items.length;
+    subnav();
   }
 
   // ---------- the link to the shop platform: is it alive, and did every event arrive ----------
@@ -3396,6 +3580,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     $('conn-mini-text').innerHTML = !list.length ? 'Not connected yet. Generate a Sandbox to start building.'
       : live ? 'Connected. Last successful sync ' + sync.toLowerCase() + '.' + (retry || ' Every event was acknowledged.')
       : 'Connected to the Sandbox only. Last successful sync ' + sync.toLowerCase() + '.' + retry + ' The live key unlocks once your shop is approved.';
+    renderSources();      // the same sync time, beside the other sources
   }
   function renderEvents() {
     var list = evList(), focus = S.evFocus, scoped = focus ? list.filter(function (e) { return e.p.tp === focus; }) : list;
@@ -3468,7 +3653,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     $('purchase-sub').textContent = c.s + ', ' + c.g + '. ' + (vault ? 'In the Vault, ' + c.h + ' of 48 hours left.' : 'In Staging, ' + c.m + (c.m === 1 ? ' minute' : ' minutes') + ' left.');
     var copy = function (v) { return '<span class="num">' + v + '</span><button class="btn btn-sm" type="button" data-copy="' + v + '">Copy</button>'; };
     var facts = [['Customer', nameBtn(who) + '<span class="muted">' + who.id + '</span>'], ['Shop platform transaction', copy(c.tx)], ['Grail purchase', copy(c.tp)],
-      ['Card', '<span class="num">' + c.card + '</span>'], ['Pack', esc(pack.label) + '<span class="muted">' + pack.id + '</span>'], ['Class', chase ? 'Chase' : 'Basic']];
+      ['Card', '<span class="num">' + c.card + '</span>'], ['Pack', (can('packs') ? relBtn('data-pack-details', pack.id, pack.label) : esc(pack.label)) + '<span class="muted">' + pack.id + '</span>'], ['Class', chase ? 'Chase' : 'Basic']];
     $('purchase-facts').innerHTML = facts.map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
     var html = EVENTS.filter(function (e) { return e.p === c; }).sort(function (a, b) { return a.t - b.t; }).map(function (e) {
       var w = evWaiting(e);
@@ -3749,9 +3934,9 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     var rows = found.filter(function (c) { return caseIn(c, S.caseFilter); });
     $('case-rows').innerHTML = rows.map(function (c) {
       var s = shipOf(c.sid), last = c.hist[c.hist.length - 1];
-      return '<tr data-row><td class="strong">' + c.id + '</td><td class="cell2"><b>' + s.id + '</b><small>' + esc(s.who) + '</small></td><td class="cell2"><b>' + c.type + '</b><small>' + esc(s.n) + '</small></td>' +
-        '<td>' + caseTag(c) + '</td><td class="cell2"><b>' + (c.status === 'done' ? 'Nobody' : esc(c.owner)) + '</b><small>' + (c.status === 'done' ? 'Closed' : esc(c.next)) + '</small></td>' +
-        '<td style="white-space: nowrap">' + day(new Date(NOW - last[1] * HOUR)) + '</td>' +
+      return '<tr data-row><td class="strong">' + c.id + '</td><td class="cell2" data-l="Shipment"><b>' + s.id + '</b><small>' + esc(s.who) + '</small></td><td class="cell2" data-l="Issue"><b>' + c.type + '</b><small>' + esc(s.n) + '</small></td>' +
+        '<td data-l="Status">' + caseTag(c) + '</td><td class="cell2" data-l="Who acts next"><b>' + (c.status === 'done' ? 'Nobody' : esc(c.owner)) + '</b><small>' + (c.status === 'done' ? 'Closed' : esc(c.next)) + '</small></td>' +
+        '<td style="white-space: nowrap" data-l="Updated">' + day(new Date(NOW - last[1] * HOUR)) + '</td>' +
         '<td class="r"><button class="btn btn-sm" type="button" data-case="' + c.id + '" aria-label="Open case ' + c.id + '">Open</button></td></tr>';
     }).join('');
     $('case-table').hidden = !rows.length;
@@ -3759,6 +3944,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     $('case-empty').textContent = q ? 'No case matches “' + S.caseQuery.trim() + '”.' : 'No cases here right now.';
     var open = S.cases.filter(function (c) { return c.status !== 'done'; }).length;
     $('case-meta').textContent = open + ' open, ' + (S.cases.length - open) + ' resolved';
+    renderSearch();
   }
   function openCase(id) {
     var c = caseOf(id);
@@ -3885,6 +4071,173 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     return true;
   }
 
+  // ---------- how current a value is ----------
+  // Up to the packing, the status of a shipment is Grail's own record. From the handover on it comes from the carrier,
+  // and a status the carrier has not updated for a day is shown as the last known one.
+  function shipFresh(s) {
+    var st = shipState(s), k = Math.max(1, st.done), carrier = k >= 3;
+    var at = when(s, s.issue === 1 ? 5 : s.issue === 2 ? 7 : k - 1).getTime();
+    return { at: at, grail: when(s, Math.min(k, 2) - 1).getTime(), carrier: carrier, done: st.kind === 'done', stale: carrier && st.kind !== 'done' && NOW - at > 24 * HOUR };
+  }
+  function plural(n, one, many) { return n + ' ' + (n === 1 ? one : many); }
+  // Across the shipments that are still on their way: the newest word from a carrier, and how many have gone quiet.
+  function tracking() {
+    var t = { stale: 0, newest: 0 };
+    SHIP.forEach(function (s) { var f = shipFresh(s); if (!f.carrier || f.done) return; if (f.stale) t.stale++; if (f.at > t.newest) t.newest = f.at; });
+    return t;
+  }
+  // Where each kind of figure comes from, and when it last changed.
+  function renderSources() {
+    var live = S.mode === 'live', list = evList(), wait = list.filter(evWaiting).length, sync = 0, lag = live ? tracking() : { stale: 0, newest: 0 }, stale = lag.stale, newest = lag.newest;
+    list.forEach(function (e) { if (!evWaiting(e) && e.t > sync) sync = e.t; });
+    if (S.synced && list.length) sync = NOW;
+    var rows = [
+      ['Balance, holds and fees', 'From Grail', 'Updated ' + clock(new Date(NOW)), 'Up to date', 'tag-on'],
+      ['Purchases and customers', live || !list.length ? 'From your shop platform' : 'From your shop platform, in the Sandbox', list.length ? 'Updated ' + clock(new Date(sync)) : 'No events yet',
+        !list.length ? 'Not connected' : wait ? plural(wait, 'event', 'events') + ' waiting' : live ? 'Up to date' : 'Sandbox only', !list.length ? '' : wait ? 'tag-warn' : live ? 'tag-on' : ''],
+      ['Shipment tracking', 'From the carriers', newest ? 'Updated ' + clock(new Date(newest)) : 'No shipments yet',
+        !newest ? 'Nothing to track' : stale ? stale + ' older than a day' : 'Up to date', !newest ? '' : stale ? 'tag-warn' : 'tag-on']
+    ];
+    $('src-list').innerHTML = rows.map(function (r) {
+      return '<div class="src"><b>' + r[0] + '</b><small>' + r[1] + '</small><span class="src-at"><span class="tag ' + r[4] + '">' + r[3] + '</span><span class="src-time">' + r[2] + '</span></span></div>';
+    }).join('');
+    $('src-viewed').textContent = 'Viewed at ' + clock(new Date(NOW)).split(', ')[1] + ' UTC';
+  }
+
+  // ---------- one search for purchases, customers, shipments and cases ----------
+  var SEARCH_TYPES = [['all', 'All'], ['purchase', 'Purchases'], ['customer', 'Customers'], ['shipment', 'Shipments'], ['case', 'Cases']];
+  function mayFind() { return can('ops') || can('sales'); }
+  function byTouch() { return !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches); }
+  // Every word that was typed has to be found. A record that carries the words in its own name or references comes before one that is only linked to them.
+  function rank(own, linked, words, joined) {
+    own = fold(own.join(' '));
+    var both = own + ' ' + fold(linked.join(' '));
+    if (words.every(function (w) { return own.indexOf(w) >= 0; })) return 2;
+    if (joined.length > 2 && own.replace(/[\s-]+/g, '').indexOf(joined) >= 0) return 2;
+    return words.every(function (w) { return both.indexOf(w) >= 0; }) ? 1 : 0;
+  }
+  function searchAll(text) {
+    var q = fold(String(text || '').trim().replace(/^#/, '')), words = q.split(/\s+/).filter(Boolean), joined = q.replace(/[\s-]+/g, ''), out = [], live = S.mode === 'live';
+    if (q.length < 2) return out;
+    function take(type, rec, own, linked) { var r = rank(own, linked, words, joined); if (r) out.push({ type: type, rec: rec, rank: r, i: out.length }); }
+    if (live && can('sales')) PEOPLE.forEach(function (p) { take('customer', p, [p.id, p.name], [p.city, p.country]); });
+    if (live && can('ops')) {
+      PURCHASES.forEach(function (c) {
+        if (c.stage === 'released') return;
+        var who = PEOPLE.by[c.who], pack = packOf(c.pack);
+        take('purchase', c, [c.tp, c.tx, c.card, c.n, c.s, c.g], [who.name, who.id, pack.label, pack.id]);
+      });
+      SHIP.forEach(function (s) { take('shipment', s, [s.id, 'order ' + s.order, shipState(s).done >= 3 ? s.track : '', s.n, s.s, s.g], [s.who, s.cid, s.city, s.country, s.carrier]); });
+      S.cases.forEach(function (k) { var s = shipOf(k.sid); take('case', k, [k.id, k.type, CASE_STATUS[k.status]], [k.sid, s.who, s.cid, s.n]); });
+    }
+    return out.sort(function (a, b) { return b.rank - a.rank || a.i - b.i; });
+  }
+  function relBtn(attr, id, label) { return '<button class="namebtn" type="button" ' + attr + '="' + id + '">' + esc(label) + '</button>'; }
+  function casesOf(sid) { return S.cases.filter(function (k) { return k.sid === sid; }); }
+  function caseRow(k, what) {
+    return '<div class="vrow"><div class="vname"><b>' + k.id + '</b><span>' + esc(what) + '</span></div><div class="vend">' + caseTag(k) +
+      '<button class="btn btn-sm" type="button" data-case="' + k.id + '" aria-label="Open case ' + k.id + '">Open</button></div></div>';
+  }
+  // One result: what it is, the line that tells it apart, the records that belong to it, and the way in.
+  function resultHtml(r) {
+    var x = r.rec, kind, title, sub, rel, open, s;
+    if (r.type === 'purchase') {
+      kind = 'Purchase'; title = x.tp;
+      sub = cardName(x) + '. ' + (x.stage === 'vault' ? 'In the Vault, ' + money(x.v) + ' held, ' + plural(x.h, 'hour', 'hours') + ' left' : 'In Staging, ' + money(x.v) + ', not held') + '. Transaction ' + x.tx + '.';
+      rel = [nameBtn(PEOPLE.by[x.who]), can('packs') ? relBtn('data-pack-details', x.pack, packOf(x.pack).label) : '<span>' + esc(packOf(x.pack).label) + '</span>'];
+      open = ['data-purchase', x.tp, 'Open purchase'];
+    } else if (r.type === 'customer') {
+      var nc = S.cases.filter(function (k) { return shipOf(k.sid).cid === x.id; }).length;
+      kind = 'Customer'; title = x.name;
+      sub = x.id + ', ' + x.city + ', ' + x.country + '. ' + count(x.bought) + (x.bought === 1 ? ' purchase' : ' purchases') + ' and ' + money(x.sales) + ' of sales in the last 30 days.';
+      rel = ['<span>' + [plural(x.cards, 'card', 'cards') + ' in the Vault', plural(x.shipped, 'shipment', 'shipments'), plural(nc, 'case', 'cases')].join(', ') + '</span>'];
+      open = ['data-person', x.id, 'Open customer'];
+    } else if (r.type === 'shipment') {
+      kind = 'Shipment'; title = x.id;
+      sub = cardName(x) + '. ' + shipState(x).line + (shipFresh(x).stale ? ', last known status' : '') + '. Order ' + x.order + (shipState(x).done >= 3 ? ', ' + x.carrier + ' ' + x.track : '') + '.';
+      rel = [nameBtn(PEOPLE.by[x.cid])].concat(casesOf(x.id).map(function (k) { return relBtn('data-case', k.id, 'Case ' + k.id); }));
+      open = ['data-track', x.id, 'Open shipment'];
+    } else {
+      s = shipOf(x.sid);
+      kind = 'Case'; title = x.id;
+      sub = x.type + ', ' + cardName(s) + '. ' + (x.status === 'done' ? 'Resolved. ' + x.out : CASE_STATUS[x.status] + '. Next: ' + x.next) + '.';
+      rel = [relBtn('data-track', s.id, 'Shipment ' + s.id), nameBtn(PEOPLE.by[s.cid])];
+      open = ['data-case', x.id, 'Open case'];
+    }
+    return '<div class="item"><div class="item-main"><b><span class="tag">' + kind + '</span>' + esc(title) + '</b><small>' + esc(sub) + '</small>' +
+      '<div class="related"><span class="exc-lbl">Related</span>' + rel.join('') + '</div></div>' +
+      '<div class="item-acts"><button class="btn btn-sm" type="button" ' + open[0] + '="' + open[1] + '">' + open[2] + '</button></div></div>';
+  }
+  function renderSearch() {
+    var text = S.q || '', shown = text.trim(), res = searchAll(text), asked = shown.replace(/^#/, '').length >= 2, f = S.searchType, n = { all: res.length };
+    SEARCH_TYPES.forEach(function (t) { if (t[0] !== 'all') n[t[0]] = res.filter(function (r) { return r.type === t[0]; }).length; });
+    all('[data-search-f]').forEach(function (b) {
+      var k = b.getAttribute('data-search-f');
+      b.setAttribute('aria-pressed', k === f ? 'true' : 'false');
+      b.querySelector('b').textContent = n[k];
+    });
+    $('search-filters').hidden = !asked;
+    var rows = res.filter(function (r) { return f === 'all' || r.type === f; }), shownRows = rows.length - S.searchShown <= 3 ? rows.length : S.searchShown;   // a last few never hide behind a button
+    $('search-list').innerHTML = rows.slice(0, shownRows).map(resultHtml).join('');
+    $('search-list').hidden = !rows.length;
+    $('search-empty').hidden = rows.length > 0;
+    if (!rows.length) {
+      var tries = [];
+      if (can('sales')) tries.push(PEOPLE[0].name.split(' ')[0]);
+      if (can('ops')) { tries.push(VAULT[0].n, (SHIP.filter(function (s) { return s.issue; })[0] || SHIP[0]).id); if (S.cases.length) tries.push(S.cases[0].id); }
+      $('search-empty').innerHTML = S.mode !== 'live' ? '<span>Nothing to search yet. Purchases, customers, shipments and cases show up here after your first Temporary Purchase.</span>'
+        : asked ? '<span>Nothing matches “' + esc(shown) + '”' + (f === 'all' ? '' : ' under ' + SEARCH_TYPES.filter(function (t) { return t[0] === f; })[0][1]) + '. Try a name, a card or a reference.</span>'
+        : '<span>Type a name, a card or a reference, or try one of these.</span><div class="tries">' + tries.map(function (x) { return '<button class="btn btn-sm" type="button" data-try="' + esc(x) + '">' + esc(x) + '</button>'; }).join('') + '</div>';
+    }
+    $('search-meta').textContent = asked && S.mode === 'live' ? plural(res.length, 'result', 'results') + ' for “' + shown + '”' : '';
+    var left = rows.length - shownRows;
+    $('search-more-wrap').hidden = left <= 0;
+    $('search-more').textContent = 'Show ' + Math.min(12, Math.max(left, 0)) + ' more';
+    [$('search-q'), $('gsearch-q')].forEach(function (box) { if (document.activeElement !== box && box.value !== text) box.value = text; });
+  }
+
+  // ---------- a phone: the pages as a list, and a new case straight from a shipment ----------
+  function openPages() {
+    $('pages-list').innerHTML = GROUPS.map(function (g) {
+      var open = opens(g[2]), many = g[2].length > 1;
+      if (!open.length) return '';
+      return '<div>' + (many ? '<h3>' + g[1] + '</h3>' : '') + open.map(function (v) {
+        return '<a href="#' + v + '"' + (v === current ? ' aria-current="page"' : '') + '>' + (many ? SUB_NAMES[v] : g[1]) + '</a>';
+      }).join('') + '</div>';
+    }).join('') + (mayFind() ? '<div><a href="#search"' + (current === 'search' ? ' aria-current="page"' : '') + '>Search</a></div>' : '');
+    openSheet($('pages'));
+  }
+  function openNewCase(sid) {
+    var list = SHIP.slice(0, 24), s = sid ? shipOf(sid) : null;
+    if (s && list.indexOf(s) < 0) list = [s].concat(list);
+    $('newcase-form').reset();
+    $('newcase-ship').innerHTML = list.map(function (x) { return '<option value="' + x.id + '">' + x.id + ', ' + esc(x.who) + ', ' + esc(x.n) + '</option>'; }).join('');
+    if (s) $('newcase-ship').value = s.id;
+    openSheet($('newcase'));
+  }
+  // A record opened from inside another record takes its place, so there is never a pile of sheets to close.
+  function onlySheet(id) { all('dialog[open]').forEach(function (d) { if (d.id !== id) closeSheet(d); }); }
+  // The second row of pages, with the number that waits at the shipments and at the cases. The bar at the bottom of a phone follows the page too.
+  var subHtml = null;
+  function subnav() {
+    var g = current === 'none' || current === 'search' ? null : groupOf(current), subs = g ? opens(g[2]) : [], nav = $('subtabs');
+    var n = { shipments: S.mode === 'live' ? SHIP.filter(function (s) { return s.issue; }).length : 0, cases: S.cases.filter(function (k) { return k.status !== 'done'; }).length };
+    var html = subs.length < 2 ? '' : subs.map(function (v) {
+      return '<a class="subtab" href="#' + v + '"' + (v === current ? ' aria-current="page"' : '') + '>' + SUB_NAMES[v] +
+        (n[v] ? '<b class="badge" aria-hidden="true">' + n[v] + '</b><span class="vh">, ' + n[v] + (v === 'cases' ? ' open' : ' need attention') + '</span>' : '') + '</a>';
+    }).join('');
+    nav.hidden = subs.length < 2;
+    nav.setAttribute('aria-label', g ? 'Pages in ' + g[1] : '');
+    if (html !== subHtml) { nav.innerHTML = html; subHtml = html; }
+    var home = document.querySelector('[data-bot="home"]').getAttribute('href').slice(1);
+    var where = current === 'none' ? '' : current === home ? 'home' : g && g[0] === 'fulfilment' ? 'fulfilment' : 'more';
+    all('[data-bot]').forEach(function (a) { if (a.getAttribute('data-bot') === where) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    // the search of the bar steps aside on the search page, and says "/" only where "/" leads to it
+    $('gsearch').hidden = !mayFind() || current === 'search';
+    $('gsearch-go').hidden = !mayFind();
+    $('gsearch').classList.toggle('no-key', current === 'shipments' || current === 'cases');
+  }
+
   // ---------- pages ----------
   // Eight pages in the bar. Some hold more than one page, and those show a second row to move between them.
   var GROUPS = [['overview', 'Overview', ['overview']], ['catalogue', 'Catalogue', ['packs', 'marketplace']], ['fulfilment', 'Fulfilment', ['vault', 'shipments', 'cases']],
@@ -3900,21 +4253,21 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   function route() {
     var name = (location.hash || '').replace('#', '');
     if (OLD_NAMES[name]) name = OLD_NAMES[name];
-    if (VIEWS.indexOf(name) < 0) name = 'overview';
+    if (name !== 'search' && VIEWS.indexOf(name) < 0) name = 'overview';
     // a page the signed-in role may not open falls back to the first one it may
-    if (!can(PAGE_NEEDS[name])) name = opens(VIEWS)[0] || 'none';
+    if (name === 'search' ? !mayFind() : !can(PAGE_NEEDS[name])) name = opens(VIEWS)[0] || 'none';
+    var came = name !== current;
     current = name;
-    VIEWS.concat('none').forEach(function (v) { $('view-' + v).hidden = v !== name; });
-    var g = name === 'none' ? null : groupOf(name), subs = g ? opens(g[2]) : [], nav = $('subtabs');
+    VIEWS.concat('search', 'none').forEach(function (v) { $('view-' + v).hidden = v !== name; });
+    var g = name === 'none' || name === 'search' ? null : groupOf(name);
     all('[data-group]').forEach(function (a) {
       if (g && a.getAttribute('data-group') === g[0]) {
         a.setAttribute('aria-current', 'page');
         if (a.classList.contains('tab') && a.scrollIntoView) a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       } else a.removeAttribute('aria-current');
     });
-    nav.hidden = subs.length < 2;
-    nav.setAttribute('aria-label', g ? 'Pages in ' + g[1] : '');
-    nav.innerHTML = subs.length < 2 ? '' : subs.map(function (v) { return '<a class="subtab" href="#' + v + '"' + (v === name ? ' aria-current="page"' : '') + '>' + SUB_NAMES[v] + '</a>'; }).join('');
+    subnav();
+    if (name === 'search' && came && !(byTouch() && S.q)) $('search-q').focus();     // arriving at the search you can type at once, unless a phone already shows results
     hideTip();
     // a key is shown in full only until you leave the page
     if (S.liveKey && S.liveKey.full) delete S.liveKey.full;
@@ -3969,7 +4322,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   }
 
   // ---------- sheets ----------
-  function openSheet(d) { if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', ''); }
+  function openSheet(d) { if (d.open) return; if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', ''); }
   function closeSheet(d) { if (typeof d.close === 'function') d.close(); else d.removeAttribute('open'); }
   var other = $('amt-other');
   function payOptions() { return S.methods.length ? S.methods : [{ id: 'x1', label: 'Crypto' }, { id: 'x2', label: 'Card' }, { id: 'x3', label: 'Apple Pay' }]; }
@@ -4092,8 +4445,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       $('manage-name').value = managing.label; $('manage-id').textContent = managing.id; openSheet($('manage')); return;
     }
     if ((el = t.closest('[data-copy]'))) { copyText(el.getAttribute('data-copy'), el); return; }
-    if ((el = t.closest('[data-track]'))) { openTrack(el.getAttribute('data-track')); return; }
-    if ((el = t.closest('[data-person]'))) { openPerson(el.getAttribute('data-person')); return; }
+    if ((el = t.closest('[data-track]'))) { onlySheet('track'); openTrack(el.getAttribute('data-track')); return; }
+    if ((el = t.closest('[data-person]'))) { onlySheet('person'); openPerson(el.getAttribute('data-person')); return; }
     if ((el = t.closest('[data-invoice]'))) { openInvoice(el.getAttribute('data-invoice')); return; }
     if ((el = t.closest('[data-filter]'))) { S.shipFilter = el.getAttribute('data-filter'); S.shipShown = START.shipShown; renderShipments(); return; }
     if ((el = t.closest('[data-clear-ship]'))) { S.shipQuery = ''; S.shipFilter = 'all'; $('ship-search').value = ''; renderShipments(); $('ship-search').focus(); return; }
@@ -4108,7 +4461,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     }
     if ((el = t.closest('[data-as]'))) {
       S.as = el.getAttribute('data-as');
-      renderTodo(); applyAccess(); route(); window.scrollTo(0, 0);
+      renderTodo(); renderSearch(); applyAccess(); route(); window.scrollTo(0, 0);
       toast(S.as === 'Admin' ? 'Signed in as an admin again.' : 'Showing what a ' + S.as + ' user sees.');
       return;
     }
@@ -4173,8 +4526,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       return;
     }
     if ((el = t.closest('[data-topup-exact]'))) { all('dialog[open]').forEach(closeSheet); openTopup(Number(el.getAttribute('data-topup-exact'))); return; }
-    if ((el = t.closest('[data-pack-details]'))) { openPack(el.getAttribute('data-pack-details')); return; }
-    if ((el = t.closest('[data-purchase]'))) { if ($('event').open) closeSheet($('event')); openPurchase(el.getAttribute('data-purchase')); return; }
+    if ((el = t.closest('[data-pack-details]'))) { onlySheet('pack'); openPack(el.getAttribute('data-pack-details')); return; }
+    if ((el = t.closest('[data-purchase]'))) { onlySheet('purchase'); openPurchase(el.getAttribute('data-purchase')); return; }
     if ((el = t.closest('[data-event]'))) { openEvent(el.getAttribute('data-event')); return; }
     if ((el = t.closest('[data-ev]'))) { S.evFilter = el.getAttribute('data-ev'); S.evShown = START.evShown; renderEvents(); return; }
     if ((el = t.closest('[data-ev-clear]'))) { S.evFocus = ''; S.evShown = START.evShown; renderEvents(); return; }
@@ -4185,11 +4538,20 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     if ((el = t.closest('[data-case-ev]'))) { caseEvidence(Number(el.getAttribute('data-case-ev'))); return; }
     if ((el = t.closest('[data-case-act]'))) { caseAct(el.getAttribute('data-case-act')); return; }
     if ((el = t.closest('[data-case-f]'))) { S.caseFilter = el.getAttribute('data-case-f'); renderCases(); return; }
-    if ((el = t.closest('[data-case]'))) { openCase(el.getAttribute('data-case')); return; }
+    if ((el = t.closest('[data-case]'))) { onlySheet('case'); openCase(el.getAttribute('data-case')); return; }
     if ((el = t.closest('[data-rec-f]'))) { S.recFilter = el.getAttribute('data-rec-f'); S.recShown = START.recShown; renderRec(); return; }
     if ((el = t.closest('[data-rec-act]'))) { recAct(el.getAttribute('data-rec-act')); return; }
     if ((el = t.closest('[data-rec]'))) { openRec(el.getAttribute('data-rec')); return; }
     if ((el = t.closest('[data-test]'))) { openTest(Number(el.getAttribute('data-test'))); return; }
+    if ((el = t.closest('[data-search-f]'))) { S.searchType = el.getAttribute('data-search-f'); S.searchShown = START.searchShown; renderSearch(); return; }
+    if ((el = t.closest('[data-try]'))) {
+      S.q = el.getAttribute('data-try'); S.searchType = 'all'; S.searchShown = START.searchShown;
+      $('search-q').value = S.q; renderSearch();
+      if (!byTouch()) $('search-q').focus();      // with a keyboard you go on typing, and on a phone the results keep the screen
+      return;
+    }
+    if ((el = t.closest('[data-newcase]'))) { onlySheet('newcase'); openNewCase(el.getAttribute('data-newcase')); return; }
+    if ((el = t.closest('#pages a'))) { closeSheet($('pages')); return; }      // the link itself opens the page
     // a row with one clear action takes the click anywhere along it, not only on its small button
     if ((el = t.closest('tr[data-row]')) && !t.closest('button, a, input, select, label')) {
       if (window.getSelection && String(window.getSelection())) return;   // dragging across a row to select its text is not a click on it
@@ -4203,8 +4565,9 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   document.addEventListener('keydown', function (e) {
     if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
     var a = document.activeElement, typing = a && (a.tagName === 'INPUT' || a.tagName === 'TEXTAREA' || a.tagName === 'SELECT' || a.isContentEditable);
-    var box = $('ship-search');
-    if (typing || !box.getClientRects().length || document.querySelector('dialog[open]')) return;
+    // the search of the page if it has one, and the search for everything if it does not
+    var box = [$('ship-search'), $('case-search'), $('search-q'), $('gsearch-q')].filter(function (b) { return b.getClientRects().length; })[0];
+    if (typing || !box || document.querySelector('dialog[open]')) return;
     e.preventDefault(); box.focus(); box.select();
   });
   $('ship-search').addEventListener('keydown', function (e) {
@@ -4320,11 +4683,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   // returns and claims: search, and a new case
   $('case-search').addEventListener('input', function () { S.caseQuery = this.value; renderCases(); });
   $('case-search').addEventListener('keydown', function (e) { if (e.key === 'Escape' && this.value) { e.preventDefault(); this.value = ''; S.caseQuery = ''; renderCases(); } });
-  $('case-new').addEventListener('click', function () {
-    $('newcase-form').reset();
-    $('newcase-ship').innerHTML = SHIP.slice(0, 24).map(function (s) { return '<option value="' + s.id + '">' + s.id + ', ' + esc(s.who) + ', ' + esc(s.n) + '</option>'; }).join('');
-    openSheet($('newcase'));
-  });
+  $('case-new').addEventListener('click', function () { openNewCase(''); });
   $('newcase-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var c = newCase($('newcase-ship').value, (document.querySelector('input[name="issue"]:checked') || {}).value || 'Other');
@@ -4390,6 +4749,27 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     toast('Test alert sent to ' + to + '. This demo sends nothing.');
   });
   $('hist-more').addEventListener('click', function () { S.histAll = !S.histAll; renderHistory(); });
+  // search: the box in the bar and the box on the page ask the same question
+  $('gsearch').addEventListener('submit', function (e) {
+    e.preventDefault();
+    S.q = $('gsearch-q').value; S.searchType = 'all'; S.searchShown = START.searchShown;
+    renderSearch();
+    location.hash = 'search';
+  });
+  $('gsearch-q').addEventListener('input', function () { S.q = this.value; });
+  $('gsearch-q').addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (this.value) { e.preventDefault(); this.value = ''; S.q = ''; } else this.blur(); } });
+  // on a phone the search key puts the keyboard away, so the results have the whole screen
+  $('search-form').addEventListener('submit', function (e) { e.preventDefault(); if (byTouch()) $('search-q').blur(); });
+  $('search-q').addEventListener('input', function () { S.q = this.value; S.searchShown = START.searchShown; renderSearch(); });
+  $('search-q').addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (this.value) { e.preventDefault(); this.value = ''; S.q = ''; S.searchShown = START.searchShown; renderSearch(); } else this.blur(); } });
+  $('search-more').addEventListener('click', function () { S.searchShown += 12; renderSearch(); });
+  $('src-refresh').addEventListener('click', function () {
+    var b = this;
+    b.classList.remove('is-busy'); void b.offsetWidth; b.classList.add('is-busy');
+    render();
+    toast('Up to date. The demo shows one fixed moment, 12 Nov 2026 at 16:00 UTC.');
+  });
+  $('bot-more').addEventListener('click', openPages);
   // team: add a user, change a role, tick a permission
   function userRoleNote() { var r = document.querySelector('input[name="newrole"]:checked'); $('user-role-note').textContent = r ? roleSees(r.value) : ''; }
   $('user-add').addEventListener('click', function () {
