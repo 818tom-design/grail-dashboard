@@ -971,6 +971,78 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 /* a pack that is only a proposal says so beside its name */
 .pack-nm { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.5rem; min-width: 0; }
 
+/* ---- the pack grid: 17 price tiers, four to a row, each tile with its status and what it needs ---- */
+.packbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.625rem 0.75rem; padding-top: 1rem; }
+.packbar .search { flex: 1 1 15rem; min-width: 0; }
+.packbar .field-select { flex: none; max-width: 100%; }
+.packbar .meta { white-space: nowrap; }
+.packs { grid-template-columns: repeat(auto-fill, minmax(max(15.25rem, (100% - 3rem) / 4 - 0.0625rem), 1fr)); gap: 1rem; }
+.pack { padding: 1rem; gap: 0.75rem; }
+.pk-head { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); column-gap: 0.75rem; row-gap: 0.1875rem; align-items: start; }
+.pk-art { grid-row: 1 / span 3; aspect-ratio: 3 / 4; border-radius: 0.5rem; overflow: hidden; border: 1px solid var(--border); background: var(--soft); }
+.pk-art svg, .pk-art img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pack.is-paused .pk-art { opacity: 0.72; }
+.pk-head .pack-name { font-size: 1.0625rem; }
+.pk-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.625rem; }
+.pk-meta .pack-price { font-size: 1.25rem; line-height: 1.2; }
+.pack .fund { padding-top: 0.625rem; gap: 0.4375rem; }
+.pstats { position: relative; }
+.pstats dt { display: flex; align-items: center; gap: 0.375rem; }
+.pstats .tip { left: auto; right: 0; }
+.pack-info { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.875rem 2rem; margin-top: 1rem; padding: 1.25rem clamp(1.125rem, 2.2vw, 1.75rem); }
+.pack-info h2 { grid-column: 1 / -1; }
+
+/* ---- pack insights: the top packs, the cards that return to stock, and the split by category ---- */
+:root { --cat-1: #1B8F68; --cat-2: #2A78D6; --cat-3: #EB6834; --cat-4: #6250D6; --cat-0: #7B8290; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --cat-1: #199E70; --cat-2: #3987E5; --cat-3: #D95926; --cat-4: #9085E9; --cat-0: #8A92A1; } }
+:root[data-theme="dark"] { --cat-1: #199E70; --cat-2: #3987E5; --cat-3: #D95926; --cat-4: #9085E9; --cat-0: #8A92A1; }
+.ins-dates { display: flex; flex-wrap: wrap; align-items: center; gap: 0.625rem 1rem; font-size: 0.9375rem; color: var(--t2); }
+.ins-dates label { display: inline-flex; align-items: center; gap: 0.5rem; }
+.ins-dates .field { width: auto; min-height: 2.375rem; padding: 0 0.625rem; font-size: 0.9375rem; }
+.ins-kpis { padding: 1rem 0 1.125rem; }
+.ins-kpis .kpi-num { font-size: min(1.75rem, 6.4vw); }
+.ranked { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
+.rank { flex: none; width: 1.375rem; text-align: right; font-size: 0.875rem; color: var(--t3); font-variant-numeric: tabular-nums; }
+.relbar { min-width: 7.5rem; }
+.relbar .bar-track { height: 0.375rem; }
+.rate { display: inline-flex; align-items: center; justify-content: flex-end; min-width: 3.75rem; height: 1.625rem; padding: 0 0.5rem; border-radius: 0.375rem; background: color-mix(in srgb, var(--live) 10%, transparent); font-weight: 600; font-variant-numeric: tabular-nums; }
+.ins-note { margin-top: 0.875rem; padding: 0.625rem 0.875rem; border-radius: 0.625rem; background: var(--soft); border: 1px solid var(--border); font-size: 0.9375rem; line-height: 1.5; color: var(--t2); }
+.ins-note b { font-weight: 600; color: var(--ink); }
+.catbar { display: flex; gap: 2px; height: 1.5rem; margin-top: 0.25rem; }
+.catbar i { display: block; min-width: 0.25rem; border-radius: 0.25rem; }
+.catbar i:first-child { border-radius: 0.5rem 0.25rem 0.25rem 0.5rem; }
+.catbar i:last-child { border-radius: 0.25rem 0.5rem 0.5rem 0.25rem; }
+.catbar i:only-child { border-radius: 0.5rem; }
+.catbar i:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin: 0; padding: 0.625rem 0 0.875rem; list-style: none; font-size: 0.875rem; color: var(--t2); }
+.legend li { display: inline-flex; align-items: center; gap: 0.4375rem; }
+.swatch { display: inline-block; flex: none; width: 0.625rem; height: 0.625rem; margin-right: 0.4375rem; border-radius: 50%; }
+.legend .swatch { margin-right: 0; }
+.cat2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, 20rem); gap: 1.25rem 2rem; align-items: start; }
+.cat-tbl td:first-child { font-weight: 600; }
+.cat-top { display: flex; flex-direction: column; gap: 0.375rem; padding: 1.125rem 1.25rem; border-radius: 0.875rem; background: var(--soft); border: 1px solid var(--border); }
+.cat-top .lbl { font-size: 0.9375rem; }
+.cat-top strong { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+.cat-top b { font-weight: 600; }
+.cat-top p { font-size: 0.875rem; line-height: 1.5; color: var(--t2); }
+/* the list of pack IDs: five columns on a desk, and on a phone the ID and the category sit under the name */
+.tbl.ids-tbl { min-width: 24rem; }
+.ids-tbl td:nth-child(2), .ids-tbl td:nth-child(4), .ids-tbl td:nth-child(5) { white-space: nowrap; }
+.ids-sub { display: none; }
+@media (max-width: 900px) { .cat2 { grid-template-columns: minmax(0, 1fr); } .pack-info { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 620px) {
+  .pstats { position: static; }
+  .pstats .tip { left: 0; right: 0; width: auto; max-width: none; }
+  .packbar .field-select, .packbar .btn { flex: 1 1 8.5rem; }
+  .relbar { min-width: 0; }
+  .ins-dates label { flex: 1 1 8.5rem; flex-direction: column; align-items: stretch; gap: 0.25rem; min-width: 0; }
+  .ins-dates .field { width: 100%; min-width: 0; min-height: 44px; }
+  .ins-dates > span { flex-basis: 100%; }
+  .tbl.ids-tbl { min-width: 0; }
+  .ids-tbl th:nth-child(2), .ids-tbl th:nth-child(3), .ids-tbl td:nth-child(2), .ids-tbl td:nth-child(3) { display: none; }
+  .ids-sub { display: block; padding-top: 0.125rem; font-size: 0.8125rem; font-weight: 400; color: var(--t2); }
+}
+
 /* on a touch screen every control takes a full fingertip, whatever size it is drawn */
 @media (pointer: coarse) {
   .btn, .fchip, .seg-btn, .namebtn, .linkbtn, .iconbtn, .info, .switch, .tickbox { position: relative; }
@@ -1163,12 +1235,12 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   <div class="phead">
     <div class="row wrap">
       <h1 class="h-page">Your packs</h1>
-      <span class="tipw"><button class="info" type="button" aria-label="About your packs" aria-describedby="tip-packs"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-packs">Built and stocked by Grail. You call a pack by its ID, and you can change its name and artwork. A pack is live while its top chase card is within your Max Card Value, and each paused pack shows what it still needs.</span></span>
-      <span class="meta" data-bind="packcount">3 live, 2 paused</span>
+      <span class="tipw"><button class="info" type="button" aria-label="About your packs" aria-describedby="tip-packs"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-packs">Built and stocked by Grail. You call a pack by its ID, and you can change its name and artwork. A pack is live while its top card is within your Max Card Value, and each paused pack shows what it still needs. The 17 price tiers shown here are proposals.</span></span>
+      <span class="meta" data-bind="packcount">9 live, 8 paused</span>
     </div>
     <dl class="pstats">
       <div><dt>Available Balance</dt><dd class="num" data-bind="available">$26,750</dd></div>
-      <div><dt>Max Card Value</dt><dd class="num" data-bind="maxcard">$10,700</dd></div>
+      <div><dt>Max Card Value<span class="tipw"><button class="info" type="button" aria-label="About Max Card Value" aria-describedby="tip-maxcard"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-maxcard" data-bind="maxtip">40% of your Available Balance, and 60% from $50,000. A pack is live while its top card is within this value.</span></span></dt><dd class="num" data-bind="maxcard">$10,700</dd></div>
     </dl>
   </div>
 
@@ -1195,18 +1267,107 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     </div>
   </section>
 
-  <div class="rail" id="rail">
-    <div class="panel rail-tag" id="rail-tag">
-      <span class="lbl">Max Card Value</span>
-      <span class="rail-val" data-bind="maxcard">$10,700</span>
-      <span class="tipw"><button class="info" type="button" aria-label="About Max Card Value" aria-describedby="tip-max-rail"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-bc" role="tooltip" id="tip-max-rail" data-bind="maxtip">40% of your Available Balance, and 60% from $50,000. A pack is live while its top chase card is within this value.</span></span>
-    </div>
-    <div class="rail-stem" id="rail-stem" aria-hidden="true"></div>
-    <div class="rail-track" aria-hidden="true"><div class="rail-fill" id="rail-fill"></div></div>
-    <div class="rail-pins" id="rail-pins"></div>
+  <div class="example-note" role="note" style="margin-top: 1rem">
+    <svg class="ic" aria-hidden="true"><use href="#i-alert"></use></svg>
+    <div><b>17 proposed price tiers</b><span>Names, categories, artwork and numbers are examples. None of these packs is published yet.</span></div>
   </div>
-
+  <div class="packbar">
+    <div class="search">
+      <svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg>
+      <input class="field" type="search" id="pack-search" aria-label="Search packs" aria-keyshortcuts="/" placeholder="Search packs by name or ID" autocomplete="off" spellcheck="false" enterkeyhint="search">
+      <kbd class="key-hint" aria-hidden="true">/</kbd>
+    </div>
+    <select class="field field-select" id="pack-cat" aria-label="Category"></select>
+    <select class="field field-select" id="pack-price" aria-label="Price">
+      <option value="all">Price: all</option><option value="low">Under $100</option><option value="mid">$100 to $999</option><option value="high">$1,000 and more</option>
+    </select>
+    <button class="btn" type="button" id="pack-sort">Price: low to high</button>
+    <span class="meta" id="packs-count" role="status"></span>
+  </div>
   <div class="packs" id="packs-grid"></div>
+  <div class="panel empty" id="packs-empty" style="margin-top: 0.875rem; padding-bottom: 2.25rem" hidden><span>No pack matches these filters.</span><button class="btn" type="button" data-clear-packs>Show all packs</button></div>
+  <aside class="panel pack-info" aria-labelledby="pack-info-title">
+    <h2 id="pack-info-title">How packs work</h2>
+    <div class="info-item"><b>Start from $1,000</b><p>A first top-up of $1,000 covers <span data-bind="startpacks"></span>. Going live also needs approval by Grail.</p></div>
+    <div class="info-item"><b>From the Grail API</b><p>The names, the artwork, the categories, the card mix and the funding requirement of every pack. Your shop can change only the name and the artwork.</p></div>
+    <div class="info-item"><b>Paused, not gone</b><p>A pack whose top card is above your Max Card Value is hidden from your customers. It returns when your balance covers it.</p></div>
+  </aside>
+</div>
+
+<!-- ================= Pack insights ================= -->
+<div class="page" id="view-insights" hidden>
+  <div class="phead">
+    <div class="row wrap">
+      <h1 class="h-page">Pack insights</h1>
+      <span class="meta" data-when="live" id="ins-period"></span>
+    </div>
+    <div class="segs" role="group" aria-label="Period" data-when="live">
+      <button class="seg-btn" type="button" data-ins-range="7" aria-pressed="false">7 days</button>
+      <button class="seg-btn" type="button" data-ins-range="30" aria-pressed="true">30 days</button>
+      <button class="seg-btn" type="button" data-ins-range="custom" aria-pressed="false">Custom range</button>
+    </div>
+  </div>
+  <div class="pbody stack-v" data-when="live">
+    <div class="ins-dates" id="ins-dates" hidden>
+      <label for="ins-from">From <input class="field" type="date" id="ins-from"></label>
+      <label for="ins-to">To <input class="field" type="date" id="ins-to"></label>
+      <span id="ins-dates-note"></span>
+    </div>
+    <div class="example-note" role="note">
+      <svg class="ic" aria-hidden="true"><use href="#i-alert"></use></svg>
+      <div><b>Illustrative data only</b><span>The pack names and the numbers below are examples, not a shop’s results.</span></div>
+    </div>
+    <section class="panel pad" aria-labelledby="ins-packs-title">
+      <div class="head">
+        <h2 class="h-panel" id="ins-packs-title">Top 10 packs by purchases</h2>
+        <span class="meta">Most purchases first</span>
+      </div>
+      <div class="kpi-grid three ins-kpis" id="ins-packs-kpis"></div>
+      <div class="tbl-wrap">
+        <table class="tbl cards-tbl ins-tbl">
+          <thead><tr><th style="width: 32%">Pack</th><th>Category</th><th class="r">Purchases</th><th>Relative popularity</th><th class="r">Share of all</th></tr></thead>
+          <tbody id="ins-packs-rows"></tbody>
+        </table>
+      </div>
+      <p class="note" style="padding-top: 0.875rem">One completed pack purchase counts once. A repeated delivery of the same purchase is not counted again. The share is of all purchases, not only of these 10.</p>
+    </section>
+    <section class="panel pad" aria-labelledby="ins-cards-title">
+      <div class="head">
+        <h2 class="h-panel" id="ins-cards-title">Top 10 cards returned to stock</h2>
+        <button class="btn btn-sm" type="button" id="ins-sort">Sort: returned count</button>
+      </div>
+      <div class="kpi-grid three ins-kpis" id="ins-cards-kpis"></div>
+      <div class="tbl-wrap">
+        <table class="tbl cards-tbl ins-tbl">
+          <thead><tr><th style="width: 34%">Card</th><th class="r">Received</th><th class="r">Returned</th><th class="r">From Reserve Card</th><th class="r">From Vault</th><th class="r">Return rate</th></tr></thead>
+          <tbody id="ins-cards-rows"></tbody>
+        </table>
+      </div>
+      <p class="note" style="padding-top: 0.875rem" id="ins-cards-foot"></p>
+      <p class="ins-note"><b>Stock returns only.</b> A card returns to stock when it is released in Reserve Card or in the Vault. Returns of shipped cards and delivery claims are not counted here. A high rate is a signal, not proof of low interest.</p>
+    </section>
+    <section class="panel pad" aria-labelledby="ins-cat-title">
+      <div class="head">
+        <h2 class="h-panel" id="ins-cat-title">Purchases by category</h2>
+        <span class="meta">Share of all purchases</span>
+      </div>
+      <div class="kpi-grid three ins-kpis" id="ins-cat-kpis"></div>
+      <div class="catbar" id="ins-cat-bar" role="group" aria-label="Purchases by category"></div>
+      <ul class="legend" id="ins-cat-legend"></ul>
+      <div class="cat2">
+        <div class="tbl-wrap">
+          <table class="tbl cat-tbl" style="min-width: 0">
+            <thead><tr><th>Category</th><th class="r">Purchases</th><th>Share</th><th class="r">Percentage</th></tr></thead>
+            <tbody id="ins-cat-rows"></tbody>
+          </table>
+        </div>
+        <aside class="cat-top" id="ins-cat-top" aria-label="Largest category"></aside>
+      </div>
+    </section>
+  </div>
+  <div class="pbody" data-when="new">
+    <section class="panel blank"><b>No purchases yet</b><span>From your first Temporary Purchase, this page shows which packs are bought most, which cards return to stock and how the purchases split by category.</span></section>
+  </div>
 </div>
 
 <!-- ================= Marketplace ================= -->
@@ -1697,12 +1858,12 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       <div class="head rel" style="padding-bottom: 0.875rem">
         <div class="row wrap">
           <h2 class="h-panel" id="ids-title">Pack IDs</h2>
-          <span class="tipw"><button class="info" type="button" aria-label="About pack IDs" aria-describedby="tip-api"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-api">Your site calls a pack by its ID. Grail builds and stocks the pack, and the ID stays the same when you rename it.</span></span>
+          <span class="tipw"><button class="info" type="button" aria-label="About pack IDs" aria-describedby="tip-api"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip" role="tooltip" id="tip-api">Your site calls a pack by its ID. Grail builds and stocks the pack, and the ID stays the same when you rename it. The category comes from Grail too, and the pack insights count by it.</span></span>
         </div>
       </div>
       <div class="tbl-wrap">
-        <table class="tbl" style="min-width: 24rem">
-          <thead><tr><th>Pack</th><th>ID</th><th>Status</th><th></th></tr></thead>
+        <table class="tbl ids-tbl">
+          <thead><tr><th>Pack</th><th>ID</th><th>Category</th><th>Status</th><th></th></tr></thead>
           <tbody id="id-rows"></tbody>
         </table>
       </div>
@@ -2148,7 +2309,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
 <footer class="foot rel">
   <span>Sample data</span>
-  <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="tip-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-al" role="tooltip" id="tip-sample">Card names and market values are from the Grail inventory of 11 November 2026, and a card still at grading shows the grade it is valued at. Balances, sales, fees, customers, shipments, keys, invoices, references, events, reconciliation records, cases, test results, alerts, update times, the change history, the carrier quotes, the shipping destinations and times, and the packs with their prices, card mix, artwork and product copy are a sample. Who acts next on a shipping problem or a case is a proposal. Card photos were supplied by the shop owner, and a slab without one is an empty photo slot. Nothing you do here moves money. New shop shows the same dashboard for a shop that is still onboarding.</span></span>
+  <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="tip-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-al" role="tooltip" id="tip-sample">Card names and market values are from the Grail inventory of 11 November 2026, and a card still at grading shows the grade it is valued at. Balances, sales, fees, customers, shipments, keys, invoices, references, events, reconciliation records, cases, test results, alerts, update times, the change history, the carrier quotes, the shipping destinations and times, the pack insights, and the 17 price tiers with their names, categories, card mix, artwork and product copy are a sample. Who acts next on a shipping problem or a case is a proposal. Card photos were supplied by the shop owner, and a slab without one is an empty photo slot. Nothing you do here moves money. New shop shows the same dashboard for a shop that is still onboarding.</span></span>
   <button class="linkbtn" type="button" id="reset">Reset</button>
   <div class="foot-ctl">
     <span class="lbl">Shop</span>
@@ -2363,7 +2524,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     <div>
       <h3 class="sub-h">Card mix by rarity group</h3>
       <div id="pack-mix"></div>
-      <p class="note" style="padding-top: 0.5rem">Sample numbers. Grail sets the card mix of each pack, and it is the same in every shop.</p>
+      <p class="note" style="padding-top: 0.5rem" id="pack-mix-note">Sample numbers. Grail sets the card mix of each pack, and it is the same in every shop.</p>
     </div>
     <form class="present" id="pack-form" novalidate>
       <h3 class="sub-h">Your shop presentation</h3>
@@ -2567,24 +2728,39 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   'use strict';
 
   // ---------- sample data: real card names and values from the Grail inventory ----------
+  // 17 proposed price tiers, from $1 to $100,000. Five packs carry real card names and values from the Grail inventory.
+  // The other twelve are examples of a tier: a name, a category and the value of a top card, which is enough to show what a balance covers.
   var PACKS = [
+    { id: 'GR-0096', name: 'Mini Pack', price: 1, cat: 'Pokémon', top: 60, bought: 4660, buyers: 2310, proposed: true },
+    { id: 'GR-0099', name: 'Discovery Pack', price: 5, cat: 'Pokémon', top: 120, bought: 1331, buyers: 720, proposed: true },
     // the entry pack holds Basic cards only, so a first balance of $1,000 covers it: its top card is within a Max Card Value of $200
-    { id: 'GR-0101', name: 'Entry Pack', price: 10, bought: 6120, buyers: 1960, proposed: true, cards: [
+    { id: 'GR-0101', name: 'Entry Pack', price: 10, cat: 'Pokémon', bought: 3994, buyers: 1960, proposed: true, cards: [
       { n: 'Psyduck', s: '#226', g: 'PSA 10', v: 190 }, { n: 'Charizard VMAX', s: 'Japanese #308', g: 'PSA 10', v: 180 },
       { n: 'Rayquaza VMAX', s: '#111', g: 'PSA 10', v: 150 }, { n: 'Mega Gengar ex', s: '#269', g: 'PSA 10', v: 145 }] },
-    { id: 'GR-0117', name: 'Modern Hits', price: 25, bought: 8722, buyers: 2140, cards: [
+    { id: 'GR-0117', name: 'Modern Hits', price: 25, cat: 'Pokémon', bought: 3328, buyers: 1480, cards: [
       { n: 'Umbreon VMAX', g: 'PSA 9', v: 1900 }, { n: 'Mega Dragonite ex SIR', g: 'PSA 10', v: 857 },
       { n: 'Gengar VMAX Alt Art', g: 'PSA 9', v: 820 }, { n: 'Charizard V Full Art', g: 'PSA 10', v: 760 }] },
-    { id: 'GR-0142', name: 'Fire Legends', price: 100, bought: 6200, buyers: 1640, cards: [
+    { id: 'GR-0125', name: 'Soccer Highlights', price: 50, cat: 'Soccer', top: 3200, bought: 2662, buyers: 1120, proposed: true },
+    { id: 'GR-0131', name: 'Baseball Classics', price: 75, cat: 'Baseball', top: 4800, bought: 1553, buyers: 640, proposed: true },
+    { id: 'GR-0142', name: 'Fire Legends', price: 100, cat: 'Pokémon', bought: 2219, buyers: 905, cards: [
       { n: 'Shining Charizard', g: 'PSA 9', v: 6300 }, { n: 'Blaine’s Charizard', g: 'PSA 9', v: 5000 },
       { n: 'Charizard EX Dragon', g: 'PSA 9', v: 3700 }, { n: 'Charizard Base Set', g: 'PSA 9', v: 3600 }] },
-    { id: 'GR-0158', name: 'Ghost Hunt', price: 250, bought: 1000, buyers: 310, cards: [
+    { id: 'GR-0149', name: 'Basketball Stars', price: 150, cat: 'Basketball', top: 8900, bought: 1109, buyers: 410, proposed: true },
+    { id: 'GR-0153', name: 'Sample pack 09', price: 200, cat: 'Pokémon', top: 10200, bought: 186, buyers: 61, proposed: true },
+    { id: 'GR-0158', name: 'Ghost Hunt', price: 250, cat: 'Pokémon', bought: 1000, buyers: 310, cards: [
       { n: 'Gengar Skyridge H9', g: 'PSA 8', v: 11400 }, { n: 'Gengar reverse holo', g: 'CGC 9', v: 11000 },
       { n: 'Gengar Prime', g: 'PSA 9', v: 3800 }, { n: 'Gengar Lost Origin', g: 'PSA 10', v: 690 }] },
-    { id: 'GR-0163', name: 'Vintage Grails', price: 500, bought: 240, buyers: 52, cards: [
+    { id: 'GR-0163', name: 'Vintage Grails', price: 500, cat: 'Pokémon', bought: 240, buyers: 52, cards: [
       { n: 'Charizard Gold Star', g: 'PSA 7', v: 13500 }, { n: 'Crystal Charizard', g: 'BGS 9', v: 7000 },
-      { n: 'Umbreon 1st Edition', g: 'PSA 8', v: 4920 }, { n: 'Blastoise 1st Edition', g: 'BGS 8', v: 4500 }] }
+      { n: 'Umbreon 1st Edition', g: 'PSA 8', v: 4920 }, { n: 'Blastoise 1st Edition', g: 'BGS 8', v: 4500 }] },
+    { id: 'GR-0171', name: 'Sample pack 12', price: 1000, cat: 'Basketball', top: 20000, bought: 0, buyers: 0, proposed: true },
+    { id: 'GR-0176', name: 'Sample pack 13', price: 2500, cat: 'Pokémon', top: 36000, bought: 0, buyers: 0, proposed: true },
+    { id: 'GR-0182', name: 'Sample pack 14', price: 5000, cat: 'Soccer', top: 70000, bought: 0, buyers: 0, proposed: true },
+    { id: 'GR-0188', name: 'Sample pack 15', price: 10000, cat: 'Baseball', top: 120000, bought: 0, buyers: 0, proposed: true },
+    { id: 'GR-0193', name: 'Sample pack 16', price: 50000, cat: 'Basketball', top: 400000, bought: 0, buyers: 0, proposed: true },
+    { id: 'GR-0199', name: 'Sample pack 17', price: 100000, cat: 'Pokémon', top: 600000, bought: 0, buyers: 0, proposed: true }
   ];
+  PACKS.forEach(function (p) { if (p.cards) p.top = p.cards[0].v; });      // a pack with its cards here takes the value of its first card
   var SINGLES = [
     { n: 'Alakazam EX Full Art', s: 'Fates Collide #125', g: 'PSA 10', v: 7000 },
     { n: 'LeBron James', s: '2003 Topps Chrome #111', g: 'PSA 9', v: 3567 },
@@ -2619,7 +2795,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     'Rocket’s Mewtwo ex|#231': 'X-11', 'Mega Gengar ex SIR|Ascended Heroes #284': 'X-12', 'Pikachu Yellow Cheeks|Base Set #58': 'X-13',
     'Gastly|#177': 'X-15', 'Ninetales|#199': 'X-16', 'Umbreon V|#094': 'X-17', 'Rocket’s Moltres ex|#229': 'X-18', 'Psyduck|#226': 'X-19',
     'Charizard VMAX|Japanese #308': 'X-21', 'Rayquaza VMAX|#111': 'X-22', 'Mega Gengar ex|#269': 'X-24' };
-  PACKS.forEach(function (p) { p.cards.forEach(function (c, i) { var k = p.id + '-' + (i + 1); if (PHOTOS.indexOf(k) >= 0) c.img = 'cards/' + k + '.jpg'; }); });
+  PACKS.forEach(function (p) { (p.cards || []).forEach(function (c, i) { var k = p.id + '-' + (i + 1); if (PHOTOS.indexOf(k) >= 0) c.img = 'cards/' + k + '.jpg'; }); });
   SINGLES.forEach(function (c, i) { var k = 'S-' + ('0' + (i + 1)).slice(-2); if (PHOTOS.indexOf(k) >= 0) c.img = 'cards/' + k + '.jpg'; });
   function photoOf(card) { var k = SAME_CARD[card.n + '|' + card.s]; return card.img || (k ? 'cards/' + k + '.jpg' : ''); }
 
@@ -2768,9 +2944,9 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     ['users', 'Add users and change roles', 'Settings, Team'],
     ['settings', 'Change shop settings and notifications', 'Settings, Shop and Notifications']
   ];
-  var PAGE_NEEDS = { overview: 'sales', packs: 'packs', marketplace: 'packs', vault: 'ops', shipments: 'ops', cases: 'ops', customers: 'sales', analytics: 'sales',
+  var PAGE_NEEDS = { overview: 'sales', packs: 'packs', insights: 'packs', marketplace: 'packs', vault: 'ops', shipments: 'ops', cases: 'ops', customers: 'sales', analytics: 'sales',
     billing: 'billing', reconcile: 'billing', autotopup: 'billing', integration: 'keys', launch: 'keys', kyb: 'kyb', team: 'users', account: 'settings', alerts: 'settings' };
-  var PAGE_NAMES = { overview: 'Overview', packs: 'Packs', marketplace: 'Marketplace', vault: 'Vault', shipments: 'Shipments', cases: 'Returns and claims', customers: 'Customers', analytics: 'Analytics',
+  var PAGE_NAMES = { overview: 'Overview', packs: 'Packs', insights: 'Pack insights', marketplace: 'Marketplace', vault: 'Vault', shipments: 'Shipments', cases: 'Returns and claims', customers: 'Customers', analytics: 'Analytics',
     billing: 'Billing', reconcile: 'Reconciliation', autotopup: 'Auto top-up', integration: 'Integration', launch: 'Launch checks', kyb: 'KYB', team: 'Team', account: 'Shop settings', alerts: 'Notifications' };
 
   var PEOPLE = buildPeople();
@@ -2805,7 +2981,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
   // ---------- state ----------
   var START = { auto: false, autoAmount: 10000, autoBelow: 20000, shop: '', shown: 12, shipFilter: 'all', shipQuery: '', shipShown: 12,
-    ledgerFilter: 'all', ledgerShown: 10, topBy: 'sales', actMode: 'chart', evFilter: 'all', evShown: 8, evFocus: '', autoCap: 30000, caseFilter: 'open', caseQuery: '', recDay: 0, recFilter: 'review', recShown: 10, q: '', searchType: 'all', searchShown: 12, feeShown: 6 };
+    ledgerFilter: 'all', ledgerShown: 10, topBy: 'sales', actMode: 'chart', evFilter: 'all', evShown: 8, evFocus: '', autoCap: 30000, caseFilter: 'open', caseQuery: '', recDay: 0, recFilter: 'review', recShown: 10, q: '', searchType: 'all', searchShown: 12, feeShown: 6,
+    packQuery: '', packCat: 'all', packPrice: 'all', packSort: 'low', insRange: '30', insA: 0, insB: 13, insSort: 'count' };
   var S = {};
   function resetState(mode) {
     for (var k in START) S[k] = START[k];
@@ -2912,9 +3089,9 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   function chunks(n) { return String(n).replace(/(\d{1,4})/g, '<span class="g">$1</span>'); }
   // Something typed cannot be used: the field shakes its head once.
   function shake(el) { if (!still && el.animate) el.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(5px)' }, { transform: 'translateX(-3px)' }, { transform: 'translateX(0)' }], { duration: 280, easing: 'cubic-bezier(.2,.7,.2,1)' }); }
-  // A pack that has just gone live says so once: its pin and its cards dip, rise past their place and settle.
+  // A pack that has just gone live says so once: its artwork dips, rises past its place and settles.
   function comeAlive(p) {
-    [document.querySelector('[data-pin="' + p.id + '"] .pin'), document.querySelector('[data-pack="' + p.id + '"] .stack')].forEach(function (el) {
+    [document.querySelector('[data-art="' + p.id + '"]')].forEach(function (el) {
       if (el && el.animate && el.getClientRects().length) el.animate([{ transform: 'scale(0.9)' }, { transform: 'scale(1.07)' }, { transform: 'scale(1)' }], { duration: 380, easing: 'cubic-bezier(.2,.7,.2,1)' });
     });
   }
@@ -3041,7 +3218,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   function hex(r, n) { var s = ''; while (s.length < n) s += Math.floor(r() * 16).toString(16); return s; }
   function refs(c, r) { c.tp = 'TP-' + digits(r, 6); c.tx = 'TX-' + digits(r, 8); c.card = 'CARD-' + digits(r, 6); return c; }
   // A card that is one of the entry pack's own cards came from that pack.
-  function entryOr(c, other) { return PACKS[0].cards.some(function (x) { return x.n === c[0] && x.s === c[1]; }) ? PACKS[0].id : other; }
+  function entryOr(c, other) { var e = packOf('GR-0101'); return e.cards.some(function (x) { return x.n === c[0] && x.s === c[1]; }) ? e.id : other; }
   function buildPurchases() {
     var r = rng(8128), out = [];
     // minutes since the purchase: a Vault card has used up 48 hours less what is left, a Staging card 5 minutes less what is left
@@ -3096,7 +3273,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     else if (s === 0.4) next = ', and 60% from $50,000';
     else if (s === 0.6) next = ', and 80% from $100,000';
     else next = ', the highest share';
-    return Math.round(s * 100) + '% of your Available Balance' + next + '. A pack is live while its top chase card is within this value.';
+    return Math.round(s * 100) + '% of your Available Balance' + next + '. A pack is live while its top card is within this value.';
   }
 
   // ---------- small builders ----------
@@ -3135,27 +3312,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
   // ---------- lists that do not change ----------
   function buildStatic() {
-    $('rail-pins').innerHTML = PACKS.map(function (p) {
-      return '<div class="pin-cell" data-pin="' + p.id + '"><div class="pin" aria-hidden="true"><svg class="ic i-check"><use href="#i-check"></use></svg><svg class="ic i-lock"><use href="#i-lock"></use></svg></div>' + money(p.cards[0].v) + '</div>';
-    }).join('');
-    $('packs-grid').innerHTML = PACKS.map(function (p) {
-      var order = [3, 2, 1, 0];
-      return '<article class="panel pack" data-pack="' + p.id + '" id="pack-' + p.id + '">' +
-        '<div class="pack-head"><div class="pack-top rel"><span class="st-wrap"><span class="st st-live"><i aria-hidden="true"></i>Live</span>' +
-        '<span class="st st-paused"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg><span data-why="' + p.id + '">Paused</span></span>' + infoTip('tip-' + p.id, 'Why this pack is paused', 'tip-fill') + '</span>' +
-        '<span class="pack-id">' + p.id + '</span></div>' +
-        '<div class="pack-title">' + (p.proposed ? '<div class="pack-nm"><h2 class="pack-name" data-name="' + p.id + '"></h2><span class="tag">Proposed example</span></div>' : '<h2 class="pack-name" data-name="' + p.id + '"></h2>') +
-        '<span class="pack-price">' + money(p.price) + '</span></div></div>' +
-        '<div class="stack">' + order.map(function (i) { return slab(p.cards[i], 's' + (i + 1)); }).join('') + '</div>' +
-        '<div class="rows">' + p.cards.map(function (c) { return '<div><span>' + esc(c.n) + '</span><b>' + money(c.v) + '</b></div>'; }).join('') + '</div>' +
-        '<div class="pack-stats" data-when="live"><div><b title="' + count(p.bought) + '">' + abbr(p.bought) + '</b><span>Purchases</span></div>' +
-        '<div><b title="' + count(p.buyers) + '">' + abbr(p.buyers) + '</b><span>Buyers</span></div></div>' +
-        '<div class="fund" data-fund="' + p.id + '"></div>' +
-        '<div class="pack-acts" data-acts="' + p.id + '"></div></article>';
-    }).join('') + '<aside class="panel pack-info" aria-labelledby="pack-info-title"><h2 id="pack-info-title">How packs work</h2>' +
-      '<div class="info-item"><b>Start from $1,000</b><p>A first top-up of $1,000 covers <span data-bind="entryname"></span>. Going live also needs approval by Grail.</p></div>' +
-      '<div class="info-item"><b>Fixed by Grail</b><p>The price and the cards of a pack are the same in every shop. You can change its name and its artwork.</p></div>' +
-      '<div class="info-item"><b>Paused, not gone</b><p>A pack whose top card is above your Max Card Value is hidden from your customers. It returns when your balance covers it.</p></div></aside>';
+    $('packs-grid').innerHTML = PACKS.map(tileHtml).join('');
+    $('pack-cat').innerHTML = '<option value="all">Category: all</option>' + CATS.filter(function (k) { return PACKS.some(function (p) { return p.cat === k; }); }).map(function (k) { return '<option value="' + esc(k) + '">' + esc(k) + '</option>'; }).join('');
     $('ship-filters').innerHTML = chips(FILTERS, 'data-filter');
     $('ledger-filters').innerHTML = chips(LEDGER_FILTERS, 'data-ledger');
     $('ev-filters').innerHTML = chips([['all', 'All'], ['wait', 'Needs retry']], 'data-ev');
@@ -3281,7 +3439,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   function bind(name, text) { all('[data-bind="' + name + '"]').forEach(function (el) { el.textContent = text; }); }
   function defaultMethod() { return S.methods.filter(function (m) { return m.id === S.defaultMethod; })[0] || S.methods[0] || null; }
 
-  var renderSeq = 0, lastMax, railTimer = null;
+  var renderSeq = 0, thumbKey = {};
   function render() {
     renderSeq++;   // figures that are still counting up stop when a newer picture of the state is drawn
     // Auto top-up keeps the Available Balance above its line.
@@ -3294,9 +3452,6 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     if (guard) toast('Auto top-up added ' + money(guard * S.autoAmount) + '.' + (capped ? ' It has reached today’s limit.' : ''));
 
     var av = S.balance - S.held, mx = maxCard(av), ok = approved(), live = S.mode === 'live';
-    // when the Max Card Value changes, the marker on the pack rail travels to its new place
-    if (lastMax !== undefined && lastMax !== mx && !quiet()) { $('rail').classList.add('moving'); clearTimeout(railTimer); railTimer = setTimeout(function () { $('rail').classList.remove('moving'); }, 520); }
-    lastMax = mx;
     root.setAttribute('data-mode', S.mode);
     pressed('data-mode-set', S.mode);
     bind('available', money(av));
@@ -3312,32 +3467,34 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
     var on = 0, paused = 0;
     PACKS.forEach(function (p) {
-      var top = p.cards[0].v, was = p.live;
+      var top = p.top, was = p.live, tile = $('pack-' + p.id);
       p.live = ok && top <= mx;
       if (p.live) on++; else paused++;
-      document.querySelector('[data-pack="' + p.id + '"]').classList.toggle('is-paused', !p.live);
-      document.querySelector('[data-pin="' + p.id + '"]').classList.toggle('is-live', p.live);
+      tile.classList.toggle('is-paused', !p.live);
       if (p.live && was === false && !quiet()) comeAlive(p);
       document.querySelector('[data-name="' + p.id + '"]').textContent = p.label;
-      document.querySelector('[data-why="' + p.id + '"]').textContent = 'Paused: ' + pausedWhy(p, av, ok);
       document.querySelector('[data-fund="' + p.id + '"]').innerHTML = fundHtml(p, av, ok);
+      // the artwork of a tile is drawn again only when it changed
+      var key = p.art || 'grail';
+      if (thumbKey[p.id] !== key) { document.querySelector('[data-art="' + p.id + '"]').innerHTML = packThumb(p); thumbKey[p.id] = key; }
       // the buttons of a tile are drawn again only when their set changes, so the one in focus stays in place
       var acts = document.querySelector('[data-acts="' + p.id + '"]'), set = p.live ? 'live' : need(top) > av ? 'gap' : 'covered';
       if (acts.getAttribute('data-set') !== set) { acts.innerHTML = actsHtml(p, av); acts.setAttribute('data-set', set); acts.classList.toggle('one', acts.children.length === 1); }
-      $('tip-' + p.id).textContent = p.live ? '' : !ok ? 'Packs go live once your shop is approved. This one also needs ' + money(need(top)) + ' available, for its top chase card of ' + money(top) + '.'
-        : 'Its top chase card, ' + money(top) + ', is above your Max Card Value. It goes live at ' + money(need(top)) + ' available, and is hidden from customers until then.';
     });
     bind('packcount', paused ? on + ' live, ' + paused + ' paused' : on + ' live');
-    bind('entryname', PACKS[0].label);
+    renderPackGrid();
 
-    // a new shop: the first top-up of $1,000 covers the entry pack, and the approval of the shop makes it live
-    var first = PACKS[0], firstNeed = need(first.cards[0].v), firstGap = Math.max(0, firstNeed - av), firstTop = Math.max(firstGap, 1000 - S.balance);
-    $('fund-facts').innerHTML = [['First top-up', '$1,000 or more'], ['It covers', esc(first.label) + ', top card ' + money(first.cards[0].v)], ok ? ['Approval', 'Approved by Grail'] : ['Also needed', 'KYB and approval by Grail']].map(function (f) {
+    // a new shop: the first top-up of $1,000 covers the packs whose top card is within a Max Card Value of $200, and the approval of the shop makes them live
+    var starters = PACKS.filter(function (p) { return need(p.top) <= 1000; }), startNames = listed(starters.map(function (p) { return p.label; }));
+    var firstNeed = Math.max.apply(null, starters.map(function (p) { return need(p.top); })), firstGap = Math.max(0, firstNeed - av), firstTop = Math.max(firstGap, 1000 - S.balance), many = starters.length > 1;
+    bind('startpacks', startNames);
+    $('fund-facts').innerHTML = [['First top-up', '$1,000 or more'], ['It covers', plural(starters.length, 'pack', 'packs') + ', top card up to ' + money(Math.max.apply(null, starters.map(function (p) { return p.top; })))],
+      ok ? ['Approval', 'Approved by Grail'] : ['Also needed', 'KYB and approval by Grail']].map(function (f) {
       return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>';
     }).join('');
-    $('fund-note').textContent = firstGap ? 'A shop can start from $1,000. That balance gives a Max Card Value of $200, which covers ' + first.label + '. Every other pack shows what it still needs.'
-      : ok ? first.label + ' is live. Every other pack goes live once your balance covers its top card.'
-      : 'Your balance covers ' + first.label + '. It goes live once your shop is approved.';
+    $('fund-note').textContent = firstGap ? 'A shop can start from $1,000. That balance gives a Max Card Value of $200, which covers ' + startNames + '. Every other pack shows what it still needs.'
+      : ok ? startNames + (many ? ' are' : ' is') + ' live. Every other pack goes live once your balance covers its top card.'
+      : 'Your balance covers ' + startNames + '. ' + (many ? 'They go' : 'It goes') + ' live once your shop is approved.';
     $('fund-topup-wrap').hidden = !firstGap;
     $('fund-left').hidden = ok;
     $('fund-topup').textContent = 'Top up ' + money(firstTop);
@@ -3354,7 +3511,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     $('paid-rates').textContent = lv[0] + ' rates: Basic ' + lv[1] + ', Chase ' + lv[2] + '.';
 
     $('id-rows').innerHTML = PACKS.map(function (p) {
-      return '<tr><td class="strong">' + esc(p.label) + '</td><td>' + p.id + '</td><td><span class="dot' + (p.live ? ' dot-on' : '') + '" aria-hidden="true"></span>' + (p.live ? 'Live' : 'Paused') + '</td>' +
+      return '<tr><td class="strong">' + esc(p.label) + '<small class="ids-sub">' + p.id + ', ' + esc(p.cat) + '</small></td><td>' + p.id + '</td><td>' + esc(p.cat) + '</td><td><span class="dot' + (p.live ? ' dot-on' : '') + '" aria-hidden="true"></span>' + (p.live ? 'Live' : 'Paused') + '</td>' +
         '<td class="r"><button class="btn btn-sm" type="button" data-copy="' + p.id + '">Copy ID</button></td></tr>';
     }).join('');
 
@@ -3379,6 +3536,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     renderLedger();
     renderFees();
     renderCover();
+    renderInsights();
     renderMethods();
     renderShipments();
     renderKeys();
@@ -3397,7 +3555,6 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     renderSearch();
     applyAccess();
     subnav();
-    layoutRail();
   }
 
   // ---------- team: users, roles and what each role may see ----------
@@ -3631,6 +3788,113 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     $('cover-copy').setAttribute('data-copy', say);
   }
 
+  // ---------- pack insights: what the purchases of a period were made of ----------
+  // The sample knows the purchases of the 30 days as one total for each pack. A day's part of them follows that day's transaction fees
+  // in the balance activity, so a shorter period takes the same share of every pack and of every card.
+  var DAY = 24 * HOUR, DAY_END = Date.UTC(2026, 10, 13);      // midnight after the day the sample describes
+  // Whole numbers that keep the proportions of the weights and add up to the total.
+  function allot(total, weights) {
+    var sum = weights.reduce(add, 0), raw = weights.map(function (w) { return sum ? total * w / sum : 0; }), out = raw.map(Math.floor), left = total - out.reduce(add, 0);
+    raw.map(function (x, i) { return [x - Math.floor(x), i]; }).sort(function (a, b) { return b[0] - a[0] || a[1] - b[1]; }).slice(0, left).forEach(function (x) { out[x[1]]++; });
+    return out;
+  }
+  var dailyMemo = null;
+  function daily() {      // the purchases of each of the 30 days, today first
+    if (!dailyMemo) dailyMemo = allot(TOTAL_BOUGHT, LEDGER.filter(function (e) { return e.kind === 'fee'; }).sort(function (a, b) { return a.age - b.age; }).map(function (e) { return -e.c; }));
+    return dailyMemo;
+  }
+  function dayOf(time) { return Math.floor((DAY_END - time) / DAY); }                      // 0 is today, 29 is the first of the 30 days
+  function dateOf(d) { return new Date(DAY_END - (d + 1) * DAY); }
+  function isoOf(d) { return dateOf(d).toISOString().slice(0, 10); }
+  // The days of the chosen period, as the newest and the oldest day.
+  function insDays() {
+    if (S.insRange === '7') return [0, 6];
+    if (S.insRange === 'custom') return [Math.min(S.insA, S.insB), Math.max(S.insA, S.insB)];
+    return [0, 29];
+  }
+  // The categories a pack can carry in the Grail API, in a fixed order, so a category keeps its colour whatever its share is.
+  var CATS = ['Pokémon', 'Soccer', 'Baseball', 'Basketball'];
+  function catSlot(name) { return CATS.indexOf(name) + 1; }      // 0 stands for a pack without a category
+  function swatch(name) { return '<span class="swatch" style="background: var(--cat-' + catSlot(name) + ')" aria-hidden="true"></span>'; }
+  // How often a card was received in the 30 days. Sample values: a card of lower value is received more often.
+  // Beside it, the part of its returns that came from the Vault and not from Reserve Card: a Chase card waits in the Vault more often before it is released.
+  var CARD_REC = [15, 19, 28, 31, 32, 32, 33, 33, 34, 37, 38, 41, 42, 43, 43, 45, 46, 49, 50, 53, 120, 185, 240, 250, 300, 310, 320, 380, 380, 395];
+  var CARD_STATS = POOL.map(function (c, i) { return { n: c[0], s: c[1], g: c[2], v: c[3], rec: CARD_REC[i] }; }).concat([
+    { n: 'Hypno', s: 'Japanese Town on No Map 1st Edition', g: 'PSA 10', v: 900, rec: 31 }, { n: 'Haunter', s: 'Fossil 1st Edition #6', g: 'PSA 9', v: 456, rec: 125 },
+    { n: 'Shining Magikarp', s: 'Neo Revelation #66', g: 'PSA 3', v: 311, rec: 180 }, { n: 'Wartortle', s: 'Base Set #42', g: 'PSA 10', v: 252, rec: 235 },
+    { n: 'Charizard', s: 'Base Set 2 #4', g: 'PSA 6', v: 425, rec: 130 }]);
+  CARD_STATS.forEach(function (c, i) { c.vs = (c.v >= 500 ? 0.08 : 0.01) * (0.7 + 0.6 * ((i * 0.618034) % 1)); });
+  function kpis(list) { return list.map(function (k) { return '<div class="kpi"><span class="kpi-num">' + k[0] + '</span><span class="kpi-lbl">' + k[1] + '</span></div>'; }).join(''); }
+  function share1(part, whole) { return (whole ? part / whole * 100 : 0).toFixed(1) + '%'; }
+  function ranked(i, inner) { return '<div class="ranked"><span class="rank">' + (i + 1) + '</span>' + inner + '</div>'; }
+  function renderInsights() {
+    if (S.mode !== 'live') return;
+    var span = insDays(), a = span[0], b = span[1], total = daily().slice(a, b + 1).reduce(add, 0), custom = S.insRange === 'custom';
+    var inside = function (time) { var d = dayOf(time); return d >= a && d <= b; };
+    pressed('data-ins-range', S.insRange);
+    $('ins-period').textContent = (a === b ? day(dateOf(a)) : day(dateOf(b)) + ' to ' + day(dateOf(a))) + ' 2026';
+    $('ins-dates').hidden = !custom;
+    if (custom) {
+      if (document.activeElement !== $('ins-from')) $('ins-from').value = isoOf(b);
+      if (document.activeElement !== $('ins-to')) $('ins-to').value = isoOf(a);
+      $('ins-dates-note').textContent = plural(b - a + 1, 'day', 'days') + '. The sample holds ' + day(dateOf(29)) + ' to ' + day(dateOf(0)) + ' 2026.';
+    }
+
+    // the packs that were bought most
+    var per = allot(total, PACKS.map(function (p) { return p.bought; }));
+    var rows = PACKS.map(function (p, i) { return { p: p, n: per[i] }; }).filter(function (x) { return x.n > 0; }).sort(function (x, y) { return y.n - x.n || x.p.price - y.p.price; });
+    var top = rows.slice(0, 10), topSum = top.reduce(function (t, x) { return t + x.n; }, 0), most = top.length ? top[0].n : 1;
+    $('ins-packs-title').textContent = 'Top ' + top.length + ' packs by purchases';
+    $('ins-packs-kpis').innerHTML = kpis([[count(total), 'All pack purchases, selected period'], [count(topSum), 'Purchases in these top ' + top.length + ' packs'], [share1(topSum, total), 'Top ' + top.length + ' share of all purchases']]);
+    $('ins-packs-rows').innerHTML = top.map(function (x, i) {
+      return '<tr><td>' + ranked(i, '<div class="cell2"><b>' + esc(x.p.label) + '</b><small>' + x.p.id + ', ' + money(x.p.price) + '</small></div>') + '</td>' +
+        '<td data-l="Category">' + swatch(x.p.cat) + esc(x.p.cat) + '</td><td class="r strong" data-l="Purchases">' + count(x.n) + '</td>' +
+        '<td data-l="Relative popularity"><div class="relbar"><div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width: ' + (x.n / most * 100).toFixed(1) + '%; background: var(--cat-' + catSlot(x.p.cat) + ')"></div></div></div></td>' +
+        '<td class="r" data-l="Share of all">' + share1(x.n, total) + '</td></tr>';
+    }).join('');
+
+    // the cards that returned to stock most: released in Reserve Card or in the Vault, and neither shipped nor still waiting
+    var scale = total / TOTAL_BOUGHT, waiting = VAULT.concat(STAGING);
+    var cards = CARD_STATS.map(function (c) {
+      var same = function (x) { return x.n === c.n && x.s === c.s; };
+      var shipped = SHIP.filter(function (s) { return same(s) && inside(NOW - (s.age + s.pre) * HOUR); }).length;
+      var pending = waiting.filter(function (x) { return same(x) && inside(NOW - x.ago * MIN); }).length;
+      var rec = Math.max(Math.round(c.rec * scale), shipped + pending), back = rec - shipped - pending, vault = Math.round(back * c.vs);
+      return { c: c, rec: rec, back: back, vault: vault, res: back - vault, rate: rec ? back / rec : 0 };
+    }).filter(function (x) { return x.back > 0; });
+    cards.sort(S.insSort === 'rate' ? function (x, y) { return y.rate - x.rate || y.back - x.back; } : function (x, y) { return y.back - x.back || y.rec - x.rec; });
+    var ten = cards.slice(0, 10), recSum = ten.reduce(function (t, x) { return t + x.rec; }, 0), backSum = ten.reduce(function (t, x) { return t + x.back; }, 0);
+    var gone = SHIP.filter(function (s) { return inside(NOW - (s.age + s.pre) * HOUR); }).length + waiting.filter(function (x) { return inside(NOW - x.ago * MIN); }).length;
+    $('ins-cards-title').textContent = 'Top ' + ten.length + ' cards returned to stock';
+    $('ins-sort').textContent = S.insSort === 'rate' ? 'Sort: return rate' : 'Sort: returned count';
+    $('ins-cards-kpis').innerHTML = kpis([[count(recSum), 'Cards received, the ' + ten.length + ' shown'], [count(backSum), 'Returned to stock, the ' + ten.length + ' shown'], [share1(backSum, recSum), 'Return rate, the ' + ten.length + ' shown']]);
+    $('ins-cards-rows').innerHTML = ten.map(function (x, i) {
+      return '<tr><td>' + ranked(i, cardCell(x.c, true)) + '</td><td class="r" data-l="Received">' + count(x.rec) + '</td><td class="r strong" data-l="Returned">' + count(x.back) + '</td>' +
+        '<td class="r" data-l="From Reserve Card">' + count(x.res) + '</td><td class="r" data-l="From Vault">' + count(x.vault) + '</td>' +
+        '<td class="r" data-l="Return rate"><span class="rate">' + share1(x.back, x.rec) + '</span></td></tr>';
+    }).join('');
+    $('ins-cards-foot').textContent = 'Return rate = returned ÷ received. Based on the purchases of the selected period, with each return counted once. A card that is still in Reserve Card or in the Vault is not counted as returned. ' +
+      'Across all cards, ' + count(total - gone) + ' of ' + count(total) + ' returned to stock in this period.';
+
+    // the same purchases by the category of their pack
+    var byCat = {};
+    PACKS.forEach(function (p, i) { var k = catSlot(p.cat) ? p.cat : 'Uncategorized'; byCat[k] = (byCat[k] || 0) + per[i]; });
+    var cats = Object.keys(byCat).filter(function (k) { return byCat[k] > 0; }).map(function (k) { return { name: k, n: byCat[k] }; }).sort(function (x, y) { return y.n - x.n; }), lead = cats[0];
+    $('ins-cat-kpis').innerHTML = kpis([[count(total), 'All pack purchases, selected period'], [String(cats.length), cats.length === 1 ? 'Category' : 'Categories'], [share1(lead.n, total), esc(lead.name) + ' share of all purchases']]);
+    $('ins-cat-bar').innerHTML = cats.map(function (k) {
+      return '<i tabindex="0" role="img" style="flex: ' + k.n + ' 1 0; background: var(--cat-' + catSlot(k.name) + ')" data-tip-a="' + share1(k.n, total) + '" data-tip-b="' + esc(k.name) + ', ' + count(k.n) + ' purchases" aria-label="' + esc(k.name) + ', ' + count(k.n) + ' purchases, ' + share1(k.n, total) + '"></i>';
+    }).join('');
+    $('ins-cat-legend').innerHTML = cats.map(function (k) { return '<li>' + swatch(k.name) + esc(k.name) + '</li>'; }).join('');
+    $('ins-cat-rows').innerHTML = cats.map(function (k) {
+      return '<tr><td>' + swatch(k.name) + esc(k.name) + '</td><td class="r">' + count(k.n) + '</td>' +
+        '<td><div class="relbar"><div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width: ' + (k.n / total * 100).toFixed(1) + '%; background: var(--cat-' + catSlot(k.name) + ')"></div></div></div></td>' +
+        '<td class="r strong">' + share1(k.n, total) + '</td></tr>';
+    }).join('') + '<tr class="total-row"><td>Total</td><td class="r">' + count(total) + '</td><td></td><td class="r">100.0%</td></tr>';
+    $('ins-cat-top').innerHTML = '<span class="lbl">Largest category</span><strong>' + swatch(lead.name) + ' ' + esc(lead.name) + '</strong><b>' + count(lead.n) + ' purchases</b>' +
+      '<p>' + share1(lead.n, total) + ' of the selected period.</p><p>The category is the Grail category ID of each pack, as the API returns it. Each purchase counts once.</p>' +
+      '<p>A pack with several categories needs one agreed reporting category. A pack without a category stays in view as Uncategorized.</p>';
+  }
+
   // ---------- shipments ----------
   function shipRow(s) {
     var st = shipState(s), dot = st.kind === 'done' ? ' dot-on' : st.kind === 'warn' ? ' dot-warn' : st.done >= 3 ? ' dot-way' : '', fr = shipFresh(s);
@@ -3815,35 +4079,6 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     hideTip();
   }
 
-  // Put the fill, the stem and the tag where the Max Card Value falls between the pack pins.
-  function layoutRail() {
-    var rail = $('rail'), W = rail.clientWidth;
-    if (!W) return;
-    var box = rail.getBoundingClientRect();
-    var xs = [0], vs = [0];
-    PACKS.forEach(function (p) {
-      var r = document.querySelector('[data-pin="' + p.id + '"] .pin').getBoundingClientRect();
-      xs.push(r.left + r.width / 2 - box.left);
-      vs.push(p.cards[0].v);
-    });
-    xs.push(W); vs.push(vs[vs.length - 1] * 1.6);
-    var mx = maxCard(S.balance - S.held), x = W;
-    for (var i = 0; i < vs.length - 1; i++) {
-      if (mx <= vs[i + 1]) { x = xs[i] + (mx - vs[i]) / (vs[i + 1] - vs[i]) * (xs[i + 1] - xs[i]); break; }
-    }
-    x = Math.max(0, Math.min(W, x));
-    $('rail-fill').style.width = x + 'px';
-    $('rail-stem').style.left = x + 'px';
-    var tag = $('rail-tag'), half = tag.offsetWidth / 2;
-    tag.style.left = Math.max(half, Math.min(W - half, x)) + 'px';
-    // the tooltip opens centred under the tag, and toward the middle when half of it would leave the screen
-    var mid = box.left + Math.max(half, Math.min(W - half, x)), vw = document.documentElement.clientWidth;
-    var halfTip = Math.min(20 * parseFloat(getComputedStyle(document.documentElement).fontSize), vw * 0.8) / 2;
-    var tip = $('tip-max-rail'), end = mid - halfTip < 8 ? 'start' : mid + halfTip > vw - 8 ? 'end' : '';
-    tip.classList.toggle('tip-bc', !end);
-    tip.classList.toggle('tip-br', end === 'end');
-  }
-
   // ---------- overview: what needs doing, the connection and the fees ----------
   function renderTodo() {
     var items = [], av = S.balance - S.held, warn = SHIP.filter(function (s) { return s.issue; });
@@ -3861,8 +4096,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     }
     var diff = S.mode === 'live' ? recIssues(0).filter(function (x) { return !x.done; }).length : 0;
     if (diff && can('billing')) items.push(['warn', diff + (diff === 1 ? ' record needs' : ' records need') + ' review', 'Today’s reconciliation found a difference between your records and Grail’s.', '<a class="btn btn-sm" href="#reconcile">Review</a>']);
-    PACKS.filter(function (p) { return !p.live; }).sort(function (a, b) { return a.cards[0].v - b.cards[0].v; }).forEach(function (p) {
-      var gap = Math.max(0, need(p.cards[0].v) - av);
+    PACKS.filter(function (p) { return !p.live && p.bought > 0; }).sort(function (a, b) { return a.top - b.top; }).forEach(function (p) {
+      var gap = Math.max(0, need(p.top) - av);
       if (!gap) return;
       var act = can('packs') ? '<a class="btn btn-sm" href="#packs" data-jump="pack-' + p.id + '">View pack</a>'
         : can('topup') ? '<button class="btn btn-sm" type="button" data-topup-exact="' + gap + '">Top up ' + money(gap) + '</button>' : '';
@@ -3989,23 +4224,57 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     if (!$('purchase').open) openSheet($('purchase'));
   }
 
-  // ---------- packs: what a pack needs to go live, and the details of a pack ----------
+  // ---------- packs: the grid of price tiers, what a pack needs to go live, and the details of a pack ----------
   var CHECK = '<svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>', ALERT = '<svg class="ic" aria-hidden="true"><use href="#i-alert"></use></svg>';
   // On a pack tile: the Available Balance its top card needs, and whether the shop has it.
   function fundHtml(p, av, ok) {
-    var req = need(p.cards[0].v), gap = Math.max(0, req - av), row = '<div class="fund-row"><span>Required available</span><b>' + money(req) + '</b></div>';
+    var req = need(p.top), gap = Math.max(0, req - av), row = '<div class="fund-row"><span>Required available</span><b>' + money(req) + '</b></div>';
     if (p.live) return '<div class="fund-line ok">' + CHECK + '<span>Within your Max Card Value</span></div>' + row;
     if (gap) return row + '<div class="fund-line warn">' + ALERT + '<span>' + money(gap) + ' more needed</span></div>' + (ok ? '' : '<small>Your shop also has to be approved.</small>');
     return row + '<div class="fund-line ok">' + CHECK + '<span>Covered by your balance</span></div><small>It goes live once your shop is approved.</small>';
   }
   // A paused pack that needs money leads with its funding. Every pack opens its details.
   function actsHtml(p, av) {
-    var gap = Math.max(0, need(p.cards[0].v) - av), details = '<button class="btn" type="button" data-pack-details="' + p.id + '">Pack details</button>';
+    var gap = Math.max(0, need(p.top) - av), details = '<button class="btn" type="button" data-pack-details="' + p.id + '">Pack details</button>';
     return !p.live && gap ? '<button class="btn btn-primary" type="button" data-pack-funding="' + p.id + '">View funding</button>' + details : details;
+  }
+  // A tile of the grid: the artwork, the status and the ID, the name, the price and the category, then what the pack needs and its buttons.
+  // The tile says Paused, and the lines under it say why: the balance that is missing, the approval that is missing, or both.
+  function tileHtml(p) {
+    return '<article class="panel pack" data-pack="' + p.id + '" id="pack-' + p.id + '">' +
+      '<div class="pk-head"><div class="pk-art" data-art="' + p.id + '" aria-hidden="true"></div>' +
+      '<div class="pack-top"><span class="st-wrap"><span class="st st-live"><i aria-hidden="true"></i>Live</span>' +
+      '<span class="st st-paused"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg>Paused</span></span>' +
+      '<span class="pack-id">' + p.id + '</span></div>' +
+      '<h2 class="pack-name" data-name="' + p.id + '"></h2>' +
+      '<div class="pk-meta"><span class="pack-price">' + money(p.price) + '</span><span class="tag">' + esc(p.cat) + '</span></div></div>' +
+      '<div class="fund" data-fund="' + p.id + '"></div>' +
+      '<div class="pack-acts" data-acts="' + p.id + '"></div></article>';
+  }
+  // The grid can be narrowed by a word, a category and a price band, and turned to start from the highest price.
+  // Every tile stays in the page: one that does not match is hidden, and the order is changed only when it has to be, so a button in use keeps the focus.
+  var PRICE_BANDS = { all: [0, Infinity], low: [0, 99], mid: [100, 999], high: [1000, Infinity] };
+  function packShown(p) {
+    var q = fold(S.packQuery || '').trim(), band = PRICE_BANDS[S.packPrice] || PRICE_BANDS.all;
+    return (!q || fold(p.label + ' ' + p.name + ' ' + p.id + ' ' + p.cat).indexOf(q) >= 0) && (S.packCat === 'all' || p.cat === S.packCat) && p.price >= band[0] && p.price <= band[1];
+  }
+  function packFiltered() { return !!((S.packQuery || '').trim()) || S.packCat !== 'all' || S.packPrice !== 'all'; }
+  function clearPackFilters() { S.packQuery = ''; S.packCat = 'all'; S.packPrice = 'all'; }
+  function renderPackGrid() {
+    var grid = $('packs-grid'), want = PACKS.slice().sort(function (a, b) { return S.packSort === 'high' ? b.price - a.price : a.price - b.price; }), n = 0;
+    var have = [].map.call(grid.children, function (el) { return el.getAttribute('data-pack'); }).join();
+    if (have !== want.map(function (p) { return p.id; }).join()) want.forEach(function (p) { grid.appendChild($('pack-' + p.id)); });
+    want.forEach(function (p) { var on = packShown(p); $('pack-' + p.id).hidden = !on; if (on) n++; });
+    if (document.activeElement !== $('pack-search')) $('pack-search').value = S.packQuery || '';
+    $('pack-cat').value = S.packCat;
+    $('pack-price').value = S.packPrice;
+    $('pack-sort').textContent = S.packSort === 'high' ? 'Price: high to low' : 'Price: low to high';
+    $('packs-count').textContent = n === PACKS.length ? n + ' shown' : n + ' of ' + PACKS.length + ' shown';
+    $('packs-empty').hidden = n > 0;
   }
   // In the pack sheet: the Available Balance that covers the top card, how much of it is missing, and a button for exactly that amount.
   function routeHtml(p, av, ok) {
-    var req = need(p.cards[0].v), gap = Math.max(0, req - av);
+    var req = need(p.top), gap = Math.max(0, req - av);
     if (!gap) return '<small>Your balance covers this pack. It goes live once your shop is approved.</small>';
     return '<div class="bar"><div class="bar-top"><span>Needs ' + money(req) + ' available</span><span><strong>' + money(gap) + '</strong> <em>more needed</em></span></div>' +
       '<div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width: ' + (Math.max(0, av) / req * 100).toFixed(1) + '%"></div></div></div>' +
@@ -4014,15 +4283,18 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   }
   // The first thing that keeps a pack paused.
   function pausedWhy(p, av, ok) { return ok ? 'balance' : 'approval'; }
-  // The card mix and the series are set by Grail for each pack. These are sample values. The entry pack holds Basic cards only.
+  // The card mix and the series are set by Grail for each pack. These are sample values, for the five packs whose cards this sample knows.
+  // The entry pack holds Basic cards only. A pack without its cards here has no mix either.
   var MIX = { 'GR-0101': [88.5, 9.5, 2], 'GR-0117': [86, 11, 2.7, 0.3], 'GR-0142': [84, 12.5, 3.1, 0.4], 'GR-0158': [82, 13.5, 4, 0.5], 'GR-0163': [80, 14.5, 4.9, 0.6] };
   var MIX_NAMES = ['Common', 'Uncommon', 'Rare', 'Chase'];
   var SERIES = { 'GR-0101': 'Pokémon, modern sets', 'GR-0117': 'Pokémon, modern sets', 'GR-0142': 'Pokémon, Charizard, all eras', 'GR-0158': 'Pokémon, Gengar, all eras', 'GR-0163': 'Pokémon, vintage sets' };
   var TINT = { 'GR-0101': '#8FD3C1', 'GR-0117': '#9DB7F0', 'GR-0142': '#F0A36B', 'GR-0158': '#B79AE8', 'GR-0163': '#E7C873' };
+  var CAT_TINT = { 'Pokémon': '#9DB7F0', 'Soccer': '#7FD1A6', 'Baseball': '#F2B36B', 'Basketball': '#EE8E6B' };
+  function tintOf(p) { return TINT[p.id] || CAT_TINT[p.cat] || '#9DB7F0'; }
 
   // Grail's own artwork for a pack, drawn here as a sample: four card outlines, the name the shop gave the pack, its ID and its price.
   function coverSvg(p, asFile) {
-    var words = String(p.label).split(/\s+/), lines = [''], tint = TINT[p.id] || '#9DB7F0';
+    var words = String(p.label).split(/\s+/), lines = [''], tint = tintOf(p);
     words.forEach(function (w) { var k = lines.length - 1; if (lines[k] && (lines[k] + ' ' + w).length > 13 && lines.length < 3) lines.push(w); else lines[k] = lines[k] ? lines[k] + ' ' + w : w; });
     var longest = Math.max.apply(null, lines.map(function (l) { return l.length; })), size = longest > 16 ? 40 : longest > 12 ? 52 : 64, y0 = 668 - (lines.length - 1) * size * 1.12;
     var fan = [[-21, -118, 0.3], [-7, -42, 0.5], [7, 42, 0.75], [21, 118, 1]].map(function (f) {
@@ -4038,6 +4310,16 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       '<text x="48" y="748" fill="#B9BFCC" font-size="26">' + p.id + '</text>' +
       '<text x="552" y="748" text-anchor="end" fill="' + tint + '" font-size="34" font-weight="700">' + money(p.price) + '</text></svg>';
   }
+  // The same artwork at the size of a grid tile: the card outlines alone, because no line of text would be readable there.
+  function thumbSvg(p) {
+    var tint = tintOf(p), fan = [[-21, -52, 0.3], [-7, -18, 0.5], [7, 18, 0.75], [21, 52, 1]].map(function (f) {
+      return '<rect x="-46" y="-65" width="92" height="130" rx="9" transform="translate(' + f[1] + ' ' + Math.abs(f[0]) * 0.7 + ') rotate(' + f[0] + ')" opacity="' + f[2] + '"></rect>';
+    }).join('');
+    return '<svg viewBox="0 0 300 400" focusable="false"><defs><linearGradient id="thumb-' + p.id + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B2745"></stop><stop offset="1" stop-color="#0A1122"></stop></linearGradient></defs>' +
+      '<rect width="300" height="400" fill="url(#thumb-' + p.id + ')"></rect><g fill="none" stroke="' + tint + '" stroke-width="5" transform="translate(150 190)">' + fan + '</g>' +
+      '<rect x="110" y="338" width="80" height="8" rx="4" fill="' + tint + '"></rect></svg>';
+  }
+  function packThumb(p) { return p.art ? '<img src="' + esc(p.art) + '" alt="">' : thumbSvg(p); }
   // The artwork a shop sees for a pack: its own if it saved one, otherwise Grail's. A choice made in the sheet waits there until it is saved.
   var packDraft = null;
   function drawArt(p) {
@@ -4049,8 +4331,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   }
   // What a shop can put on its own product page. Sample wording, without the cards of the pack.
   function packCopy(p) {
-    var mix = MIX[p.id].map(function (x, i) { return MIX_NAMES[i] + ' ' + x + '%'; }).join(', ');
-    return p.label + '\n' + SERIES[p.id] + '. One graded card in every pack.\nFixed price: ' + money(p.price) + '.\nCard mix by rarity group: ' + mix + '.\n' +
+    var mix = MIX[p.id] ? 'Card mix by rarity group: ' + MIX[p.id].map(function (x, i) { return MIX_NAMES[i] + ' ' + x + '%'; }).join(', ') + '.\n' : '';
+    return p.label + '\n' + (SERIES[p.id] || p.cat) + '. One graded card in every pack.\nFixed price: ' + money(p.price) + '.\n' + mix +
       'Your card is kept for you for 48 hours. Ask for shipping in that time and it is sent to your door.\n';
   }
   function packMix(p) { return 'Group,Share\n' + MIX[p.id].map(function (x, i) { return MIX_NAMES[i] + ',' + x + '%'; }).join('\n') + '\n'; }
@@ -4073,12 +4355,14 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   // The bytes of an image that was read as a data address.
   function bytesOf(url) { var b = atob(url.slice(url.indexOf(',') + 1)), n = b.length, out = new Uint8Array(n); while (n--) out[n] = b.charCodeAt(n); return out; }
   function drawKit() {
-    var files = !framed || !!saver;
-    $('pack-kit').innerHTML = files
-      ? ['art', 'copy', 'mix'].map(function (k, i) { return '<button class="btn" type="button" data-kit="' + k + '"><svg class="ic" aria-hidden="true"><use href="#i-down"></use></svg>Download ' + ['artwork', 'product copy', 'card mix'][i] + '</button>'; }).join('')
-      : '<button class="btn" type="button" data-kit="copy">Copy product copy</button><button class="btn" type="button" data-kit="mix">Copy card mix</button>';
-    $('pack-kit-note').textContent = (files ? 'The artwork downloads as an image, the product copy as text and the card mix as a CSV file.'
-      : 'In this preview the product copy and the card mix are copied as text. On the published page they download as files, together with the artwork.') + ' Sample material: the product copy names the series and the card mix, not the cards.';
+    var p = packOf(S.packOpen), files = !framed || !!saver, mix = !!(p && MIX[p.id]), names = { art: 'artwork', copy: 'product copy', mix: 'card mix' };
+    var kinds = (files ? ['art', 'copy', 'mix'] : ['copy', 'mix']).filter(function (k) { return k !== 'mix' || mix; });
+    $('pack-kit').innerHTML = kinds.map(function (k) {
+      return '<button class="btn" type="button" data-kit="' + k + '">' + (files ? '<svg class="ic" aria-hidden="true"><use href="#i-down"></use></svg>Download ' : 'Copy ') + names[k] + '</button>';
+    }).join('');
+    $('pack-kit-note').textContent = (files ? 'The artwork downloads as an image' + (mix ? ', the product copy as text and the card mix as a CSV file.' : ' and the product copy as text.')
+      : 'In this preview the product copy' + (mix ? ' and the card mix are' : ' is') + ' copied as text. On the published page ' + (mix ? 'they download as files' : 'it downloads as a file') + ', together with the artwork.') +
+      (mix ? ' Sample material: the product copy names the series and the card mix, not the cards.' : ' Sample material: the product copy names the category and the price, not the cards.');
   }
   function kitGo(kind, btn) {
     var p = packOf(S.packOpen);
@@ -4101,30 +4385,32 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   function openPack(id, focus) {
     var p = packOf(id);
     if (!p) return;
-    var av = S.balance - S.held, top = p.cards[0].v, req = need(top), ok = approved();
+    var av = S.balance - S.held, top = p.top, req = need(top), ok = approved(), mix = MIX[p.id];
     if (S.packOpen !== id || !$('pack').open) packDraft = null;      // a choice that was not saved does not follow to another pack
     askSaver();
     S.packOpen = id;
     $('pack-title').textContent = p.label;
     $('pack-sub').textContent = (p.live ? 'Live: your customers can buy it.' : 'Paused: hidden from your customers.') + (p.proposed ? ' A proposed example.' : '');
-    $('pack-facts').innerHTML = [['Grail ID', p.id], ['Fixed price', money(p.price)], ['Series', esc(SERIES[p.id])], ['Cards in a pack', '1']].map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
+    $('pack-facts').innerHTML = [['Grail ID', p.id], ['Fixed price', money(p.price)], ['Category', esc(p.cat)], ['Cards in a pack', '1']].map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
     var rows = [['Availability', p.live ? 'Live' : 'Paused: ' + pausedWhy(p, av, ok)], ['Highest card value', money(top)], ['Required available', money(req)], ['Your Available Balance', money(av)]];
     if (p.live) rows.push(['Purchases, 30 days', S.mode === 'live' ? count(p.bought) : '0']);
     $('pack-fund').innerHTML = rows.map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>'; }).join('');
     $('pack-route').hidden = p.live;
     $('pack-route').innerHTML = p.live ? '' : routeHtml(p, av, ok);
     $('pack-cards-h').textContent = top >= 500 ? 'Top chase cards' : 'Top cards';
-    $('pack-cards').innerHTML = p.cards.map(function (c) {
+    $('pack-cards').innerHTML = p.cards ? p.cards.map(function (c) {
       return '<div class="vrow">' + slab(c, 'slab-sm') + '<div class="vname"><b>' + esc(c.n) + '</b><span>' + esc(c.g) + '</span></div><div class="vend"><span class="vval">' + money(c.v) + '</span></div></div>';
-    }).join('');
-    $('pack-mix').innerHTML = MIX[p.id].map(function (x, i) { return '<div class="mixrow"><span>' + MIX_NAMES[i] + '</span>' + meter(x / 100) + '</div>'; }).join('');
+    }).join('') : '<p class="note">The cards of this pack come from the Grail API. This sample holds only the value of its top card, ' + money(top) + '.</p>';
+    $('pack-mix').innerHTML = mix ? mix.map(function (x, i) { return '<div class="mixrow"><span>' + MIX_NAMES[i] + '</span>' + meter(x / 100) + '</div>'; }).join('') : '';
+    $('pack-mix-note').textContent = mix ? 'Sample numbers. Grail sets the card mix of each pack, and it is the same in every shop.' : 'The card mix of this pack comes from the Grail API. It is not part of this sample.';
     $('pack-name-in').value = p.label;
     $('pack-name-in').classList.remove('is-bad');
     $('pack-saved').textContent = '';
     $('pack-art-msg').textContent = 'JPG or PNG. 1200 by 1600 px works best. In this demo the image stays on your device.';
     drawArt(p);
     drawKit();
-    $('pack-note').textContent = p.proposed ? 'A proposed example of a pack that fits a first balance of $1,000. Its Grail ID, its price and its cards are sample values until Grail confirms them.'
+    $('pack-note').textContent = !p.cards ? 'An example of a proposed price tier. Its name, its category and the value of its top card are sample values. The cards, the card mix and the funding requirement come from the Grail API.'
+      : p.proposed ? 'A proposed example of a pack that fits a first balance of $1,000. Its Grail ID, its price and its cards are sample values until Grail confirms them.'
       : 'Grail builds and stocks this pack, and its contents are the same in every shop. This version is built from the Grail inventory of 11 November 2026.';
     $('pack-copy').setAttribute('data-copy', p.id);
     applyAccess();
@@ -4504,6 +4790,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     var at = when(s, s.issue === 1 ? 5 : s.issue === 2 ? 7 : k - 1).getTime();
     return { at: at, grail: when(s, Math.min(k, 2) - 1).getTime(), carrier: carrier, done: st.kind === 'done', stale: carrier && st.kind !== 'done' && NOW - at > 24 * HOUR };
   }
+  // Names in a sentence: "A", "A and B", "A, B and C".
+  function listed(names) { return names.length < 2 ? names.join('') : names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1]; }
   function plural(n, one, many) { return n + ' ' + (n === 1 ? one : many); }
   // Across the shipments that are still on their way: the newest word from a carrier, and how many have gone quiet.
   function tracking() {
@@ -4660,16 +4948,16 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     // the search of the bar steps aside on the search page, and says "/" only where "/" leads to it
     $('gsearch').hidden = !mayFind() || current === 'search';
     $('gsearch-go').hidden = !mayFind();
-    $('gsearch').classList.toggle('no-key', [$('ship-search'), $('case-search')].some(function (b) { return b.getClientRects().length; }));
+    $('gsearch').classList.toggle('no-key', [$('ship-search'), $('case-search'), $('pack-search')].some(function (b) { return b.getClientRects().length; }));
   }
 
   // ---------- pages ----------
   // Eight pages in the bar. Some hold more than one page, and those show a second row to move between them.
-  var GROUPS = [['overview', 'Overview', ['overview']], ['catalogue', 'Catalogue', ['packs', 'marketplace']], ['fulfilment', 'Fulfilment', ['vault', 'shipments', 'cases']],
+  var GROUPS = [['overview', 'Overview', ['overview']], ['catalogue', 'Catalogue', ['packs', 'insights', 'marketplace']], ['fulfilment', 'Fulfilment', ['vault', 'shipments', 'cases']],
     ['customers', 'Customers', ['customers']], ['analytics', 'Analytics', ['analytics']], ['billing', 'Billing', ['billing', 'reconcile', 'autotopup']],
     ['integration', 'Integration', ['integration', 'launch']], ['settings', 'Settings', ['account', 'team', 'alerts', 'kyb']]];
   var VIEWS = GROUPS.reduce(function (a, g) { return a.concat(g[2]); }, []);
-  var SUB_NAMES = { packs: 'Packs', marketplace: 'Marketplace singles', vault: 'Vault', shipments: 'Shipments', cases: 'Returns and claims', billing: 'Fees and invoices', reconcile: 'Reconciliation',
+  var SUB_NAMES = { packs: 'Packs', insights: 'Pack insights', marketplace: 'Marketplace', vault: 'Vault', shipments: 'Shipments', cases: 'Returns and claims', billing: 'Fees and invoices', reconcile: 'Reconciliation',
     autotopup: 'Auto top-up', integration: 'Connection', launch: 'Launch checks', account: 'Shop', team: 'Team', alerts: 'Notifications', kyb: 'KYB' };
   var OLD_NAMES = { activity: 'analytics', catalogue: 'packs', fulfilment: 'vault' };   // addresses from before the pages were grouped
   var current = 'overview', jumpTo = null;
@@ -4703,7 +4991,6 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     if (S.liveKey && S.liveKey.full) delete S.liveKey.full;
     if (S.sandbox && S.sandbox.full) delete S.sandbox.full;
     renderKeys();
-    if (name === 'packs') layoutRail();
   }
   // After a move: go to the part of the page that was asked for, or to the top.
   function landed() {
@@ -4862,6 +5149,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     if ((el = t.closest('[data-first-topup]'))) { openTopup(1000); return; }
     if ((el = t.closest('[data-ship-view]'))) { location.hash = el.getAttribute('data-ship-view') === 'coverage' ? 'coverage' : 'shipments'; return; }
     if ((el = t.closest('[data-terms]'))) { openSheet($('terms')); return; }
+    if ((el = t.closest('[data-clear-packs]'))) { clearPackFilters(); renderPackGrid(); $('pack-search').focus(); return; }
+    if ((el = t.closest('[data-ins-range]'))) { S.insRange = el.getAttribute('data-ins-range'); renderInsights(); return; }
     if ((el = t.closest('[data-copy]'))) { copyText(el.getAttribute('data-copy'), el); return; }
     if ((el = t.closest('[data-track]'))) { onlySheet('track'); openTrack(el.getAttribute('data-track')); return; }
     if ((el = t.closest('[data-person]'))) { onlySheet('person'); openPerson(el.getAttribute('data-person')); return; }
@@ -4953,7 +5242,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     if ((el = t.closest('[data-exc]'))) { excAct(el.getAttribute('data-exc'), el.getAttribute('data-id')); return; }
     // these two are links: the click sets what the page shows, and the link opens the page
     if ((el = t.closest('[data-ship-warn]'))) { S.shipFilter = 'warn'; S.shipQuery = ''; $('ship-search').value = ''; S.shipShown = START.shipShown; renderShipments(); return; }
-    if ((el = t.closest('[data-jump]'))) { jumpTo = el.getAttribute('data-jump'); if (current === el.getAttribute('href').slice(1)) { e.preventDefault(); landed(); } return; }
+    if ((el = t.closest('[data-jump]'))) { jumpTo = el.getAttribute('data-jump'); if (jumpTo.indexOf('pack-') === 0 && packFiltered()) { clearPackFilters(); renderPackGrid(); } if (current === el.getAttribute('href').slice(1)) { e.preventDefault(); landed(); } return; }
     if ((el = t.closest('[data-case-ev]'))) { caseEvidence(Number(el.getAttribute('data-case-ev'))); return; }
     if ((el = t.closest('[data-case-act]'))) { caseAct(el.getAttribute('data-case-act')); return; }
     if ((el = t.closest('[data-case-f]'))) { S.caseFilter = el.getAttribute('data-case-f'); renderCases(); return; }
@@ -4985,7 +5274,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
     var a = document.activeElement, typing = a && (a.tagName === 'INPUT' || a.tagName === 'TEXTAREA' || a.tagName === 'SELECT' || a.isContentEditable);
     // the search of the page if it has one, and the search for everything if it does not
-    var box = [$('ship-search'), $('case-search'), $('search-q'), $('gsearch-q')].filter(function (b) { return b.getClientRects().length; })[0];
+    var box = [$('ship-search'), $('case-search'), $('pack-search'), $('search-q'), $('gsearch-q')].filter(function (b) { return b.getClientRects().length; })[0];
     if (typing || !box || document.querySelector('dialog[open]')) return;
     e.preventDefault(); box.focus(); box.select();
   });
@@ -5204,6 +5493,38 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     toast('Saved. Your shop shows this pack as ' + v + '.');
   });
   $('fee-more').addEventListener('click', function () { S.feeShown += 12; renderFees(); });
+  // the pack grid: a word, a category, a price band, and the order
+  $('pack-search').addEventListener('input', function () { S.packQuery = this.value; renderPackGrid(); });
+  $('pack-search').addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (this.value) { this.value = ''; S.packQuery = ''; renderPackGrid(); } else this.blur(); } });
+  $('pack-cat').addEventListener('change', function () { S.packCat = this.value; renderPackGrid(); });
+  $('pack-price').addEventListener('change', function () { S.packPrice = this.value; renderPackGrid(); });
+  $('pack-sort').addEventListener('click', function () { S.packSort = S.packSort === 'high' ? 'low' : 'high'; renderPackGrid(); });
+  // pack insights: the order of the returned cards, the two dates of a period of one's own, and what a part of the category bar stands for
+  $('ins-sort').addEventListener('click', function () { S.insSort = S.insSort === 'rate' ? 'count' : 'rate'; renderInsights(); });
+  ['ins-from', 'ins-to'].forEach(function (id) {
+    $(id).min = isoOf(29); $(id).max = isoOf(0);
+    $(id).addEventListener('change', function () {
+      var t = Date.parse(this.value + 'T00:00:00Z');
+      if (isNaN(t)) return;
+      var d = Math.max(0, Math.min(29, Math.round((DAY_END - DAY - t) / DAY)));
+      if (id === 'ins-from') { S.insB = d; if (S.insA > d) S.insA = d; } else { S.insA = d; if (S.insB < d) S.insB = d; }
+      renderInsights();
+    });
+  });
+  // Scrolling puts the tooltip away, so the next move over the same part brings it back.
+  var catAt = null;
+  function catTip(e) {
+    var el = e.target.closest ? e.target.closest('[data-tip-a]') : null;
+    if (!el || (el === catAt && !$('viz-tip').hidden)) return;
+    catAt = el;
+    showTip(el, el.getAttribute('data-tip-a'), el.getAttribute('data-tip-b'));
+  }
+  function catOut() { catAt = null; hideTip(); }
+  $('ins-cat-bar').addEventListener('mouseover', catTip);
+  $('ins-cat-bar').addEventListener('mousemove', catTip);
+  $('ins-cat-bar').addEventListener('focusin', catTip);
+  $('ins-cat-bar').addEventListener('mouseout', catOut);
+  $('ins-cat-bar').addEventListener('focusout', catOut);
   // inside a claude.ai artifact the viewer's own save prompt hands over a file, once the artifact answers that it may
   askSaver();
   // search: the box in the bar and the box on the page ask the same question
@@ -5333,9 +5654,6 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     else if (root.getAttribute('data-theme')) setLook(root.getAttribute('data-theme'), false);
   } catch (err) { /* follow the viewer's theme */ }
 
-  if (window.ResizeObserver) new ResizeObserver(layoutRail).observe($('rail'));
-  else window.addEventListener('resize', layoutRail);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutRail);
 
   // The first look of a visit is staged once: the bar, then each block of the page, a beat apart. After that every page is simply there.
   try {
