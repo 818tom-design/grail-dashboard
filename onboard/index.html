@@ -543,8 +543,10 @@ dialog.sheet::backdrop { background: rgba(4,6,12,0.74); }
 .site-card { position: relative; width: 3rem; border-radius: 0.3125rem; border: 1px solid var(--line-2); background: var(--ink-3); overflow: hidden; }
 .site-card img { display: block; width: 100%; height: auto; aspect-ratio: 5 / 7; object-fit: cover; }
 .site-card span { position: absolute; left: 0.1875rem; bottom: 0.1875rem; padding: 0 0.25rem; border-radius: 0.1875rem; background: rgba(7,11,21,0.82); font-size: 0.6875rem; font-weight: 600; color: var(--bone); }
-/* shown only where the step has room for it: on a narrow or a low screen the form alone sets the height */
-@media (max-width: 60rem), (max-height: 44.5rem) { .scene > .after.site { display: none; } }
+/* shown only where the step has room for it: on a narrow or a very low screen the form alone sets the height */
+@media (max-width: 60rem), (max-height: 43rem) { .scene > .after.site { display: none; } }
+/* a wide window that is low, such as a 13-inch laptop with the browser bars showing (1440 by 709): the step keeps less air above and below it, so it still fits */
+@media (min-width: 60.0625rem) and (max-height: 50rem) { .step { padding-block: clamp(0.5rem, 1.6vh, 3rem); } }
 .foot-ver b { font-weight: 600; color: var(--mist); font-variant-numeric: tabular-nums; }
 .foot-ver .tag { height: 1.375rem; padding: 0 0.4375rem; font-size: 0.75rem; }
 .foot .demo { width: auto; max-width: none; flex: 1 1 18rem; justify-content: center; padding: 0; border: none; }
