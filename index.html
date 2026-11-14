@@ -251,6 +251,7 @@ svg.ic { width: 1.125rem; height: 1.125rem; flex: none; fill: none; stroke: curr
 .slab-lab { height: calc(var(--w) * 0.21); flex: none; border-radius: calc(var(--w) * 0.045); background: var(--slab-lab-bg); border: 1px solid var(--slab-lab-border); display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--w) * 0.07); font-size: max(0.5625rem, calc(var(--w) * 0.125)); font-weight: 700; line-height: 1; letter-spacing: 0.02em; color: var(--slab-lab-ink); overflow: hidden; white-space: nowrap; }
 .slab-win { position: relative; flex: 1; min-height: 0; border-radius: calc(var(--w) * 0.045); background: linear-gradient(115deg, transparent 32%, var(--slab-sheen) 46%, transparent 60%), linear-gradient(160deg, var(--slab-a) 0%, var(--slab-b) 100%); box-shadow: inset 0 0 0 1px var(--slab-frame); overflow: hidden; }
 .slab-win img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.slab-win img.fit { object-fit: contain; }
 .slab-sm { --w: 1.875rem; }
 .slab-lg { --w: 6rem; }
 .is-paused .slab-win { background: linear-gradient(160deg, var(--slab-off-a) 0%, var(--slab-off-b) 100%); box-shadow: inset 0 0 0 1px var(--slab-off-frame); }
@@ -1043,6 +1044,20 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   .ids-sub { display: block; padding-top: 0.125rem; font-size: 0.8125rem; font-weight: 400; color: var(--t2); }
 }
 
+/* ---- the three top cards of a pack on its tile: a fan of slabs, then their names with their values ---- */
+.stack.three { width: 12rem; height: 8.5rem; }
+.stack.three .s1 { --w: 5.25rem; left: 0; top: 0; z-index: 3; }
+.stack.three .s2 { --w: 4.875rem; left: 3.875rem; top: 0.3125rem; z-index: 2; }
+.stack.three .s3 { --w: 4.5rem; left: 7.5rem; top: 0.625rem; z-index: 1; }
+/* the second and the third slab are partly covered, so they show the grade alone and not a cut name of the grader */
+.stack.three .s2 .slab-lab span:first-child, .stack.three .s3 .slab-lab span:first-child { visibility: hidden; }
+.pack .rows span { min-width: 0; overflow-wrap: anywhere; }
+.pack .rows b { flex: none; font-variant-numeric: tabular-nums; }
+/* a card whose photo has not arrived yet: an empty window with the outline of a card, so it reads as waiting and not as broken */
+.slab-win:empty::after { content: ""; position: absolute; inset: 17% 21%; border-radius: 9%; border: 1px solid var(--slab-frame); }
+.is-paused .slab-win:empty::after { border-color: var(--slab-off-frame); }
+.slab-sm .slab-win:empty::after { inset: 20% 24%; }
+
 /* on a touch screen every control takes a full fingertip, whatever size it is drawn */
 @media (pointer: coarse) {
   .btn, .fchip, .seg-btn, .namebtn, .linkbtn, .iconbtn, .info, .switch, .tickbox { position: relative; }
@@ -1269,7 +1284,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
   <div class="example-note" role="note" style="margin-top: 1rem">
     <svg class="ic" aria-hidden="true"><use href="#i-alert"></use></svg>
-    <div><b>17 proposed price tiers</b><span>Names, categories, artwork and numbers are examples. None of these packs is published yet.</span></div>
+    <div><b>17 proposed price tiers</b><span>Names, categories, top cards, artwork and numbers are examples. None of these packs is published yet.</span></div>
   </div>
   <div class="packbar">
     <div class="search">
@@ -2309,7 +2324,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 
 <footer class="foot rel">
   <span>Sample data</span>
-  <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="tip-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-al" role="tooltip" id="tip-sample">Card names and market values are from the Grail inventory of 11 November 2026, and a card still at grading shows the grade it is valued at. Balances, sales, fees, customers, shipments, keys, invoices, references, events, reconciliation records, cases, test results, alerts, update times, the change history, the carrier quotes, the shipping destinations and times, the pack insights, and the 17 price tiers with their names, categories, card mix, artwork and product copy are a sample. Who acts next on a shipping problem or a case is a proposal. Card photos were supplied by the shop owner, and a slab without one is an empty photo slot. Nothing you do here moves money. New shop shows the same dashboard for a shop that is still onboarding.</span></span>
+  <span class="tipw"><button class="info" type="button" aria-label="About the sample data" aria-describedby="tip-sample"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg></button><span class="tip tip-al" role="tooltip" id="tip-sample">Card names and market values are from the Grail inventory of 11 November 2026, and a card still at grading shows the grade it is valued at. Balances, sales, fees, customers, shipments, keys, invoices, references, events, reconciliation records, cases, test results, alerts, update times, the change history, the carrier quotes, the shipping destinations and times, the pack insights, and the 17 price tiers with their names, categories, top cards, card mix, artwork and product copy are a sample. Who acts next on a shipping problem or a case is a proposal. Card photos were supplied by the shop owner, and a slab without one is an empty photo slot. Nothing you do here moves money. New shop shows the same dashboard for a shop that is still onboarding.</span></span>
   <button class="linkbtn" type="button" id="reset">Reset</button>
   <div class="foot-ctl">
     <span class="lbl">Shop</span>
@@ -2728,11 +2743,16 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   'use strict';
 
   // ---------- sample data: real card names and values from the Grail inventory ----------
-  // 17 proposed price tiers, from $1 to $100,000. Five packs carry real card names and values from the Grail inventory.
-  // The other twelve are examples of a tier: a name, a category and the value of a top card, which is enough to show what a balance covers.
+  // 17 proposed price tiers, from $1 to $100,000. Every pack names its top cards, and the first of them sets what the pack needs.
+  // Five packs carry real card names and values from the Grail inventory. The other twelve name three well-known cards as examples
+  // of their tier, with sample values, and take a card of the inventory where one fits.
   var PACKS = [
-    { id: 'GR-0096', name: 'Mini Pack', price: 1, cat: 'Pokémon', top: 60, bought: 4660, buyers: 2310, proposed: true },
-    { id: 'GR-0099', name: 'Discovery Pack', price: 5, cat: 'Pokémon', top: 120, bought: 1331, buyers: 720, proposed: true },
+    { id: 'GR-0096', name: 'Mini Pack', price: 1, cat: 'Pokémon', bought: 4660, buyers: 2310, proposed: true, cards: [
+      { n: 'Gengar VMAX', s: 'Fusion Strike #157', g: 'PSA 10', v: 60 }, { n: 'Pikachu VMAX', s: 'Vivid Voltage #044', g: 'PSA 10', v: 48 },
+      { n: 'Mew ex', s: '151 #151', g: 'PSA 10', v: 35 }] },
+    { id: 'GR-0099', name: 'Discovery Pack', price: 5, cat: 'Pokémon', bought: 1331, buyers: 720, proposed: true, cards: [
+      { n: 'Charizard ex SIR', s: 'Obsidian Flames #223', g: 'PSA 10', v: 120 }, { n: 'Pikachu Illustration Rare', s: '151 #173', g: 'PSA 10', v: 95 },
+      { n: 'Mewtwo V Alt Art', s: 'Pokémon GO #072', g: 'PSA 10', v: 80 }] },
     // the entry pack holds Basic cards only, so a first balance of $1,000 covers it: its top card is within a Max Card Value of $200
     { id: 'GR-0101', name: 'Entry Pack', price: 10, cat: 'Pokémon', bought: 3994, buyers: 1960, proposed: true, cards: [
       { n: 'Psyduck', s: '#226', g: 'PSA 10', v: 190 }, { n: 'Charizard VMAX', s: 'Japanese #308', g: 'PSA 10', v: 180 },
@@ -2740,27 +2760,50 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     { id: 'GR-0117', name: 'Modern Hits', price: 25, cat: 'Pokémon', bought: 3328, buyers: 1480, cards: [
       { n: 'Umbreon VMAX', g: 'PSA 9', v: 1900 }, { n: 'Mega Dragonite ex SIR', g: 'PSA 10', v: 857 },
       { n: 'Gengar VMAX Alt Art', g: 'PSA 9', v: 820 }, { n: 'Charizard V Full Art', g: 'PSA 10', v: 760 }] },
-    { id: 'GR-0125', name: 'Soccer Highlights', price: 50, cat: 'Soccer', top: 3200, bought: 2662, buyers: 1120, proposed: true },
-    { id: 'GR-0131', name: 'Baseball Classics', price: 75, cat: 'Baseball', top: 4800, bought: 1553, buyers: 640, proposed: true },
+    { id: 'GR-0125', name: 'Soccer Highlights', price: 50, cat: 'Soccer', bought: 2662, buyers: 1120, proposed: true, cards: [
+      { n: 'Lionel Messi', s: '2014 Panini Prizm World Cup #12', g: 'PSA 10', v: 3200 }, { n: 'Cristiano Ronaldo', s: '2014 Panini Prizm World Cup #161', g: 'PSA 10', v: 2400 },
+      { n: 'Kylian Mbappé', s: '2018 Panini Prizm World Cup #80', g: 'PSA 10', v: 1800 }] },
+    { id: 'GR-0131', name: 'Baseball Classics', price: 75, cat: 'Baseball', bought: 1553, buyers: 640, proposed: true, cards: [
+      { n: 'Mike Trout', s: '2011 Topps Update #US175', g: 'PSA 10', v: 4800 }, { n: 'Derek Jeter', s: '1993 SP Foil #279', g: 'PSA 9', v: 3900 },
+      { n: 'Ken Griffey Jr.', s: '1989 Upper Deck #1', g: 'PSA 10', v: 2600 }] },
     { id: 'GR-0142', name: 'Fire Legends', price: 100, cat: 'Pokémon', bought: 2219, buyers: 905, cards: [
       { n: 'Shining Charizard', g: 'PSA 9', v: 6300 }, { n: 'Blaine’s Charizard', g: 'PSA 9', v: 5000 },
       { n: 'Charizard EX Dragon', g: 'PSA 9', v: 3700 }, { n: 'Charizard Base Set', g: 'PSA 9', v: 3600 }] },
-    { id: 'GR-0149', name: 'Basketball Stars', price: 150, cat: 'Basketball', top: 8900, bought: 1109, buyers: 410, proposed: true },
-    { id: 'GR-0153', name: 'Sample pack 09', price: 200, cat: 'Pokémon', top: 10200, bought: 186, buyers: 61, proposed: true },
+    // two of its three are the basketball singles of the inventory
+    { id: 'GR-0149', name: 'Basketball Stars', price: 150, cat: 'Basketball', bought: 1109, buyers: 410, proposed: true, cards: [
+      { n: 'Giannis Antetokounmpo', s: '2013 Panini Prizm Silver #290', g: 'PSA 10', v: 8900 }, { n: 'LeBron James', s: '2003 Topps Chrome #111', g: 'PSA 9', v: 3567 },
+      { n: 'Kobe Bryant', s: '1997 Topps Chrome Refractor', g: 'PSA 9', v: 3420 }] },
+    // Alakazam and Celebi are cards of the inventory, with their photos
+    { id: 'GR-0153', name: 'Sample pack 09', price: 200, cat: 'Pokémon', bought: 186, buyers: 61, proposed: true, cards: [
+      { n: 'Mario Pikachu', s: 'Japanese XY-P promo #294', g: 'PSA 10', v: 10200 }, { n: 'Alakazam EX Full Art', s: 'Fates Collide #125', g: 'PSA 10', v: 7000 },
+      { n: 'Shining Celebi', s: 'Neo Destiny 1st Edition', g: 'PSA 9', v: 2760 }] },
     { id: 'GR-0158', name: 'Ghost Hunt', price: 250, cat: 'Pokémon', bought: 1000, buyers: 310, cards: [
       { n: 'Gengar Skyridge H9', g: 'PSA 8', v: 11400 }, { n: 'Gengar reverse holo', g: 'CGC 9', v: 11000 },
       { n: 'Gengar Prime', g: 'PSA 9', v: 3800 }, { n: 'Gengar Lost Origin', g: 'PSA 10', v: 690 }] },
     { id: 'GR-0163', name: 'Vintage Grails', price: 500, cat: 'Pokémon', bought: 240, buyers: 52, cards: [
       { n: 'Charizard Gold Star', g: 'PSA 7', v: 13500 }, { n: 'Crystal Charizard', g: 'BGS 9', v: 7000 },
       { n: 'Umbreon 1st Edition', g: 'PSA 8', v: 4920 }, { n: 'Blastoise 1st Edition', g: 'BGS 8', v: 4500 }] },
-    { id: 'GR-0171', name: 'Sample pack 12', price: 1000, cat: 'Basketball', top: 20000, bought: 0, buyers: 0, proposed: true },
-    { id: 'GR-0176', name: 'Sample pack 13', price: 2500, cat: 'Pokémon', top: 36000, bought: 0, buyers: 0, proposed: true },
-    { id: 'GR-0182', name: 'Sample pack 14', price: 5000, cat: 'Soccer', top: 70000, bought: 0, buyers: 0, proposed: true },
-    { id: 'GR-0188', name: 'Sample pack 15', price: 10000, cat: 'Baseball', top: 120000, bought: 0, buyers: 0, proposed: true },
-    { id: 'GR-0193', name: 'Sample pack 16', price: 50000, cat: 'Basketball', top: 400000, bought: 0, buyers: 0, proposed: true },
-    { id: 'GR-0199', name: 'Sample pack 17', price: 100000, cat: 'Pokémon', top: 600000, bought: 0, buyers: 0, proposed: true }
+    { id: 'GR-0171', name: 'Sample pack 12', price: 1000, cat: 'Basketball', bought: 0, buyers: 0, proposed: true, cards: [
+      { n: 'Kobe Bryant', s: '1996 Topps Chrome Refractor #138', g: 'PSA 9', v: 20000 }, { n: 'LeBron James', s: '2003 Topps Chrome Refractor #111', g: 'PSA 9', v: 14500 },
+      { n: 'Michael Jordan', s: '1986 Fleer #57', g: 'PSA 8', v: 11000 }] },
+    { id: 'GR-0176', name: 'Sample pack 13', price: 2500, cat: 'Pokémon', bought: 0, buyers: 0, proposed: true, cards: [
+      { n: 'Umbreon Gold Star', s: 'POP Series 5 #17', g: 'PSA 10', v: 36000 }, { n: 'Mewtwo Gold Star', s: 'EX Holon Phantoms #103', g: 'PSA 10', v: 18000 },
+      { n: 'Celebi Gold Star', s: 'EX Crystal Guardians #100', g: 'PSA 10', v: 12000 }] },
+    { id: 'GR-0182', name: 'Sample pack 14', price: 5000, cat: 'Soccer', bought: 0, buyers: 0, proposed: true, cards: [
+      { n: 'Pelé', s: '1958 Alifabolaget #635', g: 'PSA 6', v: 70000 }, { n: 'Lionel Messi', s: '2004 Panini Megacracks #71', g: 'PSA 9', v: 48000 },
+      { n: 'Diego Maradona', s: '1979 Panini Calciatori #312', g: 'PSA 8', v: 26000 }] },
+    { id: 'GR-0188', name: 'Sample pack 15', price: 10000, cat: 'Baseball', bought: 0, buyers: 0, proposed: true, cards: [
+      { n: 'Mickey Mantle', s: '1952 Topps #311', g: 'PSA 4', v: 120000 }, { n: 'Babe Ruth', s: '1933 Goudey #53', g: 'PSA 5', v: 78000 },
+      { n: 'Jackie Robinson', s: '1948 Leaf #79', g: 'PSA 7', v: 52000 }] },
+    // the same three cards as the $1,000 pack, in the highest grade
+    { id: 'GR-0193', name: 'Sample pack 16', price: 50000, cat: 'Basketball', bought: 0, buyers: 0, proposed: true, cards: [
+      { n: 'Kobe Bryant', s: '1996 Topps Chrome Refractor #138', g: 'PSA 10', v: 400000 }, { n: 'Michael Jordan', s: '1986 Fleer #57', g: 'PSA 10', v: 250000 },
+      { n: 'LeBron James', s: '2003 Topps Chrome Refractor #111', g: 'PSA 10', v: 120000 }] },
+    { id: 'GR-0199', name: 'Sample pack 17', price: 100000, cat: 'Pokémon', bought: 0, buyers: 0, proposed: true, cards: [
+      { n: 'Pikachu Illustrator', s: '1998 CoroCoro promo', g: 'PSA 7', v: 600000 }, { n: 'Charizard 1st Edition', s: 'Base Set Shadowless #4', g: 'PSA 10', v: 300000 },
+      { n: 'Lugia 1st Edition', s: 'Neo Genesis #9', g: 'PSA 10', v: 150000 }] }
   ];
-  PACKS.forEach(function (p) { if (p.cards) p.top = p.cards[0].v; });      // a pack with its cards here takes the value of its first card
+  PACKS.forEach(function (p) { p.top = p.cards[0].v; });      // the first card of a pack is its highest, and it sets the value the pack needs
   var SINGLES = [
     { n: 'Alakazam EX Full Art', s: 'Fates Collide #125', g: 'PSA 10', v: 7000 },
     { n: 'LeBron James', s: '2003 Topps Chrome #111', g: 'PSA 9', v: 3567 },
@@ -2783,7 +2826,13 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   ];
   // Card photos supplied by the shop owner and published beside this page, in cards/. The same card in another list reuses its photo.
   var PHOTOS = ['GR-0117-1', 'GR-0117-2', 'GR-0117-3', 'GR-0117-4', 'GR-0142-1', 'GR-0142-2', 'GR-0142-3', 'GR-0142-4', 'GR-0158-1', 'GR-0158-2', 'GR-0158-3', 'GR-0158-4',
-    'GR-0163-1', 'GR-0163-2', 'GR-0163-3', 'GR-0163-4', 'S-01', 'S-04', 'S-05', 'S-06', 'S-07', 'S-08', 'S-09', 'S-10', 'S-11', 'S-12', 'S-13', 'S-15', 'S-17', 'S-18'];
+    'GR-0163-1', 'GR-0163-2', 'GR-0163-3', 'GR-0163-4', 'S-01', 'S-04', 'S-05', 'S-06', 'S-07', 'S-08', 'S-09', 'S-10', 'S-11', 'S-12', 'S-13', 'S-15', 'S-17', 'S-18',
+    'X-01', 'X-02', 'X-03', 'X-04', 'X-05', 'X-06', 'X-07', 'X-08', 'X-09', 'X-11', 'X-12', 'X-13', 'X-15', 'X-16', 'X-17', 'X-18', 'X-19', 'X-21', 'X-22', 'X-24',
+    // the third batch, 13 November 2026
+    'GR-0096-1', 'GR-0096-2', 'GR-0096-3', 'GR-0099-1', 'GR-0099-2', 'GR-0099-3', 'GR-0125-2', 'GR-0125-3', 'GR-0131-1', 'GR-0131-2', 'GR-0131-3', 'GR-0149-1', 'GR-0153-1', 'GR-0171-1', 'GR-0171-2', 'GR-0171-3', 'GR-0176-1',
+    'GR-0176-2', 'GR-0176-3', 'GR-0182-1', 'GR-0182-2', 'GR-0182-3', 'GR-0188-2', 'GR-0188-3', 'GR-0199-1', 'GR-0199-2', 'GR-0199-3', 'S-02', 'S-03', 'X-10', 'X-14', 'X-20', 'X-23', 'X-25'];
+  // Photos of cards that are less tall than a slab window: an old card or a sticker. They are shown whole, with the window above and below them.
+  var SQUARE = ['GR-0182-3', 'GR-0188-2', 'GR-0188-3'];
   var SAME_CARD = { 'Charizard|Base Set #4': 'GR-0142-4', 'Alakazam EX Full Art|Fates Collide #125': 'S-01', 'Umbreon VMAX|Evolving Skies #215': 'GR-0117-1',
     'Van Gogh Pikachu|Grey Felt Hat': 'S-17', 'Pikachu EX|XY124': 'S-18', 'Mega Dragonite ex SIR|Ascended Heroes #290': 'GR-0117-2',
     'Gengar VMAX Alt Art|Fusion Strike #271': 'GR-0117-3', 'Charizard V Full Art|Brilliant Stars #154': 'GR-0117-4', 'Gengar|Lost Origin TG06': 'GR-0158-4',
@@ -2794,10 +2843,16 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     'Roaring Moon ex SIR|Prismatic Evolutions #162': 'X-07', 'Snorlax|Japanese XY Starter Pack #47': 'X-08', 'Charizard|Base Set 2 #4': 'X-09',
     'Rocket’s Mewtwo ex|#231': 'X-11', 'Mega Gengar ex SIR|Ascended Heroes #284': 'X-12', 'Pikachu Yellow Cheeks|Base Set #58': 'X-13',
     'Gastly|#177': 'X-15', 'Ninetales|#199': 'X-16', 'Umbreon V|#094': 'X-17', 'Rocket’s Moltres ex|#229': 'X-18', 'Psyduck|#226': 'X-19',
-    'Charizard VMAX|Japanese #308': 'X-21', 'Rayquaza VMAX|#111': 'X-22', 'Mega Gengar ex|#269': 'X-24' };
-  PACKS.forEach(function (p) { (p.cards || []).forEach(function (c, i) { var k = p.id + '-' + (i + 1); if (PHOTOS.indexOf(k) >= 0) c.img = 'cards/' + k + '.jpg'; }); });
+    'Charizard VMAX|Japanese #308': 'X-21', 'Rayquaza VMAX|#111': 'X-22', 'Mega Gengar ex|#269': 'X-24',
+    // one card under two names in the inventory, and a single that is also a top card of a pack
+    'Mega Dragonite ex|#290': 'GR-0117-2', 'Shining Celebi|Neo Destiny 1st Edition': 'S-10',
+    // cards that were wired to a code before their photo arrived: a card shows its photo once the code is in PHOTOS
+    'Mew ex SIR|#152': 'X-10', 'Mew ex Futuristic|#158': 'X-14', 'Mega Venusaur ex|#177': 'X-20', 'Pikachu ex Full Art|#219': 'X-23',
+    'Alakazam|Base Set Shadowless 1st Edition #1': 'X-25', 'LeBron James|2003 Topps Chrome #111': 'S-02', 'Kobe Bryant|1997 Topps Chrome Refractor': 'S-03',
+    'Kobe Bryant|1996 Topps Chrome Refractor #138': 'GR-0171-1', 'LeBron James|2003 Topps Chrome Refractor #111': 'GR-0171-2', 'Michael Jordan|1986 Fleer #57': 'GR-0171-3' };
+  PACKS.forEach(function (p) { p.cards.forEach(function (c, i) { var k = p.id + '-' + (i + 1); if (PHOTOS.indexOf(k) >= 0) c.img = 'cards/' + k + '.jpg'; }); });
   SINGLES.forEach(function (c, i) { var k = 'S-' + ('0' + (i + 1)).slice(-2); if (PHOTOS.indexOf(k) >= 0) c.img = 'cards/' + k + '.jpg'; });
-  function photoOf(card) { var k = SAME_CARD[card.n + '|' + card.s]; return card.img || (k ? 'cards/' + k + '.jpg' : ''); }
+  function photoOf(card) { var k = SAME_CARD[card.n + '|' + card.s]; return card.img || (k && PHOTOS.indexOf(k) >= 0 ? 'cards/' + k + '.jpg' : ''); }
 
   // Customers as the shop's site reports them: id, name, purchases and sales in the last 30 days, biggest first.
   var PEOPLE_RAW = [
@@ -3280,7 +3335,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   function slab(card, cls) {
     var g = (card.g || '').split(' ');
     var lab = cls === 'slab-sm' ? '' : '<span>' + esc(g[0] || '') + '</span><span>' + esc(g[1] || '') + '</span>';
-    var src = photoOf(card), pic = src ? '<img src="' + esc(src) + '" alt="" loading="lazy">' : '';
+    var src = photoOf(card), pic = src ? '<img' + (SQUARE.indexOf(src.slice(6, -4)) >= 0 ? ' class="fit"' : '') + ' src="' + esc(src) + '" alt="" loading="lazy">' : '';
     return '<div class="slab ' + cls + '" aria-hidden="true"><div class="slab-lab">' + lab + '</div><div class="slab-win">' + pic + '</div></div>';
   }
   function ring(part, label) {
@@ -4238,7 +4293,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     var gap = Math.max(0, need(p.top) - av), details = '<button class="btn" type="button" data-pack-details="' + p.id + '">Pack details</button>';
     return !p.live && gap ? '<button class="btn btn-primary" type="button" data-pack-funding="' + p.id + '">View funding</button>' + details : details;
   }
-  // A tile of the grid: the artwork, the status and the ID, the name, the price and the category, then what the pack needs and its buttons.
+  // A tile of the grid: the artwork, the status and the ID, the name, the price and the category, the three top cards as slabs and by name,
+  // then what the pack needs and its buttons.
   // The tile says Paused, and the lines under it say why: the balance that is missing, the approval that is missing, or both.
   function tileHtml(p) {
     return '<article class="panel pack" data-pack="' + p.id + '" id="pack-' + p.id + '">' +
@@ -4248,6 +4304,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       '<span class="pack-id">' + p.id + '</span></div>' +
       '<h2 class="pack-name" data-name="' + p.id + '"></h2>' +
       '<div class="pk-meta"><span class="pack-price">' + money(p.price) + '</span><span class="tag">' + esc(p.cat) + '</span></div></div>' +
+      '<div class="stack three">' + [2, 1, 0].map(function (i) { return slab(p.cards[i], 's' + (i + 1)); }).join('') + '</div>' +
+      '<div class="rows" role="group" aria-label="Top 3 cards">' + p.cards.slice(0, 3).map(function (c) { return '<div><span>' + esc(c.n) + '</span><b>' + money(c.v) + '</b></div>'; }).join('') + '</div>' +
       '<div class="fund" data-fund="' + p.id + '"></div>' +
       '<div class="pack-acts" data-acts="' + p.id + '"></div></article>';
   }
@@ -4283,8 +4341,8 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   }
   // The first thing that keeps a pack paused.
   function pausedWhy(p, av, ok) { return ok ? 'balance' : 'approval'; }
-  // The card mix and the series are set by Grail for each pack. These are sample values, for the five packs whose cards this sample knows.
-  // The entry pack holds Basic cards only. A pack without its cards here has no mix either.
+  // The card mix and the series are set by Grail for each pack. These are sample values, for the five packs built from the inventory.
+  // The entry pack holds Basic cards only. The other twelve packs name their top cards and have no mix here.
   var MIX = { 'GR-0101': [88.5, 9.5, 2], 'GR-0117': [86, 11, 2.7, 0.3], 'GR-0142': [84, 12.5, 3.1, 0.4], 'GR-0158': [82, 13.5, 4, 0.5], 'GR-0163': [80, 14.5, 4.9, 0.6] };
   var MIX_NAMES = ['Common', 'Uncommon', 'Rare', 'Chase'];
   var SERIES = { 'GR-0101': 'Pokémon, modern sets', 'GR-0117': 'Pokémon, modern sets', 'GR-0142': 'Pokémon, Charizard, all eras', 'GR-0158': 'Pokémon, Gengar, all eras', 'GR-0163': 'Pokémon, vintage sets' };
@@ -4398,9 +4456,9 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     $('pack-route').hidden = p.live;
     $('pack-route').innerHTML = p.live ? '' : routeHtml(p, av, ok);
     $('pack-cards-h').textContent = top >= 500 ? 'Top chase cards' : 'Top cards';
-    $('pack-cards').innerHTML = p.cards ? p.cards.map(function (c) {
-      return '<div class="vrow">' + slab(c, 'slab-sm') + '<div class="vname"><b>' + esc(c.n) + '</b><span>' + esc(c.g) + '</span></div><div class="vend"><span class="vval">' + money(c.v) + '</span></div></div>';
-    }).join('') : '<p class="note">The cards of this pack come from the Grail API. This sample holds only the value of its top card, ' + money(top) + '.</p>';
+    $('pack-cards').innerHTML = p.cards.map(function (c) {
+      return '<div class="vrow">' + slab(c, 'slab-sm') + '<div class="vname"><b>' + esc(c.n) + '</b><span>' + esc(c.s ? c.s + ', ' + c.g : c.g) + '</span></div><div class="vend"><span class="vval">' + money(c.v) + '</span></div></div>';
+    }).join('');
     $('pack-mix').innerHTML = mix ? mix.map(function (x, i) { return '<div class="mixrow"><span>' + MIX_NAMES[i] + '</span>' + meter(x / 100) + '</div>'; }).join('') : '';
     $('pack-mix-note').textContent = mix ? 'Sample numbers. Grail sets the card mix of each pack, and it is the same in every shop.' : 'The card mix of this pack comes from the Grail API. It is not part of this sample.';
     $('pack-name-in').value = p.label;
@@ -4409,7 +4467,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     $('pack-art-msg').textContent = 'JPG or PNG. 1200 by 1600 px works best. In this demo the image stays on your device.';
     drawArt(p);
     drawKit();
-    $('pack-note').textContent = !p.cards ? 'An example of a proposed price tier. Its name, its category and the value of its top card are sample values. The cards, the card mix and the funding requirement come from the Grail API.'
+    $('pack-note').textContent = !mix ? 'An example of a proposed price tier. Its name, its category, its top cards and their values are sample values. The card mix and the funding requirement come from the Grail API.'
       : p.proposed ? 'A proposed example of a pack that fits a first balance of $1,000. Its Grail ID, its price and its cards are sample values until Grail confirms them.'
       : 'Grail builds and stocks this pack, and its contents are the same in every shop. This version is built from the Grail inventory of 11 November 2026.';
     $('pack-copy').setAttribute('data-copy', p.id);
