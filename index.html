@@ -1060,10 +1060,34 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
 .group-head .h-panel { display: inline-flex; align-items: center; }
 .group-head .swatch { width: 0.75rem; height: 0.75rem; margin-right: 0.5625rem; }
 .pack-group .packs { padding-top: 0.75rem; }
-/* the ground of a paused pack: flat and a tone apart from a live one, so the pack reads as not active while its cards keep their colour */
-:root { --paused: #ECECE8; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paused: #0D131F; } }
-:root[data-theme="dark"] { --paused: #0D131F; }
+/* the ground of a paused pack: a slate grey of its own with a line around it, clearly apart from the page and from a live pack,
+   so the pack reads as not active while its cards keep their colour */
+:root { --paused: #D6DCE5; --paused-line: #B9C2CF; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paused: #252A34; --paused-line: rgba(255,255,255,0.20); } }
+:root[data-theme="dark"] { --paused: #252A34; --paused-line: rgba(255,255,255,0.20); }
+.pack.is-paused { border-color: var(--paused-line); }
+/* on the slate the quietest text takes the next tone, and the line about the funding sits on a light chip, so both keep their contrast */
+.pack.is-paused .pack-id { color: var(--t2); }
+.pack.is-paused .fund-line.warn { background: color-mix(in srgb, var(--warn) 12%, var(--panel)); }
+.pack.is-paused .fund-line.ok { background: color-mix(in srgb, var(--live) 12%, var(--panel)); }
+.pack.is-paused .rows div, .pack.is-paused .fund { border-top-color: color-mix(in srgb, var(--ink) 16%, transparent); }
+/* ---- Version 18: the Packs page reads as sections. A line and the name of the category open each one, with no colour beside the name.
+   The sections sit on the columns of the tiles: two short ones stand side by side, and in a section that runs over several rows
+   the paused packs start on a row of their own. ---- */
+:root { --rule: rgba(15,26,46,0.22); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --rule: rgba(255,255,255,0.22); } }
+:root[data-theme="dark"] { --rule: rgba(255,255,255,0.22); }
+.pack-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(max(15.25rem, (100% - 3rem) / 4 - 0.0625rem), 1fr)); gap: 2.25rem 1rem; padding-top: 1.5rem; }
+.pack-group { grid-column: 1 / -1; display: flex; flex-direction: column; min-width: 0; border-top: 1px solid var(--rule); padding-top: 1.125rem; }
+.pack-group.fit { grid-column: span var(--span); }
+.pack-group.fit .packs { grid-template-columns: repeat(var(--span), minmax(0, 1fr)); }
+.group-head { justify-content: space-between; gap: 0.25rem 1rem; padding: 0 0.25rem; }
+.group-head .h-panel { font-size: 1.5rem; letter-spacing: -0.02em; line-height: 1.2; }
+.group-head .meta { padding-left: 0; font-variant-numeric: tabular-nums; }
+.pack-group .packs { flex: 1; padding-top: 1rem; }
+.pack.row-start { grid-column-start: 1; }
+/* the notes under the packs keep the same distance as one section from the next */
+.pack-groups + .empty + .pack-info { margin-top: 2.25rem; }
 
 /* on a touch screen every control takes a full fingertip, whatever size it is drawn */
 @media (pointer: coarse) {
@@ -3376,7 +3400,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   function buildStatic() {
     $('packs-grid').innerHTML = packCats().map(function (cat, k) {
       return '<section class="pack-group" id="pack-group-' + (k + 1) + '" data-cat="' + esc(cat) + '" aria-labelledby="pack-group-h-' + (k + 1) + '">' +
-        '<div class="group-head"><h2 class="h-panel" id="pack-group-h-' + (k + 1) + '">' + swatch(cat) + esc(cat) + '</h2><span class="meta" data-group-count></span></div>' +
+        '<div class="group-head"><h2 class="h-panel" id="pack-group-h-' + (k + 1) + '">' + esc(cat) + '</h2><span class="meta" data-group-count></span></div>' +
         '<div class="packs">' + PACKS.filter(function (p) { return p.cat === cat; }).map(tileHtml).join('') + '</div></section>';
     }).join('');
     $('pack-cat').innerHTML = '<option value="all">Category: all</option>' + CATS.filter(function (k) { return PACKS.some(function (p) { return p.cat === k; }); }).map(function (k) { return '<option value="' + esc(k) + '">' + esc(k) + '</option>'; }).join('');
@@ -4337,6 +4361,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
   }
   // The packs sit in a section for each category. Inside a section the live packs come first and the paused ones after them,
   // each from the highest price down, or from the lowest up when the order is turned. A section with nothing to show is hidden.
+  // The head of a section counts its live and its paused packs the way the top of the page does.
   function renderPackGrid() {
     var n = 0;
     packCats().forEach(function (cat, k) {
@@ -4346,7 +4371,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
       if (have !== want.map(function (p) { return p.id; }).join()) want.forEach(function (p) { grid.appendChild($('pack-' + p.id)); });
       want.forEach(function (p) { var on = packShown(p); $('pack-' + p.id).hidden = !on; if (on) { shown++; if (p.live) live++; } });
       box.hidden = !shown;
-      box.querySelector('[data-group-count]').textContent = plural(shown, 'pack', 'packs') + ', ' + live + ' live';
+      box.querySelector('[data-group-count]').textContent = live && shown - live ? live + ' live, ' + (shown - live) + ' paused' : live ? live + ' live' : (shown - live) + ' paused';
       n += shown;
     });
     if (document.activeElement !== $('pack-search')) $('pack-search').value = S.packQuery || '';
@@ -4355,7 +4380,38 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     $('pack-sort').textContent = S.packSort === 'high' ? 'Price: high to low' : 'Price: low to high';
     $('packs-count').textContent = n === PACKS.length ? n + ' shown' : n + ' of ' + PACKS.length + ' shown';
     $('packs-empty').hidden = n > 0;
+    packLayout();
   }
+  // The sections sit on the same columns as the tiles. A section with more packs than half a row takes the whole row.
+  // A shorter one takes just the columns of its packs, so two short sections stand side by side, and the last section of a row
+  // runs to the end of it. Inside a section that runs over more than one row, the paused packs start on a row of their own
+  // when that takes no more rows, so the live packs and the paused ones read as two blocks.
+  // It is worked out from the columns the page has right now: when the page is opened, when the packs change, and when the width changes.
+  function packLayout() {
+    var wrap = $('packs-grid');
+    if (!wrap.getClientRects().length) return;
+    // the columns are counted with every section on the whole row: a section still set to more columns than now fit would add one of its own
+    [].forEach.call(wrap.children, function (s) { s.classList.remove('fit'); });
+    [].forEach.call(wrap.querySelectorAll('.row-start'), function (el) { el.classList.remove('row-start'); });
+    var cols = getComputedStyle(wrap).gridTemplateColumns.split(' ').length, half = Math.floor(cols / 2), items = [], row = [], used = 0;
+    function close() { if (row.length) row[row.length - 1].span += cols - used; row = []; used = 0; }
+    packCats().forEach(function (cat, k) {
+      var box = $('pack-group-' + (k + 1)); if (!box || box.hidden) return;
+      var tiles = [].filter.call(box.querySelector('.packs').children, function (el) { return !el.hidden; });
+      var it = { box: box, tiles: tiles, span: tiles.length <= half ? tiles.length : cols };
+      if (used + it.span > cols) close();
+      row.push(it); used += it.span; items.push(it);
+    });
+    close();
+    items.forEach(function (it) {
+      var c = it.span, n = it.tiles.length, on = it.tiles.filter(function (el) { return !el.classList.contains('is-paused'); }).length, off = n - on;
+      var first = c > 1 && on && off && on % c && Math.ceil(on / c) + Math.ceil(off / c) === Math.ceil(n / c) ? it.tiles[on] : null;
+      it.box.style.setProperty('--span', c); it.box.classList.add('fit');
+      if (first) first.classList.add('row-start');
+    });
+  }
+  if (window.ResizeObserver) new ResizeObserver(function () { requestAnimationFrame(packLayout); }).observe($('packs-grid'));
+  else window.addEventListener('resize', packLayout);
   // In the pack sheet: the Available Balance that covers the top card, how much of it is missing, and a button for exactly that amount.
   function routeHtml(p, av, ok) {
     var req = need(p.top), gap = Math.max(0, req - av);
@@ -5059,6 +5115,7 @@ select.field:disabled, input.field:disabled { opacity: 0.6; }
     var came = name !== current;
     current = name;
     VIEWS.concat('search', 'none').forEach(function (v) { $('view-' + v).hidden = v !== name; });
+    if (name === 'packs') packLayout();
     var g = name === 'none' || name === 'search' ? null : groupOf(name);
     all('[data-group]').forEach(function (a) {
       if (g && a.getAttribute('data-group') === g[0]) {
